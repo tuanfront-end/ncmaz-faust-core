@@ -1,5 +1,4 @@
-import { __ } from "@wordpress/i18n/";
-import React from "react";
+import { ValueOfOptionFilterDataBy } from "./contains/common";
 
 export interface Option<T = string> {
 	label: string;
@@ -15,23 +14,6 @@ export type MyTabsForActive = "Normal" | "Active";
 export type AlignmentH = "left" | "center" | "right";
 export type MyPosition = "left" | "right" | "top" | "bottom";
 
-export type AlignmentMatrixControlValue =
-	| "top left"
-	| "top center"
-	| "top right"
-	| "center left"
-	| "center"
-	| "center center"
-	| "center right"
-	| "bottom left"
-	| "bottom center"
-	| "bottom right";
-
-export interface NcmazFcAttrsCommonFromWp {
-	className?: string;
-	anchor?: string;
-	align?: "" | "wide" | "full";
-}
 export type AttrsGenericType<T> = {
 	[k in keyof T]: {
 		type: string;
@@ -42,8 +24,8 @@ export type AttrsGenericType<T> = {
 		__experimentalRole?: string;
 	};
 };
-
-export type CommonEditProps<T, C = any> = {
+//
+export type ContainerEditProps<T, C = any> = {
 	attributes: T;
 	setAttributes: (newAttributes: Partial<T>) => void;
 	clientId: string;
@@ -54,4 +36,4 @@ export type CommonEditProps<T, C = any> = {
 	onReplace: Function;
 };
 
-export interface EditProps<T, C = any> extends CommonEditProps<T, C> {}
+export interface EditProps<T, C = any> extends ContainerEditProps<T, C> {}

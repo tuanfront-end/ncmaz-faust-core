@@ -1,5 +1,23 @@
 <?php
 
+function ncmazfc__add_new_block_category($block_categories, $editor_context)
+{
+    if (!empty($editor_context->post)) {
+        array_unshift(
+            $block_categories,
+            array(
+                'slug'  => 'ncmazfc-blocks',
+                'title' => __('Ncmaz faust', 'wcb'),
+                'icon'  => null,
+            ),
+        );
+    }
+    return $block_categories;
+}
+
+add_filter('block_categories_all', 'ncmazfc__add_new_block_category', 9999999, 2);
+
+
 /**
  * Activate the plugin.
  */

@@ -32,7 +32,10 @@ define('_NCMAZ_FRONTEND_PREFIX', 'ncmaz_frontend_prefix_');
 define('_NCMAZ_FRONTEND_TEXT_DOMAIN', 'ncmaz-frontend');
 
 // below is of ncmaz frontend plugin -----------------
-require plugin_dir_path(__FILE__) . 'includes/ncmaz-fe-total-counts-for-wp-graphql.php';
+
+// maybe this will be slow down the wpgraphql query.
+// require plugin_dir_path(__FILE__) . 'includes/ncmaz-fe-total-counts-for-wp-graphql.php';
+
 require plugin_dir_path(__FILE__) . 'includes/ncmaz-custom-funcs.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmaz-enqueue-scripts.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmaz-update-views-count.php';

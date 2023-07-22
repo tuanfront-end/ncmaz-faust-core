@@ -1,25 +1,17 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
-  "name": "ncmazfc/default",
+  "name": "ncmaz-faust/block-default",
   "version": "0.1.0",
-  "title": "Heading",
-  "category": "ncmaz-faust-core-blocks",
-  "icon": "heart",
+  "title": "NcmazFc Default",
+  "category": "ncmazfc-blocks",
+  "icon": "smiley",
   "description": "Example static block scaffolded with Create Block tool.",
   "supports": {
-    "html": false,
-    "align": [
-      "wide",
-      "full"
-    ]
+    "html": false
   },
-  "parent": [
-    "wcbNCMAZFC/create-block-wcbxxyyyzz"
-  ],
-  "textdomain": "ncmazfc-blocks",
+  "textdomain": "ncmazfc",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css",
-  "viewScript": "file:./FrontendStyles.js"
+  "style": "file:./style-index.css"
 }
