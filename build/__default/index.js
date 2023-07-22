@@ -2529,6 +2529,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/__default/block.json");
 /* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./attributes */ "./src/__default/attributes.ts");
 /* harmony import */ var _utils_convertAttsToPreview__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/convertAttsToPreview */ "./src/utils/convertAttsToPreview.ts");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../style.css */ "./src/style.css");
+/* harmony import */ var _styles_index_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../styles/index.scss */ "./src/styles/index.scss");
 /**
  * Registers a new block provided a unique name and an object defining its behavior.
  *
@@ -2560,6 +2562,10 @@ const {
 
 
 //------------------ TAILWINDCSS AND COMMON CSS -----------------
+//------------------ ONLY AT DEFAULT BLOCK - PLEASE REMOVE ON OTHER BLOCK -----------------
+
+
+//-----------------------------------------
 
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
   edit: _Edit__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -4138,6 +4144,18 @@ module.exports = hoistNonReactStatics;
 
 /***/ }),
 
+/***/ "./src/style.css":
+/*!***********************!*\
+  !*** ./src/style.css ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./src/__default/editor.scss":
 /*!***********************************!*\
   !*** ./src/__default/editor.scss ***!
@@ -4154,6 +4172,18 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************!*\
   !*** ./src/__default/style.scss ***!
   \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/styles/index.scss":
+/*!*******************************!*\
+  !*** ./src/styles/index.scss ***!
+  \*******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -6438,7 +6468,7 @@ function combine (array, callback) {
   \**********************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"ncmazfc/default","version":"0.1.0","title":"Heading","category":"ncmaz-faust-core-blocks","icon":"heart","description":"Example static block scaffolded with Create Block tool.","supports":{"html":false,"align":["wide","full"]},"textdomain":"ncmazfc-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./FrontendStyles.js"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"ncmazfc/default","version":"0.1.0","title":"Heading","category":"ncmaz-faust-core-blocks","icon":"heart","description":"Example static block scaffolded with Create Block tool.","supports":{"html":false,"align":["wide","full"]},"parent":["wcbNCMAZFC/create-block-wcbxxyyyzz"],"textdomain":"ncmazfc-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./FrontendStyles.js"}');
 
 /***/ })
 

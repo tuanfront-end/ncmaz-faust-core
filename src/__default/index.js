@@ -25,6 +25,10 @@ const { withSelect } = wp.data;
 import attributes from "./attributes";
 import convertObjectAttrToPreview from "../utils/convertAttsToPreview";
 //------------------ TAILWINDCSS AND COMMON CSS -----------------
+//------------------ ONLY AT DEFAULT BLOCK - PLEASE REMOVE ON OTHER BLOCK -----------------
+import "../style.css";
+import "../styles/index.scss";
+//-----------------------------------------
 
 registerBlockType(metadata.name, {
 	edit: Edit,

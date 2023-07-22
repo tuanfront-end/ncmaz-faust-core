@@ -1,18 +1,22 @@
 <?php
 
+// require NCMAZFC_PATH . 'includes/wcb-render-callback-for-block-posts-grid.php';
+
+
 //============================================================================================================================================
 // START REGISTER GUTENBERG BLOCKS
 //======================================================================================================================================
 
-add_action('init', 'ncmaz_faust_core__create_blocks_gutenberg_init');
-if (!function_exists("ncmaz_faust_core__create_blocks_gutenberg_init")) {
-    function ncmaz_faust_core__create_blocks_gutenberg_init()
-    {
-        register_block_type(
-            NCMAZFC_BUILD_PATH . '/__default',
-            [
-                "view_script_handles" => []
-            ]
-        );
-    }
-}
+// commont css for all blocks, do not remove!
+register_block_type(
+    NCMAZFC_BUILD_PATH . '/__default',
+    []
+);
+
+register_block_type(
+    NCMAZFC_BUILD_PATH . '/block-posts-grid',
+    [
+        // "render_callback"     => "wcb_block_posts_grid__renderCallback",
+        "view_script_handles" => []
+    ]
+);
