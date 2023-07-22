@@ -65,17 +65,10 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 		initPosts,
 	} = attributes;
 
-	// const {
-	// 	GQL_QUERY__string,
-	// 	GQL_QUERY__string_text,
-	// 	variables,
-	// 	dataLists,
-	// 	error,
-	// 	loading,
-	// 	data,
-	// 	tabActiveId,
-	// 	handleClickTab,
-	// } = usePostGqlQuery(queries);
+	const { variables, dataLists, error, loading, data } =
+		usePostGqlQuery(queries);
+
+	console.log(888, { loading, dataLists, error, data, variables });
 
 	// ---- SAVE graphQLvariables ----
 	// useEffect(() => {

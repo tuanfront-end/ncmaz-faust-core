@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { gql, useQuery } from "@apollo/client";
-import {
-	GQL_QUERY_GET_POSTS_BY_FILTER,
-	GQL_QUERY_GET_POSTS_BY_SPECIFIC,
-} from "../contains/contants";
+
 import { HeaderSectionFilterTabs } from "../frontend-components/HeaderSectionFilter/HeaderSectionFilter";
-import { PostsQueryData } from "../components/MyQueryControls/PostsQueryControls";
+import { PostsQueriesControlsType } from "../components/posts-queries-controls/PostsQueriesControls";
+import { CORE_IMAGE_FIELDS_FRAGMENT } from "../fragments";
 
 export interface ListPostsGQLResultData {
 	posts: ListPosts;
@@ -42,22 +40,22 @@ export interface PostNode {
 	__typename: string;
 }
 
-export default function usePostGqlQuery(attributes: PostsQueryData) {
+export default function usePostGqlQuery(queries: PostsQueriesControlsType) {
 	const {
-		isExcludeCurrentPost,
-		isOffsetStartingPost,
-		numberOfItems,
-		offsetPost,
+		author,
+		exclude,
+		inherit,
+		offset,
 		order,
 		orderBy,
+		pages,
+		parents,
+		perPage,
 		postType,
-		selectedAuthorId,
-		selectedTerms,
-		taxonomyRestbase,
-		taxonomySlug,
-		maxItems,
-		minItems,
-	} = attributes;
+		search,
+		sticky,
+		taxQuery,
+	} = queries;
 	// const {
 	// 	filterDataBy,
 	// 	posts,
@@ -69,47 +67,75 @@ export default function usePostGqlQuery(attributes: PostsQueryData) {
 	// 	authors,
 	// } = attributes;
 	//
-	const [tabActiveId, setTabActiveId] = useState(-1);
+	// const [tabActiveId, setTabActiveId] = useState(-1);
 
 	//
-	let GQL_QUERY__string = "";
-	let GQL_QUERY__string_text = "";
+	// let GQL_QUERY__string = "";
+	// let GQL_QUERY__string_text = "";
 	let variables = {};
 	let variablesUseNow;
 	//
 
-	if (filterDataBy === "by_specific") {
-		variablesUseNow = null;
-		variables = {
-			// arr posts Slugs
-			nameIn: posts?.map((item) => item.value) || [],
-		};
-		GQL_QUERY__string = GQL_QUERY_GET_POSTS_BY_SPECIFIC;
-		GQL_QUERY__string_text = "GQL_QUERY_GET_POSTS_BY_SPECIFIC";
-	} else {
-		GQL_QUERY__string = GQL_QUERY_GET_POSTS_BY_FILTER;
-		GQL_QUERY__string_text = "GQL_QUERY_GET_POSTS_BY_FILTER";
-		variables = {
-			// term IDs
-			categoryIn: categories?.map((item) => item.value) || [],
-			tagIn: tags?.map((item) => item.value) || [],
-			authorIn: authors?.map((item) => item.value) || [],
-			order,
-			field: orderBy,
-			first: Number(numberPerPage),
-		};
-		variablesUseNow = {
-			...variables,
-			categoryIn:
-				tabActiveId && tabActiveId !== -1
-					? [tabActiveId]
-					: categories?.map((item) => item.value) || [],
-		};
-	}
+	// GQL_QUERY__string = GQL_QUERY_GET_POSTS_BY_FILTER;
+	// GQL_QUERY__string_text = "GQL_QUERY_GET_POSTS_BY_FILTER";
+	variables = {
+		order: order.toUpperCase(),
+		field: orderBy.toUpperCase(),
+		first: Number(perPage),
+		parentIn: parents,
+		authorIn: !!author
+			? author.split(",").map((item) => Number(item)) || []
+			: [],
+		categoryIn: queries?.taxQuery?.category || [],
+		tagIn: queries?.taxQuery?.post_tag || [],
+	};
+
+	// variablesUseNow = {
+	// 	...variables,
+	// 	categoryIn:
+	// 		tabActiveId && tabActiveId !== -1
+	// 			? [tabActiveId]
+	// 			: categories?.map((item) => item.value) || [],
+	// };
 
 	// =================== QUERY GRAPHQL ===================
 	const gqlQuery = gql`
-		${GQL_QUERY__string}
+		${CORE_IMAGE_FIELDS_FRAGMENT}
+		query GetPosts(
+			$authorIn: [ID] = ""
+			$categoryIn: [ID] = ""
+			$tagIn: [ID] = ""
+			$search: String = ""
+			$parentIn: [ID] = ""
+			$first: Int = 10
+			$field: PostObjectsConnectionOrderbyEnum = AUTHOR
+			$order: OrderEnum = ASC
+		) {
+			posts(
+				where: {
+					authorIn: $authorIn
+					categoryIn: $categoryIn
+					tagIn: $tagIn
+					search: $search
+					parentIn: $parentIn
+					orderby: { field: $field, order: $order }
+				}
+				first: $first
+			) {
+				edges {
+					node {
+						id
+						link
+						date
+						featuredImage {
+							node {
+								...CoreImageFields
+							}
+						}
+					}
+				}
+			}
+		}
 	`;
 	const { loading, error, data } = useQuery<ListPostsGQLResultData>(gqlQuery, {
 		variables: variablesUseNow || variables,
@@ -118,26 +144,22 @@ export default function usePostGqlQuery(attributes: PostsQueryData) {
 	const dataLists = data?.posts?.edges || [];
 
 	//
-	const handleClickTab = (tab: -1 | HeaderSectionFilterTabs) => {
-		if (tab === -1) {
-			setTabActiveId(tab);
-			return;
-		}
-		if (tab.id === tabActiveId) {
-			return;
-		}
-		setTabActiveId(tab.id);
-	};
+	// const handleClickTab = (tab: -1 | HeaderSectionFilterTabs) => {
+	// 	if (tab === -1) {
+	// 		setTabActiveId(tab);
+	// 		return;
+	// 	}
+	// 	if (tab.id === tabActiveId) {
+	// 		return;
+	// 	}
+	// 	setTabActiveId(tab.id);
+	// };
 
 	return {
-		GQL_QUERY__string, // for debug
-		GQL_QUERY__string_text,
 		variables,
 		loading,
 		error,
 		data,
 		dataLists,
-		handleClickTab,
-		tabActiveId,
 	};
 }

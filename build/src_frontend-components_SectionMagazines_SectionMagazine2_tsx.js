@@ -1,56 +1,12 @@
-"use strict";
 (self["webpackChunkncmazfaustcore"] = self["webpackChunkncmazfaustcore"] || []).push([["src_frontend-components_SectionMagazines_SectionMagazine2_tsx"],{
 
 /***/ "./src/contains/contants.ts":
 /*!**********************************!*\
   !*** ./src/contains/contants.ts ***!
   \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   EDGES_POST_COMMONT_FIELDS: () => (/* binding */ EDGES_POST_COMMONT_FIELDS),
-/* harmony export */   EDGES_TERMS_COMMONT_FIELDS: () => (/* binding */ EDGES_TERMS_COMMONT_FIELDS),
-/* harmony export */   EDGES_USER_COMMONT_FIELDS: () => (/* binding */ EDGES_USER_COMMONT_FIELDS),
-/* harmony export */   GQL_QUERY_GET_CATEGORIES_BY_FILTER: () => (/* binding */ GQL_QUERY_GET_CATEGORIES_BY_FILTER),
-/* harmony export */   GQL_QUERY_GET_CATEGORIES_BY_SPECIFIC: () => (/* binding */ GQL_QUERY_GET_CATEGORIES_BY_SPECIFIC),
-/* harmony export */   GQL_QUERY_GET_POSTS_BY_FILTER: () => (/* binding */ GQL_QUERY_GET_POSTS_BY_FILTER),
-/* harmony export */   GQL_QUERY_GET_POSTS_BY_SPECIFIC: () => (/* binding */ GQL_QUERY_GET_POSTS_BY_SPECIFIC),
-/* harmony export */   GQL_QUERY_GET_TAGS_BY_FILTER: () => (/* binding */ GQL_QUERY_GET_TAGS_BY_FILTER),
-/* harmony export */   GQL_QUERY_GET_TAGS_BY_SPECIFIC: () => (/* binding */ GQL_QUERY_GET_TAGS_BY_SPECIFIC),
-/* harmony export */   GQL_QUERY_GET_USERS_BY_FILTER: () => (/* binding */ GQL_QUERY_GET_USERS_BY_FILTER),
-/* harmony export */   GQL_QUERY_GET_USERS_BY_SPECIFIC: () => (/* binding */ GQL_QUERY_GET_USERS_BY_SPECIFIC),
-/* harmony export */   GQL_QUERY_SEARCH_CATEGORIES: () => (/* binding */ GQL_QUERY_SEARCH_CATEGORIES),
-/* harmony export */   GQL_QUERY_SEARCH_POSTS: () => (/* binding */ GQL_QUERY_SEARCH_POSTS),
-/* harmony export */   GQL_QUERY_SEARCH_TAGS: () => (/* binding */ GQL_QUERY_SEARCH_TAGS),
-/* harmony export */   GQL_QUERY_SEARCH_USER: () => (/* binding */ GQL_QUERY_SEARCH_USER),
-/* harmony export */   IS_ENABLE_PLL: () => (/* binding */ IS_ENABLE_PLL),
-/* harmony export */   NCMAZCORE_PLL_CURRENT_LANGUAGE: () => (/* binding */ NCMAZCORE_PLL_CURRENT_LANGUAGE),
-/* harmony export */   NCMAZCORE_PLL_THEMEOPTION_ACTIVED: () => (/* binding */ NCMAZCORE_PLL_THEMEOPTION_ACTIVED),
-/* harmony export */   avatarColors: () => (/* binding */ avatarColors)
-/* harmony export */ });
 let avatarColors = ["#ffdd00", "#fbb034", "#ff4c4c", "#c1d82f", "#f48924", "#7ac143", "#30c39e", "#06BCAE", "#0695BC", "#037ef3", "#146eb4", "#8e43e7", "#ea1d5d", "#fc636b", "#ff6319", "#e01f3d", "#a0ac48", "#00d1b2", "#472f92", "#388ed1", "#a6192e", "#4a8594", "#7B9FAB", "#1393BD", "#5E13BD", "#E208A7"];
-const {
-  EDGES_POST_COMMONT_FIELDS,
-  EDGES_TERMS_COMMONT_FIELDS,
-  EDGES_USER_COMMONT_FIELDS,
-  GQL_QUERY_GET_CATEGORIES_BY_FILTER,
-  GQL_QUERY_GET_CATEGORIES_BY_SPECIFIC,
-  GQL_QUERY_GET_POSTS_BY_FILTER,
-  GQL_QUERY_GET_POSTS_BY_SPECIFIC,
-  GQL_QUERY_GET_TAGS_BY_FILTER,
-  GQL_QUERY_GET_TAGS_BY_SPECIFIC,
-  GQL_QUERY_GET_USERS_BY_FILTER,
-  GQL_QUERY_GET_USERS_BY_SPECIFIC,
-  GQL_QUERY_SEARCH_CATEGORIES,
-  GQL_QUERY_SEARCH_POSTS,
-  GQL_QUERY_SEARCH_TAGS,
-  GQL_QUERY_SEARCH_USER,
-  IS_ENABLE_PLL,
-  NCMAZCORE_PLL_CURRENT_LANGUAGE,
-  NCMAZCORE_PLL_THEMEOPTION_ACTIVED
-} = window.ncmazcoreJsData.gqlQueries;
-
 
 /***/ }),
 
@@ -60,6 +16,7 @@ const {
   \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -69,6 +26,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _contains_contants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../contains/contants */ "./src/contains/contants.ts");
+/* harmony import */ var _contains_contants__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_contains_contants__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _utils_getImageSizesBySizeName__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/getImageSizesBySizeName */ "./src/utils/getImageSizesBySizeName.ts");
 
 
@@ -117,6 +75,7 @@ const Avatar = ({
   \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -173,6 +132,7 @@ const Badge = ({
   \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -250,6 +210,7 @@ const Card11 = ({
   \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -345,6 +306,7 @@ const Card2 = ({
   \*************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -405,6 +367,7 @@ const CardAuthor2 = ({
   \*************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -444,6 +407,7 @@ const CategoryBadgeList = ({
   \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -500,6 +464,7 @@ const NcImage = ({
   \***************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -560,6 +525,7 @@ const PostCardCommentBtn = ({
   \*********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -611,6 +577,7 @@ const PostCardDropdownShare = () => {
   \***********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -653,6 +620,7 @@ const PostCardLikeAndComment = ({
   \***************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -707,6 +675,7 @@ const PostCardMeta = ({
   \*******************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -824,6 +793,7 @@ const PostTypeFeaturedIcon = ({
   \***********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -876,6 +846,7 @@ const SectionMagazine2 = ({
   \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ ncFormatDate)
@@ -904,6 +875,7 @@ function ncFormatDate(date) {
   \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
