@@ -5,8 +5,19 @@ import CategoryBadgeList from "../CategoryBadgeList/CategoryBadgeList";
 import CardAuthor2 from "../CardAuthor2/CardAuthor2";
 import PostCardLikeAndComment from "../PostCardLikeAndComment/PostCardLikeAndComment";
 import PostCardDropdownShare from "../PostCardDropdownShare/PostCardDropdownShare";
+import { Edge, Post } from "../../__generated__/graphql";
 
-const Card2 = ({ className = "h-full", size = "normal", post }) => {
+export interface Card2Props {
+	className?: string;
+	size?: "normal" | "large";
+	post: Post;
+}
+
+const Card2: FC<Card2Props> = ({
+	className = "h-full",
+	size = "normal",
+	post,
+}) => {
 	const {
 		featuredImage,
 		title,

@@ -5,14 +5,19 @@ import PostCardDropdownShare from "../PostCardDropdownShare/PostCardDropdownShar
 import PostCardLikeAndComment from "../PostCardLikeAndComment/PostCardLikeAndComment";
 import PostTypeFeaturedIcon from "../PostTypeFeaturedIcon/PostTypeFeaturedIcon";
 import PostCardMeta from "../PostCardMeta/PostCardMeta";
+import { Post } from "../../__generated__/graphql";
 
-const Card6 = ({ className = "h-full", post }) => {
+export interface Props {
+	className?: string;
+	post: Post;
+}
+
+const Card6: FC<Props> = ({ className = "h-full", post }) => {
 	const { title, link, featuredImage, categories, postFormats } = post;
 
 	return (
 		<div
 			className={`nc-Card6 relative flex group flex-col-reverse sm:flex-row sm:items-center p-4  [ nc-box-has-hover ] [ nc-dark-box-bg-has-hover ] ${className}`}
-			data-nc-id="Card6"
 		>
 			<a href={link} className="absolute inset-0 z-0"></a>
 			<div className="flex flex-col flex-grow">

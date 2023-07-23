@@ -27,8 +27,32 @@ export const avatarColors = [
 	"#E208A7",
 ];
 
-//
-// ===================== POSTS =================================================
+// MEDIA =================================================
+export const NC_IMAGE_MEDIA_FIELDS = `
+  id
+  altText
+  caption
+  databaseId
+  sizes
+  sourceUrl
+  srcSet
+`;
+
+//  POSTS =================================================
+export const XXXXXXX = `
+commentCount
+date
+excerpt
+`;
+export const NC_POST_META_DATA_FIELD = `
+  reactionLikedList
+  savedList
+  showRightSidebar
+  singlePageStyle
+  viewsCount
+  readingTime
+`;
+
 export const POST_COMMONT_FIELDS_HAS_CONTENT = `
     id
     link
@@ -48,7 +72,7 @@ export const POST_COMMONT_FIELDS_HAS_CONTENT = `
         slug
         ncUserMeta {
           featuredImage {
-           ...CoreImageFields
+           ${NC_IMAGE_MEDIA_FIELDS}
           }
         }
       }
@@ -87,7 +111,7 @@ export const POST_COMMONT_FIELDS_HAS_CONTENT = `
     excerpt
     featuredImage {
       node {
-       ...CoreImageFields
+       ${NC_IMAGE_MEDIA_FIELDS}
       }
     }
     postFormats {
@@ -109,37 +133,32 @@ export const POST_COMMONT_FIELDS_HAS_CONTENT = `
       audioUrl
     }
     ncPostMetaData {
-		likedReactionList
-		readingTime
-		savedList
-		singlePageStyle
-		viewsCount
-		showRightSidebar
+      ${NC_POST_META_DATA_FIELD}
     }
     ncmazGalleryImgs {
       image1 {
-       ...CoreImageFields
+       ${NC_IMAGE_MEDIA_FIELDS}
       }
       image2 {
-       ...CoreImageFields
+       ${NC_IMAGE_MEDIA_FIELDS}
       }
       image3 {
-       ...CoreImageFields
+       ${NC_IMAGE_MEDIA_FIELDS}
       }
       image4 {
-       ...CoreImageFields
+       ${NC_IMAGE_MEDIA_FIELDS}
       }
       image5 {
-       ...CoreImageFields
+       ${NC_IMAGE_MEDIA_FIELDS}
       }
       image6 {
-       ...CoreImageFields
+       ${NC_IMAGE_MEDIA_FIELDS}
       }
       image7 {
-       ...CoreImageFields
+       ${NC_IMAGE_MEDIA_FIELDS}
       }
       image8 {
-       ...CoreImageFields
+       ${NC_IMAGE_MEDIA_FIELDS}
       }
     }
 `;
@@ -161,7 +180,7 @@ export const POST_COMMONT_FIELDS = `
         slug
         ncUserMeta {
           featuredImage {
-           ...CoreImageFields
+           ${NC_IMAGE_MEDIA_FIELDS}
           }
         }
       }
@@ -187,7 +206,7 @@ export const POST_COMMONT_FIELDS = `
     excerpt
     featuredImage {
       node {
-       ...CoreImageFields
+       ${NC_IMAGE_MEDIA_FIELDS}
       }
     }
     postFormats {
@@ -209,37 +228,32 @@ export const POST_COMMONT_FIELDS = `
       audioUrl
     }
     ncPostMetaData {
-		likedReactionList
-		readingTime
-		savedList
-		singlePageStyle
-		viewsCount
-		showRightSidebar
+      ${NC_POST_META_DATA_FIELD}
     }
     ncmazGalleryImgs {
       image1 {
-       ...CoreImageFields
+       ${NC_IMAGE_MEDIA_FIELDS}
       }
       image2 {
-       ...CoreImageFields
+       ${NC_IMAGE_MEDIA_FIELDS}
       }
       image3 {
-       ...CoreImageFields
+       ${NC_IMAGE_MEDIA_FIELDS}
       }
       image4 {
-       ...CoreImageFields
+       ${NC_IMAGE_MEDIA_FIELDS}
       }
       image5 {
-       ...CoreImageFields
+       ${NC_IMAGE_MEDIA_FIELDS}
       }
       image6 {
-       ...CoreImageFields
+       ${NC_IMAGE_MEDIA_FIELDS}
       }
       image7 {
-       ...CoreImageFields
+       ${NC_IMAGE_MEDIA_FIELDS}
       }
       image8 {
-       ...CoreImageFields
+       ${NC_IMAGE_MEDIA_FIELDS}
       }
     }
 `;

@@ -68,7 +68,17 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	const { variables, dataLists, error, loading, data } =
 		usePostGqlQuery(queries);
 
-	console.log(888, { loading, dataLists, error, data, variables });
+	// ---- SAVE initPosts ----
+	useEffect(() => {
+		console.log(888, { loading, dataLists, error, data, variables });
+		if (loading || error) {
+			return;
+		}
+
+		setAttributes({
+			initPosts: dataLists,
+		});
+	}, [error, loading, dataLists]);
 
 	// ---- SAVE graphQLvariables ----
 	// useEffect(() => {
@@ -190,7 +200,6 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	//
 	return (
 		<div {...useBlockProps()}>
-			<h2>Tuan magazine block</h2>
 			<InspectorControls>
 				<PanelBody title="Layout">
 					<div className="space-y-2.5">
@@ -239,7 +248,8 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 				/>
 			</BlockControls>
 
-			{renderContent()}
+			{/* Content */}
+			{/* {renderContent()} */}
 		</div>
 	);
 };

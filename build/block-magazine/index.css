@@ -530,6 +530,9 @@ video {
 .visible {
   visibility: visible !important;
 }
+.static {
+  position: static !important;
+}
 .absolute {
   position: absolute !important;
 }
@@ -1216,11 +1219,17 @@ video {
 .inline-flex {
   display: inline-flex !important;
 }
+.table {
+  display: table !important;
+}
 .flow-root {
   display: flow-root !important;
 }
 .grid {
   display: grid !important;
+}
+.contents {
+  display: contents !important;
 }
 .hidden {
   display: none !important;

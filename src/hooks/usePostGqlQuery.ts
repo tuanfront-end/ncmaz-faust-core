@@ -1,45 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { gql, useQuery } from "@apollo/client";
-
-import { HeaderSectionFilterTabs } from "../frontend-components/HeaderSectionFilter/HeaderSectionFilter";
 import { PostsQueriesControlsType } from "../components/posts-queries-controls/PostsQueriesControls";
-import { CORE_IMAGE_FIELDS_FRAGMENT } from "../fragments";
-import { POST_COMMONT_FIELDS } from "../contains/contants";
-
-export interface ListPostsGQLResultData {
-	posts: ListPosts;
-}
-
-export interface ListPosts {
-	edges: Post[];
-}
-
-export interface Post {
-	node: PostNode;
-}
-
-export interface PostNode {
-	id: string;
-	link: string;
-	status: string;
-	author?: any;
-	categories?: any;
-	commentCount?: any;
-	date?: string;
-	excerpt?: string;
-	featuredImage?: any;
-	postFormats?: string;
-	postId: number;
-	slug: string;
-	title: string;
-	ncPostMetaData: {
-		favoriteButtonShortcode?: string;
-		readingTimeShortcode?: string;
-		viewsCount?: number;
-		fieldGroupName: "ncPostMetaData";
-	};
-	__typename: string;
-}
+import { POST_COMMONT_FIELDS, XXXXXXX } from "../contains/contants";
+import { RootQueryToPostConnection } from "../__generated__/graphql";
+import { graphql } from "../__generated__/";
+import { NC_POST_CARD_FRAGMENT } from "../fragments";
 
 export default function usePostGqlQuery(queries: PostsQueriesControlsType) {
 	const {
@@ -99,10 +64,19 @@ export default function usePostGqlQuery(queries: PostsQueriesControlsType) {
 	// 			: categories?.map((item) => item.value) || [],
 	// };
 
+	const NC_POST_CARD_FRAGMENT = graphql(/* GraphQL */ `
+		fragment XXXXXXXXXXXX on MediaItem {
+			altText
+			authorId
+			caption
+			id
+		}
+	`);
+
 	// =================== QUERY GRAPHQL ===================
-	const gqlQuery = gql`
-		${CORE_IMAGE_FIELDS_FRAGMENT}
-		query GetPosts(
+
+	const postsWithVariablesQueryDocument = graphql(/* GraphQL */ `
+		query postsWithVariablesQuery(
 			$authorIn: [ID] = ""
 			$categoryIn: [ID] = ""
 			$tagIn: [ID] = ""
@@ -125,17 +99,26 @@ export default function usePostGqlQuery(queries: PostsQueriesControlsType) {
 			) {
 				edges {
 					node {
-						${POST_COMMONT_FIELDS}
+						id
+						link
+						status
+						featuredImage {
+							node {
+								...XXXXXXXXXXXX
+							}
+						}
 					}
 				}
 			}
 		}
-	`;
-	const { loading, error, data } = useQuery<ListPostsGQLResultData>(gqlQuery, {
-		variables: variablesUseNow || variables,
+	`);
+
+	const { loading, error, data } = useQuery(postsWithVariablesQueryDocument, {
+		variables,
 	});
 
 	const dataLists = data?.posts?.edges || [];
+	console.log(dataLists[0].node.featuredImage?.node);
 
 	//
 	// const handleClickTab = (tab: -1 | HeaderSectionFilterTabs) => {
