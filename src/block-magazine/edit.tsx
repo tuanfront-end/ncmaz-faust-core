@@ -20,6 +20,8 @@ import { ContainerEditProps } from "../types";
 import { BlockMagazine_Attrs } from "./attributes";
 import PostsQueriesControls from "../components/posts-queries-controls/PostsQueriesControls";
 import QueryToolbar from "./query-toolbar";
+import { FragmentType, useFragment } from "../__generated__";
+import { NC_POSTS_EDGES_FRAGMENT } from "../fragments";
 
 const SectionMagazine1Lazy = lazy(
 	() => import("../frontend-components/SectionMagazines/SectionMagazine1")
@@ -99,7 +101,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 			case "magazine-1":
 				return (
 					<Suspense fallback={<Spinner />}>
-						<SectionMagazine1Lazy activePosts={dataLists} />
+						<SectionMagazine1Lazy posts={dataLists} />
 					</Suspense>
 				);
 			case "magazine-2":

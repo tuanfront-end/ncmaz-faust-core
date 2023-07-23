@@ -5,19 +5,28 @@ import CategoryBadgeList from "../CategoryBadgeList/CategoryBadgeList";
 import CardAuthor2 from "../CardAuthor2/CardAuthor2";
 import PostCardLikeAndComment from "../PostCardLikeAndComment/PostCardLikeAndComment";
 import PostCardDropdownShare from "../PostCardDropdownShare/PostCardDropdownShare";
-import { Edge, Post } from "../../__generated__/graphql";
+import {
+	Edge,
+	NcmazFcPostCardFieldsFragment,
+} from "../../__generated__/graphql";
+import { FragmentType, useFragment } from "../../__generated__";
+import { NC_POST_CARD_FRAGMENT } from "../../fragments";
 
 export interface Card2Props {
 	className?: string;
 	size?: "normal" | "large";
-	post: Post;
+	post: NcmazFcPostCardFieldsFragment;
 }
 
-const Card2: FC<Card2Props> = ({
-	className = "h-full",
-	size = "normal",
-	post,
-}) => {
+type UserProfileHeaderProps = {
+	post: FragmentType<typeof NC_POST_CARD_FRAGMENT>;
+	className?: string;
+	size?: "normal" | "large";
+};
+
+export default function UserProfileHeader(props: UserProfileHeaderProps) {
+	const post = useFragment(NC_POST_CARD_FRAGMENT, props.post);
+
 	const {
 		featuredImage,
 		title,
@@ -85,6 +94,6 @@ const Card2: FC<Card2Props> = ({
 			</div>
 		</div>
 	);
-};
+}
 
-export default Card2;
+// export default Card2;

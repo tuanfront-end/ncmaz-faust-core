@@ -5,14 +5,27 @@ import PostCardDropdownShare from "../PostCardDropdownShare/PostCardDropdownShar
 import PostCardLikeAndComment from "../PostCardLikeAndComment/PostCardLikeAndComment";
 import PostTypeFeaturedIcon from "../PostTypeFeaturedIcon/PostTypeFeaturedIcon";
 import PostCardMeta from "../PostCardMeta/PostCardMeta";
-import { Post } from "../../__generated__/graphql";
+import { NcmazFcPostCardFieldsFragment } from "../../__generated__/graphql";
+import { FragmentType, useFragment } from "../../__generated__";
+import { NC_POST_CARD_FRAGMENT } from "../../fragments";
 
 export interface Props {
 	className?: string;
-	post: Post;
+	post: NcmazFcPostCardFieldsFragment;
 }
 
-const Card6: FC<Props> = ({ className = "h-full", post }) => {
+// const Card6: FC<Props> = ({ className = "h-full", post }) => {
+
+type UserProfileHeaderProps = {
+	post: FragmentType<typeof NC_POST_CARD_FRAGMENT>;
+	className?: string;
+};
+
+export default function UserProfileHeader({
+	post: query,
+	className = "h-full",
+}: UserProfileHeaderProps) {
+	const post = useFragment(NC_POST_CARD_FRAGMENT, query);
 	const { title, link, featuredImage, categories, postFormats } = post;
 
 	return (
@@ -56,6 +69,6 @@ const Card6: FC<Props> = ({ className = "h-full", post }) => {
 			</a>
 		</div>
 	);
-};
+}
 
-export default Card6;
+// export default Card6;

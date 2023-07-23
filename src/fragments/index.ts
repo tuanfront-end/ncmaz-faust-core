@@ -1,8 +1,9 @@
-import { gql } from "@apollo/client";
+import { graphql } from "../__generated__";
 
 // MEDIA =================================================
-export const NC_IMAGE_MEDIA_FRAGMENT = gql`
+export const NC_IMAGE_MEDIA_FRAGMENT = graphql(`
 	fragment NcmazFcImageFields on MediaItem {
+		__typename
 		id
 		altText
 		caption
@@ -11,11 +12,12 @@ export const NC_IMAGE_MEDIA_FRAGMENT = gql`
 		sourceUrl
 		srcSet
 	}
-`;
+`);
 
 //  POSTS =================================================
-export const NC_POST_META_DATA_FRAGMENT = gql`
+export const NC_POST_META_DATA_FRAGMENT = graphql(`
 	fragment NcmazFcPostMetaFields on Post_Ncpostmetadata {
+		__typename
 		reactionLikedList
 		savedList
 		showRightSidebar
@@ -23,12 +25,22 @@ export const NC_POST_META_DATA_FRAGMENT = gql`
 		viewsCount
 		readingTime
 	}
-`;
+`);
 
-export const NC_POST_CARD_FRAGMENT = gql`
-	${NC_IMAGE_MEDIA_FRAGMENT}
-	${NC_POST_META_DATA_FRAGMENT}
+export const NC_POSTS_EDGES_FRAGMENT = graphql(`
+	fragment NcmazFcPostsEdegsFields on RootQueryToPostConnection {
+		__typename
+		edges {
+			node {
+				...NcmazFcPostCardFields
+			}
+		}
+	}
+`);
+
+export const NC_POST_CARD_FRAGMENT = graphql(/* GraphQL */ `
 	fragment NcmazFcPostCardFields on Post {
+		__typename
 		id
 		link
 		status
@@ -122,4 +134,4 @@ export const NC_POST_CARD_FRAGMENT = gql`
 			}
 		}
 	}
-`;
+`);

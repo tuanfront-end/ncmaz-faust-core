@@ -249,6 +249,158 @@ const POST_COMMONT_FIELDS = `
 
 /***/ }),
 
+/***/ "./src/fragments/index.ts":
+/*!********************************!*\
+  !*** ./src/fragments/index.ts ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   NC_IMAGE_MEDIA_FRAGMENT: () => (/* binding */ NC_IMAGE_MEDIA_FRAGMENT),
+/* harmony export */   NC_POSTS_EDGES_FRAGMENT: () => (/* binding */ NC_POSTS_EDGES_FRAGMENT),
+/* harmony export */   NC_POST_CARD_FRAGMENT: () => (/* binding */ NC_POST_CARD_FRAGMENT),
+/* harmony export */   NC_POST_META_DATA_FRAGMENT: () => (/* binding */ NC_POST_META_DATA_FRAGMENT)
+/* harmony export */ });
+/* harmony import */ var _generated___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../__generated__ */ "./src/__generated__/index.ts");
+
+
+// MEDIA =================================================
+const NC_IMAGE_MEDIA_FRAGMENT = (0,_generated___WEBPACK_IMPORTED_MODULE_0__.graphql)(`
+	fragment NcmazFcImageFields on MediaItem {
+		__typename
+		id
+		altText
+		caption
+		databaseId
+		sizes
+		sourceUrl
+		srcSet
+	}
+`);
+
+//  POSTS =================================================
+const NC_POST_META_DATA_FRAGMENT = (0,_generated___WEBPACK_IMPORTED_MODULE_0__.graphql)(`
+	fragment NcmazFcPostMetaFields on Post_Ncpostmetadata {
+		__typename
+		reactionLikedList
+		savedList
+		showRightSidebar
+		singlePageStyle
+		viewsCount
+		readingTime
+	}
+`);
+const NC_POSTS_EDGES_FRAGMENT = (0,_generated___WEBPACK_IMPORTED_MODULE_0__.graphql)(`
+	fragment NcmazFcPostsEdegsFields on RootQueryToPostConnection {
+		__typename
+		edges {
+			node {
+				...NcmazFcPostCardFields
+			}
+		}
+	}
+`);
+const NC_POST_CARD_FRAGMENT = (0,_generated___WEBPACK_IMPORTED_MODULE_0__.graphql)( /* GraphQL */`
+	fragment NcmazFcPostCardFields on Post {
+		__typename
+		id
+		link
+		status
+		author {
+			node {
+				id
+				avatar {
+					url
+				}
+				url
+				uri
+				username
+				name
+				slug
+				ncUserMeta {
+					featuredImage {
+						...NcmazFcImageFields
+					}
+				}
+			}
+		}
+		categories {
+			edges {
+				node {
+					id
+					link
+					name
+					uri
+					slug
+					count
+					categoryId
+					ncTaxonomyMeta {
+						color
+					}
+				}
+			}
+		}
+		commentCount
+		date
+		excerpt
+		featuredImage {
+			node {
+				...NcmazFcImageFields
+			}
+		}
+		postFormats {
+			edges {
+				node {
+					id
+					name
+					slug
+				}
+			}
+		}
+		databaseId
+		slug
+		title
+		ncmazVideoUrl {
+			videoUrl
+		}
+		ncmazAudioUrl {
+			audioUrl
+		}
+		ncPostMetaData {
+			...NcmazFcPostMetaFields
+		}
+		ncmazGalleryImgs {
+			image1 {
+				...NcmazFcImageFields
+			}
+			image2 {
+				...NcmazFcImageFields
+			}
+			image3 {
+				...NcmazFcImageFields
+			}
+			image4 {
+				...NcmazFcImageFields
+			}
+			image5 {
+				...NcmazFcImageFields
+			}
+			image6 {
+				...NcmazFcImageFields
+			}
+			image7 {
+				...NcmazFcImageFields
+			}
+			image8 {
+				...NcmazFcImageFields
+			}
+		}
+	}
+`);
+
+/***/ }),
+
 /***/ "./src/frontend-components/Avatar/Avatar.tsx":
 /*!***************************************************!*\
   !*** ./src/frontend-components/Avatar/Avatar.tsx ***!
@@ -370,7 +522,7 @@ const Badge = ({
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (/* binding */ UserProfileHeader)
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
@@ -382,6 +534,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CardAuthor2_CardAuthor2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../CardAuthor2/CardAuthor2 */ "./src/frontend-components/CardAuthor2/CardAuthor2.tsx");
 /* harmony import */ var _PostCardLikeAndComment_PostCardLikeAndComment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../PostCardLikeAndComment/PostCardLikeAndComment */ "./src/frontend-components/PostCardLikeAndComment/PostCardLikeAndComment.tsx");
 /* harmony import */ var _PostCardDropdownShare_PostCardDropdownShare__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../PostCardDropdownShare/PostCardDropdownShare */ "./src/frontend-components/PostCardDropdownShare/PostCardDropdownShare.tsx");
+/* harmony import */ var _generated___WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../__generated__ */ "./src/__generated__/index.ts");
+/* harmony import */ var _fragments__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../fragments */ "./src/fragments/index.ts");
 
 
 
@@ -390,11 +544,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const Card2 = ({
-  className = "h-full",
-  size = "normal",
-  post
-}) => {
+
+
+function UserProfileHeader(props) {
+  const post = (0,_generated___WEBPACK_IMPORTED_MODULE_8__.useFragment)(_fragments__WEBPACK_IMPORTED_MODULE_9__.NC_POST_CARD_FRAGMENT, props.post);
   const {
     featuredImage,
     title,
@@ -452,8 +605,9 @@ const Card2 = ({
     className: "relative",
     postData: post
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PostCardDropdownShare_PostCardDropdownShare__WEBPACK_IMPORTED_MODULE_7__["default"], null))));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Card2);
+}
+
+// export default Card2;
 
 /***/ }),
 
