@@ -4,6 +4,7 @@ import { gql, useQuery } from "@apollo/client";
 import { HeaderSectionFilterTabs } from "../frontend-components/HeaderSectionFilter/HeaderSectionFilter";
 import { PostsQueriesControlsType } from "../components/posts-queries-controls/PostsQueriesControls";
 import { CORE_IMAGE_FIELDS_FRAGMENT } from "../fragments";
+import { POST_COMMONT_FIELDS } from "../contains/contants";
 
 export interface ListPostsGQLResultData {
 	posts: ListPosts;
@@ -124,14 +125,7 @@ export default function usePostGqlQuery(queries: PostsQueriesControlsType) {
 			) {
 				edges {
 					node {
-						id
-						link
-						date
-						featuredImage {
-							node {
-								...CoreImageFields
-							}
-						}
+						${POST_COMMONT_FIELDS}
 					}
 				}
 			}

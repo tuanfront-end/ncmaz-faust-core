@@ -172,7 +172,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 					<Heading desc={subHeading}>{heading}</Heading>
 				)} */}
 
-				{/* <div className="relative">
+				<div className="relative">
 					{loading && <Spinner />}
 					{error && (
 						<pre className="text-xs text-red-500">
@@ -181,7 +181,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 					)}
 
 					{!dataLists.length && !loading && <EmptyState />}
-				</div> */}
+				</div>
 
 				{renderLayoutType()}
 			</div>
@@ -226,7 +226,6 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 				attributes={queries}
 				setQuery={(query) => {
 					setAttributes({ queries: { ...queries, ...query } });
-					console.log(1212, { queries, query });
 				}}
 			/>
 
@@ -236,12 +235,11 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 					query={queries}
 					setQuery={(query) => {
 						setAttributes({ queries: { ...queries, ...query } });
-						console.log(1212, { queries, query });
 					}}
 				/>
 			</BlockControls>
 
-			{/* {renderContent()} */}
+			{renderContent()}
 		</div>
 	);
 };

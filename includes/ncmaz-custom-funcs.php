@@ -1,5 +1,7 @@
 <?php
 
+
+
 if (!function_exists('ncmazFe_getPageType')) :
     function ncmazFe_getPageType()
     {
@@ -66,15 +68,7 @@ if (!function_exists('ncmazGetOptionForSectionTrendingArchivePage')) :
     }
 endif;
 
-// ============ READ ONLY SOME AFC FIELDS ============
-if (!function_exists('my_acf_prepare_field')) :
-    function my_acf_prepare_field($field)
-    {
-        $field['readonly'] = true;
-        return $field;
-    }
-endif;
-add_filter('acf/prepare_field/name=views_count', 'my_acf_prepare_field');
+
 
 
 // ============ GET CURRENT USER BY GRAPHQL
@@ -242,27 +236,6 @@ if (!function_exists('checkPageNcmazAccountOrPostSubmissionEditor')) :
         }
 
         return null;
-    }
-endif;
-
-
-// GET Readingtime shortcode DOM
-if (!function_exists('ncmazFe_getReadingTimeDom')) :
-    function ncmazFe_getReadingTimeDom($postID)
-    {
-        if (!class_exists('Reading_Time_WP')) {
-            return "";
-        }
-
-        $NcReadingTime = new Reading_Time_WP;
-        $rt_reading_time_options = get_option('rt_reading_time_options');
-        $atts = array(
-            'label'            =>  $rt_reading_time_options['label'],
-            'postfix'          => $rt_reading_time_options['postfix'],
-            'postfix_singular' => $rt_reading_time_options['postfix_singular'],
-            'post_id'          => $postID
-        );
-        return $NcReadingTime->rt_reading_time($atts);
     }
 endif;
 

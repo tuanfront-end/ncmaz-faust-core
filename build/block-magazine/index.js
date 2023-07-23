@@ -113,9 +113,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _hooks_usePostGqlQuery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hooks/usePostGqlQuery */ "./src/hooks/usePostGqlQuery.ts");
-/* harmony import */ var _components_posts_queries_controls_PostsQueriesControls__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/posts-queries-controls/PostsQueriesControls */ "./src/components/posts-queries-controls/PostsQueriesControls.tsx");
-/* harmony import */ var _query_toolbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./query-toolbar */ "./src/block-magazine/query-toolbar.tsx");
+/* harmony import */ var _frontend_components_EmptyState_EmptyState__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../frontend-components/EmptyState/EmptyState */ "./src/frontend-components/EmptyState/EmptyState.tsx");
+/* harmony import */ var _hooks_usePostGqlQuery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../hooks/usePostGqlQuery */ "./src/hooks/usePostGqlQuery.ts");
+/* harmony import */ var _components_posts_queries_controls_PostsQueriesControls__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/posts-queries-controls/PostsQueriesControls */ "./src/components/posts-queries-controls/PostsQueriesControls.tsx");
+/* harmony import */ var _query_toolbar__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./query-toolbar */ "./src/block-magazine/query-toolbar.tsx");
+
 
 
 
@@ -155,7 +157,7 @@ const Edit = props => {
     error,
     loading,
     data
-  } = (0,_hooks_usePostGqlQuery__WEBPACK_IMPORTED_MODULE_5__["default"])(queries);
+  } = (0,_hooks_usePostGqlQuery__WEBPACK_IMPORTED_MODULE_6__["default"])(queries);
   console.log(888, {
     loading,
     dataLists,
@@ -251,7 +253,11 @@ const Edit = props => {
   const renderContent = () => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: `nc-FactoryBlockMagazine relative `
-    }, renderLayoutType());
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "relative"
+    }, loading && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, null), error && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("pre", {
+      className: "text-xs text-red-500"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, JSON.stringify(error))), !dataLists.length && !loading && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_frontend_components_EmptyState_EmptyState__WEBPACK_IMPORTED_MODULE_5__["default"], null)), renderLayoutType());
   };
   //
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -304,7 +310,7 @@ const Edit = props => {
     onChange: viewMoreHref => setAttributes({
       viewMoreHref
     })
-  })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_posts_queries_controls_PostsQueriesControls__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_posts_queries_controls_PostsQueriesControls__WEBPACK_IMPORTED_MODULE_7__["default"], {
     attributes: queries,
     setQuery: query => {
       setAttributes({
@@ -313,14 +319,10 @@ const Edit = props => {
           ...query
         }
       });
-      console.log(1212, {
-        queries,
-        query
-      });
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.BlockControls, {
     group: "block"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_query_toolbar__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_query_toolbar__WEBPACK_IMPORTED_MODULE_8__["default"], {
     query: queries,
     setQuery: query => {
       setAttributes({
@@ -329,12 +331,8 @@ const Edit = props => {
           ...query
         }
       });
-      console.log(1212, {
-        queries,
-        query
-      });
     }
-  })));
+  })), renderContent());
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
 
@@ -1682,6 +1680,238 @@ function useIsPostTypeHierarchical(postType) {
 
 /***/ }),
 
+/***/ "./src/contains/contants.ts":
+/*!**********************************!*\
+  !*** ./src/contains/contants.ts ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   POST_COMMONT_FIELDS: () => (/* binding */ POST_COMMONT_FIELDS),
+/* harmony export */   POST_COMMONT_FIELDS_HAS_CONTENT: () => (/* binding */ POST_COMMONT_FIELDS_HAS_CONTENT),
+/* harmony export */   avatarColors: () => (/* binding */ avatarColors)
+/* harmony export */ });
+const avatarColors = ["#ffdd00", "#fbb034", "#ff4c4c", "#c1d82f", "#f48924", "#7ac143", "#30c39e", "#06BCAE", "#0695BC", "#037ef3", "#146eb4", "#8e43e7", "#ea1d5d", "#fc636b", "#ff6319", "#e01f3d", "#a0ac48", "#00d1b2", "#472f92", "#388ed1", "#a6192e", "#4a8594", "#7B9FAB", "#1393BD", "#5E13BD", "#E208A7"];
+
+//
+// ===================== POSTS =================================================
+const POST_COMMONT_FIELDS_HAS_CONTENT = `
+    id
+    link
+    content
+    status
+    commentStatus
+    author {
+      node {
+        id
+        avatar {
+          url
+        }
+        url
+        uri
+        username
+        name
+        slug
+        ncUserMeta {
+          featuredImage {
+           ...CoreImageFields
+          }
+        }
+      }
+    }
+    categories {
+      edges {
+        node {
+          id
+          link
+          name
+          uri
+          slug
+          count
+          categoryId
+          ncTaxonomyMeta {
+            color
+          }
+        }
+      }
+    }
+    tags {
+      edges {
+        node {
+          id
+          link
+          name
+          uri
+          slug
+          count
+          tagId
+        }
+      }
+    }
+    commentCount
+    date
+    excerpt
+    featuredImage {
+      node {
+       ...CoreImageFields
+      }
+    }
+    postFormats {
+      edges {
+        node {
+          id
+          name
+          slug
+        }
+      }
+    }
+    databaseId
+    slug
+    title
+    ncmazVideoUrl {
+      videoUrl
+    }
+    ncmazAudioUrl {
+      audioUrl
+    }
+    ncPostMetaData {
+		likedReactionList
+		readingTime
+		savedList
+		singlePageStyle
+		viewsCount
+		showRightSidebar
+    }
+    ncmazGalleryImgs {
+      image1 {
+       ...CoreImageFields
+      }
+      image2 {
+       ...CoreImageFields
+      }
+      image3 {
+       ...CoreImageFields
+      }
+      image4 {
+       ...CoreImageFields
+      }
+      image5 {
+       ...CoreImageFields
+      }
+      image6 {
+       ...CoreImageFields
+      }
+      image7 {
+       ...CoreImageFields
+      }
+      image8 {
+       ...CoreImageFields
+      }
+    }
+`;
+const POST_COMMONT_FIELDS = `
+    id
+    link
+    status
+    author {
+      node {
+        id
+        avatar {
+          url
+        }
+        url
+        uri
+        username
+        name
+        slug
+        ncUserMeta {
+          featuredImage {
+           ...CoreImageFields
+          }
+        }
+      }
+    }
+    categories {
+      edges {
+        node {
+          id
+          link
+          name
+          uri
+          slug
+          count
+          categoryId
+          ncTaxonomyMeta {
+            color
+          }
+        }
+      }
+    }
+    commentCount
+    date
+    excerpt
+    featuredImage {
+      node {
+       ...CoreImageFields
+      }
+    }
+    postFormats {
+      edges {
+        node {
+          id
+          name
+          slug
+        }
+      }
+    }
+    databaseId
+    slug
+    title
+    ncmazVideoUrl {
+      videoUrl
+    }
+    ncmazAudioUrl {
+      audioUrl
+    }
+    ncPostMetaData {
+		likedReactionList
+		readingTime
+		savedList
+		singlePageStyle
+		viewsCount
+		showRightSidebar
+    }
+    ncmazGalleryImgs {
+      image1 {
+       ...CoreImageFields
+      }
+      image2 {
+       ...CoreImageFields
+      }
+      image3 {
+       ...CoreImageFields
+      }
+      image4 {
+       ...CoreImageFields
+      }
+      image5 {
+       ...CoreImageFields
+      }
+      image6 {
+       ...CoreImageFields
+      }
+      image7 {
+       ...CoreImageFields
+      }
+      image8 {
+       ...CoreImageFields
+      }
+    }
+`;
+
+/***/ }),
+
 /***/ "./src/fragments/index.ts":
 /*!********************************!*\
   !*** ./src/fragments/index.ts ***!
@@ -1708,6 +1938,37 @@ const CORE_IMAGE_FIELDS_FRAGMENT = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_0_
 
 /***/ }),
 
+/***/ "./src/frontend-components/EmptyState/EmptyState.tsx":
+/*!***********************************************************!*\
+  !*** ./src/frontend-components/EmptyState/EmptyState.tsx ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+
+const EmptyState = () => {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `inline-flex flex-col items-center justify-center text-center  pb-10`
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: ncmazcoreJsData.img_empty_png,
+    className: "w-36 sm:w-40",
+    alt: "empty state"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "text-sm block text-neutral-500"
+  }, "Nothing we found!"));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EmptyState);
+
+/***/ }),
+
 /***/ "./src/hooks/usePostGqlQuery.ts":
 /*!**************************************!*\
   !*** ./src/hooks/usePostGqlQuery.ts ***!
@@ -1718,9 +1979,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ usePostGqlQuery)
 /* harmony export */ });
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @apollo/client */ "./node_modules/graphql-tag/lib/index.js");
-/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/hooks/useQuery.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @apollo/client */ "./node_modules/graphql-tag/lib/index.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @apollo/client */ "./node_modules/@apollo/client/react/hooks/useQuery.js");
 /* harmony import */ var _fragments__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../fragments */ "./src/fragments/index.ts");
+/* harmony import */ var _contains_contants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../contains/contants */ "./src/contains/contants.ts");
+
 
 
 function usePostGqlQuery(queries) {
@@ -1780,7 +2043,7 @@ function usePostGqlQuery(queries) {
   // };
 
   // =================== QUERY GRAPHQL ===================
-  const gqlQuery = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_1__.gql)`
+  const gqlQuery = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.gql)`
 		${_fragments__WEBPACK_IMPORTED_MODULE_0__.CORE_IMAGE_FIELDS_FRAGMENT}
 		query GetPosts(
 			$authorIn: [ID] = ""
@@ -1805,14 +2068,7 @@ function usePostGqlQuery(queries) {
 			) {
 				edges {
 					node {
-						id
-						link
-						date
-						featuredImage {
-							node {
-								...CoreImageFields
-							}
-						}
+						${_contains_contants__WEBPACK_IMPORTED_MODULE_1__.POST_COMMONT_FIELDS}
 					}
 				}
 			}
@@ -1822,7 +2078,7 @@ function usePostGqlQuery(queries) {
     loading,
     error,
     data
-  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_2__.useQuery)(gqlQuery, {
+  } = (0,_apollo_client__WEBPACK_IMPORTED_MODULE_3__.useQuery)(gqlQuery, {
     variables: variablesUseNow || variables
   });
   const dataLists = data?.posts?.edges || [];

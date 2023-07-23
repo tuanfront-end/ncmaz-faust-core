@@ -1,4 +1,4 @@
-let avatarColors = [
+export const avatarColors = [
 	"#ffdd00",
 	"#fbb034",
 	"#ff4c4c",
@@ -26,3 +26,220 @@ let avatarColors = [
 	"#5E13BD",
 	"#E208A7",
 ];
+
+//
+// ===================== POSTS =================================================
+export const POST_COMMONT_FIELDS_HAS_CONTENT = `
+    id
+    link
+    content
+    status
+    commentStatus
+    author {
+      node {
+        id
+        avatar {
+          url
+        }
+        url
+        uri
+        username
+        name
+        slug
+        ncUserMeta {
+          featuredImage {
+           ...CoreImageFields
+          }
+        }
+      }
+    }
+    categories {
+      edges {
+        node {
+          id
+          link
+          name
+          uri
+          slug
+          count
+          categoryId
+          ncTaxonomyMeta {
+            color
+          }
+        }
+      }
+    }
+    tags {
+      edges {
+        node {
+          id
+          link
+          name
+          uri
+          slug
+          count
+          tagId
+        }
+      }
+    }
+    commentCount
+    date
+    excerpt
+    featuredImage {
+      node {
+       ...CoreImageFields
+      }
+    }
+    postFormats {
+      edges {
+        node {
+          id
+          name
+          slug
+        }
+      }
+    }
+    databaseId
+    slug
+    title
+    ncmazVideoUrl {
+      videoUrl
+    }
+    ncmazAudioUrl {
+      audioUrl
+    }
+    ncPostMetaData {
+		likedReactionList
+		readingTime
+		savedList
+		singlePageStyle
+		viewsCount
+		showRightSidebar
+    }
+    ncmazGalleryImgs {
+      image1 {
+       ...CoreImageFields
+      }
+      image2 {
+       ...CoreImageFields
+      }
+      image3 {
+       ...CoreImageFields
+      }
+      image4 {
+       ...CoreImageFields
+      }
+      image5 {
+       ...CoreImageFields
+      }
+      image6 {
+       ...CoreImageFields
+      }
+      image7 {
+       ...CoreImageFields
+      }
+      image8 {
+       ...CoreImageFields
+      }
+    }
+`;
+
+export const POST_COMMONT_FIELDS = `
+    id
+    link
+    status
+    author {
+      node {
+        id
+        avatar {
+          url
+        }
+        url
+        uri
+        username
+        name
+        slug
+        ncUserMeta {
+          featuredImage {
+           ...CoreImageFields
+          }
+        }
+      }
+    }
+    categories {
+      edges {
+        node {
+          id
+          link
+          name
+          uri
+          slug
+          count
+          categoryId
+          ncTaxonomyMeta {
+            color
+          }
+        }
+      }
+    }
+    commentCount
+    date
+    excerpt
+    featuredImage {
+      node {
+       ...CoreImageFields
+      }
+    }
+    postFormats {
+      edges {
+        node {
+          id
+          name
+          slug
+        }
+      }
+    }
+    databaseId
+    slug
+    title
+    ncmazVideoUrl {
+      videoUrl
+    }
+    ncmazAudioUrl {
+      audioUrl
+    }
+    ncPostMetaData {
+		likedReactionList
+		readingTime
+		savedList
+		singlePageStyle
+		viewsCount
+		showRightSidebar
+    }
+    ncmazGalleryImgs {
+      image1 {
+       ...CoreImageFields
+      }
+      image2 {
+       ...CoreImageFields
+      }
+      image3 {
+       ...CoreImageFields
+      }
+      image4 {
+       ...CoreImageFields
+      }
+      image5 {
+       ...CoreImageFields
+      }
+      image6 {
+       ...CoreImageFields
+      }
+      image7 {
+       ...CoreImageFields
+      }
+      image8 {
+       ...CoreImageFields
+      }
+    }
+`;
