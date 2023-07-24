@@ -5,70 +5,69 @@ import PostCardDropdownShare from "../PostCardDropdownShare/PostCardDropdownShar
 import PostCardLikeAndComment from "../PostCardLikeAndComment/PostCardLikeAndComment";
 import PostTypeFeaturedIcon from "../PostTypeFeaturedIcon/PostTypeFeaturedIcon";
 import PostCardMeta from "../PostCardMeta/PostCardMeta";
-import { NcmazFcPostCardFieldsFragment } from "../../__generated__/graphql";
-import { FragmentType, useFragment } from "../../__generated__";
+import { FragmentType } from "../../__generated__";
 import { NC_POST_CARD_FRAGMENT } from "../../fragments";
+import { getPostDataFromPostFragment } from "../../utils/getPostDataFromPostFragment";
+import PostCardSaveAction from "../PostCardSaveAction";
 
 export interface Props {
 	className?: string;
-	post: NcmazFcPostCardFieldsFragment;
+	post: FragmentType<typeof NC_POST_CARD_FRAGMENT>;
 }
 
-// const Card6: FC<Props> = ({ className = "h-full", post }) => {
-
-type UserProfileHeaderProps = {
-	post: FragmentType<typeof NC_POST_CARD_FRAGMENT>;
-	className?: string;
-};
-
-export default function UserProfileHeader({
-	post: query,
-	className = "h-full",
-}: UserProfileHeaderProps) {
-	const post = useFragment(NC_POST_CARD_FRAGMENT, query);
-	const { title, link, featuredImage, categories, postFormats } = post;
+const Card6: FC<Props> = ({ className = "h-full", post }) => {
+	const {
+		title,
+		link,
+		date,
+		categories,
+		excerpt,
+		author,
+		postFormats,
+		featuredImage,
+		ncPostMetaData,
+	} = getPostDataFromPostFragment(post);
 
 	return (
 		<div
-			className={`nc-Card6 relative flex group flex-col-reverse sm:flex-row sm:items-center p-4  [ nc-box-has-hover ] [ nc-dark-box-bg-has-hover ] ${className}`}
+			className={`nc-Card6 relative flex group flex-row items-center sm:p-4 sm:rounded-3xl sm:bg-white sm:dark:bg-neutral-900 sm:border border-neutral-200 dark:border-neutral-700 ${className}`}
 		>
-			<a href={link} className="absolute inset-0 z-0"></a>
 			<div className="flex flex-col flex-grow">
 				<div className="space-y-3 mb-4">
 					<CategoryBadgeList categories={categories} />
-					<h2 className={`block font-semibold text-base`}>
-						<a href={link} className="line-clamp-2" title={title}>
-							{title}
-						</a>
+					<h2 className={`block font-semibold text-sm sm:text-base`}>
+						<span className="line-clamp-2">{title}</span>
 					</h2>
 					<PostCardMeta meta={{ ...post }} />
 				</div>
 				<div className="flex items-center flex-wrap justify-between mt-auto">
-					<PostCardLikeAndComment className="relative" postData={post} />
-					<PostCardDropdownShare />
+					<PostCardLikeAndComment className="relative" />
+					<PostCardSaveAction
+						className="relative"
+						readingTime={ncPostMetaData?.readingTime || 2}
+					/>
 				</div>
 			</div>
 
-			<a
-				href={link}
-				className={`block relative flex-shrink-0 w-full sm:w-40 h-40 sm:h-full sm:ml-5 rounded-2xl overflow-hidden mb-5 sm:mb-0 `}
+			<span
+				className={`block relative flex-shrink-0 w-24 h-24 sm:w-40 sm:h-full ms-3 sm:ms-5 rounded-2xl overflow-hidden z-0`}
 			>
 				<NcImage
-					containerClassName="absolute inset-0"
+					sizes="(max-width: 600px) 180px, 400px"
 					className="object-cover w-full h-full"
-					src={featuredImage?.node.sourceUrl}
-					srcSet={featuredImage?.node.srcSet}
+					fill
+					src={featuredImage?.sourceUrl || undefined}
 				/>
-				<span className="absolute bottom-1 left-1">
+				<span className="absolute bottom-1 start-1">
 					<PostTypeFeaturedIcon
 						wrapSize="h-7 w-7"
 						iconSize="h-4 w-4"
-						postType={postFormats.edges[0]?.node.slug}
+						postType={postFormats?.edges[0]?.node?.slug || "post"}
 					/>
 				</span>
-			</a>
+			</span>
 		</div>
 	);
-}
+};
 
-// export default Card6;
+export default Card6;

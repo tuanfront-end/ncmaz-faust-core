@@ -28,7 +28,7 @@ export const avatarColors = [
 ];
 
 // MEDIA =================================================
-export const NC_IMAGE_MEDIA_FIELDS = `
+const NC_IMAGE_MEDIA_FIELDS = `
   id
   altText
   caption
@@ -39,12 +39,8 @@ export const NC_IMAGE_MEDIA_FIELDS = `
 `;
 
 //  POSTS =================================================
-export const XXXXXXX = `
-commentCount
-date
-excerpt
-`;
-export const NC_POST_META_DATA_FIELD = `
+
+const NC_POST_META_DATA_FIELD = `
   reactionLikedList
   savedList
   showRightSidebar
@@ -53,7 +49,7 @@ export const NC_POST_META_DATA_FIELD = `
   readingTime
 `;
 
-export const POST_COMMONT_FIELDS_HAS_CONTENT = `
+const POST_COMMONT_FIELDS_HAS_CONTENT = `
     id
     link
     content
@@ -163,7 +159,7 @@ export const POST_COMMONT_FIELDS_HAS_CONTENT = `
     }
 `;
 
-export const POST_COMMONT_FIELDS = `
+const POST_COMMONT_FIELDS = `
     id
     link
     status

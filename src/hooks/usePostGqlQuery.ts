@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 import { PostsQueriesControlsType } from "../components/posts-queries-controls/PostsQueriesControls";
-import { POST_COMMONT_FIELDS, XXXXXXX } from "../contains/contants";
-import { RootQueryToPostConnection } from "../__generated__/graphql";
+import { NcmazFcPostsEdegsFieldsFragment } from "../__generated__/graphql";
 import { graphql } from "../__generated__/";
 
 const postsWithVariablesQueryDocument = graphql(/* GraphQL */ `
@@ -50,14 +49,7 @@ export default function usePostGqlQuery(queries: PostsQueriesControlsType) {
 	} = queries;
 
 	//
-	// const [tabActiveId, setTabActiveId] = useState(-1);
-
-	//
-	let variables = {};
-	let variablesUseNow;
-	//
-
-	variables = {
+	const variables = {
 		order: order.toUpperCase(),
 		field: orderBy.toUpperCase(),
 		first: Number(perPage),
@@ -69,33 +61,16 @@ export default function usePostGqlQuery(queries: PostsQueriesControlsType) {
 		tagIn: queries?.taxQuery?.post_tag || [],
 	};
 
-	// variablesUseNow = {
-	// 	...variables,
-	// 	categoryIn:
-	// 		tabActiveId && tabActiveId !== -1
-	// 			? [tabActiveId]
-	// 			: categories?.map((item) => item.value) || [],
-	// };
-
 	// =================== QUERY GRAPHQL ===================
 
 	const { loading, error, data } = useQuery(postsWithVariablesQueryDocument, {
 		variables,
 	});
 
-	const dataLists = data?.posts?.edges || [];
-
 	//
-	// const handleClickTab = (tab: -1 | HeaderSectionFilterTabs) => {
-	// 	if (tab === -1) {
-	// 		setTabActiveId(tab);
-	// 		return;
-	// 	}
-	// 	if (tab.id === tabActiveId) {
-	// 		return;
-	// 	}
-	// 	setTabActiveId(tab.id);
-	// };
+	const dataLists: NcmazFcPostsEdegsFieldsFragment["edges"] =
+		// @ts-ignore
+		data?.posts?.edges || [];
 
 	return {
 		variables,

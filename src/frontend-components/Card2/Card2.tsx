@@ -5,30 +5,21 @@ import CategoryBadgeList from "../CategoryBadgeList/CategoryBadgeList";
 import CardAuthor2 from "../CardAuthor2/CardAuthor2";
 import PostCardLikeAndComment from "../PostCardLikeAndComment/PostCardLikeAndComment";
 import PostCardDropdownShare from "../PostCardDropdownShare/PostCardDropdownShare";
-import {
-	Edge,
-	NcmazFcPostCardFieldsFragment,
-} from "../../__generated__/graphql";
-import { FragmentType, useFragment } from "../../__generated__";
+import { FragmentType } from "../../__generated__";
 import { NC_POST_CARD_FRAGMENT } from "../../fragments";
+import { getPostDataFromPostFragment } from "../../utils/getPostDataFromPostFragment";
+import PostCardMeta from "../PostCardMeta/PostCardMeta";
+import PostCardLikeAction from "../PostCardLikeAction/PostCardLikeAction";
+import PostCardSaveAction from "../PostCardSaveAction";
 
 export interface Card2Props {
 	className?: string;
 	size?: "normal" | "large";
-	post: NcmazFcPostCardFieldsFragment;
+	post: FragmentType<typeof NC_POST_CARD_FRAGMENT>;
 }
 
-type UserProfileHeaderProps = {
-	post: FragmentType<typeof NC_POST_CARD_FRAGMENT>;
-	className?: string;
-	size?: "normal" | "large";
-};
-
-export default function UserProfileHeader(props: UserProfileHeaderProps) {
-	const post = useFragment(NC_POST_CARD_FRAGMENT, props.post);
-
+const Card2: FC<Card2Props> = ({ className = "", size = "normal", post }) => {
 	const {
-		featuredImage,
 		title,
 		link,
 		date,
@@ -36,64 +27,66 @@ export default function UserProfileHeader(props: UserProfileHeaderProps) {
 		excerpt,
 		author,
 		postFormats,
+		featuredImage,
 		ncPostMetaData,
-	} = post;
+	} = getPostDataFromPostFragment(post);
 
 	return (
-		<div
-			className={`nc-Card2 group relative flex flex-col  [ nc-box-has-hover ] [ nc-dark-box-bg-has-hover ] overflow-hidden ${className}`}
-			data-nc-id="Card2"
-		>
-			<span className="block flex-shrink-0 flex-grow relative w-full h-0 pt-[75%] sm:pt-[55%] rounded-xl sm:rounded-b-none overflow-hidden">
+		<div className={`nc-Card2 group relative flex flex-col ${className}`}>
+			<div className="block flex-shrink-0 flex-grow relative w-full h-0 pt-[75%] sm:pt-[55%] z-0">
 				<NcImage
-					containerClassName="absolute inset-0"
-					src={featuredImage?.node.sourceUrl}
-					srcSet={featuredImage?.node.srcSet}
+					fill
+					sizes="(max-width: 600px) 480px, 800px"
+					className="object-cover rounded-3xl"
+					src={featuredImage?.sourceUrl || undefined}
 				/>
-
 				<PostTypeFeaturedIcon
 					className="absolute bottom-2 left-2"
-					postType={postFormats.edges[0]?.node.slug}
+					postType={postFormats?.edges[0]?.node?.slug || "post"}
 					wrapSize="w-8 h-8"
 					iconSize="w-4 h-4"
 				/>
-			</span>
+				<CategoryBadgeList
+					className="flex flex-wrap space-x-2 absolute top-3 left-3"
+					itemClass="relative"
+					categories={categories}
+				/>
+			</div>
 
-			<a href={link} className="absolute inset-0" />
-
-			<div className="p-4 sm:p-5 flex flex-col">
+			<div className="mt-5 px-4 flex flex-col">
 				<div className="space-y-3">
-					<CategoryBadgeList categories={categories} />
+					<PostCardMeta
+						className="relative text-sm"
+						avatarSize="h-8 w-8 text-sm"
+						meta={post}
+					/>
+
 					<h2
-						className={`nc-card-title block font-semibold text-neutral-900 dark:text-neutral-100 transition-colors ${
-							size === "large" ? "text-lg sm:text-2xl" : "text-base"
+						className={`nc-card-title block font-semibold text-neutral-900 dark:text-neutral-100 ${
+							size === "large" ? "text-base sm:text-lg md:text-xl" : "text-base"
 						}`}
 					>
-						<a href={link} className="line-clamp-2" title={title}>
+						<span className="line-clamp-2" title={title || ""}>
 							{title}
-						</a>
+						</span>
 					</h2>
-					<div
-						className="block text-neutral-500 dark:text-neutral-400 text-sm line-clamp-2"
-						dangerouslySetInnerHTML={{ __html: excerpt }}
-					></div>
+					<span className="block text-neutral-500 dark:text-neutral-400 text-[15px] leading-6 ">
+						Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione
+						beatae quasi et, reprehenderit alias veritatis nostrum iste sed
+						laboriosam eveniet possimus.
+					</span>
 				</div>
-
-				<CardAuthor2
-					className="relative my-4"
-					date={date}
-					author={author}
-					readingTimeShortcode={ncPostMetaData.readingTimeShortcode}
-					hoverReadingTime={false}
-				/>
-				<div className="flex items-center justify-between mt-auto">
-					<PostCardLikeAndComment className="relative" postData={post} />
-
-					<PostCardDropdownShare />
+				<div className="my-5 border-t border-neutral-200 dark:border-neutral-700"></div>
+				<div className="flex items-center justify-between">
+					<PostCardLikeAndComment />
+					<PostCardSaveAction
+						className="relative"
+						readingTime={ncPostMetaData?.readingTime || 2}
+					/>
 				</div>
 			</div>
 		</div>
 	);
-}
+};
 
-// export default Card2;
+export default Card2;

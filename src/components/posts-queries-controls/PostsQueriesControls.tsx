@@ -36,8 +36,8 @@ export interface PostsQueriesControlsType {
 	pages: number;
 	offset: number;
 	postType: string;
-	order: string;
-	orderBy: string;
+	order: "ASC" | "DESC";
+	orderBy: "DATE" | "TITLE" | "COMMENT_COUNT";
 	// multi author will separate by comma
 	author: string;
 	search: string;
@@ -55,8 +55,8 @@ export const PostsQueriesControls_DEMO_DATA: PostsQueriesControlsType = {
 	perPage: null,
 	offset: 0,
 	postType: "post",
-	order: "desc",
-	orderBy: "date",
+	order: "DESC",
+	orderBy: "DATE",
 	author: "",
 	search: "",
 	exclude: [],
@@ -137,7 +137,7 @@ const PostsQueriesControls = ({
 		return onChangeDebounced.cancel;
 	}, [querySearch, onChangeDebounced]);
 	const showInheritControl = false;
-	const showPostTypeControl = true;
+	const showPostTypeControl = false;
 	const showOrderControl = true;
 	const showStickyControl = true;
 	const showSettingsPanel =
@@ -218,6 +218,11 @@ const PostsQueriesControls = ({
 							onDeselect={() => setQuery({ taxQuery: null })}
 						>
 							<TaxonomyControls onChange={setQuery} query={query} />
+							<span className="text-xs block mt-1 text-slate-500">
+								{__(
+									"Currently, NcmazFaust only supports filtering data for Category and Tag. If you want support for custom taxonomy, please contact support."
+								)}
+							</span>
 						</ToolsPanelItem>
 					)}
 					{showAuthorControl && (

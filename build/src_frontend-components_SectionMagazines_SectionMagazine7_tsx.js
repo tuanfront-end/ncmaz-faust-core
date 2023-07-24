@@ -9,11 +9,6 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   NC_IMAGE_MEDIA_FIELDS: () => (/* binding */ NC_IMAGE_MEDIA_FIELDS),
-/* harmony export */   NC_POST_META_DATA_FIELD: () => (/* binding */ NC_POST_META_DATA_FIELD),
-/* harmony export */   POST_COMMONT_FIELDS: () => (/* binding */ POST_COMMONT_FIELDS),
-/* harmony export */   POST_COMMONT_FIELDS_HAS_CONTENT: () => (/* binding */ POST_COMMONT_FIELDS_HAS_CONTENT),
-/* harmony export */   XXXXXXX: () => (/* binding */ XXXXXXX),
 /* harmony export */   avatarColors: () => (/* binding */ avatarColors)
 /* harmony export */ });
 const avatarColors = ["#ffdd00", "#fbb034", "#ff4c4c", "#c1d82f", "#f48924", "#7ac143", "#30c39e", "#06BCAE", "#0695BC", "#037ef3", "#146eb4", "#8e43e7", "#ea1d5d", "#fc636b", "#ff6319", "#e01f3d", "#a0ac48", "#00d1b2", "#472f92", "#388ed1", "#a6192e", "#4a8594", "#7B9FAB", "#1393BD", "#5E13BD", "#E208A7"];
@@ -30,11 +25,7 @@ const NC_IMAGE_MEDIA_FIELDS = `
 `;
 
 //  POSTS =================================================
-const XXXXXXX = `
-commentCount
-date
-excerpt
-`;
+
 const NC_POST_META_DATA_FIELD = `
   reactionLikedList
   savedList
@@ -687,6 +678,7 @@ const NcImage = ({
   loading = "lazy",
   src,
   sizes,
+  fill = false,
   imageSizes = window.innerWidth < 475 ? "MEDIUM" : "MEDIUM_LARGE",
   ...args
 }) => {
@@ -702,12 +694,12 @@ const NcImage = ({
     }));
   };
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `nc-NcImage ${containerClassName}`,
+    className: `nc-NcImage ${fill ? "absolute inset-0" : ""} ${containerClassName}`,
     "data-nc-id": "NcImage"
   }, !!src && src.includes("http") ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: src,
     alt: alt,
-    className: className,
+    className: ` ${fill ? "absolute inset-0 w-full h-full" : ""} ${className}`,
     loading: loading,
     ...args,
     sizes: SIZES
@@ -783,18 +775,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _utils_convertNumbThousand__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/convertNumbThousand */ "./src/utils/convertNumbThousand.ts");
+
 
 
 const PostCardLikeAction = ({
-  favoriteButtonShortcode,
-  className = "relative"
+  className = "px-3 h-8 text-xs",
+  likeCount = 34,
+  liked = false
 }) => {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: className,
-    dangerouslySetInnerHTML: {
-      __html: favoriteButtonShortcode
-    }
-  });
+  const [isLiked, setisLiked] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(liked);
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    className: `nc-PostCardLikeAction relative min-w-[68px] flex items-center rounded-full leading-none group transition-colors ${className} ${isLiked ? "text-rose-600 bg-rose-50 dark:bg-rose-100" : "text-neutral-700 bg-neutral-50 dark:text-neutral-200 dark:bg-neutral-800 hover:bg-rose-50 dark:hover:bg-rose-100 hover:text-rose-600 dark:hover:text-rose-500"}`,
+    onClick: () => setisLiked(!isLiked),
+    title: "Liked"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    width: "24",
+    height: "24",
+    fill: isLiked ? "currentColor" : "none",
+    viewBox: "0 0 24 24"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    fillRule: "evenodd",
+    stroke: "currentColor",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "1",
+    d: "M11.995 7.23319C10.5455 5.60999 8.12832 5.17335 6.31215 6.65972C4.49599 8.14609 4.2403 10.6312 5.66654 12.3892L11.995 18.25L18.3235 12.3892C19.7498 10.6312 19.5253 8.13046 17.6779 6.65972C15.8305 5.18899 13.4446 5.60999 11.995 7.23319Z",
+    clipRule: "evenodd"
+  })), likeCount && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: `ml-1 ${isLiked ? "text-rose-600" : "text-neutral-900 dark:text-neutral-200"}`
+  }, (0,_utils_convertNumbThousand__WEBPACK_IMPORTED_MODULE_2__["default"])(likeCount)));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PostCardLikeAction);
 
@@ -907,6 +917,28 @@ const SectionMagazine7 = ({
   }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SectionMagazine7);
+
+/***/ }),
+
+/***/ "./src/utils/convertNumbThousand.ts":
+/*!******************************************!*\
+  !*** ./src/utils/convertNumbThousand.ts ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ convertNumbThousand)
+/* harmony export */ });
+function convertNumbThousand(number) {
+  let str = "";
+  if (number < 1000) {
+    str = String(number);
+  } else {
+    str = (number / 1000).toFixed(1) + "k";
+  }
+  return str;
+}
 
 /***/ }),
 

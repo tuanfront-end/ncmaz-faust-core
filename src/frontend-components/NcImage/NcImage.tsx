@@ -6,6 +6,7 @@ import getImageSizesBySizeName, {
 export interface NcImageProps extends ImgHTMLAttributes<HTMLImageElement> {
 	containerClassName?: string;
 	imageSizes?: NC_IMAGE_SIZES;
+	fill?: boolean;
 }
 
 const NcImage: FC<NcImageProps> = ({
@@ -15,6 +16,7 @@ const NcImage: FC<NcImageProps> = ({
 	loading = "lazy",
 	src,
 	sizes,
+	fill = false,
 	imageSizes = window.innerWidth < 475 ? "MEDIUM" : "MEDIUM_LARGE",
 	...args
 }) => {
@@ -31,12 +33,19 @@ const NcImage: FC<NcImageProps> = ({
 	};
 
 	return (
-		<div className={`nc-NcImage ${containerClassName}`} data-nc-id="NcImage">
+		<div
+			className={`nc-NcImage ${
+				fill ? "absolute inset-0" : ""
+			} ${containerClassName}`}
+			data-nc-id="NcImage"
+		>
 			{!!src && src.includes("http") ? (
 				<img
 					src={src}
 					alt={alt}
-					className={className}
+					className={` ${
+						fill ? "absolute inset-0 w-full h-full" : ""
+					} ${className}`}
 					loading={loading}
 					{...args}
 					sizes={SIZES}

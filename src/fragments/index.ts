@@ -1,32 +1,52 @@
 import { graphql } from "../__generated__";
 
-// MEDIA =================================================
-export const NC_IMAGE_MEDIA_FRAGMENT = graphql(`
-	fragment NcmazFcImageFields on MediaItem {
+// Terms =================================================
+export const NC_TERM_CARD_FRAGMENT = graphql(/* GraphQL */ `
+	fragment NcmazFcTermCardFields on TermNode {
 		__typename
 		id
-		altText
-		caption
+		count
+		name
+		slug
 		databaseId
-		sizes
-		sourceUrl
-		srcSet
+		description
+		link
+		taxonomyName
+		... on Category {
+			id
+			name
+			ncTaxonomyMeta {
+				color
+				featuredImage {
+					...NcmazFcImageFields
+				}
+			}
+		}
+		... on Tag {
+			id
+			name
+			ncTaxonomyMeta {
+				color
+				featuredImage {
+					...NcmazFcImageFields
+				}
+			}
+		}
 	}
 `);
 
-//  POSTS =================================================
-export const NC_POST_META_DATA_FRAGMENT = graphql(`
-	fragment NcmazFcPostMetaFields on Post_Ncpostmetadata {
+export const NC_TERMS_EDGES_FRAGMENT = graphql(/* GraphQL */ `
+	fragment NcmazFcTermsCardFields on RootQueryToTermNodeConnection {
 		__typename
-		reactionLikedList
-		savedList
-		showRightSidebar
-		singlePageStyle
-		viewsCount
-		readingTime
+		edges {
+			node {
+				...NcmazFcTermCardFields
+			}
+		}
 	}
 `);
 
+// POSTS =================================================
 export const NC_POSTS_EDGES_FRAGMENT = graphql(`
 	fragment NcmazFcPostsEdegsFields on RootQueryToPostConnection {
 		__typename
@@ -133,5 +153,32 @@ export const NC_POST_CARD_FRAGMENT = graphql(/* GraphQL */ `
 				...NcmazFcImageFields
 			}
 		}
+	}
+`);
+
+// MEDIA =================================================
+export const NC_IMAGE_MEDIA_FRAGMENT = graphql(`
+	fragment NcmazFcImageFields on MediaItem {
+		__typename
+		id
+		altText
+		caption
+		databaseId
+		sizes
+		sourceUrl
+		srcSet
+	}
+`);
+
+//  POSTS =================================================
+export const NC_POST_META_DATA_FRAGMENT = graphql(`
+	fragment NcmazFcPostMetaFields on Post_Ncpostmetadata {
+		__typename
+		reactionLikedList
+		savedList
+		showRightSidebar
+		singlePageStyle
+		viewsCount
+		readingTime
 	}
 `);

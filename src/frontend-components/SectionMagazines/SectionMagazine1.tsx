@@ -1,18 +1,14 @@
 import React, { FC } from "react";
 import Card2 from "../Card2/Card2";
 import Card6 from "../Card6/Card6";
-import { NcmazFcPostCardFieldsFragment } from "../../__generated__/graphql";
-import { FragmentType, useFragment } from "../../__generated__";
-import { NC_POSTS_EDGES_FRAGMENT } from "../../fragments";
+import { NcmazFcPostsEdegsFieldsFragment } from "../../__generated__/graphql";
 
-type UserProfileHeaderProps = {
-	posts: FragmentType<typeof NC_POSTS_EDGES_FRAGMENT>;
-};
+interface Props {
+	className?: string;
+	posts: NcmazFcPostsEdegsFieldsFragment["edges"];
+}
 
-export default function UserProfileHeader(props: UserProfileHeaderProps) {
-	const query = useFragment(NC_POSTS_EDGES_FRAGMENT, props.posts);
-	const posts = query.edges;
-
+const SectionMagazine1: FC<Props> = ({ posts, className }) => {
 	return (
 		<div>
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
@@ -27,4 +23,6 @@ export default function UserProfileHeader(props: UserProfileHeaderProps) {
 			</div>
 		</div>
 	);
-}
+};
+
+export default SectionMagazine1;

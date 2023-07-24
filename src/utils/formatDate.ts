@@ -1,4 +1,4 @@
-export default function ncFormatDate(date) {
+export default function ncFormatDate(date: string) {
 	// CAN LAM THEM PHAN DATE FOrMAT ---- get_option(date_format)
 
 	let d = new Date(date);

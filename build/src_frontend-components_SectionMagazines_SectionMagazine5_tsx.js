@@ -9,11 +9,6 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   NC_IMAGE_MEDIA_FIELDS: () => (/* binding */ NC_IMAGE_MEDIA_FIELDS),
-/* harmony export */   NC_POST_META_DATA_FIELD: () => (/* binding */ NC_POST_META_DATA_FIELD),
-/* harmony export */   POST_COMMONT_FIELDS: () => (/* binding */ POST_COMMONT_FIELDS),
-/* harmony export */   POST_COMMONT_FIELDS_HAS_CONTENT: () => (/* binding */ POST_COMMONT_FIELDS_HAS_CONTENT),
-/* harmony export */   XXXXXXX: () => (/* binding */ XXXXXXX),
 /* harmony export */   avatarColors: () => (/* binding */ avatarColors)
 /* harmony export */ });
 const avatarColors = ["#ffdd00", "#fbb034", "#ff4c4c", "#c1d82f", "#f48924", "#7ac143", "#30c39e", "#06BCAE", "#0695BC", "#037ef3", "#146eb4", "#8e43e7", "#ea1d5d", "#fc636b", "#ff6319", "#e01f3d", "#a0ac48", "#00d1b2", "#472f92", "#388ed1", "#a6192e", "#4a8594", "#7B9FAB", "#1393BD", "#5E13BD", "#E208A7"];
@@ -30,11 +25,7 @@ const NC_IMAGE_MEDIA_FIELDS = `
 `;
 
 //  POSTS =================================================
-const XXXXXXX = `
-commentCount
-date
-excerpt
-`;
+
 const NC_POST_META_DATA_FIELD = `
   reactionLikedList
   savedList
@@ -485,6 +476,7 @@ const NcImage = ({
   loading = "lazy",
   src,
   sizes,
+  fill = false,
   imageSizes = window.innerWidth < 475 ? "MEDIUM" : "MEDIUM_LARGE",
   ...args
 }) => {
@@ -500,12 +492,12 @@ const NcImage = ({
     }));
   };
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `nc-NcImage ${containerClassName}`,
+    className: `nc-NcImage ${fill ? "absolute inset-0" : ""} ${containerClassName}`,
     "data-nc-id": "NcImage"
   }, !!src && src.includes("http") ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: src,
     alt: alt,
-    className: className,
+    className: ` ${fill ? "absolute inset-0 w-full h-full" : ""} ${className}`,
     loading: loading,
     ...args,
     sizes: SIZES
@@ -537,33 +529,30 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const PostCardMeta = ({
-  className = "leading-none",
+  className = "leading-none text-xs",
   meta,
   hiddenAvatar = false,
-  size = "normal"
+  avatarSize = "h-7 w-7 text-sm"
 }) => {
-  let {
+  const {
     date,
     author
   } = meta;
-  author = author?.node;
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `nc-PostCardMeta inline-flex items-center  text-neutral-800 dark:text-neutral-200 truncate ${size === "normal" ? "text-xs" : "text-base"} ${className}`,
-    "data-nc-id": "PostCardMeta"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: author?.url + author?.uri,
-    className: "relative flex items-center space-x-2 truncate"
+    className: `nc-PostCardMeta inline-flex items-center flex-wrap text-neutral-800 dark:text-neutral-200 ${className}`
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "relative flex items-center space-x-2 rtl:space-x-reverse"
   }, !hiddenAvatar && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Avatar_Avatar__WEBPACK_IMPORTED_MODULE_2__["default"], {
     radius: "rounded-full",
-    sizeClass: size === "normal" ? "h-7 w-7 text-sm" : "h-10 w-10 text-xl",
-    imgUrl: author?.avatar?.url,
-    userName: author?.username
+    sizeClass: avatarSize,
+    imgUrl: author.avatar,
+    userName: author.displayName
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "block text-neutral-700 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium truncate py-1"
-  }, author?.name)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "block text-neutral-700 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium"
+  }, author.displayName)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-neutral-500 dark:text-neutral-400 mx-[6px] font-medium"
   }, "\xB7"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "text-neutral-500 dark:text-neutral-400 font-normal flex-shrink-0"
+    className: "text-neutral-500 dark:text-neutral-400 font-normal"
   }, (0,_utils_formatDate__WEBPACK_IMPORTED_MODULE_3__["default"])(date))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PostCardMeta);
@@ -594,7 +583,7 @@ const PostTypeFeaturedIcon = ({
   iconSize = "w-6 h-6"
 }) => {
   const renderMediaIcon = () => {
-    if (postType.includes("video")) {
+    if (postType?.includes("video")) {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
         className: iconSize,
         viewBox: "0 0 24 24",
@@ -609,7 +598,7 @@ const PostTypeFeaturedIcon = ({
         strokeLinejoin: "round"
       }));
     }
-    if (postType.includes("audio")) {
+    if (postType?.includes("audio")) {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
         className: iconSize,
         viewBox: "0 0 24 24",
@@ -647,7 +636,7 @@ const PostTypeFeaturedIcon = ({
         strokeLinejoin: "round"
       }));
     }
-    if (postType.includes("gallery")) {
+    if (postType?.includes("gallery")) {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
         className: iconSize,
         viewBox: "0 0 24 24",

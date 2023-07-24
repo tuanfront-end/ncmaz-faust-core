@@ -20,8 +20,6 @@ import { ContainerEditProps } from "../types";
 import { BlockMagazine_Attrs } from "./attributes";
 import PostsQueriesControls from "../components/posts-queries-controls/PostsQueriesControls";
 import QueryToolbar from "./query-toolbar";
-import { FragmentType, useFragment } from "../__generated__";
-import { NC_POSTS_EDGES_FRAGMENT } from "../fragments";
 
 const SectionMagazine1Lazy = lazy(
 	() => import("../frontend-components/SectionMagazines/SectionMagazine1")
@@ -67,12 +65,12 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 		initPosts,
 	} = attributes;
 
-	const { variables, dataLists, error, loading, data } =
+	const { variables, error, loading, data, dataLists } =
 		usePostGqlQuery(queries);
 
 	// ---- SAVE initPosts ----
 	useEffect(() => {
-		console.log(888, { loading, dataLists, error, data, variables });
+		console.log(888, "__posts___", { loading, error, data, variables });
 		if (loading || error) {
 			return;
 		}
@@ -107,7 +105,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 			case "magazine-2":
 				return (
 					<Suspense fallback={<Spinner />}>
-						<SectionMagazine2Lazy activePosts={dataLists} />{" "}
+						<SectionMagazine2Lazy activePosts={dataLists} />
 					</Suspense>
 				);
 			case "magazine-3":
@@ -162,7 +160,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 			default:
 				return (
 					<Suspense fallback={<Spinner />}>
-						<SectionMagazine1Lazy activePosts={dataLists} />
+						<SectionMagazine1Lazy posts={dataLists} />
 					</Suspense>
 				);
 		}
@@ -201,7 +199,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	};
 	//
 	return (
-		<div {...useBlockProps()}>
+		<>
 			<InspectorControls>
 				<PanelBody title="Layout">
 					<div className="space-y-2.5">
@@ -232,14 +230,12 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 					</div>
 				</PanelBody>
 			</InspectorControls>
-
 			<PostsQueriesControls
 				attributes={queries}
 				setQuery={(query) => {
 					setAttributes({ queries: { ...queries, ...query } });
 				}}
 			/>
-
 			{/* @ts-ignore */}
 			<BlockControls group="block">
 				<QueryToolbar
@@ -250,9 +246,9 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 				/>
 			</BlockControls>
 
-			{/* Content */}
-			{/* {renderContent()} */}
-		</div>
+			{/* edit content render */}
+			<div {...useBlockProps()}>{renderContent()}</div>
+		</>
 	);
 };
 
