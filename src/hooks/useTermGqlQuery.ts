@@ -3,16 +3,6 @@ import { gql, useQuery } from "@apollo/client";
 import { graphql } from "../__generated__";
 import { BlockTerms_Attrs } from "../block-terms/attributes";
 
-export const ANKJABCJBA = graphql(/* GraphQL */ `
-	fragment Abcsahfkhafe on TermNode {
-		__typename
-		databaseId
-		description
-		link
-		taxonomyName
-	}
-`);
-
 const termsWithVariablesQueryDocument = graphql(/* GraphQL */ `
 	query termsWithVariablesQuery(
 		$first: Int = 10
@@ -29,13 +19,37 @@ const termsWithVariablesQueryDocument = graphql(/* GraphQL */ `
 					__typename
 					id
 					count
-					...Abcsahfkhafe
+					name
+					slug
+					databaseId
+					description
+					link
+					taxonomyName
+					... on Category {
+						id
+						name
+						ncTaxonomyMeta {
+							color
+							featuredImage {
+								...NcmazFcImageFields
+							}
+						}
+					}
+					... on Tag {
+						id
+						name
+						ncTaxonomyMeta {
+							color
+							featuredImage {
+								...NcmazFcImageFields
+							}
+						}
+					}
 				}
 			}
 		}
 	}
 `);
-// ...NcmazFcTermCardFields
 
 export default function useTermGqlQuery(attributes: BlockTerms_Attrs) {
 	const {
@@ -64,7 +78,7 @@ export default function useTermGqlQuery(attributes: BlockTerms_Attrs) {
 		variables,
 	});
 
-	const dataLists: any[] = data?.terms?.edges || [];
+	const dataLists = data?.terms?.edges || [];
 
 	return {
 		variables,

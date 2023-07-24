@@ -3,15 +3,15 @@
 // CUSTOM  https://www.wpgraphql.com/recipes/
 
 // =====================    Remove Extensions from GraphQL Response     ==============================
-add_filter('graphql_request_results', function ($response) {
-    if (is_array($response) && isset($response['extensions'])) {
-        unset($response['extensions']);
-    }
-    if (is_object($response) && isset($response->extensions)) {
-        unset($response->extensions);
-    }
-    return $response;
-}, 99, 1);
+// add_filter('graphql_request_results', function ($response) {
+//     if (is_array($response) && isset($response['extensions'])) {
+//         unset($response['extensions']);
+//     }
+//     if (is_object($response) && isset($response->extensions)) {
+//         unset($response->extensions);
+//     }
+//     return $response;
+// }, 99, 1);
 
 // =====================    ORDER BY VIEWS_COUNT     ==============================
 // ****  can lam lai vi view_couts bay gio la string, khong phai int, can su dung split de tach ra roi dem so luong

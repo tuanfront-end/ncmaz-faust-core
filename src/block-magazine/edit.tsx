@@ -70,15 +70,15 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 
 	// ---- SAVE initPosts ----
 	useEffect(() => {
-		console.log(888, "__posts___", { loading, error, data, variables });
-		if (loading || error) {
+		if (loading) {
 			return;
 		}
+		console.log(888, "__posts___", { loading, error, data, variables });
 
 		setAttributes({
 			initPosts: dataLists,
 		});
-	}, [error, loading, dataLists]);
+	}, [loading]);
 
 	// ---- SAVE graphQLvariables ----
 	// useEffect(() => {

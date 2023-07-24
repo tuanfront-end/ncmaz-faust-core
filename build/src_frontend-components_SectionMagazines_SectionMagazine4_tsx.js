@@ -295,8 +295,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _utils_getImageSizesBySizeName__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/getImageSizesBySizeName */ "./src/utils/getImageSizesBySizeName.ts");
-
 
 
 const NcImage = ({
@@ -307,13 +305,8 @@ const NcImage = ({
   src,
   sizes,
   fill = false,
-  imageSizes = window.innerWidth < 475 ? "MEDIUM" : "MEDIUM_LARGE",
   ...args
 }) => {
-  let SIZES = (0,_utils_getImageSizesBySizeName__WEBPACK_IMPORTED_MODULE_2__["default"])({
-    sizeName: imageSizes,
-    sizes
-  });
   const renderLoadingPlaceholder = () => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: `${className} flex items-center justify-center bg-neutral-200 dark:bg-neutral-6000 text-neutral-100 dark:text-neutral-500`
@@ -329,9 +322,7 @@ const NcImage = ({
     alt: alt,
     className: ` ${fill ? "absolute inset-0 w-full h-full" : ""} ${className}`,
     loading: loading,
-    ...args,
-    sizes: SIZES
-    // srcSet="http://localhost/wordpress-1/wp-content/uploads/2022/09/1650732.jpg 960w, http://localhost/wordpress-1/wp-content/uploads/2022/09/1650732-240x300.jpg 240w, http://localhost/wordpress-1/wp-content/uploads/2022/09/1650732-819x1024.jpg 819w, http://localhost/wordpress-1/wp-content/uploads/2022/09/1650732-768x960.jpg 768w"
+    ...args
   }) : renderLoadingPlaceholder());
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NcImage);
@@ -777,52 +768,6 @@ function ncFormatDate(date) {
   }).format(d);
   return `${mo} ${da}, ${ye}`;
 }
-
-/***/ }),
-
-/***/ "./src/utils/getImageSizesBySizeName.ts":
-/*!**********************************************!*\
-  !*** ./src/utils/getImageSizesBySizeName.ts ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-const getImageSizesBySizeName = ({
-  sizeName,
-  sizes
-}) => {
-  let SIZES;
-  switch (sizeName) {
-    case "THUMBNAIL":
-      SIZES = "(max-width: 150px) 100vw, 150px";
-      break;
-    case "MEDIUM":
-      SIZES = "(max-width: 475px) 100vw, 475px";
-      break;
-    case "MEDIUM_LARGE":
-      SIZES = "(max-width: 768px) 100vw, 768px";
-      break;
-    case "LARGE":
-      SIZES = "(max-width: 1024px) 100vw, 1024px";
-      break;
-    case "_1536X1536":
-      SIZES = "(max-width: 1536px) 100vw, 1536px";
-      break;
-    case "_2048X2048":
-      SIZES = "(max-width: 1600px) 100vw, 1600px";
-      break;
-    case "IS_SIZES":
-      SIZES = sizes;
-      break;
-    default:
-      break;
-  }
-  return SIZES;
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getImageSizesBySizeName);
 
 /***/ })
 

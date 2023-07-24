@@ -1,11 +1,7 @@
 import React, { FC, ImgHTMLAttributes } from "react";
-import getImageSizesBySizeName, {
-	NC_IMAGE_SIZES,
-} from "../../utils/getImageSizesBySizeName";
 
 export interface NcImageProps extends ImgHTMLAttributes<HTMLImageElement> {
 	containerClassName?: string;
-	imageSizes?: NC_IMAGE_SIZES;
 	fill?: boolean;
 }
 
@@ -17,11 +13,8 @@ const NcImage: FC<NcImageProps> = ({
 	src,
 	sizes,
 	fill = false,
-	imageSizes = window.innerWidth < 475 ? "MEDIUM" : "MEDIUM_LARGE",
 	...args
 }) => {
-	let SIZES = getImageSizesBySizeName({ sizeName: imageSizes, sizes });
-
 	const renderLoadingPlaceholder = () => {
 		return (
 			<div
@@ -48,7 +41,6 @@ const NcImage: FC<NcImageProps> = ({
 					} ${className}`}
 					loading={loading}
 					{...args}
-					sizes={SIZES}
 					// srcSet="http://localhost/wordpress-1/wp-content/uploads/2022/09/1650732.jpg 960w, http://localhost/wordpress-1/wp-content/uploads/2022/09/1650732-240x300.jpg 240w, http://localhost/wordpress-1/wp-content/uploads/2022/09/1650732-819x1024.jpg 819w, http://localhost/wordpress-1/wp-content/uploads/2022/09/1650732-768x960.jpg 768w"
 				></img>
 			) : (

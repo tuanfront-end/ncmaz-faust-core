@@ -1,31 +1,36 @@
 import React, { FC } from "react";
+import { TaxonomyType } from "../SectionSliderNewCategories/SectionSliderNewCategories";
+import NcImage from "../NcImage/NcImage";
 
-const CardCategory1 = ({ className = "", size = "normal", taxonomyNode }) => {
-	const { count, name, link, ncTaxonomyMeta, categoryId, id } = taxonomyNode;
-	const { color, featuredImage } = ncTaxonomyMeta;
+export interface CardCategory1Props {
+	className?: string;
+	taxonomy: TaxonomyType;
+	size?: "large" | "normal";
+}
 
+const CardCategory1: FC<CardCategory1Props> = ({
+	className = "",
+	size = "normal",
+	taxonomy,
+}) => {
+	const { count, name, ncTaxonomyMeta } = taxonomy;
 	return (
-		<div
-			className={`nc-CardCategory1  flex items-center ${className}`}
-			data-nc-id="CardCategory1"
-		>
-			<div
-				className={`flex-shrink-0 ${
+		<span className={`nc-CardCategory1 flex items-center ${className}`}>
+			<NcImage
+				alt=""
+				containerClassName={`relative flex-shrink-0 ${
 					size === "large" ? "w-20 h-20" : "w-12 h-12"
-				} rounded-lg mr-4 overflow-hidden object-cover bg-gray-400`}
-			>
-				{featuredImage?.sourceUrl && (
-					<img
-						className="w-full h-full object-cover bg-red-400"
-						src={featuredImage?.sourceUrl}
-					/>
-				)}
-			</div>
+				} rounded-lg me-4 overflow-hidden`}
+				src={ncTaxonomyMeta?.featuredImage?.sourceUrl || ""}
+				fill
+				className="object-cover"
+				sizes="80px"
+			/>
 			<div>
 				<h2
 					className={`${
 						size === "large" ? "text-lg" : "text-base"
-					} nc-card-title text-neutral-900 dark:text-neutral-100 font-semibold`}
+					} nc-card-title text-neutral-900 dark:text-neutral-100 text-sm sm:text-base font-medium sm:font-semibold`}
 				>
 					{name}
 				</h2>
@@ -34,10 +39,10 @@ const CardCategory1 = ({ className = "", size = "normal", taxonomyNode }) => {
 						size === "large" ? "text-sm" : "text-xs"
 					} block mt-[2px] text-neutral-500 dark:text-neutral-400`}
 				>
-					{count || 0} Articles
+					{count} Articles
 				</span>
 			</div>
-		</div>
+		</span>
 	);
 };
 

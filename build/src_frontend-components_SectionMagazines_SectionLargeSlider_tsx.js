@@ -552,8 +552,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _utils_getImageSizesBySizeName__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/getImageSizesBySizeName */ "./src/utils/getImageSizesBySizeName.ts");
-
 
 
 const NcImage = ({
@@ -564,13 +562,8 @@ const NcImage = ({
   src,
   sizes,
   fill = false,
-  imageSizes = window.innerWidth < 475 ? "MEDIUM" : "MEDIUM_LARGE",
   ...args
 }) => {
-  let SIZES = (0,_utils_getImageSizesBySizeName__WEBPACK_IMPORTED_MODULE_2__["default"])({
-    sizeName: imageSizes,
-    sizes
-  });
   const renderLoadingPlaceholder = () => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: `${className} flex items-center justify-center bg-neutral-200 dark:bg-neutral-6000 text-neutral-100 dark:text-neutral-500`
@@ -586,9 +579,7 @@ const NcImage = ({
     alt: alt,
     className: ` ${fill ? "absolute inset-0 w-full h-full" : ""} ${className}`,
     loading: loading,
-    ...args,
-    sizes: SIZES
-    // srcSet="http://localhost/wordpress-1/wp-content/uploads/2022/09/1650732.jpg 960w, http://localhost/wordpress-1/wp-content/uploads/2022/09/1650732-240x300.jpg 240w, http://localhost/wordpress-1/wp-content/uploads/2022/09/1650732-819x1024.jpg 819w, http://localhost/wordpress-1/wp-content/uploads/2022/09/1650732-768x960.jpg 768w"
+    ...args
   }) : renderLoadingPlaceholder());
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NcImage);

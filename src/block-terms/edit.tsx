@@ -16,6 +16,7 @@ import { ContainerEditProps } from "../types";
 import { BlockTerms_Attrs } from "./attributes";
 import useTermGqlQuery from "../hooks/useTermGqlQuery";
 import TermOrderControl from "./order-control";
+import SectionSliderNewCategories from "../frontend-components/SectionSliderNewCategories/SectionSliderNewCategories";
 
 const MIN_TAGS = 1;
 const MAX_TAGS = 100;
@@ -36,28 +37,22 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 	const { data, dataLists, error, loading, variables } =
 		useTermGqlQuery(attributes);
 
-	console.log(999, "__terms___", {
-		loading,
-		error,
-		data,
-		dataLists,
-	});
 	// ---- SAVE initPosts ----
-	// useEffect(() => {
-	// 	if (loading) {
-	// 		return;
-	// 	}
-	// 	console.log(999, "__terms___", {
-	// 		loading,
-	// 		error,
-	// 		data,
-	// 		variables,
-	// 		dataLists,
-	// 	});
-	// 	setAttributes({
-	// 		initTerms: dataLists,
-	// 	});
-	// }, [error]);
+	useEffect(() => {
+		if (loading) {
+			return;
+		}
+		console.log(999, "__terms___", {
+			loading,
+			error,
+			data,
+			variables,
+			dataLists,
+		});
+		setAttributes({
+			initTerms: dataLists,
+		});
+	}, [loading]);
 
 	const inspectorControls = (
 		<InspectorControls>
@@ -137,6 +132,11 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 						</pre>
 					)}
 				</div>
+
+				<SectionSliderNewCategories
+					terms={data?.terms?.edges || []}
+					categoryCardType="card4"
+				/>
 			</div>
 		</>
 	);
