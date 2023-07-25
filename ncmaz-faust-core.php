@@ -43,6 +43,7 @@ add_theme_support('post-formats',  ['gallery', 'video', 'audio']);
 // maybe this will be slow down the wpgraphql query.
 // require plugin_dir_path(__FILE__) . 'includes/ncmaz-fe-total-counts-for-wp-graphql.php';
 
+require plugin_dir_path(__FILE__) . 'includes/ncmazfc-ajax.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmaz-custom-funcs.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmaz-enqueue-scripts.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmaz-update-views-count.php';
@@ -51,6 +52,7 @@ require plugin_dir_path(__FILE__) . 'includes/ncmaz-AFC-fields.php';
 add_action('plugins_loaded',  function () {
     require plugin_dir_path(__FILE__) . 'includes/ncmaz-redux-sample-config.php';
     require plugin_dir_path(__FILE__) . 'includes/ncmaz-custom-wpgraphql.php';
+    require plugin_dir_path(__FILE__) . 'includes/ncmazfc-wpgraphql-mutation.php';
 });
 require plugin_dir_path(__FILE__) . 'includes/ncmaz-custom-hooks.php';
 

@@ -6,6 +6,7 @@ export const NC_TERM_CARD_FRAGMENT = graphql(/* GraphQL */ `
 		__typename
 		id
 		count
+		uri
 		name
 		slug
 		databaseId
@@ -63,10 +64,18 @@ export const NC_POST_CARD_FRAGMENT = graphql(/* GraphQL */ `
 		__typename
 		id
 		link
+		uri
+		modifiedGmt
+		modified
+		isSticky
+		dateGmt
+		date
+		commentStatus
 		status
 		author {
 			node {
 				id
+				databaseId
 				avatar {
 					url
 				}

@@ -7,7 +7,7 @@ import { AttrsGenericType } from "../types";
 export interface BlockMagazine_Attrs {
 	uniqueId: string;
 	queries: PostsQueriesControlsType;
-	initPosts: any[];
+	initData: Record<string, any>;
 	//
 
 	showFilterTab: boolean;
@@ -30,9 +30,9 @@ const blokcAttrs: AttrsGenericType<BlockMagazine_Attrs> = {
 		default: "style-1",
 	},
 
-	initPosts: {
-		type: "array",
-		default: [],
+	initData: {
+		type: "object",
+		default: {},
 	},
 
 	showFilterTab: {

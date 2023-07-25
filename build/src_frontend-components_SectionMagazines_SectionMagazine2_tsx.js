@@ -264,6 +264,7 @@ const NC_TERM_CARD_FRAGMENT = (0,_generated___WEBPACK_IMPORTED_MODULE_0__.graphq
 		__typename
 		id
 		count
+		uri
 		name
 		slug
 		databaseId
@@ -319,10 +320,18 @@ const NC_POST_CARD_FRAGMENT = (0,_generated___WEBPACK_IMPORTED_MODULE_0__.graphq
 		__typename
 		id
 		link
+		uri
+		modifiedGmt
+		modified
+		isSticky
+		dateGmt
+		date
+		commentStatus
 		status
 		author {
 			node {
 				id
+				databaseId
 				avatar {
 					url
 				}

@@ -62,13 +62,13 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 		viewMoreHref,
 		blockVariation,
 		queries,
-		initPosts,
+		initData,
 	} = attributes;
 
 	const { variables, error, loading, data, dataLists } =
 		usePostGqlQuery(queries);
 
-	// ---- SAVE initPosts ----
+	// ---- SAVE initData ----
 	useEffect(() => {
 		if (loading) {
 			return;
@@ -76,7 +76,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 		console.log(888, "__posts___", { loading, error, data, variables });
 
 		setAttributes({
-			initPosts: dataLists,
+			initData: data,
 		});
 	}, [loading]);
 
