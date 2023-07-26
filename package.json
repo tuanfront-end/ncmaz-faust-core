@@ -13,7 +13,8 @@
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
 		"start": "wp-scripts start",
-		"watch-codegen": "graphql-codegen -w"
+		"watch-codegen": "graphql-codegen -w",
+		"dev": "yarn start & yarn watch-codegen"
 	},
 	"devDependencies": {
 		"@graphql-codegen/cli": "^4.0.1",

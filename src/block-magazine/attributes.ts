@@ -7,7 +7,6 @@ import { AttrsGenericType } from "../types";
 export interface BlockMagazine_Attrs {
 	uniqueId: string;
 	queries: PostsQueriesControlsType;
-	initData: Record<string, any>;
 	//
 
 	showFilterTab: boolean;
@@ -20,6 +19,7 @@ const blokcAttrs: AttrsGenericType<BlockMagazine_Attrs> = {
 		type: "string",
 		default: "",
 	},
+	// khi tuy chinh o day cung can thay doi trong file render_callback.php of block magazine
 	queries: {
 		type: "object",
 		default: PostsQueriesControls_DEMO_DATA,
@@ -28,11 +28,6 @@ const blokcAttrs: AttrsGenericType<BlockMagazine_Attrs> = {
 	blockVariation: {
 		type: "string",
 		default: "style-1",
-	},
-
-	initData: {
-		type: "object",
-		default: {},
 	},
 
 	showFilterTab: {

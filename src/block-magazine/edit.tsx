@@ -1,25 +1,23 @@
-import React, { lazy, Suspense, useEffect, FC } from "react";
+import React, { lazy, Suspense, FC, useEffect } from "react";
 import { __ } from "@wordpress/i18n";
 import {
 	TextControl,
-	Panel,
 	PanelBody,
-	PanelRow,
 	SelectControl,
 	Spinner,
-	Toolbar,
 } from "@wordpress/components";
 import {
 	BlockControls,
 	InspectorControls,
 	useBlockProps,
 } from "@wordpress/block-editor";
-import EmptyState from "../frontend-components/EmptyState/EmptyState";
-import usePostGqlQuery from "../hooks/usePostGqlQuery";
 import { ContainerEditProps } from "../types";
 import { BlockMagazine_Attrs } from "./attributes";
 import PostsQueriesControls from "../components/posts-queries-controls/PostsQueriesControls";
 import QueryToolbar from "./query-toolbar";
+import ServerSideRender from "@wordpress/server-side-render";
+import BlockLoadingPlaceholder from "../components/BlockLoadingPlaceholder";
+import BlockEmptyPlaceholder from "../components/BlockEmptyPlaceholder";
 
 const SectionMagazine1Lazy = lazy(
 	() => import("../frontend-components/SectionMagazines/SectionMagazine1")
@@ -53,48 +51,47 @@ const SectionLargeSliderLazy = lazy(
 );
 
 const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
-	const { attributes, setAttributes } = props;
+	const { attributes, setAttributes, clientId } = props;
 
 	//
-	const {
-		uniqueId,
-		showFilterTab,
-		viewMoreHref,
-		blockVariation,
-		queries,
-		initData,
-	} = attributes;
+	const { uniqueId, showFilterTab, viewMoreHref, blockVariation, queries } =
+		attributes;
 
-	const { variables, error, loading, data, dataLists } =
-		usePostGqlQuery(queries);
-
-	// ---- SAVE initData ----
+	// ---- SAVE uniqueId ----
 	useEffect(() => {
-		if (loading) {
-			return;
-		}
-		console.log(888, "__posts___", { loading, error, data, variables });
+		setAttributes({ uniqueId: clientId });
+	}, []);
 
-		setAttributes({
-			initData: data,
+	const getPostsDataFromSeverSideRenderNode = () => {
+		const node = document.querySelector(
+			`#block-${clientId} .ncmazfc-block-magazine__content`
+		) as HTMLElement | null;
+
+		const dataInitPosts =
+			node?.getAttribute("data-ncmazfc-init-posts") || "null";
+		const dataInitErrors =
+			node?.getAttribute("data-ncmazfc-init-errors") || "null";
+
+		console.log(1, {
+			node,
+			uniqueId,
+			a: `#block-${clientId} .ncmazfc-block-magazine__content`,
+			dataInitPosts,
+			dataInitErrors,
 		});
-	}, [loading]);
+		return {
+			initPosts: JSON.parse(dataInitPosts),
+			initErrors: JSON.parse(dataInitErrors),
+		};
+	};
 
-	// ---- SAVE graphQLvariables ----
-	// useEffect(() => {
-	// 	if (!data) {
-	// 		return;
-	// 	}
-	// 	setAttributes({
-	// 		graphQLvariables: {
-	// 			variables,
-	// 			queryString: GQL_QUERY__string_text,
-	// 		},
-	// 		expectedNumberResults: dataLists.length || numberPerPage,
-	// 	});
-	// }, [data]);
+	const data = getPostsDataFromSeverSideRenderNode();
+	console.log(22, { data });
 
 	const renderLayoutType = () => {
+		const dataLists = data?.initPosts || [];
+		if (!dataLists.length) return null;
+
 		switch (blockVariation) {
 			case "magazine-1":
 				return (
@@ -168,7 +165,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 
 	const renderContent = () => {
 		return (
-			<div className={`nc-FactoryBlockMagazine relative `}>
+			<div className={`ncmazfc-block-magazine relative `}>
 				{/* {showFilterTab && !!categories?.length ? (
 					<HeaderSectionFilter
 						tabActiveId={tabActiveId}
@@ -182,18 +179,22 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 					<Heading desc={subHeading}>{heading}</Heading>
 				)} */}
 
-				<div className="relative">
-					{loading && <Spinner />}
-					{error && (
-						<pre className="text-xs text-red-500">
-							<code>{JSON.stringify(error)}</code>
-						</pre>
-					)}
-
-					{!dataLists.length && !loading && <EmptyState />}
-				</div>
-
 				{renderLayoutType()}
+
+				{!!data?.initErrors && !data?.initPosts && (
+					<div>
+						<h2>Error!</h2>
+						<pre>
+							<code>{JSON.stringify(data?.initErrors, null, 2)}</code>
+						</pre>
+					</div>
+				)}
+				<ServerSideRender
+					block="ncmaz-faust/block-magazine"
+					attributes={attributes}
+					httpMethod="POST"
+					LoadingResponsePlaceholder={BlockLoadingPlaceholder}
+				/>
 			</div>
 		);
 	};

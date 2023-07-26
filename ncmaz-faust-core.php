@@ -59,9 +59,11 @@ require plugin_dir_path(__FILE__) . 'includes/ncmaz-custom-hooks.php';
 
 // ****  -----------------
 // below is of ncmaz faust core plugin -----------------
+require plugin_dir_path(__FILE__) . 'includes/ncmazfc-wpgraphql-fragments.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-custom-funcs.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-enqueue-scripts.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-register-blocks.php';
+require plugin_dir_path(__FILE__) . 'includes/ncmazfc-blocks-render-callback.php';
 // end
 
 

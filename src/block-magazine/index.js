@@ -21,13 +21,7 @@ import "../styles/index.scss";
 //
 
 registerBlockType(metadata.name, {
-	edit: (props) => (
-		<ApolloProvider client={client}>
-			<Suspense fallback={<Spinner />}>
-				<Edit {...props} />
-			</Suspense>
-		</ApolloProvider>
-	),
+	edit: Edit,
 	save: () => null,
 	attributes,
 	deprecated: deprecated,
