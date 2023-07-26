@@ -16,7 +16,6 @@ function ncmazfc__add_new_block_category($block_categories, $editor_context)
     }
     return $block_categories;
 }
-
 add_filter('block_categories_all', 'ncmazfc__add_new_block_category', 9999999, 2);
 
 

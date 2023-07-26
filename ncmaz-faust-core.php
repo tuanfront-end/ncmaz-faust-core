@@ -43,23 +43,18 @@ add_theme_support('post-formats',  ['gallery', 'video', 'audio']);
 // maybe this will be slow down the wpgraphql query.
 // require plugin_dir_path(__FILE__) . 'includes/ncmaz-fe-total-counts-for-wp-graphql.php';
 
-require plugin_dir_path(__FILE__) . 'includes/ncmazfc-ajax.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmaz-custom-funcs.php';
-require plugin_dir_path(__FILE__) . 'includes/ncmaz-enqueue-scripts.php';
-require plugin_dir_path(__FILE__) . 'includes/ncmaz-update-views-count.php';
-require plugin_dir_path(__FILE__) . 'includes/ncmaz-register-widgets.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmaz-AFC-fields.php';
 add_action('plugins_loaded',  function () {
-    require plugin_dir_path(__FILE__) . 'includes/ncmaz-redux-sample-config.php';
+    require plugin_dir_path(__FILE__) . 'includes/redux/ncmaz-redux-sample-config.php';
     require plugin_dir_path(__FILE__) . 'includes/ncmaz-custom-wpgraphql.php';
     require plugin_dir_path(__FILE__) . 'includes/ncmazfc-wpgraphql-mutation.php';
 });
 require plugin_dir_path(__FILE__) . 'includes/ncmaz-custom-hooks.php';
-
-
 // ****  -----------------
 // below is of ncmaz faust core plugin -----------------
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-wpgraphql-fragments.php';
+require plugin_dir_path(__FILE__) . 'includes/ncmazfc-update-post-custom-fields.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-custom-funcs.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-enqueue-scripts.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-register-blocks.php';
@@ -76,7 +71,7 @@ function ncmazfc__plugin_activate_update_fields()
 register_activation_hook(__FILE__, 'ncmazfc__plugin_activate_update_fields');
 
 
-if (!function_exists('ncmazFc__update_posts_custom_fields_one_time')) {
+if (!function_exists('ncmazFc__update_posts_custom_fields_one_time')) :
     // update reading time for all posts (Note: only run once time when you active this plugin)
     function ncmazFc__update_posts_custom_fields_one_time()
     {
@@ -106,5 +101,21 @@ if (!function_exists('ncmazFc__update_posts_custom_fields_one_time')) {
             wp_reset_query();
         }
     }
-}
-add_action('admin_init', 'ncmazFc__update_posts_custom_fields_one_time');
+    add_action('admin_init', 'ncmazFc__update_posts_custom_fields_one_time');
+endif;
+
+// update reading time 
+if (!function_exists("ncmazFc__update_reading_time_when_save_post")) :
+    function ncmazFc__update_reading_time_when_save_post($post_ID, $post, $update)
+    {
+        if ($post->post_type !== 'post' || !function_exists('get_field')) {
+            return null;
+        }
+
+        if (!get_field('reading_time', $post_ID)) {
+            $reading_time = ncmazFc__calculate_reading_time_by_content($post->post_content);
+            update_field('reading_time', $reading_time, $post_ID);
+        }
+    }
+    add_action('save_post', 'ncmazFc__update_reading_time_when_save_post', 10, 3);
+endif;

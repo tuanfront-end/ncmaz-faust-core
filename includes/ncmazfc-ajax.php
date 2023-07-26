@@ -1,2 +1,0 @@
-<?php
-// some ajax functions 
