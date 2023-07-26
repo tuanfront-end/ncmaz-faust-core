@@ -21,6 +21,8 @@ if (!function_exists("ncmazFc__increment_view_count_by_id")) :
         }
         $currentCount = get_field('views_count', $post_id);
         update_field('views_count', intval($currentCount) + 1, $post_id);
+
+        return intval($currentCount) + 1;
     }
 endif;
 
@@ -31,7 +33,7 @@ if (!function_exists("ncmazFc__update_likes_count_by_id")) :
     {
         // number is the number of likes
         // number = 1 => like
-        // number = -1 => unlike
+        // number = 0 => unlike
 
         // Kiểm tra xem post_id có hợp lệ không
         if (!$post_id || !is_numeric($post_id)) {
@@ -45,7 +47,18 @@ if (!function_exists("ncmazFc__update_likes_count_by_id")) :
         }
 
         $currentCount = get_field('likes_count', $post_id);
+
+        if ($number == 0 && $currentCount == 0) {
+            return false;
+        }
+        if ($number == 0 && $currentCount > 0) {
+            $number = -1;
+        }
+
+
         update_field('likes_count', intval($currentCount) + intval($number), $post_id);
+
+        return intval($currentCount) + intval($number);
     }
 endif;
 
@@ -57,7 +70,7 @@ if (!function_exists("ncmazFc__update_saveds_count_by_id")) :
     {
         // number is the number of likes
         // number = 1 => save
-        // number = -1 => unsave
+        // number = 0 => unsave
 
         // Kiểm tra xem post_id có hợp lệ không
         if (!$post_id || !is_numeric($post_id)) {
@@ -71,6 +84,16 @@ if (!function_exists("ncmazFc__update_saveds_count_by_id")) :
         }
 
         $currentCount = get_field('saveds_count', $post_id);
+
+        if ($number == 0 && $currentCount == 0) {
+            return false;
+        }
+        if ($number == 0 && $currentCount > 0) {
+            $number = -1;
+        }
+
         update_field('saveds_count', intval($currentCount) + intval($number), $post_id);
+
+        return intval($currentCount) + intval($number);
     }
 endif;

@@ -1,6 +1,7 @@
 <?php
-add_action('acf/init', 'ncmazFC__acf_add_local_field_groups');
 
+// create custom fields for post type post
+add_action('acf/init', 'ncmazFC__acf_add_local_field_groups');
 if (!function_exists("ncmazFC__acf_add_local_field_groups")) :
 
     function ncmazFC__acf_add_local_field_groups()
@@ -1060,3 +1061,51 @@ if (!function_exists("ncmazFC__acf_add_local_field_groups")) :
     }
 
 endif;
+
+// creage custom post type for user reaction
+add_action('init', function () {
+    register_post_type('user-reaction-post', array(
+        'labels' => array(
+            'name' => 'User Reaction Posts',
+            'singular_name' => 'User Reaction Post',
+            'menu_name' => 'User reaction posts',
+            'all_items' => 'All User reaction posts',
+            'edit_item' => 'Edit User reaction post',
+            'view_item' => 'View User reaction post',
+            'view_items' => 'View User reaction posts',
+            'add_new_item' => 'Add New User reaction post',
+            'new_item' => 'New User reaction post',
+            'parent_item_colon' => 'Parent User reaction post:',
+            'search_items' => 'Search User reaction posts',
+            'not_found' => 'No user reaction posts found',
+            'not_found_in_trash' => 'No user reaction posts found in Trash',
+            'archives' => 'User reaction post Archives',
+            'attributes' => 'User reaction post Attributes',
+            'insert_into_item' => 'Insert into user reaction post',
+            'uploaded_to_this_item' => 'Uploaded to this user reaction post',
+            'filter_items_list' => 'Filter user reaction posts list',
+            'filter_by_date' => 'Filter user reaction posts by date',
+            'items_list_navigation' => 'User reaction posts list navigation',
+            'items_list' => 'User reaction posts list',
+            'item_published' => 'User reaction post published.',
+            'item_published_privately' => 'User reaction post published privately.',
+            'item_reverted_to_draft' => 'User reaction post reverted to draft.',
+            'item_scheduled' => 'User reaction post scheduled.',
+            'item_updated' => 'User reaction post updated.',
+            'item_link' => 'User reaction post Link',
+            'item_link_description' => 'A link to a user reaction post.',
+        ),
+        'description' => 'Intermediate table to store information about each user\'s post retention.',
+        'public' => true,
+        'exclude_from_search' => true,
+        'show_in_rest' => true,
+        'supports' => array(
+            0 => 'title',
+            1 => 'author',
+        ),
+        'delete_with_user' => true,
+        'show_in_graphql' => true,
+        'graphql_single_name' => 'userReactionPost',
+        'graphql_plural_name' => 'userReactionPosts',
+    ));
+});
