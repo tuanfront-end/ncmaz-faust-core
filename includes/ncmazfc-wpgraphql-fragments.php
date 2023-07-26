@@ -20,7 +20,9 @@ $NC_TERM_CARD_FRAGMENT = '
 			ncTaxonomyMeta {
 				color
 				featuredImage {
-					...NcmazFcImageFields
+					node {
+						...NcmazFcImageFields
+					}
 				}
 			}
 		}
@@ -30,7 +32,9 @@ $NC_TERM_CARD_FRAGMENT = '
 			ncTaxonomyMeta {
 				color
 				featuredImage {
-					...NcmazFcImageFields
+					node {
+						...NcmazFcImageFields
+					}
 				}
 			}
 		}
@@ -87,7 +91,9 @@ $NC_POST_CARD_FRAGMENT = '
 				slug
 				ncUserMeta {
 					featuredImage {
-						...NcmazFcImageFields
+						node {
+							...NcmazFcImageFields
+						}
 					}
 				}
 			}
@@ -101,7 +107,7 @@ $NC_POST_CARD_FRAGMENT = '
 					uri
 					slug
 					count
-					categoryId
+					databaseId
 					ncTaxonomyMeta {
 						color
 					}
@@ -139,28 +145,44 @@ $NC_POST_CARD_FRAGMENT = '
 		}
 		ncmazGalleryImgs {
 			image1 {
-				...NcmazFcImageFields
+				node {
+					...NcmazFcImageFields
+				}
 			}
 			image2 {
-				...NcmazFcImageFields
+				node {
+					...NcmazFcImageFields
+				}
 			}
 			image3 {
-				...NcmazFcImageFields
+				node {
+					...NcmazFcImageFields
+				}
 			}
 			image4 {
-				...NcmazFcImageFields
+				node {
+					...NcmazFcImageFields
+				}
 			}
 			image5 {
-				...NcmazFcImageFields
+				node {
+					...NcmazFcImageFields
+				}
 			}
 			image6 {
-				...NcmazFcImageFields
+				node {
+					...NcmazFcImageFields
+				}
 			}
 			image7 {
-				...NcmazFcImageFields
+				node {
+					...NcmazFcImageFields
+				}
 			}
 			image8 {
-				...NcmazFcImageFields
+				node {
+					...NcmazFcImageFields
+				}
 			}
 		}
 	}
@@ -184,11 +206,11 @@ $NC_IMAGE_MEDIA_FRAGMENT =  '
 $NC_POST_META_DATA_FRAGMENT = '
 	fragment NcmazFcPostMetaFields on Post_Ncpostmetadata {
 		__typename
-		reactionLikedList
-		savedList
-		showRightSidebar
-		singlePageStyle
 		viewsCount
 		readingTime
+		likesCount
+		savedsCount
+		showRightSidebar
+		template
 	}
 ';

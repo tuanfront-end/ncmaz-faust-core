@@ -15,7 +15,6 @@ register_graphql_enum_type('NcmazFcUserReactionPostActionEnum', [
     ],
 ]);
 
-
 register_graphql_enum_type('NcmazFcUserReactionPostNumberUpdateEnum', [
     'description' => __('1 = add, 0 = remove', 'ncmazfc'),
     'values' => [
@@ -26,6 +25,25 @@ register_graphql_enum_type('NcmazFcUserReactionPostNumberUpdateEnum', [
         '_1' => [
             'value' => 1,
             'description' => "Add. Will add 1 to the count"
+        ],
+
+    ],
+]);
+
+register_graphql_enum_type('NcmazFcUserReactionPostUpdateResuiltEnum', [
+    'description' => __('Added, Removed, or Error', 'ncmazfc'),
+    'values' => [
+        'ADDED' => [
+            'value' => 'ADDED',
+            'description' => "Success! Added!"
+        ],
+        'REMOVED' => [
+            'value' => 'REMOVED',
+            'description' => "Success! Removed!"
+        ],
+        'ERROR' => [
+            'value' => 'ERROR',
+            'description' => "Error!, something went wrong!"
         ],
 
     ],
@@ -67,12 +85,16 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
             'description' => __('Save, likes, view, or something else,', 'ncmazfc'),
         ],
         'result' => [
-            'type' => 'String',
-            'description' => __('Added or Removed', 'ncmazfc'),
+            'type' => 'NcmazFcUserReactionPostUpdateResuiltEnum',
+            'description' => __('Added or Removed or Error', 'ncmazfc'),
         ],
         'new_count' => [
             'type' => 'Int',
             'description' => __('New count after update', 'ncmazfc'),
+        ],
+        'errors' => [
+            'type' => 'String',
+            'description' => __('Error of this mutation', 'ncmazfc'),
         ],
     ],
     'mutateAndGetPayload' => function ($input, $context, $info) {
@@ -81,10 +103,17 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
         $postID = $input['post_id'];
         $reaction = $input['reaction'];
         $number = $input['number'];
+        $outPut = [];
 
 
         if (empty($postID) || empty($userID) || empty($reaction)) {
-            return new \WP_Error('invalid_input', __('Invalid input', 'ncmazfc'));
+            return [
+                'user_id' => $userID,
+                'post_id' => $postID,
+                'reaction' => $reaction,
+                'result' => 'ERROR',
+                'errors' => "Invalid input. Empty postID or userID or reaction"
+            ];
         }
 
         // when user save, like post ----------
@@ -109,46 +138,89 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
         ]);
         $post = ($userPosts['data']['userReactionPosts']['edges'][0]['node'] ?? null);
 
-        $outPut = [];
         if ($post) {
-            wp_delete_post($post['databaseId'], true);
-
-            $newCount = 0;
-            if ($reaction == 'SAVE') {
-                $newCount = ncmazFc__update_saveds_count_by_id($postID, 0);
-            } else if ($reaction == 'LIKE') {
-                $newCount = ncmazFc__update_likes_count_by_id($postID, 0);
+            // 1. when user update view count --------------------------------
+            if ($reaction == 'VIEW') {
+                // when user update view count, and view count is exist
+                // return error and do nothing 
+                $outPut = [
+                    'user_id'   => $userID,
+                    'post_id'   => $postID,
+                    'reaction'  => $reaction,
+                    'result'    => 'ERROR',
+                    'errors'    => 'View count is already exist.'
+                ];
+                return $outPut;
             }
-            $outPut = [
-                'user_id'   => $userID,
-                'post_id'   => $postID,
-                'reaction'  => $reaction,
-                'result'    => 'Removed',
-                'new_count' =>  $newCount
-            ];
+
+
+            // 2. when user update save or like count --------------------------------
+            // Delete Post data 
+
+            $is_post_deleted = wp_delete_post($post['databaseId'], true);
+            // false or null when Delete Post data failure.
+            if (!$is_post_deleted) {
+                $outPut = [
+                    'user_id'   => $userID,
+                    'post_id'   => $postID,
+                    'reaction'  => $reaction,
+                    'result'    => 'ERROR',
+                    'errors'    => 'Delete Reaction_post data failure.'
+                ];
+            } else {
+                // Delete Post data on success,
+                $newCount = 0;
+                if ($reaction == 'SAVE') {
+                    $newCount = ncmazFc__update_saveds_count_by_id($postID, 0);
+                } else if ($reaction == 'LIKE') {
+                    $newCount = ncmazFc__update_likes_count_by_id($postID, 0);
+                }
+
+                $outPut = [
+                    'user_id'   => $userID,
+                    'post_id'   => $postID,
+                    'reaction'  => $reaction,
+                    'result'    => 'REMOVED',
+                    'new_count' =>  $newCount
+                ];
+            }
         } else {
             $postTitle = $postID . ',' . $reaction;
             $newCount = 0;
-            if ($reaction == 'SAVE') {
-                $newCount = ncmazFc__update_saveds_count_by_id($postID, 1);
-            } else if ($reaction == 'LIKE') {
-                $newCount = ncmazFc__update_likes_count_by_id($postID, 1);
-            } else if ($reaction == 'VIEW') {
-                $newCount = ncmazFc__increment_view_count_by_id($postID);
-            }
-
-            wp_insert_post([
+            $new_reaction_post_id = wp_insert_post([
                 'post_title' => $postTitle,
                 'post_author' =>  $userID,
-                'post_type' => 'user_reaction_post',
+                'post_type' => 'user-reaction-post',
+                'post_status'   => 'publish',
             ]);
-            $outPut = [
-                'user_id' => $userID,
-                'post_id' => $postID,
-                'reaction' => $reaction,
-                'result' => 'Added',
-                'new_count' =>  $newCount
-            ];
+
+            //  Insert Post data on success,
+            if (!is_wp_error($new_reaction_post_id)) {
+                if ($reaction == 'SAVE') {
+                    $newCount = ncmazFc__update_saveds_count_by_id($postID, 1);
+                } else if ($reaction == 'LIKE') {
+                    $newCount = ncmazFc__update_likes_count_by_id($postID, 1);
+                } else if ($reaction == 'VIEW') {
+                    $newCount = ncmazFc__increment_view_count_by_id($postID);
+                }
+
+                $outPut = [
+                    'user_id' => $userID,
+                    'post_id' => $postID,
+                    'reaction' => $reaction,
+                    'result' => 'ADDED',
+                    'new_count' =>  $newCount,
+                ];
+            } else {
+                // false or null when Insert Post data failure.
+                $outPut = [
+                    'user_id' => $userID,
+                    'post_id' => $postID,
+                    'reaction' => $reaction,
+                    'result' => 'ERROR',
+                    'errors' => $new_reaction_post_id->get_error_message()
+                ];
+            }
         }
 
         return $outPut;

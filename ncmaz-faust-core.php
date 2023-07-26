@@ -57,8 +57,7 @@ require plugin_dir_path(__FILE__) . 'includes/ncmazfc-wpgraphql-fragments.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-update-post-custom-fields.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-custom-funcs.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-enqueue-scripts.php';
-require plugin_dir_path(__FILE__) . 'includes/ncmazfc-register-blocks.php';
-require plugin_dir_path(__FILE__) . 'includes/ncmazfc-blocks-render-callback.php';
+require plugin_dir_path(__FILE__) . 'includes/gutenberg/index.php';
 // end
 
 
