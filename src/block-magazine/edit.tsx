@@ -20,36 +20,36 @@ import BlockLoadingPlaceholder from "../components/BlockLoadingPlaceholder";
 import BlockEmptyPlaceholder from "../components/BlockEmptyPlaceholder";
 import DemoListPosts from "./DemoListPosts";
 
-const SectionMagazine1Lazy = lazy(
-	() => import("../frontend-components/SectionMagazines/SectionMagazine1")
-);
-const SectionMagazine2Lazy = lazy(
-	() => import("../frontend-components/SectionMagazines/SectionMagazine2")
-);
-const SectionMagazine3Lazy = lazy(
-	() => import("../frontend-components/SectionMagazines/SectionMagazine3")
-);
-const SectionMagazine4Lazy = lazy(
-	() => import("../frontend-components/SectionMagazines/SectionMagazine4")
-);
-const SectionMagazine5Lazy = lazy(
-	() => import("../frontend-components/SectionMagazines/SectionMagazine5")
-);
-const SectionMagazine6Lazy = lazy(
-	() => import("../frontend-components/SectionMagazines/SectionMagazine6")
-);
-const SectionMagazine7Lazy = lazy(
-	() => import("../frontend-components/SectionMagazines/SectionMagazine7")
-);
-const SectionMagazine8Lazy = lazy(
-	() => import("../frontend-components/SectionMagazines/SectionMagazine8")
-);
-const SectionMagazine9Lazy = lazy(
-	() => import("../frontend-components/SectionMagazines/SectionMagazine9")
-);
-const SectionLargeSliderLazy = lazy(
-	() => import("../frontend-components/SectionMagazines/SectionLargeSlider")
-);
+// const SectionMagazine1Lazy = lazy(
+// 	() => import("../frontend-components/SectionMagazines/SectionMagazine1")
+// );
+// const SectionMagazine2Lazy = lazy(
+// 	() => import("../frontend-components/SectionMagazines/SectionMagazine2")
+// );
+// const SectionMagazine3Lazy = lazy(
+// 	() => import("../frontend-components/SectionMagazines/SectionMagazine3")
+// );
+// const SectionMagazine4Lazy = lazy(
+// 	() => import("../frontend-components/SectionMagazines/SectionMagazine4")
+// );
+// const SectionMagazine5Lazy = lazy(
+// 	() => import("../frontend-components/SectionMagazines/SectionMagazine5")
+// );
+// const SectionMagazine6Lazy = lazy(
+// 	() => import("../frontend-components/SectionMagazines/SectionMagazine6")
+// );
+// const SectionMagazine7Lazy = lazy(
+// 	() => import("../frontend-components/SectionMagazines/SectionMagazine7")
+// );
+// const SectionMagazine8Lazy = lazy(
+// 	() => import("../frontend-components/SectionMagazines/SectionMagazine8")
+// );
+// const SectionMagazine9Lazy = lazy(
+// 	() => import("../frontend-components/SectionMagazines/SectionMagazine9")
+// );
+// const SectionLargeSliderLazy = lazy(
+// 	() => import("../frontend-components/SectionMagazines/SectionLargeSlider")
+// );
 
 const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	const { attributes, setAttributes, clientId } = props;
@@ -98,84 +98,75 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 
 		return <DemoListPosts posts={dataLists} />;
 
-		switch (blockVariation) {
-			case "magazine-1":
-				return (
-					<Suspense fallback={<Spinner />}>
-						<SectionMagazine1Lazy posts={dataLists} />
-					</Suspense>
-				);
-			case "magazine-2":
-				return (
-					<Suspense fallback={<Spinner />}>
-						<SectionMagazine2Lazy activePosts={dataLists} />
-					</Suspense>
-				);
-			case "magazine-3":
-				return (
-					<Suspense fallback={<Spinner />}>
-						<SectionMagazine3Lazy activePosts={dataLists} />
-					</Suspense>
-				);
-			case "magazine-4":
-				return (
-					<Suspense fallback={<Spinner />}>
-						<SectionMagazine4Lazy activePosts={dataLists} />
-					</Suspense>
-				);
-			case "magazine-5":
-				return (
-					<Suspense fallback={<Spinner />}>
-						<SectionMagazine5Lazy activePosts={dataLists} />
-					</Suspense>
-				);
-			case "magazine-6":
-				return (
-					<Suspense fallback={<Spinner />}>
-						<SectionMagazine6Lazy activePosts={dataLists} />
-					</Suspense>
-				);
-			case "magazine-7":
-				return (
-					<Suspense fallback={<Spinner />}>
-						<SectionMagazine7Lazy activePosts={dataLists} />
-					</Suspense>
-				);
-			case "magazine-8":
-				return (
-					<Suspense fallback={<Spinner />}>
-						<SectionMagazine8Lazy activePosts={dataLists} />
-					</Suspense>
-				);
-			case "magazine-9":
-				return (
-					<Suspense fallback={<Spinner />}>
-						<SectionMagazine9Lazy activePosts={dataLists} />
-					</Suspense>
-				);
-			case "large-slider":
-				return (
-					<Suspense fallback={<Spinner />}>
-						<SectionLargeSliderLazy activePosts={dataLists} />
-					</Suspense>
-				);
+		// switch (blockVariation) {
+		// 	case "magazine-1":
+		// 		return (
+		// 			<Suspense fallback={<Spinner />}>
+		// 				<SectionMagazine1Lazy posts={dataLists} />
+		// 			</Suspense>
+		// 		);
+		// 	case "magazine-2":
+		// 		return (
+		// 			<Suspense fallback={<Spinner />}>
+		// 				<SectionMagazine2Lazy activePosts={dataLists} />
+		// 			</Suspense>
+		// 		);
+		// 	case "magazine-3":
+		// 		return (
+		// 			<Suspense fallback={<Spinner />}>
+		// 				<SectionMagazine3Lazy activePosts={dataLists} />
+		// 			</Suspense>
+		// 		);
+		// 	case "magazine-4":
+		// 		return (
+		// 			<Suspense fallback={<Spinner />}>
+		// 				<SectionMagazine4Lazy activePosts={dataLists} />
+		// 			</Suspense>
+		// 		);
+		// 	case "magazine-5":
+		// 		return (
+		// 			<Suspense fallback={<Spinner />}>
+		// 				<SectionMagazine5Lazy activePosts={dataLists} />
+		// 			</Suspense>
+		// 		);
+		// 	case "magazine-6":
+		// 		return (
+		// 			<Suspense fallback={<Spinner />}>
+		// 				<SectionMagazine6Lazy activePosts={dataLists} />
+		// 			</Suspense>
+		// 		);
+		// 	case "magazine-7":
+		// 		return (
+		// 			<Suspense fallback={<Spinner />}>
+		// 				<SectionMagazine7Lazy activePosts={dataLists} />
+		// 			</Suspense>
+		// 		);
+		// 	case "magazine-8":
+		// 		return (
+		// 			<Suspense fallback={<Spinner />}>
+		// 				<SectionMagazine8Lazy activePosts={dataLists} />
+		// 			</Suspense>
+		// 		);
+		// 	case "magazine-9":
+		// 		return (
+		// 			<Suspense fallback={<Spinner />}>
+		// 				<SectionMagazine9Lazy activePosts={dataLists} />
+		// 			</Suspense>
+		// 		);
+		// 	case "large-slider":
+		// 		return (
+		// 			<Suspense fallback={<Spinner />}>
+		// 				<SectionLargeSliderLazy activePosts={dataLists} />
+		// 			</Suspense>
+		// 		);
 
-			default:
-				return (
-					<Suspense fallback={<Spinner />}>
-						<SectionMagazine1Lazy posts={dataLists} />
-					</Suspense>
-				);
-		}
-	};
-
-	const renderPost = (post: any) => {
-		return (
-			<div>
-				<h3>{post.title}</h3>
-				<p>{post.excerpt}</p>
-			</div>
-		);
+		// 	default:
+		// 		return (
+		// 			<Suspense fallback={<Spinner />}>
+		// 				<SectionMagazine1Lazy posts={dataLists} />
+		// 			</Suspense>
+		// 		);
+		// }
 	};
 
 	const renderContent = () => {
@@ -222,20 +213,51 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 						<SelectControl
 							label={__("Select block's variation", "ncmazfc")}
 							value={blockVariation}
-							options={[
-								{ label: "Style 1", value: "style-1" },
-								{ label: "Style 2", value: "style-2" },
-								{ label: "Style 3", value: "style-3" },
-								{ label: "Style 4", value: "style-4" },
-								{ label: "Style 5", value: "style-5" },
-								{ label: "Style 6", value: "style-6" },
-								{ label: "Style 7", value: "style-7" },
-								{ label: "Style 8", value: "style-8" },
-								{ label: "Style 9", value: "style-9" },
-								{ label: "Style 10", value: "style-10" },
-							]}
 							onChange={(blockVariation) => setAttributes({ blockVariation })}
-						/>
+							help={__(
+								"Select a layout for the block. For preview of each layout, please visit the preview page.",
+								"ncmazfc"
+							)}
+						>
+							<optgroup label="Magazine">
+								<option value="magazine-1">Magazine 1</option>
+								<option value="magazine-2">Magazine 2</option>
+								<option value="magazine-3">Magazine 3</option>
+								<option value="magazine-4">Magazine 4</option>
+								<option value="magazine-5">Magazine 5</option>
+								<option value="magazine-6">Magazine 6</option>
+								<option value="magazine-7">Magazine 7</option>
+								<option value="magazine-8">Magazine 8</option>
+								<option value="magazine-9">Magazine 9</option>
+								<option value="magazine-10">Magazine 10</option>
+							</optgroup>
+
+							<optgroup label="Grid">
+								<option value="grid-1">Grid 1</option>
+								<option value="grid-2">Grid 2</option>
+								<option value="grid-3">Grid 3</option>
+								<option value="grid-4">Grid 4</option>
+								<option value="grid-5">Grid 5</option>
+								<option value="grid-6">Grid 6</option>
+								<option value="grid-7">Grid 7</option>
+								<option value="grid-8">Grid 8</option>
+								<option value="grid-9">Grid 9</option>
+								<option value="grid-10">Grid 10</option>
+							</optgroup>
+
+							<optgroup label="List">
+								<option value="list-1">List 1</option>
+								<option value="list-2">List 2</option>
+								<option value="list-3">List 3</option>
+								<option value="list-4">List 4</option>
+								<option value="list-5">List 5</option>
+								<option value="list-6">List 6</option>
+								<option value="list-7">List 7</option>
+								<option value="list-8">List 8</option>
+								<option value="list-9">List 9</option>
+								<option value="list-10">List 10</option>
+							</optgroup>
+						</SelectControl>
 
 						<TextControl
 							label={__("View more href", "ncmazfc")}

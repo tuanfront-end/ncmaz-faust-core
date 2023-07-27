@@ -8740,10 +8740,10 @@ export enum NcmazFcUserReactionPostActionEnum {
 
 /** 1 = add, 0 = remove */
 export enum NcmazFcUserReactionPostNumberUpdateEnum {
-  /** Remove. Will remove 1 from the count */
-  '0' = '_0',
   /** Add. Will add 1 to the count */
-  '1' = '_1'
+  Add_1 = 'ADD_1',
+  /** Remove. Will remove 1 from the count */
+  Remove_1 = 'REMOVE_1'
 }
 
 /** Added, Removed, or Error */

@@ -18,11 +18,11 @@ register_graphql_enum_type('NcmazFcUserReactionPostActionEnum', [
 register_graphql_enum_type('NcmazFcUserReactionPostNumberUpdateEnum', [
     'description' => __('1 = add, 0 = remove', 'ncmazfc'),
     'values' => [
-        '_0' => [
+        'REMOVE_1' => [
             'value' => 0,
             'description' => "Remove. Will remove 1 from the count"
         ],
-        '_1' => [
+        'ADD_1' => [
             'value' => 1,
             'description' => "Add. Will add 1 to the count"
         ],

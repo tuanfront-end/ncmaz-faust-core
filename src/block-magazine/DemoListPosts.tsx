@@ -8,7 +8,7 @@ interface Props {
 }
 const DemoListPosts: FC<Props> = ({ posts }) => {
 	return (
-		<div className="no-prose mt-16 space-y-20 lg:mt-20 lg:space-y-20">
+		<div className="no-prose mt-12 space-y-12 lg:mt-12 lg:space-y-12">
 			{posts.map((post) => {
 				const {
 					id,
@@ -74,9 +74,10 @@ const DemoListPosts: FC<Props> = ({ posts }) => {
 										{title}
 									</span>
 								</h3>
-								<p className="mt-5 text-sm leading-6 text-gray-600">
-									{excerpt}
-								</p>
+								<div
+									dangerouslySetInnerHTML={{ __html: excerpt || "" }}
+									className="mt-5 text-sm leading-6 text-gray-600"
+								></div>
 							</div>
 							<div className="mt-6 flex border-t border-gray-900/5 pt-6">
 								<div className="relative flex items-center gap-x-4">
