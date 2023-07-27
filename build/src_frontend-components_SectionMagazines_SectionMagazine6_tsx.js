@@ -326,34 +326,6 @@ const SectionMagazine6 = ({
 
 /***/ }),
 
-/***/ "./src/utils/formatDate.ts":
-/*!*********************************!*\
-  !*** ./src/utils/formatDate.ts ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ ncFormatDate)
-/* harmony export */ });
-function ncFormatDate(date) {
-  // CAN LAM THEM PHAN DATE FOrMAT ---- get_option(date_format)
-
-  let d = new Date(date);
-  let ye = new Intl.DateTimeFormat("en", {
-    year: "numeric"
-  }).format(d);
-  let mo = new Intl.DateTimeFormat("en", {
-    month: "short"
-  }).format(d);
-  let da = new Intl.DateTimeFormat("en", {
-    day: "2-digit"
-  }).format(d);
-  return `${mo} ${da}, ${ye}`;
-}
-
-/***/ }),
-
 /***/ "./src/utils/getImageSizesBySizeName.ts":
 /*!**********************************************!*\
   !*** ./src/utils/getImageSizesBySizeName.ts ***!

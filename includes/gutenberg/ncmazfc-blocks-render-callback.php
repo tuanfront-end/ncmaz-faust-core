@@ -19,21 +19,13 @@ if (!function_exists("ncmazfc__render_callback_block_magazine")) :
             $errors = $data['errors'];
             $block_posts = "";
         }
+
+        // test admin editor
+        // return "<pre>" . wp_json_encode($attributes) . "</pre>";
+
         ob_start();
 ?>
-        <div class=" ncmazfc-block-magazine__content" data-ncmazfc-unique-id="<?php echo esc_attr(wp_json_encode($attributes["uniqueId"])); ?>" data-ncmazfc-init-posts="<?php !empty($block_posts) ? esc_attr_e(wp_json_encode($block_posts)) : null ?>" data-ncmazfc-init-errors="<?php !empty($errors) ? esc_attr_e(wp_json_encode($errors)) : null ?>">
-            <!-- <pre>
-                <code>
-                    <?php //echo wp_json_encode($attributes['queries']);
-                    ?>
-                </code>
-            </pre>
-            <pre>
-                <code>
-                    <?php //var_dump($block_posts[0]); 
-                    ?>
-                </code>
-            </pre> -->
+        <div hidden class="hidden ncmazfc-block-magazine__content" data-ncmazfc-unique-id="<?php echo esc_attr(wp_json_encode($attributes["uniqueId"])); ?>" data-ncmazfc-init-posts="<?php !empty($block_posts) ? esc_attr_e(wp_json_encode($block_posts)) : null ?>" data-ncmazfc-init-errors="<?php !empty($errors) ? esc_attr_e(wp_json_encode($errors)) : null ?>">
         </div>
 <?php
         $output = ob_get_contents(); // collect output

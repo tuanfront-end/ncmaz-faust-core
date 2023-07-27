@@ -19,7 +19,9 @@ export const NC_TERM_CARD_FRAGMENT = graphql(/* GraphQL */ `
 			ncTaxonomyMeta {
 				color
 				featuredImage {
-					...NcmazFcImageFields
+					node {
+						...NcmazFcImageFields
+					}
 				}
 			}
 		}
@@ -29,7 +31,9 @@ export const NC_TERM_CARD_FRAGMENT = graphql(/* GraphQL */ `
 			ncTaxonomyMeta {
 				color
 				featuredImage {
-					...NcmazFcImageFields
+					node {
+						...NcmazFcImageFields
+					}
 				}
 			}
 		}
@@ -48,7 +52,7 @@ export const NC_TERMS_EDGES_FRAGMENT = graphql(/* GraphQL */ `
 `);
 
 // POSTS =================================================
-export const NC_POSTS_EDGES_FRAGMENT = graphql(`
+export const NC_POSTS_EDGES_FRAGMENT = graphql(/* GraphQL */ `
 	fragment NcmazFcPostsEdegsFields on RootQueryToPostConnection {
 		__typename
 		edges {
@@ -86,7 +90,9 @@ export const NC_POST_CARD_FRAGMENT = graphql(/* GraphQL */ `
 				slug
 				ncUserMeta {
 					featuredImage {
-						...NcmazFcImageFields
+						node {
+							...NcmazFcImageFields
+						}
 					}
 				}
 			}
@@ -100,7 +106,7 @@ export const NC_POST_CARD_FRAGMENT = graphql(/* GraphQL */ `
 					uri
 					slug
 					count
-					categoryId
+					databaseId
 					ncTaxonomyMeta {
 						color
 					}
@@ -138,35 +144,51 @@ export const NC_POST_CARD_FRAGMENT = graphql(/* GraphQL */ `
 		}
 		ncmazGalleryImgs {
 			image1 {
-				...NcmazFcImageFields
+				node {
+					...NcmazFcImageFields
+				}
 			}
 			image2 {
-				...NcmazFcImageFields
+				node {
+					...NcmazFcImageFields
+				}
 			}
 			image3 {
-				...NcmazFcImageFields
+				node {
+					...NcmazFcImageFields
+				}
 			}
 			image4 {
-				...NcmazFcImageFields
+				node {
+					...NcmazFcImageFields
+				}
 			}
 			image5 {
-				...NcmazFcImageFields
+				node {
+					...NcmazFcImageFields
+				}
 			}
 			image6 {
-				...NcmazFcImageFields
+				node {
+					...NcmazFcImageFields
+				}
 			}
 			image7 {
-				...NcmazFcImageFields
+				node {
+					...NcmazFcImageFields
+				}
 			}
 			image8 {
-				...NcmazFcImageFields
+				node {
+					...NcmazFcImageFields
+				}
 			}
 		}
 	}
 `);
 
 // MEDIA =================================================
-export const NC_IMAGE_MEDIA_FRAGMENT = graphql(`
+export const NC_IMAGE_MEDIA_FRAGMENT = graphql(/* GraphQL */ `
 	fragment NcmazFcImageFields on MediaItem {
 		__typename
 		id
@@ -180,14 +202,14 @@ export const NC_IMAGE_MEDIA_FRAGMENT = graphql(`
 `);
 
 //  POSTS =================================================
-export const NC_POST_META_DATA_FRAGMENT = graphql(`
-	fragment NcmazFcPostMetaFields on Post_Ncpostmetadata {
+export const NC_POST_META_DATA_FRAGMENT = graphql(/* GraphQL */ `
+	fragment NcmazFcPostMetaFields on NcPostMetaData {
 		__typename
-		reactionLikedList
-		savedList
-		showRightSidebar
-		singlePageStyle
 		viewsCount
 		readingTime
+		likesCount
+		savedsCount
+		showRightSidebar
+		template
 	}
 `);

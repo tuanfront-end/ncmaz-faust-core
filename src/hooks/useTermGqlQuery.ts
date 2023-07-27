@@ -31,7 +31,9 @@ const termsWithVariablesQueryDocument = graphql(/* GraphQL */ `
 						ncTaxonomyMeta {
 							color
 							featuredImage {
-								...NcmazFcImageFields
+								node {
+									...NcmazFcImageFields
+								}
 							}
 						}
 					}
@@ -41,7 +43,9 @@ const termsWithVariablesQueryDocument = graphql(/* GraphQL */ `
 						ncTaxonomyMeta {
 							color
 							featuredImage {
-								...NcmazFcImageFields
+								node {
+									...NcmazFcImageFields
+								}
 							}
 						}
 					}

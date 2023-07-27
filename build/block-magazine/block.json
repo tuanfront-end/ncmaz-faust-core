@@ -8,7 +8,13 @@
   "icon": "smiley",
   "description": "Example static block scaffolded with Create Block tool.",
   "supports": {
-    "html": false
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "anchor": true,
+    "className": true
   },
   "textdomain": "ncmazfc",
   "editorScript": "file:./index.js",

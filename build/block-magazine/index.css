@@ -695,25 +695,37 @@
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
 }
 
-/*  */
-.block-editor-block-list__layout {
-  --tw-bg-opacity: 1;
-  background-color: rgb(248 248 248 / var(--tw-bg-opacity));
+html :where(.editor-styles-wrapper) [data-type^=ncmaz-faust] {
   font-size: 1rem;
   line-height: 1.5rem;
   --tw-text-opacity: 1;
   color: rgba(var(--c-neutral-900), var(--tw-text-opacity));
 }
-@media (prefers-color-scheme: dark) {
-
-  .block-editor-block-list__layout {
-    background-color: rgba(var(--c-neutral-900), 0.95);
-    --tw-text-opacity: 1;
-    color: rgba(var(--c-neutral-200), var(--tw-text-opacity));
-  }
-}
-.block-editor-block-list__layout [data-type^="ncmaz-faust/"] a {
+html :where(.editor-styles-wrapper) [data-type^=ncmaz-faust] a {
   text-decoration-line: none;
 }
+html :where(.editor-styles-wrapper) [data-type^=ncmaz-faust] img {
+  border-width: 0px;
+  border-style: none;
+}
+html :where(.editor-styles-wrapper) [data-type^=ncmaz-faust] ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+html :where(.editor-styles-wrapper) [data-type^=ncmaz-faust] ul li {
+  list-style: none;
+}
+html :where(.editor-styles-wrapper) [data-type^=ncmaz-faust] h1:not([class*=my-]),
+html :where(.editor-styles-wrapper) [data-type^=ncmaz-faust] h2:not([class*=my-]),
+html :where(.editor-styles-wrapper) [data-type^=ncmaz-faust] h3:not([class*=my-]),
+html :where(.editor-styles-wrapper) [data-type^=ncmaz-faust] h4:not([class*=my-]),
+html :where(.editor-styles-wrapper) [data-type^=ncmaz-faust] h5:not([class*=my-]),
+html :where(.editor-styles-wrapper) [data-type^=ncmaz-faust] p:not([class*=my-]) {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+/*  */
 
 /*# sourceMappingURL=index.css.map*/

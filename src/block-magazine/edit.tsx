@@ -18,6 +18,7 @@ import QueryToolbar from "./query-toolbar";
 import ServerSideRender from "@wordpress/server-side-render";
 import BlockLoadingPlaceholder from "../components/BlockLoadingPlaceholder";
 import BlockEmptyPlaceholder from "../components/BlockEmptyPlaceholder";
+import DemoListPosts from "./DemoListPosts";
 
 const SectionMagazine1Lazy = lazy(
 	() => import("../frontend-components/SectionMagazines/SectionMagazine1")
@@ -86,11 +87,16 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	};
 
 	const data = getPostsDataFromSeverSideRenderNode();
-	console.log(22, { data });
 
 	const renderLayoutType = () => {
-		const dataLists = data?.initPosts || [];
-		if (!dataLists.length) return null;
+		if (!data?.initPosts?.length) {
+			return null;
+		}
+
+		const dataLists = data?.initPosts;
+		console.log(11, { dataLists });
+
+		return <DemoListPosts posts={dataLists} />;
 
 		switch (blockVariation) {
 			case "magazine-1":
@@ -161,6 +167,15 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 					</Suspense>
 				);
 		}
+	};
+
+	const renderPost = (post: any) => {
+		return (
+			<div>
+				<h3>{post.title}</h3>
+				<p>{post.excerpt}</p>
+			</div>
+		);
 	};
 
 	const renderContent = () => {

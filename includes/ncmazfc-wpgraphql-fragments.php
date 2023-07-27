@@ -204,7 +204,7 @@ $NC_IMAGE_MEDIA_FRAGMENT =  '
 
 //  POSTS =================================================
 $NC_POST_META_DATA_FRAGMENT = '
-	fragment NcmazFcPostMetaFields on Post_Ncpostmetadata {
+	fragment NcmazFcPostMetaFields on NcPostMetaData {
 		__typename
 		viewsCount
 		readingTime
