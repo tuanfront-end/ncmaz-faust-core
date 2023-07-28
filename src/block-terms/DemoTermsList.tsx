@@ -11,21 +11,13 @@ interface Props {
 const DemoTermsList: FC<Props> = ({ terms }) => {
 	return (
 		<div>
-			<Notice isDismissible={false}>
-				<p>
-					<strong>NOTE:</strong> This is a demo of the{" "}
-					<code>ncmaz-faust-core</code> plugin. The plugin is still in
-					development. The code is not optimized for production. Use it at your
-					own risk.
-				</p>
-			</Notice>
-			<div className={`flex flex-wrap gap-4 mt-4`}>
+			<div className={`flex flex-wrap gap-3 mt-3`}>
 				{terms.map((term) => {
 					const node = useFragment(NC_TERM_CARD_FRAGMENT, term.node);
 					return (
 						<div
 							key={node.databaseId}
-							className="relative inline-flex items-center justify-between p-2.5 pr-6 space-x-5 rounded-3xl bg-neutral-100 dark:bg-neutral-800 dark:bg-opacity-30 hover:shadow-xl transition-shadow "
+							className="relative inline-flex items-center justify-between p-2 pr-5 space-x-5 rounded-3xl bg-neutral-100 dark:bg-neutral-800 dark:bg-opacity-30 hover:shadow-xl transition-shadow "
 						>
 							<div className="flex items-center space-x-4">
 								<div className="block flex-shrink-0 w-11 h-11 sm:w-16 sm:h-16 relative rounded-full overflow-hidden shadow-lg">

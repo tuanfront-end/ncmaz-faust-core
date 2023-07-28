@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { NcmazFcPostsEdegsFieldsFragment } from "../__generated__/graphql";
 import { getPostDataFromPostFragment } from "../utils/getPostDataFromPostFragment";
 import ncFormatDate from "../utils/formatDate";
+import { Notice } from "@wordpress/components";
 interface Props {
 	className?: string;
 	posts: NcmazFcPostsEdegsFieldsFragment["edges"];

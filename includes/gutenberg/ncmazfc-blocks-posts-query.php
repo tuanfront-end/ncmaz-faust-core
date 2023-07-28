@@ -101,6 +101,7 @@ if (!function_exists(('ncmazfc__graphql_query_terms_from_terms_block'))) :
                         count
                         name
                         slug
+                        uri
                         databaseId
                         description
                         link

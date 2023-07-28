@@ -6,10 +6,10 @@ import React from "react";
 const BlockEmptyPlaceholder = () => (
 	<Placeholder
 		icon={<Icon icon={file} />}
-		label={__("Woostify block Products", "wcb")}
-		className="wc-block-products-grid wc-block-products-category"
+		label={__("Ncmaz faust block!", "wcb")}
+		className=""
 	>
-		{__("No products were found that matched your selection.", "wcb")}
+		{__("No results found! Please try another selection.", "ncmazfc")}
 	</Placeholder>
 );
 export default BlockEmptyPlaceholder;

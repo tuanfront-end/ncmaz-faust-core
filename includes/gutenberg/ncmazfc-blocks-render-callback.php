@@ -23,7 +23,7 @@ if (!function_exists("ncmazfc__render_callback_block_magazine")) :
 
         ob_start();
 ?>
-        <div hidden class="hidden ncmazfc-block-magazine__content" data-ncmazfc-unique-id="<?php echo esc_attr(wp_json_encode($attributes["uniqueId"])); ?>" data-ncmazfc-init-posts="<?php !empty($block_posts) ? esc_attr_e(wp_json_encode($block_posts)) : null ?>" data-ncmazfc-init-errors="<?php !empty($errors) ? esc_attr_e(wp_json_encode($errors)) : null ?>">
+        <div hidden class="ncmazfc-block-content-common-class ncmazfc-block-magazine__content hidden" data-ncmazfc-unique-id="<?php echo esc_attr(wp_json_encode($attributes["uniqueId"])); ?>" data-ncmazfc-init-posts="<?php !empty($block_posts) ? esc_attr_e(wp_json_encode($block_posts)) : null ?>" data-ncmazfc-init-errors="<?php !empty($errors) ? esc_attr_e(wp_json_encode($errors)) : null ?>">
         </div>
     <?php
         $output = ob_get_contents(); // collect output
@@ -58,7 +58,7 @@ if (!function_exists("ncmazfc__render_callback_block_terms")) :
 
         ob_start();
     ?>
-        <div hidden class="hidden ncmazfc-block-terms__content" data-ncmazfc-unique-id="<?php echo esc_attr(wp_json_encode($attributes["uniqueId"])); ?>" data-ncmazfc-init-terms="<?php !empty($block_terms) ? esc_attr_e(wp_json_encode($block_terms)) : null ?>" data-ncmazfc-init-errors="<?php !empty($errors) ? esc_attr_e(wp_json_encode($errors)) : null ?>">
+        <div hidden class="ncmazfc-block-content-common-class ncmazfc-block-terms__content hidden" data-ncmazfc-unique-id="<?php echo esc_attr(wp_json_encode($attributes["uniqueId"])); ?>" data-ncmazfc-init-terms="<?php !empty($block_terms) ? esc_attr_e(wp_json_encode($block_terms)) : null ?>" data-ncmazfc-init-errors="<?php !empty($errors) ? esc_attr_e(wp_json_encode($errors)) : null ?>">
         </div>
 <?php
         $output = ob_get_contents(); // collect output

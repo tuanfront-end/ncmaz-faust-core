@@ -1,11 +1,6 @@
-import React, { lazy, Suspense, FC, useEffect } from "react";
+import React, { useRef, useState, FC, useEffect } from "react";
 import { __ } from "@wordpress/i18n";
-import {
-	TextControl,
-	PanelBody,
-	SelectControl,
-	Spinner,
-} from "@wordpress/components";
+import { TextControl, PanelBody, SelectControl } from "@wordpress/components";
 import {
 	BlockControls,
 	InspectorControls,
@@ -19,6 +14,7 @@ import ServerSideRender from "@wordpress/server-side-render";
 import BlockLoadingPlaceholder from "../components/BlockLoadingPlaceholder";
 import BlockEmptyPlaceholder from "../components/BlockEmptyPlaceholder";
 import DemoListPosts from "./DemoListPosts";
+import { NcmazFcPostsEdegsFieldsFragment } from "../__generated__/graphql";
 
 const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	const { attributes, setAttributes, clientId } = props;
@@ -26,46 +22,82 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	//
 	const { uniqueId, showFilterTab, viewMoreHref, blockVariation, queries } =
 		attributes;
+	const observerRef = useRef<MutationObserver | null>(null);
+
+	const [initPostsFromSSR, setInitPostsFromSSR] = useState<
+		NcmazFcPostsEdegsFieldsFragment["edges"] | null
+	>(null);
+	const [initErrorFromSSR, setInitErrorFromSSR] = useState<string | null>(null);
+	const SERVER_SIDE_ID = "ncmazfcSSR-block-" + clientId;
 
 	// ---- SAVE uniqueId ----
 	useEffect(() => {
 		setAttributes({ uniqueId: clientId });
 	}, []);
 
-	const getPostsDataFromSeverSideRenderNode = () => {
-		const node = document.querySelector(
-			`#block-${clientId} .ncmazfc-block-magazine__content`
+	const getPostsDataFromSeverSideRenderNode = (wrapNode: HTMLElement) => {
+		const node = wrapNode.querySelector(
+			".ncmazfc-block-content-common-class"
 		) as HTMLElement | null;
-
 		const dataInitPosts =
 			node?.getAttribute("data-ncmazfc-init-posts") || "null";
 		const dataInitErrors =
 			node?.getAttribute("data-ncmazfc-init-errors") || "null";
 
-		// console.log(1, {
-		// 	node,
-		// 	uniqueId,
-		// 	a: `#block-${clientId} .ncmazfc-block-magazine__content`,
-		// 	dataInitPosts,
-		// 	dataInitErrors,
-		// });
 		return {
-			initPosts: JSON.parse(dataInitPosts),
+			initPosts:
+				(JSON.parse(
+					dataInitPosts
+				) as NcmazFcPostsEdegsFieldsFragment["edges"]) || null,
 			initErrors: JSON.parse(dataInitErrors),
 		};
 	};
 
-	const data = getPostsDataFromSeverSideRenderNode();
+	useEffect(() => {
+		// Select the node that will be observed for mutations
+		const targetNode = document.getElementById(SERVER_SIDE_ID);
+		if (!targetNode) return;
 
+		// Options for the observer (which mutations to observe)
+		const config = { childList: true };
+
+		// Callback function to execute when mutations are observed
+		const callback = (mutationList, observer) => {
+			for (const mutation of mutationList) {
+				if (mutation.type === "childList") {
+					console.log(99, "__Magazine child node has been updated.", {
+						mutation,
+					});
+					const { initErrors, initPosts } = getPostsDataFromSeverSideRenderNode(
+						mutation.target
+					);
+					setInitPostsFromSSR(initPosts);
+					setInitErrorFromSSR(initErrors);
+					if (!!initErrors || !!initPosts) {
+						console.log(123, "_____Magazin__disconnect___.", {
+							mutation,
+						});
+						observer.disconnect();
+						observerRef.current = null;
+					}
+				}
+			}
+		};
+		if (!observerRef.current) {
+			observerRef.current = new MutationObserver(callback);
+			observerRef.current.observe(targetNode, config);
+		}
+	}, [queries]);
+
+	// reder
 	const renderLayoutType = () => {
-		if (!data?.initPosts?.length) {
+		if (!initPostsFromSSR) {
 			return null;
 		}
-
-		const dataLists = data?.initPosts;
-		// console.log(11, { dataLists });
-
-		return <DemoListPosts posts={dataLists} />;
+		if (!initPostsFromSSR?.length) {
+			return <BlockEmptyPlaceholder />;
+		}
+		return <DemoListPosts posts={initPostsFromSSR} />;
 	};
 
 	const renderContent = () => {
@@ -84,22 +116,25 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 					<Heading desc={subHeading}>{heading}</Heading>
 				)} */}
 
-				{renderLayoutType()}
-
-				{!!data?.initErrors && !data?.initPosts && (
-					<div>
-						<h2>Error!</h2>
+				{initErrorFromSSR && (
+					<div className="text-red-500 text-sm">
+						<h3>Error!</h3>
 						<pre>
-							<code>{JSON.stringify(data?.initErrors, null, 2)}</code>
+							<code>{JSON.stringify(initErrorFromSSR, null, 2)}</code>
 						</pre>
 					</div>
 				)}
-				<ServerSideRender
-					block="ncmaz-faust/block-magazine"
-					attributes={attributes}
-					httpMethod="POST"
-					LoadingResponsePlaceholder={BlockLoadingPlaceholder}
-				/>
+				{initPostsFromSSR && renderLayoutType()}
+
+				<div id={SERVER_SIDE_ID}>
+					<ServerSideRender
+						block="ncmaz-faust/block-magazine"
+						attributes={{ uniqueId, queries }}
+						httpMethod="POST"
+						LoadingResponsePlaceholder={BlockLoadingPlaceholder}
+						EmptyResponsePlaceholder={() => <div />}
+					/>
+				</div>
 			</div>
 		);
 	};
@@ -113,10 +148,23 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 							label={__("Select block's variation", "ncmazfc")}
 							value={blockVariation}
 							onChange={(blockVariation) => setAttributes({ blockVariation })}
-							help={__(
-								"Select a layout for the block. For preview of each layout, please visit the preview page.",
-								"ncmazfc"
-							)}
+							help={
+								<div>
+									(**) Select variation to change the layout and card style of
+									the block. The editor preview of the variants is currently
+									under construction, so you won't notice the change here, but
+									it will be changed and applied in the client UI. Sorry for the
+									inconvenience, you can check out the{" "}
+									<a
+										href="https://ncmaz-faust.vercel.app/blocks-variations-review/"
+										target="_blank"
+										rel="noopener noreferrer"
+										className="underline text-blue-400"
+									>
+										styling of the variations here
+									</a>
+								</div>
+							}
 						>
 							<optgroup label="Magazine">
 								<option value="magazine-1">Magazine 1</option>
@@ -129,6 +177,8 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 								<option value="magazine-8">Magazine 8</option>
 								<option value="magazine-9">Magazine 9</option>
 								<option value="magazine-10">Magazine 10</option>
+								<option value="magazine-10">Magazine 11</option>
+								<option value="magazine-10">Magazine 12</option>
 							</optgroup>
 
 							<optgroup label="Grid">
@@ -141,20 +191,15 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 								<option value="grid-7">Grid 7</option>
 								<option value="grid-8">Grid 8</option>
 								<option value="grid-9">Grid 9</option>
-								<option value="grid-10">Grid 10</option>
 							</optgroup>
 
-							<optgroup label="List">
-								<option value="list-1">List 1</option>
-								<option value="list-2">List 2</option>
-								<option value="list-3">List 3</option>
-								<option value="list-4">List 4</option>
-								<option value="list-5">List 5</option>
-								<option value="list-6">List 6</option>
-								<option value="list-7">List 7</option>
-								<option value="list-8">List 8</option>
-								<option value="list-9">List 9</option>
-								<option value="list-10">List 10</option>
+							<optgroup label="Slider">
+								<option value="slider-1">Slider 1</option>
+								<option value="slider-2">Slider 2</option>
+								<option value="slider-3">Slider 3</option>
+								<option value="slider-4">Slider 4</option>
+								<option value="slider-5">Slider 5</option>
+								<option value="slider-6">Slider 6</option>
 							</optgroup>
 						</SelectControl>
 
