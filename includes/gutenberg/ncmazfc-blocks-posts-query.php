@@ -1,14 +1,14 @@
 <?php
 
 
-
+//  GraphQL Query for Posts Block
 if (!function_exists(('ncmazfc__graphql_query_posts_from_post_block'))) :
     function ncmazfc__graphql_query_posts_from_post_block($queries)
     {
         if (!function_exists('graphql')) {
             return null;
         }
-        global $NC_POSTS_EDGES_FRAGMENT, $NC_POST_CARD_FRAGMENT, $NC_IMAGE_MEDIA_FRAGMENT, $NC_POST_META_DATA_FRAGMENT, $NC_TERMS_EDGES_FRAGMENT, $NC_TERM_CARD_FRAGMENT;
+        global $NC_POSTS_EDGES_FRAGMENT, $NC_POST_CARD_FRAGMENT, $NC_IMAGE_MEDIA_FRAGMENT, $NC_POST_META_DATA_FRAGMENT;
 
 
         $categoryIn = !empty($queries['taxQuery']["category"] ?? []) ? $queries['taxQuery']["category"] : [];
@@ -59,6 +59,83 @@ if (!function_exists(('ncmazfc__graphql_query_posts_from_post_block'))) :
                 'query'          => $query,
                 'variables'      => $variables,
                 'operation_name' => "postsWithVariablesQuery",
+            ]
+        );
+        return  $results;
+    }
+endif;
+
+//  GraphQL Query for Terms Block
+if (!function_exists(('ncmazfc__graphql_query_terms_from_terms_block'))) :
+    function ncmazfc__graphql_query_terms_from_terms_block($queries)
+    {
+        if (!function_exists('graphql')) {
+            return null;
+        }
+        global $NC_IMAGE_MEDIA_FRAGMENT;
+
+        $numberOfTags = !empty($queries['numberOfTags'] ?? '') ? intval($queries['numberOfTags']) : 30;
+
+        $variables = [
+            "taxonomies" => $queries["taxonomy"],
+            "orderBy" => $queries["orderBy"],
+            "order" => $queries["order"],
+            "first" => $numberOfTags,
+        ];
+
+
+        $query = ' query termsCardWithVariablesQuery(
+            $first: Int = 10
+            $order: OrderEnum = ASC
+            $orderby: TermObjectsConnectionOrderbyEnum = COUNT
+            $taxonomies: [TaxonomyEnum] = CATEGORY
+        ) {
+            terms(
+                where: { taxonomies: $taxonomies, orderby: $orderby, order: $order }
+                first: $first
+            ) {
+                edges {
+                    node {
+                        __typename
+                        id
+                        count
+                        name
+                        slug
+                        databaseId
+                        description
+                        link
+                        taxonomyName
+                        ... on Category {
+                            ncTaxonomyMeta {
+                                color
+                                featuredImage {
+                                    node {
+                                        ...NcmazFcImageFields
+                                    }
+                                }
+                            }
+                        }
+                        ... on Tag {
+                            ncTaxonomyMeta {
+                                color
+                                featuredImage {
+                                    node {
+                                        ...NcmazFcImageFields
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } ' . $NC_IMAGE_MEDIA_FRAGMENT;
+
+        //  query 
+        $results = graphql(
+            [
+                'query'          => $query,
+                'variables'      => $variables,
+                'operation_name' => "termsCardWithVariablesQuery",
             ]
         );
         return  $results;

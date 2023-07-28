@@ -17,26 +17,26 @@ export interface BlockMagazine_Attrs {
 const blokcAttrs: AttrsGenericType<BlockMagazine_Attrs> = {
 	uniqueId: {
 		type: "string",
-		default: "",
+		// default: "",
 	},
 	// khi tuy chinh o day cung can thay doi trong file render_callback.php of block magazine
 	queries: {
 		type: "object",
-		default: PostsQueriesControls_DEMO_DATA,
+		// default: PostsQueriesControls_DEMO_DATA,
 	},
 	//
 	blockVariation: {
 		type: "string",
-		default: "style-1",
+		// default: "style-1",
 	},
 
 	showFilterTab: {
 		type: "boolean",
-		default: false,
+		// default: false,
 	},
 	viewMoreHref: {
 		type: "string",
-		default: "",
+		// default: "",
 	},
 };
 

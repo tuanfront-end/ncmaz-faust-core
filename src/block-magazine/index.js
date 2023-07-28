@@ -9,12 +9,6 @@ import metadata from "./block.json";
 import deprecated from "./deprecated";
 import attributes from "./attributes";
 
-//
-import { client } from "../main";
-import { ApolloProvider } from "@apollo/client";
-import { Suspense } from "@wordpress/element";
-import { Spinner } from "@wordpress/components";
-
 // for tailwind, only import the styles in this file
 import "../style.css";
 import "../styles/index.scss";
@@ -23,7 +17,7 @@ import "../styles/index.scss";
 registerBlockType(metadata.name, {
 	edit: Edit,
 	save: () => null,
-	attributes,
+	// attributes,
 	deprecated: deprecated,
 	example: {},
 	icon: (

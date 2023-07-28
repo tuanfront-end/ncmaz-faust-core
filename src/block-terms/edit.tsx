@@ -9,20 +9,20 @@ import {
 	RangeControl,
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
-import { store as coreStore } from "@wordpress/core-data";
-import { withSelect } from "@wordpress/data";
 import { InspectorControls, useBlockProps } from "@wordpress/block-editor";
 import { ContainerEditProps } from "../types";
 import { BlockTerms_Attrs } from "./attributes";
-import useTermGqlQuery from "../hooks/useTermGqlQuery";
 import TermOrderControl from "./order-control";
-import SectionSliderNewCategories from "../frontend-components/SectionSliderNewCategories/SectionSliderNewCategories";
+import ServerSideRender from "@wordpress/server-side-render";
+import BlockLoadingPlaceholder from "../components/BlockLoadingPlaceholder";
+import DemoTermsList from "./DemoTermsList";
+import { NcmazFcTermsCardFieldsFragment } from "../__generated__/graphql";
 
 const MIN_TAGS = 1;
 const MAX_TAGS = 100;
 
 const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
-	const { attributes, setAttributes } = props;
+	const { attributes, setAttributes, clientId } = props;
 
 	const {
 		blockVariation,
@@ -34,26 +34,49 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 		orderBy,
 	} = attributes;
 
-	const { data, dataLists, error, loading, variables } =
-		useTermGqlQuery(attributes);
-
-	// ---- SAVE initPosts ----
+	// ---- SAVE uniqueId ----
 	useEffect(() => {
-		if (loading) {
-			return;
-		}
-		console.log(999, "__terms___", {
-			loading,
-			error,
-			data,
-			variables,
-			dataLists,
-		});
-		setAttributes({
-			initTerms: dataLists,
-		});
-	}, [loading]);
+		setAttributes({ uniqueId: clientId });
+	}, []);
 
+	const getTermsDataFromSeverSideRenderNode = () => {
+		const node = document.querySelector(
+			`#block-${clientId} .ncmazfc-block-terms__content`
+		) as HTMLElement | null;
+
+		const dataInitTerms =
+			node?.getAttribute("data-ncmazfc-init-terms") || "null";
+		const dataInitErrors =
+			node?.getAttribute("data-ncmazfc-init-errors") || "null";
+
+		console.log(1111, {
+			node,
+			uniqueId,
+			a: `#block-${clientId} .ncmazfc-block-terms__content`,
+			dataInitTerms,
+			initTerms: JSON.parse(dataInitTerms),
+			initErrors: JSON.parse(dataInitErrors),
+		});
+		return {
+			initTerms: JSON.parse(
+				dataInitTerms
+			) as NcmazFcTermsCardFieldsFragment["edges"],
+			initErrors: JSON.parse(dataInitErrors),
+		};
+	};
+
+	const data = getTermsDataFromSeverSideRenderNode();
+
+	const renderLayoutType = () => {
+		const dataLists = data?.initTerms;
+		if (!dataLists?.length) {
+			return null;
+		}
+
+		return <DemoTermsList terms={dataLists || []} />;
+	};
+
+	// render
 	const inspectorControls = (
 		<InspectorControls>
 			<PanelBody title="Layout">
@@ -124,18 +147,22 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 		<>
 			{inspectorControls}
 			<div {...useBlockProps()}>
-				<div className="space-y-2.5">
-					{loading && <p>{__("Loading…")}</p>}
-					{error && (
-						<pre>
-							<code>{JSON.stringify(error)}</code>
-						</pre>
-					)}
-				</div>
+				{renderLayoutType()}
 
-				<SectionSliderNewCategories
-					terms={data?.terms?.edges || []}
-					categoryCardType="card4"
+				{!!data?.initErrors && !data?.initTerms && (
+					<div>
+						<h2>Error!</h2>
+						<pre>
+							<code>{JSON.stringify(data?.initErrors, null, 2)}</code>
+						</pre>
+					</div>
+				)}
+
+				<ServerSideRender
+					block="ncmaz-faust/block-terms"
+					attributes={attributes}
+					httpMethod="POST"
+					LoadingResponsePlaceholder={BlockLoadingPlaceholder}
 				/>
 			</div>
 		</>

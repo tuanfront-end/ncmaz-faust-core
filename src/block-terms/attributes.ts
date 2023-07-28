@@ -8,41 +8,36 @@ export interface BlockTerms_Attrs {
 	taxonomy: "CATEGORY" | "POSTFORMAT" | "TAG";
 	showTagCounts: boolean;
 	blockVariation: string;
-	initTerms: any[];
 }
 
 const blokcAttrs: AttrsGenericType<BlockTerms_Attrs> = {
 	uniqueId: {
 		type: "string",
-		default: "",
-	},
-	initTerms: {
-		type: "array",
-		default: [],
+		// default: "",
 	},
 	order: {
 		type: "string",
-		default: "DESC",
+		// default: "DESC",
 	},
 	orderBy: {
 		type: "string",
-		default: "NAME",
+		// default: "NAME",
 	},
 	blockVariation: {
 		type: "string",
-		default: "style-1",
+		// default: "grid-1",
 	},
 	numberOfTags: {
 		type: "number",
-		default: 30,
+		// default: 30,
 	},
 	showTagCounts: {
 		type: "boolean",
-		default: true,
+		// default: true,
 	},
 	taxonomy: {
 		type: "string",
-		default: "TAG",
+		// default: "TAG",
 	},
 };
 

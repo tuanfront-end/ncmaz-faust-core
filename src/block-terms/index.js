@@ -10,21 +10,11 @@ import metadata from "./block.json";
 import deprecated from "./deprecated";
 import attributes from "./attributes";
 //
-import { client } from "../main";
-import { ApolloProvider } from "@apollo/client";
-import { Suspense } from "@wordpress/element";
-import { Spinner } from "@wordpress/components";
 
 registerBlockType(metadata.name, {
-	edit: (props) => (
-		<ApolloProvider client={client}>
-			<Suspense fallback={<Spinner />}>
-				<Edit {...props} />
-			</Suspense>
-		</ApolloProvider>
-	),
+	edit: Edit,
 	save,
-	attributes,
+	// attributes,
 	deprecated: deprecated,
 	example: {},
 	icon: (

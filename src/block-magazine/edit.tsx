@@ -20,37 +20,6 @@ import BlockLoadingPlaceholder from "../components/BlockLoadingPlaceholder";
 import BlockEmptyPlaceholder from "../components/BlockEmptyPlaceholder";
 import DemoListPosts from "./DemoListPosts";
 
-// const SectionMagazine1Lazy = lazy(
-// 	() => import("../frontend-components/SectionMagazines/SectionMagazine1")
-// );
-// const SectionMagazine2Lazy = lazy(
-// 	() => import("../frontend-components/SectionMagazines/SectionMagazine2")
-// );
-// const SectionMagazine3Lazy = lazy(
-// 	() => import("../frontend-components/SectionMagazines/SectionMagazine3")
-// );
-// const SectionMagazine4Lazy = lazy(
-// 	() => import("../frontend-components/SectionMagazines/SectionMagazine4")
-// );
-// const SectionMagazine5Lazy = lazy(
-// 	() => import("../frontend-components/SectionMagazines/SectionMagazine5")
-// );
-// const SectionMagazine6Lazy = lazy(
-// 	() => import("../frontend-components/SectionMagazines/SectionMagazine6")
-// );
-// const SectionMagazine7Lazy = lazy(
-// 	() => import("../frontend-components/SectionMagazines/SectionMagazine7")
-// );
-// const SectionMagazine8Lazy = lazy(
-// 	() => import("../frontend-components/SectionMagazines/SectionMagazine8")
-// );
-// const SectionMagazine9Lazy = lazy(
-// 	() => import("../frontend-components/SectionMagazines/SectionMagazine9")
-// );
-// const SectionLargeSliderLazy = lazy(
-// 	() => import("../frontend-components/SectionMagazines/SectionLargeSlider")
-// );
-
 const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	const { attributes, setAttributes, clientId } = props;
 
@@ -73,13 +42,13 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 		const dataInitErrors =
 			node?.getAttribute("data-ncmazfc-init-errors") || "null";
 
-		console.log(1, {
-			node,
-			uniqueId,
-			a: `#block-${clientId} .ncmazfc-block-magazine__content`,
-			dataInitPosts,
-			dataInitErrors,
-		});
+		// console.log(1, {
+		// 	node,
+		// 	uniqueId,
+		// 	a: `#block-${clientId} .ncmazfc-block-magazine__content`,
+		// 	dataInitPosts,
+		// 	dataInitErrors,
+		// });
 		return {
 			initPosts: JSON.parse(dataInitPosts),
 			initErrors: JSON.parse(dataInitErrors),
@@ -94,79 +63,9 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 		}
 
 		const dataLists = data?.initPosts;
-		console.log(11, { dataLists });
+		// console.log(11, { dataLists });
 
 		return <DemoListPosts posts={dataLists} />;
-
-		// switch (blockVariation) {
-		// 	case "magazine-1":
-		// 		return (
-		// 			<Suspense fallback={<Spinner />}>
-		// 				<SectionMagazine1Lazy posts={dataLists} />
-		// 			</Suspense>
-		// 		);
-		// 	case "magazine-2":
-		// 		return (
-		// 			<Suspense fallback={<Spinner />}>
-		// 				<SectionMagazine2Lazy activePosts={dataLists} />
-		// 			</Suspense>
-		// 		);
-		// 	case "magazine-3":
-		// 		return (
-		// 			<Suspense fallback={<Spinner />}>
-		// 				<SectionMagazine3Lazy activePosts={dataLists} />
-		// 			</Suspense>
-		// 		);
-		// 	case "magazine-4":
-		// 		return (
-		// 			<Suspense fallback={<Spinner />}>
-		// 				<SectionMagazine4Lazy activePosts={dataLists} />
-		// 			</Suspense>
-		// 		);
-		// 	case "magazine-5":
-		// 		return (
-		// 			<Suspense fallback={<Spinner />}>
-		// 				<SectionMagazine5Lazy activePosts={dataLists} />
-		// 			</Suspense>
-		// 		);
-		// 	case "magazine-6":
-		// 		return (
-		// 			<Suspense fallback={<Spinner />}>
-		// 				<SectionMagazine6Lazy activePosts={dataLists} />
-		// 			</Suspense>
-		// 		);
-		// 	case "magazine-7":
-		// 		return (
-		// 			<Suspense fallback={<Spinner />}>
-		// 				<SectionMagazine7Lazy activePosts={dataLists} />
-		// 			</Suspense>
-		// 		);
-		// 	case "magazine-8":
-		// 		return (
-		// 			<Suspense fallback={<Spinner />}>
-		// 				<SectionMagazine8Lazy activePosts={dataLists} />
-		// 			</Suspense>
-		// 		);
-		// 	case "magazine-9":
-		// 		return (
-		// 			<Suspense fallback={<Spinner />}>
-		// 				<SectionMagazine9Lazy activePosts={dataLists} />
-		// 			</Suspense>
-		// 		);
-		// 	case "large-slider":
-		// 		return (
-		// 			<Suspense fallback={<Spinner />}>
-		// 				<SectionLargeSliderLazy activePosts={dataLists} />
-		// 			</Suspense>
-		// 		);
-
-		// 	default:
-		// 		return (
-		// 			<Suspense fallback={<Spinner />}>
-		// 				<SectionMagazine1Lazy posts={dataLists} />
-		// 			</Suspense>
-		// 		);
-		// }
 	};
 
 	const renderContent = () => {
@@ -261,7 +160,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 
 						<TextControl
 							label={__("View more href", "ncmazfc")}
-							value={viewMoreHref}
+							value={viewMoreHref || ""}
 							type="url"
 							onChange={(viewMoreHref) => setAttributes({ viewMoreHref })}
 						/>

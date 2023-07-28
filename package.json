@@ -14,7 +14,7 @@
 		"plugin-zip": "wp-scripts plugin-zip",
 		"dev": "npm run start & npm run watch-codegen",
 		"start": "wp-scripts start",
-		"watch-codegen": "graphql-codegen -w"
+		"w-c": "graphql-codegen -w"
 	},
 	"devDependencies": {
 		"@graphql-codegen/cli": "^4.0.1",

@@ -14,6 +14,7 @@ if (!function_exists("ncmazfc__register_blocks_gutenberg_init")) :
                 "attributes" => [
                     "uniqueId" => [
                         "type" => "string",
+                        "default" => "",
                     ],
                     // can follow theo attribute.ts file của block-magazine
                     "queries" => [
@@ -36,19 +37,54 @@ if (!function_exists("ncmazfc__register_blocks_gutenberg_init")) :
                     ],
                     "blockVariation" => [
                         "type" => "string",
+                        "default" => "magazine-1",
                     ],
                     "showFilterTab" => [
                         "type" => "boolean",
+                        "default" => true,
                     ],
                     "viewMoreHref" => [
                         "type" => "string",
+                        "default" => "#",
                     ],
                 ]
             ]
         );
         register_block_type(
             NCMAZFC_BUILD_PATH . '/block-terms',
-            []
+            [
+                "render_callback" => "ncmazfc__render_callback_block_terms",
+                "attributes" => [
+                    "uniqueId" => [
+                        "type" => "string",
+                    ],
+                    // can follow theo attribute.ts file của block-terms
+                    "order" => [
+                        "type" => "string",
+                        "default" => "DESC",
+                    ],
+                    "orderBy" => [
+                        "type" => "string",
+                        "default" => "NAME",
+                    ],
+                    "blockVariation" => [
+                        "type" => "string",
+                        "default" => "grid-1",
+                    ],
+                    "numberOfTags" => [
+                        "type" => "number",
+                        "default" => 30,
+                    ],
+                    "showTagCounts" => [
+                        "type" => "boolean",
+                        "default" => true,
+                    ],
+                    "taxonomy" => [
+                        "type" => "string",
+                        "default" => "CATEGORY",
+                    ],
+                ]
+            ]
         );
     }
 

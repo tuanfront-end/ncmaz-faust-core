@@ -1,56 +1,6 @@
 <?php
 
 
-// Terms =================================================
-$NC_TERM_CARD_FRAGMENT = '
-	fragment NcmazFcTermCardFields on TermNode {
-		__typename
-		id
-		count
-		uri
-		name
-		slug
-		databaseId
-		description
-		link
-		taxonomyName
-		... on Category {
-			id
-			name
-			ncTaxonomyMeta {
-				color
-				featuredImage {
-					node {
-						...NcmazFcImageFields
-					}
-				}
-			}
-		}
-		... on Tag {
-			id
-			name
-			ncTaxonomyMeta {
-				color
-				featuredImage {
-					node {
-						...NcmazFcImageFields
-					}
-				}
-			}
-		}
-	}
-';
-
-$NC_TERMS_EDGES_FRAGMENT = '
-	fragment NcmazFcTermsCardFields on RootQueryToTermNodeConnection {
-		__typename
-		edges {
-			node {
-				...NcmazFcTermCardFields
-			}
-		}
-	}
-';
 
 // POSTS =================================================
 $NC_POSTS_EDGES_FRAGMENT = '
