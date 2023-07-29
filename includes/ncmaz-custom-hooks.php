@@ -31,42 +31,6 @@ if (!function_exists('ncmazFrontend_maybe_hide_admin_bar')) {
     }
 }
 
-
-// SHOW POST STATE FOR NCMAZ REACT-EDITOR PAGE
-add_filter('display_post_states', 'ncmazFe_custom_post_states', 10, 2);
-if (!function_exists('ncmazFe_custom_post_states')) {
-    function ncmazFe_custom_post_states($states, $post)
-    {
-        $currentSpecificPage = checkPageNcmazAccountOrPostSubmissionEditor($post->ID);
-        if (empty($currentSpecificPage)) {
-            return $states;
-        }
-        if ($currentSpecificPage === "pageNcmazAccountUrl") {
-            $states[] = __('Ncmaz Edit Account Page');
-        }
-        if ($currentSpecificPage === "pagePostSubmissionEditorUrl") {
-            $states[] = __('Ncmaz Post Submission Page');
-        }
-
-        return $states;
-    }
-}
-
-
-// ADD THEME STYLE RADIUS FOR BODY CLASS
-add_filter('body_class', function ($classes) {
-    global $ncmaz_redux_demo;
-    if (
-        empty($ncmaz_redux_demo['nc-general-settings--general-theme-radius'])
-        || $ncmaz_redux_demo['nc-general-settings--general-theme-radius'] === 'DEFAULT'
-    ) {
-        return $classes;
-    }
-    $radiusClass = ' ncmaztheme-' . $ncmaz_redux_demo['nc-general-settings--general-theme-radius'] . '-radius ';
-    return array_merge($classes, array($radiusClass));
-});
-
-// 
 // ============ READ ONLY SOME AFC FIELDS ============
 if (!function_exists('ncmazFc__acf_prepare_field')) :
     function ncmazFc__acf_prepare_field($field)

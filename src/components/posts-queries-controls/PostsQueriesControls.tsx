@@ -84,6 +84,11 @@ const PostsQueriesControls = ({
 		inherit,
 		taxQuery,
 		parents,
+		exclude,
+		offset,
+		pages,
+		perPage,
+		search,
 	} = query;
 	// const allowedControls = useAllowedControls({ query: attributes });
 	const [showSticky, setShowSticky] = useState(postType === "post");
@@ -123,7 +128,7 @@ const PostsQueriesControls = ({
 			...updateQuery,
 		});
 	};
-	const [querySearch, setQuerySearch] = useState(query.search);
+	const [querySearch, setQuerySearch] = useState(search);
 	const onChangeDebounced = useCallback(
 		debounce(() => {
 			if (query.search !== querySearch) {
@@ -193,6 +198,16 @@ const PostsQueriesControls = ({
 							onChange={(value) => setQuery({ sticky: value })}
 						/>
 					)}
+
+					<RangeControl
+						__nextHasNoMarginBottom
+						label={__("Number of posts")}
+						value={perPage || undefined}
+						onChange={(value) => setQuery({ perPage: value })}
+						min={0}
+						max={100}
+						required
+					/>
 				</PanelBody>
 			</InspectorControls>
 			<InspectorControls>

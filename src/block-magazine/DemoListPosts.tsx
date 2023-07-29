@@ -9,7 +9,7 @@ interface Props {
 }
 const DemoListPosts: FC<Props> = ({ posts }) => {
 	return (
-		<div className="no-prose mt-12 space-y-12 lg:mt-12 lg:space-y-12">
+		<div className="no-prose mt-12 divide-y">
 			{posts.map((post) => {
 				const {
 					id,
@@ -32,9 +32,9 @@ const DemoListPosts: FC<Props> = ({ posts }) => {
 				return (
 					<article
 						key={id}
-						className="relative isolate flex flex-col gap-8 lg:flex-row"
+						className="relative isolate flex flex-col gap-4 lg:flex-row py-4"
 					>
-						<div className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
+						<div className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-28 lg:shrink-0">
 							{featuredImage?.sourceUrl ? (
 								<img
 									src={featuredImage?.sourceUrl || ""}
@@ -69,32 +69,32 @@ const DemoListPosts: FC<Props> = ({ posts }) => {
 								</>
 							</div>
 							<div className="group relative max-w-xl">
-								<h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+								<h3 className="mt-2 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
 									<span>
 										<span className="absolute inset-0" />
 										{title}
 									</span>
 								</h3>
-								<div
+								{/* <div
 									dangerouslySetInnerHTML={{ __html: excerpt || "" }}
 									className="mt-5 text-sm leading-6 text-gray-600"
-								></div>
+								></div> */}
 							</div>
-							<div className="mt-6 flex border-t border-gray-900/5 pt-6">
+							<div className="mt-2 flex border-t border-gray-900/5 pt-2">
 								<div className="relative flex items-center gap-x-4">
 									<img
 										src={author?.node.avatar?.url || ""}
 										alt=""
-										className="h-10 w-10 rounded-full bg-gray-50"
+										className="h-8 w-8 rounded-full bg-gray-50"
 									/>
-									<div className="text-sm leading-6">
-										<p className="font-semibold text-gray-900">
-											<a href={author?.node.url || ""}>
-												<span className="absolute inset-0" />
-												{author?.node.name || ""}
-											</a>
-										</p>
-										<p className="text-gray-600">{ncFormatDate(date || "")}</p>
+									<div className="relative flex items-center gap-x-2 text-sm leading-6">
+										<span className="font-semibold text-gray-900">
+											{author?.node.name || ""}
+										</span>
+										<span> • </span>
+										<span className="text-gray-600 my-0">
+											{ncFormatDate(date || "")}
+										</span>
 									</div>
 								</div>
 							</div>

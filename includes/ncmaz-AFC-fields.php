@@ -921,143 +921,6 @@ if (!function_exists("ncmazFC__acf_add_local_field_groups")) :
             'map_graphql_types_from_location_rules' => 0,
             'graphql_types' => '',
         ));
-
-        acf_add_local_field_group(array(
-            'key' => 'group_61543ac682a90',
-            'title' => 'Ncmaz Menu Custom Fields',
-            'fields' => array(
-                array(
-                    'key' => 'field_61543af22200a',
-                    'label' => 'Is Mega Menu',
-                    'name' => 'is_mega_menu',
-                    'type' => 'true_false',
-                    'instructions' => '(Only set/works to menu-location is Primary)',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'show_in_graphql' => 1,
-                    'message' => '',
-                    'default_value' => 0,
-                    'ui' => 1,
-                    'ui_on_text' => '',
-                    'ui_off_text' => '',
-                ),
-                array(
-                    'key' => 'field_61543b1c2200b',
-                    'label' => 'Number Of Posts',
-                    'name' => 'number_of_posts',
-                    'type' => 'number',
-                    'instructions' => '',
-                    'required' => 0,
-                    'conditional_logic' => array(
-                        array(
-                            array(
-                                'field' => 'field_61543af22200a',
-                                'operator' => '==',
-                                'value' => '1',
-                            ),
-                        ),
-                    ),
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'show_in_graphql' => 1,
-                    'default_value' => 10,
-                    'placeholder' => '',
-                    'prepend' => '',
-                    'append' => '',
-                    'min' => '',
-                    'max' => '',
-                    'step' => '',
-                ),
-                array(
-                    'key' => 'field_61543b4c2200c',
-                    'label' => 'Taxonomies',
-                    'name' => 'taxonomies',
-                    'type' => 'taxonomy',
-                    'instructions' => '',
-                    'required' => 0,
-                    'conditional_logic' => array(
-                        array(
-                            array(
-                                'field' => 'field_61543af22200a',
-                                'operator' => '==',
-                                'value' => '1',
-                            ),
-                        ),
-                    ),
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'show_in_graphql' => 1,
-                    'taxonomy' => 'category',
-                    'field_type' => 'multi_select',
-                    'allow_null' => 0,
-                    'add_term' => 0,
-                    'save_terms' => 0,
-                    'load_terms' => 0,
-                    'return_format' => 'object',
-                    'multiple' => 0,
-                ),
-                array(
-                    'key' => 'field_61543bd32200d',
-                    'label' => 'Show Tab Filter',
-                    'name' => 'show_tab_filter',
-                    'type' => 'true_false',
-                    'instructions' => '',
-                    'required' => 0,
-                    'conditional_logic' => array(
-                        array(
-                            array(
-                                'field' => 'field_61543af22200a',
-                                'operator' => '==',
-                                'value' => '1',
-                            ),
-                        ),
-                    ),
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'show_in_graphql' => 1,
-                    'message' => '',
-                    'default_value' => 0,
-                    'ui' => 1,
-                    'ui_on_text' => '',
-                    'ui_off_text' => '',
-                ),
-            ),
-            'location' => array(
-                array(
-                    array(
-                        'param' => 'nav_menu_item',
-                        'operator' => '==',
-                        'value' => 'all',
-                    ),
-                ),
-            ),
-            'menu_order' => 0,
-            'position' => 'normal',
-            'style' => 'default',
-            'label_placement' => 'top',
-            'instruction_placement' => 'label',
-            'hide_on_screen' => '',
-            'active' => true,
-            'description' => '',
-            'show_in_graphql' => 1,
-            'graphql_field_name' => 'ncmazMenuCustomFields',
-            'map_graphql_types_from_location_rules' => 0,
-            'graphql_types' => '',
-        ));
     }
 
 endif;
@@ -1107,5 +970,101 @@ add_action('init', function () {
         'show_in_graphql' => true,
         'graphql_single_name' => 'userReactionPost',
         'graphql_plural_name' => 'userReactionPosts',
+    ));
+});
+
+
+//  add custom fields to menu / mega menu
+add_action('acf/include_fields', function () {
+    if (!function_exists('acf_add_local_field_group')) {
+        return;
+    }
+
+    acf_add_local_field_group(array(
+        'key' => 'group_64c526cd8e979',
+        'title' => 'NcmazFaust Custom Menu',
+        'fields' => array(
+            array(
+                'key' => 'field_64c526cfe7020',
+                'label' => 'Is Mega Menu',
+                'name' => 'is_mega_menu',
+                'aria-label' => '',
+                'type' => 'true_false',
+                'instructions' => 'Option to display menu as mega menu. Mega menu will contain many menu columns inside and a few featured articles. Each level 1 submenu of this menu will represent a menu column, and the level 1 menus of that menu will be in that column. Up to 6 columns.',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'message' => '',
+                'default_value' => 0,
+                'ui' => 0,
+                'show_in_graphql' => 1,
+                'graphql_description' => '',
+                'graphql_field_name' => 'isMegaMenu',
+                'graphql_non_null' => 0,
+                'ui_on_text' => '',
+                'ui_off_text' => '',
+            ),
+            array(
+                'key' => 'field_64c52931c8010',
+                'label' => 'Posts',
+                'name' => 'posts',
+                'aria-label' => '',
+                'type' => 'post_object',
+                'instructions' => 'Select posts which will be show in the right side of the mega menu (These can be the most special articles or something like that). The number of posts displayed will depend on the number of existing menu columns inside the mega menu. No menu column => Display up to 5 posts. One menu column => Display up to 4 posts.Two menu columns => Display up to 3 posts. Three or four menu columns => Display up to 2 posts. Five menu columns => Display up to 1 post. Six menu columns => Will not display any posts',
+                'required' => 0,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_64c526cfe7020',
+                            'operator' => '==',
+                            'value' => '1',
+                        ),
+                    ),
+                ),
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'post_type' => array(
+                    0 => 'post',
+                ),
+                'post_status' => '',
+                'taxonomy' => '',
+                'return_format' => 'id',
+                'multiple' => 1,
+                'allow_null' => 0,
+                'show_in_graphql' => 1,
+                'graphql_description' => 'Select posts which will be show in the right side of the mega menu.The number of posts displayed will depend on the number of existing menu columns inside the mega menu. No menu column => Display up to 5 postsOne menu column => Display up to 4 postsTwo menu columns => Display up to 3 postsThree or four menu columns => Display up to 2 postsFive menu columns => Display up to 1 postSix menu columns => Will not display any posts',
+                'graphql_field_name' => 'posts',
+                'ui' => 1,
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'nav_menu_item',
+                    'operator' => '==',
+                    'value' => 'location/primary',
+                ),
+            ),
+        ),
+        'menu_order' => 0,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+        'hide_on_screen' => '',
+        'active' => true,
+        'description' => '',
+        'show_in_rest' => 0,
+        'show_in_graphql' => 1,
+        'graphql_field_name' => 'ncmazfaustMenu',
+        'map_graphql_types_from_location_rules' => 0,
+        'graphql_types' => '',
     ));
 });
