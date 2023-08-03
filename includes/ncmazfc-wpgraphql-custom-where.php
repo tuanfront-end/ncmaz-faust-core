@@ -66,11 +66,22 @@ add_filter('graphql_post_object_connection_query_args', function ($query_args, $
 
         // $item['title'] se o dinh danh la [postID,reaction], eg: 1,SAVE
         $ids =  array_map(function ($item) {
-            return explode(",", $item['title'])[0];
+            return absint(explode(",", $item['title'])[0]);
         }, $userReactionPosts);
 
-        // 
+        if (!empty($query_args['graphql_after_cursor'])) {
+            // Tìm vị trí của phần tử có giá trị là graphql_after_cursor
+            $index = array_search($query_args['graphql_after_cursor'], $ids);
+            if ($index !== false) {
+                $ids = array_slice($ids, $index);
+            }
+        }
+
         $query_args['post__in'] = empty($ids) ? [0] : $ids;
+        $query_args['orderby'] = "post__in";
+        $query_args['order'] = "DESC";
+
+        // var_dump($query_args);
     }
     return $query_args;
 }, 10, 5);

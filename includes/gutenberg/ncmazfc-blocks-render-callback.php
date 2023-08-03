@@ -9,8 +9,8 @@ if (!function_exists("ncmazfc__render_callback_block_magazine")) :
         $block_posts = "";
         $errors = "";
 
-        if (!empty($data["data"]['posts']['edges'] ?? "")) {
-            $block_posts = $data["data"]['posts']['edges'];
+        if (!empty($data["data"]['posts']['nodes'] ?? "")) {
+            $block_posts = $data["data"]['posts']['nodes'];
         }
 
         if (!empty($data['errors'] ?? "")) {
@@ -44,8 +44,8 @@ if (!function_exists("ncmazfc__render_callback_block_terms")) :
         $block_terms = "";
         $errors = "";
 
-        if (!empty($data["data"]['terms']['edges'] ?? "")) {
-            $block_terms = $data["data"]['terms']['edges'];
+        if (!empty($data["data"]['terms']['nodes'] ?? "")) {
+            $block_terms = $data["data"]['terms']['nodes'];
         }
 
         if (!empty($data['errors'] ?? "")) {
