@@ -25,7 +25,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	const observerRef = useRef<MutationObserver | null>(null);
 
 	const [initPostsFromSSR, setInitPostsFromSSR] = useState<
-		NcmazFcPostsEdegsFieldsFragment["edges"] | null
+		NcmazFcPostsEdegsFieldsFragment["nodes"] | null
 	>(null);
 	const [initErrorFromSSR, setInitErrorFromSSR] = useState<string | null>(null);
 	const SERVER_SIDE_ID = "ncmazfcSSR-block-" + clientId;
@@ -48,7 +48,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 			initPosts:
 				(JSON.parse(
 					dataInitPosts
-				) as NcmazFcPostsEdegsFieldsFragment["edges"]) || null,
+				) as NcmazFcPostsEdegsFieldsFragment["nodes"]) || null,
 			initErrors: JSON.parse(dataInitErrors),
 		};
 	};
@@ -130,7 +130,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 					<ServerSideRender
 						block="ncmaz-faust/block-magazine"
 						attributes={{ uniqueId, queries }}
-						httpMethod="POST"
+						httpMethod="GET"
 						LoadingResponsePlaceholder={BlockLoadingPlaceholder}
 						EmptyResponsePlaceholder={() => <div />}
 					/>

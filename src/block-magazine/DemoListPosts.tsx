@@ -5,7 +5,7 @@ import ncFormatDate from "../utils/formatDate";
 import { Notice } from "@wordpress/components";
 interface Props {
 	className?: string;
-	posts: NcmazFcPostsEdegsFieldsFragment["edges"];
+	posts: NcmazFcPostsEdegsFieldsFragment["nodes"];
 }
 const DemoListPosts: FC<Props> = ({ posts }) => {
 	return (
@@ -14,7 +14,6 @@ const DemoListPosts: FC<Props> = ({ posts }) => {
 				const {
 					id,
 					title,
-					link,
 					date,
 					categories,
 					excerpt,
@@ -26,8 +25,7 @@ const DemoListPosts: FC<Props> = ({ posts }) => {
 					__typename,
 					isSticky,
 					commentCount,
-					dateGmt,
-				} = getPostDataFromPostFragment(post.node);
+				} = getPostDataFromPostFragment(post);
 
 				return (
 					<article
@@ -83,7 +81,7 @@ const DemoListPosts: FC<Props> = ({ posts }) => {
 							<div className="mt-2 flex border-t border-gray-900/5 pt-2">
 								<div className="relative flex items-center gap-x-4">
 									<img
-										src={author?.node.avatar?.url || ""}
+										src={""}
 										alt=""
 										className="h-8 w-8 rounded-full bg-gray-50"
 									/>

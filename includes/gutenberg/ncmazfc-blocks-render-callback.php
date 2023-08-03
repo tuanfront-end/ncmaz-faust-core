@@ -19,7 +19,7 @@ if (!function_exists("ncmazfc__render_callback_block_magazine")) :
         }
 
         // test admin editor
-        // return "<pre>" . wp_json_encode($attributes) . "</pre>";
+        // return "<pre>" . wp_json_encode($data) . "</pre>";
 
         ob_start();
 ?>
@@ -53,7 +53,7 @@ if (!function_exists("ncmazfc__render_callback_block_terms")) :
             $block_terms = "";
         }
 
-        // // test admin editor
+        // test admin editor
         // return "<pre>" . wp_json_encode($block_terms) . "</pre>";
 
         ob_start();

@@ -49,10 +49,10 @@ const QueryToolbar = ({
 								label={__("Items per Page")}
 								labelPosition="edge"
 								min={1}
-								max={100}
+								max={25}
 								onChange={(val) => {
 									let value = Number(val);
-									if (isNaN(value) || value < 1 || value > 100) {
+									if (isNaN(value) || value < 1 || value > 25) {
 										return;
 									}
 									setQuery({

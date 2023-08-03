@@ -1,15 +1,11 @@
 <?php
 
-
-
 // POSTS =================================================
 $NC_POSTS_EDGES_FRAGMENT = '
 	fragment NcmazFcPostsEdegsFields on RootQueryToPostConnection {
 		__typename
-		edges {
-			node {
-				...NcmazFcPostCardFields
-			}
+		nodes {
+			...NcmazFcPostCardFields
 		}
 	}
 ';
@@ -18,27 +14,17 @@ $NC_POST_CARD_FRAGMENT = '
 	fragment NcmazFcPostCardFields on Post {
 		__typename
 		id
-		link
 		uri
-		modifiedGmt
 		modified
 		isSticky
-		dateGmt
 		date
 		commentStatus
-		status
 		author {
 			node {
 				id
 				databaseId
-				avatar {
-					url
-				}
-				url
 				uri
-				username
 				name
-				slug
 				ncUserMeta {
 					featuredImage {
 						node {
@@ -52,10 +38,8 @@ $NC_POST_CARD_FRAGMENT = '
 			edges {
 				node {
 					id
-					link
 					name
 					uri
-					slug
 					count
 					databaseId
 					ncTaxonomyMeta {
@@ -82,7 +66,6 @@ $NC_POST_CARD_FRAGMENT = '
 			}
 		}
 		databaseId
-		slug
 		title
 		ncmazVideoUrl {
 			videoUrl

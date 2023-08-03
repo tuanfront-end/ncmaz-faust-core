@@ -94,35 +94,30 @@ if (!function_exists(('ncmazfc__graphql_query_terms_from_terms_block'))) :
                 where: { taxonomies: $taxonomies, orderby: $orderby, order: $order }
                 first: $first
             ) {
-                edges {
-                    node {
-                        __typename
-                        id
-                        count
-                        name
-                        slug
-                        uri
-                        databaseId
-                        description
-                        link
-                        taxonomyName
-                        ... on Category {
-                            ncTaxonomyMeta {
-                                color
-                                featuredImage {
-                                    node {
-                                        ...NcmazFcImageFields
-                                    }
+                nodes {
+                    __typename
+                    id
+                    count
+                    name
+                    uri
+                    databaseId
+                    taxonomyName
+                    ... on Category {
+                        ncTaxonomyMeta {
+                            color
+                            featuredImage {
+                                node {
+                                    ...NcmazFcImageFields
                                 }
                             }
                         }
-                        ... on Tag {
-                            ncTaxonomyMeta {
-                                color
-                                featuredImage {
-                                    node {
-                                        ...NcmazFcImageFields
-                                    }
+                    }
+                    ... on Tag {
+                        ncTaxonomyMeta {
+                            color
+                            featuredImage {
+                                node {
+                                    ...NcmazFcImageFields
                                 }
                             }
                         }

@@ -5,7 +5,7 @@ import { NC_TERM_CARD_FRAGMENT } from "../fragments";
 import { Notice } from "@wordpress/components";
 
 interface Props {
-	terms: NcmazFcTermsCardFieldsFragment["edges"];
+	terms: NcmazFcTermsCardFieldsFragment["nodes"];
 }
 
 const DemoTermsList: FC<Props> = ({ terms }) => {
@@ -13,7 +13,7 @@ const DemoTermsList: FC<Props> = ({ terms }) => {
 		<div>
 			<div className={`flex flex-wrap gap-3 mt-3`}>
 				{terms.map((term) => {
-					const node = useFragment(NC_TERM_CARD_FRAGMENT, term.node);
+					const node = useFragment(NC_TERM_CARD_FRAGMENT, term);
 					return (
 						<div
 							key={node.databaseId}

@@ -205,7 +205,7 @@ const PostsQueriesControls = ({
 						value={perPage || undefined}
 						onChange={(value) => setQuery({ perPage: value })}
 						min={0}
-						max={100}
+						max={25}
 						required
 					/>
 				</PanelBody>

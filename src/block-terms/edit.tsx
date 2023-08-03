@@ -36,7 +36,7 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 	} = attributes;
 
 	const [initTermsFromSSR, setInitTermsFromSSR] = useState<
-		NcmazFcTermsCardFieldsFragment["edges"] | null
+		NcmazFcTermsCardFieldsFragment["nodes"] | null
 	>(null);
 	const [initErrorFromSSR, setInitErrorFromSSR] = useState<string | null>(null);
 	const SERVER_SIDE_ID = "ncmazfcSSR-block-" + clientId;
@@ -59,7 +59,7 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 		return {
 			initTerms: JSON.parse(
 				dataInitTerms
-			) as NcmazFcTermsCardFieldsFragment["edges"],
+			) as NcmazFcTermsCardFieldsFragment["nodes"],
 			initErrors: JSON.parse(dataInitErrors),
 		};
 	};

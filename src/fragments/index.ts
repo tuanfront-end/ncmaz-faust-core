@@ -8,10 +8,8 @@ export const NC_TERM_CARD_FRAGMENT = graphql(/* GraphQL */ `
 		count
 		uri
 		name
-		slug
 		databaseId
 		description
-		link
 		taxonomyName
 		... on Category {
 			id
@@ -43,10 +41,8 @@ export const NC_TERM_CARD_FRAGMENT = graphql(/* GraphQL */ `
 export const NC_TERMS_EDGES_FRAGMENT = graphql(/* GraphQL */ `
 	fragment NcmazFcTermsCardFields on RootQueryToTermNodeConnection {
 		__typename
-		edges {
-			node {
-				...NcmazFcTermCardFields
-			}
+		nodes {
+			...NcmazFcTermCardFields
 		}
 	}
 `);
@@ -55,10 +51,8 @@ export const NC_TERMS_EDGES_FRAGMENT = graphql(/* GraphQL */ `
 export const NC_POSTS_EDGES_FRAGMENT = graphql(/* GraphQL */ `
 	fragment NcmazFcPostsEdegsFields on RootQueryToPostConnection {
 		__typename
-		edges {
-			node {
-				...NcmazFcPostCardFields
-			}
+		nodes {
+			...NcmazFcPostCardFields
 		}
 	}
 `);
@@ -67,12 +61,9 @@ export const NC_POST_CARD_FRAGMENT = graphql(/* GraphQL */ `
 	fragment NcmazFcPostCardFields on Post {
 		__typename
 		id
-		link
 		uri
-		modifiedGmt
 		modified
 		isSticky
-		dateGmt
 		date
 		commentStatus
 		status
@@ -80,9 +71,6 @@ export const NC_POST_CARD_FRAGMENT = graphql(/* GraphQL */ `
 			node {
 				id
 				databaseId
-				avatar {
-					url
-				}
 				url
 				uri
 				username
