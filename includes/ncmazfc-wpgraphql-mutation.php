@@ -96,6 +96,10 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
             'type' => 'String',
             'description' => __('Error of this mutation', 'ncmazfc'),
         ],
+        'number' => [
+            'type' => 'NcmazFcUserReactionPostNumberUpdateEnum',
+            'description' => __('1 is add, and 0 is remove', 'ncmazfc'),
+        ],
     ],
     'mutateAndGetPayload' => function ($input, $context, $info) {
         // Do any logic here to sanitize the input, check user capabilities, etc
@@ -112,6 +116,7 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
                 'post_id' => $postID,
                 'reaction' => $reaction,
                 'result' => 'ERROR',
+                'number' => $number,
                 'errors' => "Invalid input. Empty postID or userID or reaction"
             ];
         }
@@ -148,6 +153,7 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
                     'post_id'   => $postID,
                     'reaction'  => $reaction,
                     'result'    => 'ERROR',
+                    'number' => $number,
                     'errors'    => 'View count is already exist.'
                 ];
                 return $outPut;
@@ -165,6 +171,7 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
                     'post_id'   => $postID,
                     'reaction'  => $reaction,
                     'result'    => 'ERROR',
+                    'number' => $number,
                     'errors'    => 'Delete Reaction_post data failure.'
                 ];
             } else {
@@ -181,6 +188,7 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
                     'post_id'   => $postID,
                     'reaction'  => $reaction,
                     'result'    => 'REMOVED',
+                    'number' => $number,
                     'new_count' =>  $newCount
                 ];
             }
@@ -209,6 +217,7 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
                     'post_id' => $postID,
                     'reaction' => $reaction,
                     'result' => 'ADDED',
+                    'number' => $number,
                     'new_count' =>  $newCount,
                 ];
             } else {
@@ -218,7 +227,8 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
                     'post_id' => $postID,
                     'reaction' => $reaction,
                     'result' => 'ERROR',
-                    'errors' => $new_reaction_post_id->get_error_message()
+                    'errors' => $new_reaction_post_id->get_error_message(),
+                    'number' => $number,
                 ];
             }
         }

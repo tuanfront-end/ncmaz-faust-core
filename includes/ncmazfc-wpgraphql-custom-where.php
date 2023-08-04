@@ -1,5 +1,4 @@
 <?php
-
 // DEMO Truy vấn Sticky Post với GraphQL ------------------------------
 add_action('graphql_register_types', function () {
     register_graphql_field('RootQueryToPostConnectionWhereArgs', 'onlySticky', [
@@ -18,70 +17,19 @@ add_filter('graphql_post_object_connection_query_args', function ($query_args, $
 }, 10, 5);
 
 
-// DEMO Truy vấn  Post theo userReactionPost authorID va userReactionPost title với GraphQL ------------------------------
-add_action('graphql_register_types', function () {
-    register_graphql_field('RootQueryToPostConnectionWhereArgs', 'inUserReactionPosts', [
-        'type' => 'String',
-        'description' => __('Filter posts liked/save/viewed by user (user_id/reaction, eg: 1/SAVE)', 'ncmazfc'),
-    ]);
-});
-add_filter('graphql_post_object_connection_query_args', function ($query_args, $source, $args, $context, $info) {
-    if (!empty($args['where']['inUserReactionPosts'])) {
 
-        // -----------------------------------------------------------------
-        if (!function_exists('ncmazfc__GetUserReactionPostsByAuthorAndSearch')) :
-            function ncmazfc__GetUserReactionPostsByAuthorAndSearch($author, $search)
-            {
-                $variables = [
-                    "author" => $author,
-                    "search" => $search,
-                ];
-
-
-                $query = 'query GetUserReactionPostsByAuthorAndSearch($author: Int = 1, $search: String = "") {
-                userReactionPosts(where: {author: $author, search: $search}, first: 200) {
-                  nodes {
-                      id
-                      title
-                  }
-                }
-              }';
-
-                //  query 
-                $results = graphql(
-                    [
-                        'query'          => $query,
-                        'variables'      => $variables,
-                        'operation_name' => "GetUserReactionPostsByAuthorAndSearch",
-                    ]
-                );
-                return  $results;
-            }
-        endif;
-        // -----------------------------------------------------------------
-
-        $userID_reaction = explode("/",  $args['where']['inUserReactionPosts']);
-        $data = ncmazfc__GetUserReactionPostsByAuthorAndSearch(intval($userID_reaction[0]), $userID_reaction[1]);
-        $userReactionPosts = $data['data']['userReactionPosts']['nodes'] ?? [];
-
-        // $item['title'] se o dinh danh la [postID,reaction], eg: 1,SAVE
-        $ids =  array_map(function ($item) {
-            return absint(explode(",", $item['title'])[0]);
-        }, $userReactionPosts);
-
-        if (!empty($query_args['graphql_after_cursor'])) {
-            // Tìm vị trí của phần tử có giá trị là graphql_after_cursor
-            $index = array_search($query_args['graphql_after_cursor'], $ids);
-            if ($index !== false) {
-                $ids = array_slice($ids, $index);
-            }
-        }
-
-        $query_args['post__in'] = empty($ids) ? [0] : $ids;
-        $query_args['orderby'] = "post__in";
-        $query_args['order'] = "DESC";
-
-        // var_dump($query_args);
+/*
+ * Increase perPage for userReactionPosts. This is needed 
+ */
+add_filter('graphql_connection_max_query_amount', function (int $max_amount, $source, array $args, $context, $info) {
+    // Bail if the fieldName isn't avail
+    if (empty($info->fieldName)) {
+        return $max_amount;
     }
-    return $query_args;
+    // Bail if we're not dealing with our target fieldName
+    if ('userReactionPosts' !== $info->fieldName) {
+        return $max_amount;
+    }
+
+    return 500;
 }, 10, 5);
