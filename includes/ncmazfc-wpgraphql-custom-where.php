@@ -15,6 +15,7 @@ add_filter('graphql_post_object_connection_query_args', function ($query_args, $
     }
     return $query_args;
 }, 10, 5);
+// end ------------------------------
 
 
 
@@ -33,3 +34,46 @@ add_filter('graphql_connection_max_query_amount', function (int $max_amount, $so
 
     return 500;
 }, 10, 5);
+// end ------------------------------
+
+
+
+// add filter to add orderby views_count and likes_count to postObjectConnection ------------------------------
+add_filter('graphql_PostObjectsConnectionOrderbyEnum_values', function ($values) {
+    $values['VIEWS_COUNT'] = [
+        'value' => 'views_count',
+        'description' => __('The number of views on the post', 'ncmazfc'),
+    ];
+    $values['LIKES_COUNT'] = [
+        'value' => 'likes_count',
+        'description' => __('The number of likes on the post', 'ncmazfc'),
+    ];
+    return $values;
+});
+add_filter('graphql_post_object_connection_query_args', function ($query_args, $source, $input) {
+    if (isset($input['where']['orderby']) && is_array($input['where']['orderby'])) {
+        foreach ($input['where']['orderby'] as $orderby) {
+            if (!isset($orderby['field']) || 'views_count' !== $orderby['field']) {
+                continue;
+            }
+            $query_args['meta_key'] = 'views_count';
+            $query_args['orderby'] = 'meta_value_num';
+            $query_args['order'] = $orderby['order'];
+        }
+    }
+    return $query_args;
+}, 10, 3);
+add_filter('graphql_post_object_connection_query_args', function ($query_args, $source, $input) {
+    if (isset($input['where']['orderby']) && is_array($input['where']['orderby'])) {
+        foreach ($input['where']['orderby'] as $orderby) {
+            if (!isset($orderby['field']) || 'likes_count' !== $orderby['field']) {
+                continue;
+            }
+            $query_args['meta_key'] = 'likes_count';
+            $query_args['orderby'] = 'meta_value_num';
+            $query_args['order'] = $orderby['order'];
+        }
+    }
+    return $query_args;
+}, 10, 3);
+// end ------------------------------
