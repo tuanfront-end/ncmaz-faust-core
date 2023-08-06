@@ -16,7 +16,6 @@ $NC_POST_CARD_FRAGMENT = '
 		id
 		uri
 		modified
-		isSticky
 		date
 		commentStatus
 		author {

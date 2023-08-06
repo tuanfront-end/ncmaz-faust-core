@@ -22,18 +22,18 @@ add_filter('graphql_post_object_connection_query_args', function ($query_args, $
 /*
  * Increase perPage for userReactionPosts. This is needed 
  */
-add_filter('graphql_connection_max_query_amount', function (int $max_amount, $source, array $args, $context, $info) {
-    // Bail if the fieldName isn't avail
-    if (empty($info->fieldName)) {
-        return $max_amount;
-    }
-    // Bail if we're not dealing with our target fieldName
-    if ('userReactionPosts' !== $info->fieldName) {
-        return $max_amount;
-    }
+// add_filter('graphql_connection_max_query_amount', function (int $max_amount, $source, array $args, $context, $info) {
+//     // Bail if the fieldName isn't avail
+//     if (empty($info->fieldName)) {
+//         return $max_amount;
+//     }
+//     // Bail if we're not dealing with our target fieldName
+//     if ('userReactionPosts' !== $info->fieldName) {
+//         return $max_amount;
+//     }
 
-    return 500;
-}, 10, 5);
+//     return 500;
+// }, 10, 5);
 // end ------------------------------
 
 

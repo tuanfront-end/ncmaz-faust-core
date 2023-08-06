@@ -23,7 +23,6 @@ const DemoListPosts: FC<Props> = ({ posts }) => {
 					ncPostMetaData,
 					databaseId,
 					__typename,
-					isSticky,
 					commentCount,
 				} = getPostDataFromPostFragment(post);
 

@@ -112,16 +112,6 @@ if (!function_exists(('ncmazfc__graphql_query_terms_from_terms_block'))) :
                             }
                         }
                     }
-                    ... on Tag {
-                        ncTaxonomyMeta {
-                            color
-                            featuredImage {
-                                node {
-                                    ...NcmazFcImageFields
-                                }
-                            }
-                        }
-                    }
                 }
             }
         } ' . $NC_IMAGE_MEDIA_FRAGMENT;

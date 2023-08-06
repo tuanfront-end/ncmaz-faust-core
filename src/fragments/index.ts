@@ -23,18 +23,6 @@ export const NC_TERM_CARD_FRAGMENT = graphql(/* GraphQL */ `
 				}
 			}
 		}
-		... on Tag {
-			id
-			name
-			ncTaxonomyMeta {
-				color
-				featuredImage {
-					node {
-						...NcmazFcImageFields
-					}
-				}
-			}
-		}
 	}
 `);
 
@@ -63,7 +51,6 @@ export const NC_POST_CARD_FRAGMENT = graphql(/* GraphQL */ `
 		id
 		uri
 		modified
-		isSticky
 		date
 		commentStatus
 		status

@@ -580,7 +580,7 @@ if (!function_exists("ncmazFC__acf_add_local_field_groups")) :
                     array(
                         'param' => 'taxonomy',
                         'operator' => '==',
-                        'value' => 'all',
+                        'value' => 'category',
                     ),
                 ),
             ),
