@@ -53,3 +53,53 @@ if (!function_exists('ncmazFc__calculate_reading_time_by_content')) :
         return $reading_time_minutes;
     }
 endif;
+
+
+if (!function_exists('ncmazfc__gqlGetUserReactionPostsByAuthorAndSearch')) :
+    function ncmazfc__gqlGetUserReactionPostsByAuthorAndSearch($author, $search, $author_field_type = "id")
+    {
+        if (empty($author) || empty($search)) {
+            return false;
+        }
+
+        $variables = [];
+
+        if ($author_field_type == "id") {
+            $variables = [
+                "author" => $author,
+                "search" => $search,
+            ];
+        } else if ($author_field_type == "slug") {
+            $variables = [
+                "authorName"    => $author,
+                "search"        => $search,
+            ];
+        } else {
+            return false;
+        }
+
+
+        $query = 'query GetUserReactionPostsByAuthorAndSearch($author: Int = 0, $authorName: String = null, $search: String = "") {
+            userReactionPosts(where: {author: $author, authorName: $authorName, search: $search, orderby: {field: DATE, order: DESC}}, first: 500) {
+                nodes {
+                    id
+                    title
+                }
+            }
+        }';
+
+        if (!function_exists('graphql')) {
+            return false;
+        }
+
+        //  query 
+        $results = graphql(
+            [
+                'query'          => $query,
+                'variables'      => $variables,
+                'operation_name' => "GetUserReactionPostsByAuthorAndSearch",
+            ]
+        );
+        return  $results;
+    }
+endif;
