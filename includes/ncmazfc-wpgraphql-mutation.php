@@ -106,18 +106,17 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
         $userID = $input['user_id'];
         $postID = $input['post_id'];
         $reaction = $input['reaction'];
-        $number = $input['number'];
+        $number = $input['number']; // 1 is add, and 0 is remove
         $outPut = [];
 
-
-        if (empty($postID) || empty($userID) || empty($reaction)) {
+        if (empty($postID) || empty($userID) || empty($reaction) || ($number !== 0 && $number !== 1)) {
             return [
                 'user_id' => $userID,
                 'post_id' => $postID,
                 'reaction' => $reaction,
                 'result' => 'ERROR',
                 'number' => $number,
-                'errors' => "Invalid input. Empty postID or userID or reaction"
+                'errors' => "Invalid input. Empty postID or userID or reaction or number is not ADD_1 or REMOVE_1"
             ];
         }
 
@@ -143,7 +142,31 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
         ]);
         $post = ($userPosts['data']['userReactionPosts']['edges'][0]['node'] ?? null);
 
-        if ($post) {
+        // error case 1
+        if (empty($post) && $number === 0) {
+            return [
+                'user_id' => $userID,
+                'post_id' => $postID,
+                'reaction' => $reaction,
+                'result' => 'ERROR',
+                'number' => $number,
+                'errors' => "Reaction Post is not exist, so can not remove it. "
+            ];
+        }
+        // error case 2
+        if ($post && $number === 1) {
+            return [
+                'user_id' => $userID,
+                'post_id' => $postID,
+                'reaction' => $reaction,
+                'result' => 'ERROR',
+                'number' => $number,
+                'errors' => "Reaction Post is already exist."
+            ];
+        }
+
+
+        if ($post && $number === 0) {
             // 1. when user update view count --------------------------------
             if ($reaction == 'VIEW') {
                 // when user update view count, and view count is exist
@@ -192,7 +215,8 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
                     'new_count' =>  $newCount
                 ];
             }
-        } else {
+        } else if (empty($post) && $number === 1) {
+            // have no post and add 1
             $postTitle = $postID . ',' . $reaction;
             $newCount = 0;
             $new_reaction_post_id = wp_insert_post([
@@ -231,6 +255,15 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
                     'number' => $number,
                 ];
             }
+        } else {
+            return [
+                'user_id' => $userID,
+                'post_id' => $postID,
+                'reaction' => $reaction,
+                'result' => 'ERROR',
+                'number' => $number,
+                'errors' => "Somethings went wrong."
+            ];
         }
 
         return $outPut;
