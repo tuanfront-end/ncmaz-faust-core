@@ -79,7 +79,8 @@ add_filter('graphql_post_object_connection_query_args', function ($query_args, $
 // end ------------------------------
 
 
-// DEMO Truy vấn  Post theo userReactionPost authorID va userReactionPost title với GraphQL ------------------------------
+//  Truy vấn  Post theo userReactionPost authorID va userReactionPost title với GraphQL ------------------------------
+// su dung truy van nay trong cac tab: liked/save trong trang author
 add_action('graphql_register_types', function () {
     register_graphql_field('RootQueryToPostConnectionWhereArgs', 'inUserAndReaction', [
         'type' => 'String',
@@ -116,5 +117,34 @@ add_filter('graphql_post_object_connection_query_args', function ($query_args, $
         $query_args['post__in'] = empty($ids) ? [0] : $ids;
         $query_args['orderby'] = "post__in";
     }
+    return $query_args;
+}, 10, 5);
+
+
+
+//  Truy vấn related  Posts  theo post id ------------------------------
+add_action('graphql_register_types', function () {
+    register_graphql_field('RootQueryToPostConnectionWhereArgs', 'isRelatedOfPostId', [
+        'type' => 'Int',
+        'description' => __('Filter related posts of post_database_id', 'ncmazfc'),
+    ]);
+});
+add_filter('graphql_post_object_connection_query_args', function ($query_args, $source, $args, $context, $info) {
+    if (!isset($args['where']['isRelatedOfPostId'])) {
+        return $query_args;
+    }
+    if (empty($args['where']['isRelatedOfPostId'])) {
+        return $query_args;
+    }
+
+    $post_id = $args['where']['isRelatedOfPostId'];
+    $categories = wp_get_post_categories($post_id, array('fields' => 'ids'));
+    $tags = wp_get_post_tags($post_id, array('fields' => 'ids'));
+
+    $query_args['category__in'] =  empty($categories) ? [] : $categories;
+    $query_args['tag__in'] = empty($tags) ? [] : $tags;
+    $query_args['post__not_in'] = array($post_id);
+
+
     return $query_args;
 }, 10, 5);
