@@ -278,8 +278,6 @@ add_action('graphql_input_fields', function ($fields, $type_name, $config) {
         $fields = array_merge($fields, [
             'ncTags'        => ['type' => 'String'],
             // 
-            'ncmazFeaturedImgUrl' => ['type' => 'String'],
-            // 
             'ncmazAudioUrl' => ['type' => 'String'],
             'ncmazVideoUrl' => ['type' => 'String'],
             // 
@@ -291,12 +289,26 @@ add_action('graphql_input_fields', function ($fields, $type_name, $config) {
             'ncmazGalleryImg6Url' => ['type' => 'String'],
             'ncmazGalleryImg7Url' => ['type' => 'String'],
             'ncmazGalleryImg8Url' => ['type' => 'String'],
+            // 
+            'ncmazGalleryImg1Alt' => ['type' => 'String'],
+            'ncmazGalleryImg2Alt' => ['type' => 'String'],
+            'ncmazGalleryImg3Alt' => ['type' => 'String'],
+            'ncmazGalleryImg4Alt' => ['type' => 'String'],
+            'ncmazGalleryImg5Alt' => ['type' => 'String'],
+            'ncmazGalleryImg6Alt' => ['type' => 'String'],
+            'ncmazGalleryImg7Alt' => ['type' => 'String'],
+            'ncmazGalleryImg8Alt' => ['type' => 'String'],
+            // 
+            'ncmazFeaturedImgUrl' => ['type' => 'String'],
+            'ncmazFeaturedImgAlt' => ['type' => 'String'],
         ]);
     }
     if ($type_name === 'UpdateUserInput') {
         $fields = array_merge($fields, [
             'ncmazFeaturedImgUrl'        => ['type' => 'String'],
             'ncmazBackgroundImgUrl'      => ['type' => 'String'],
+            'ncmazFeaturedImgAlt'        => ['type' => 'String'],
+            'ncmazBackgroundImgAlt'      => ['type' => 'String'],
             // 
             'ncmazBio'                  => ['type' => 'String'],
             'ncmazYoutubeUrl'           => ['type' => 'String'],
@@ -338,7 +350,7 @@ add_action('graphql_post_object_mutation_update_additional_data', function ($pos
     // check gallery image 1 upload
     // why isset? then not empty? vi khi update, neu gia tri la "" thi phai set lai custom field
     if (!empty($input['ncmazGalleryImg1Url'])) {
-        $image1_id = ncmazfc__addImageToMediaLibraryByURL($input['ncmazGalleryImg1Url']);
+        $image1_id = ncmazfc__addImageToMediaLibraryByURL($input['ncmazGalleryImg1Url'], $input['ncmazGalleryImg1Alt']);
         if (!$image1_id['success']) {
             $images_upload_error_message = $images_upload_error_message . " (Gallery image 1 - " . $image1_id['error'] . ") ";
             $image1_id = '';
@@ -349,7 +361,7 @@ add_action('graphql_post_object_mutation_update_additional_data', function ($pos
 
     // check gallery image 2 upload
     if (!empty($input['ncmazGalleryImg2Url'])) {
-        $image2_id = ncmazfc__addImageToMediaLibraryByURL($input['ncmazGalleryImg2Url']);
+        $image2_id = ncmazfc__addImageToMediaLibraryByURL($input['ncmazGalleryImg2Url'], $input['ncmazGalleryImg2Alt']);
         if (!$image2_id['success']) {
             $images_upload_error_message = $images_upload_error_message . " (Gallery image 2 - " . $image2_id['error'] . ") ";
             $image2_id = '';
@@ -360,7 +372,7 @@ add_action('graphql_post_object_mutation_update_additional_data', function ($pos
 
     // check gallery image 3 upload
     if (!empty($input['ncmazGalleryImg3Url'])) {
-        $image3_id = ncmazfc__addImageToMediaLibraryByURL($input['ncmazGalleryImg3Url']);
+        $image3_id = ncmazfc__addImageToMediaLibraryByURL($input['ncmazGalleryImg3Url'], $input['ncmazGalleryImg3Alt']);
         if (!$image3_id['success']) {
             $images_upload_error_message = $images_upload_error_message . " (Gallery image 3 - " . $image3_id['error'] . ") ";
             $image3_id = '';
@@ -371,7 +383,7 @@ add_action('graphql_post_object_mutation_update_additional_data', function ($pos
 
     // check gallery image 4 upload
     if (!empty($input['ncmazGalleryImg4Url'])) {
-        $image4_id = ncmazfc__addImageToMediaLibraryByURL($input['ncmazGalleryImg4Url']);
+        $image4_id = ncmazfc__addImageToMediaLibraryByURL($input['ncmazGalleryImg4Url'], $input['ncmazGalleryImg4Alt']);
         if (!$image4_id['success']) {
             $images_upload_error_message = $images_upload_error_message . " (Gallery image 4 - " . $image4_id['error'] . ") ";
             $image4_id = '';
@@ -382,7 +394,7 @@ add_action('graphql_post_object_mutation_update_additional_data', function ($pos
 
     // check gallery image 5 upload
     if (!empty($input['ncmazGalleryImg5Url'])) {
-        $image5_id = ncmazfc__addImageToMediaLibraryByURL($input['ncmazGalleryImg5Url']);
+        $image5_id = ncmazfc__addImageToMediaLibraryByURL($input['ncmazGalleryImg5Url'], $input['ncmazGalleryImg5Alt']);
         if (!$image5_id['success']) {
             $images_upload_error_message = $images_upload_error_message . " (Gallery image 5 - " . $image5_id['error'] . ") ";
             $image5_id = '';
@@ -393,7 +405,7 @@ add_action('graphql_post_object_mutation_update_additional_data', function ($pos
 
     // check gallery image 6 upload
     if (!empty($input['ncmazGalleryImg6Url'])) {
-        $image6_id = ncmazfc__addImageToMediaLibraryByURL($input['ncmazGalleryImg6Url']);
+        $image6_id = ncmazfc__addImageToMediaLibraryByURL($input['ncmazGalleryImg6Url'], $input['ncmazGalleryImg6Alt']);
         if (!$image6_id['success']) {
             $images_upload_error_message = $images_upload_error_message . " (Gallery image 6 - " . $image6_id['error'] . ") ";
             $image6_id = '';
@@ -404,7 +416,7 @@ add_action('graphql_post_object_mutation_update_additional_data', function ($pos
 
     // check gallery image 7 upload
     if (!empty($input['ncmazGalleryImg7Url'])) {
-        $image7_id = ncmazfc__addImageToMediaLibraryByURL($input['ncmazGalleryImg7Url']);
+        $image7_id = ncmazfc__addImageToMediaLibraryByURL($input['ncmazGalleryImg7Url'], $input['ncmazGalleryImg7Alt']);
         if (!$image7_id['success']) {
             $images_upload_error_message = $images_upload_error_message . " (Gallery image 7 - " . $image7_id['error'] . ") ";
             $image7_id = '';
@@ -415,7 +427,7 @@ add_action('graphql_post_object_mutation_update_additional_data', function ($pos
 
     // check gallery image 8 upload
     if (!empty($input['ncmazGalleryImg8Url'])) {
-        $image8_id = ncmazfc__addImageToMediaLibraryByURL($input['ncmazGalleryImg8Url']);
+        $image8_id = ncmazfc__addImageToMediaLibraryByURL($input['ncmazGalleryImg8Url'], $input['ncmazGalleryImg8Alt']);
         if (!$image8_id['success']) {
             $images_upload_error_message = $images_upload_error_message . " (Gallery image 8 - " . $image8_id['error'] . ") ";
             $image8_id = '';
@@ -426,7 +438,7 @@ add_action('graphql_post_object_mutation_update_additional_data', function ($pos
 
     // check featured image upload
     if (!empty($input['ncmazFeaturedImgUrl'])) {
-        $imageFeatured_id = ncmazfc__addImageToMediaLibraryByURL($input['ncmazFeaturedImgUrl']);
+        $imageFeatured_id = ncmazfc__addImageToMediaLibraryByURL($input['ncmazFeaturedImgUrl'], $input['ncmazFeaturedImgAlt']);
         if (!$imageFeatured_id['success']) {
             $images_upload_error_message = $images_upload_error_message . " (Featured image - " . $imageFeatured_id['error'] . ") ";
             $imageFeatured_id = '';

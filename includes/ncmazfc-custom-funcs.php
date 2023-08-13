@@ -107,7 +107,7 @@ endif;
 
 // function add image to library from a image url
 // https://developer.wordpress.org/reference/functions/media_sideload_image/
-function ncmazfc__addImageToMediaLibraryByURL($imageUrl = "")
+function ncmazfc__addImageToMediaLibraryByURL($imageUrl = "", $alt = "")
 {
     if (!function_exists('wp_handle_sideload') || !function_exists('media_sideload_image')) {
         require_once(ABSPATH . 'wp-admin/includes/media.php');
@@ -115,9 +115,14 @@ function ncmazfc__addImageToMediaLibraryByURL($imageUrl = "")
         require_once(ABSPATH . 'wp-admin/includes/image.php');
     }
 
-    $imageID = media_sideload_image($imageUrl, 0, '');
+    $imageID = media_sideload_image($imageUrl, 0, $alt ?? "", 'id');
 
     if (!is_wp_error($imageID)) {
+        // Add alt text
+        if (!empty($alt)) {
+            $attachment = get_post($imageID);
+            update_post_meta($attachment->ID, '_wp_attachment_image_alt', $alt);
+        }
         return [
             "success" => true,
             "imageID" => $imageID,
