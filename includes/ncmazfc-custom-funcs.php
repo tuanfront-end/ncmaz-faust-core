@@ -103,3 +103,30 @@ if (!function_exists('ncmazfc__gqlGetUserReactionPostsByAuthorAndSearch')) :
         return  $results;
     }
 endif;
+
+
+// function add image to library from a image url
+// https://developer.wordpress.org/reference/functions/media_sideload_image/
+function ncmazfc__addImageToMediaLibraryByURL($imageUrl = "")
+{
+    if (!function_exists('wp_handle_sideload') || !function_exists('media_sideload_image')) {
+        require_once(ABSPATH . 'wp-admin/includes/media.php');
+        require_once(ABSPATH . 'wp-admin/includes/file.php');
+        require_once(ABSPATH . 'wp-admin/includes/image.php');
+    }
+
+    $imageID = media_sideload_image($imageUrl, 0, '');
+
+    if (!is_wp_error($imageID)) {
+        return [
+            "success" => true,
+            "imageID" => $imageID,
+        ];
+    }
+
+    return [
+        "success" => false,
+        "imageID" => null,
+        "error" => "Error when upload image " . $imageID->get_error_message(),
+    ];
+}
