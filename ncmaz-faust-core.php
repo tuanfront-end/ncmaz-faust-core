@@ -17,6 +17,26 @@
 
 defined('ABSPATH') || exit;
 
+
+// required plugins -----------------
+// 1 - advanced-custom-fields - advancedcustomfields.com
+// 2 - wp-graphql - wpgraphql.com
+// 3 - Faust.js™ - https://faustjs.org/
+// 4 - WPGraphQL Content Blocks - https://github.com/wpengine/wp-graphql-content-blocks / https://faustjs.org/tutorial/get-started-with-wp-graphql-content-blocks
+// 5 - WPGraphQL for Advanced Custom Fields - https://github.com/wp-graphql/wpgraphql-acf
+// 6 - WPGraphQL Smart Cache - https://github.com/wp-graphql/wp-graphql-smart-cache
+// 7 - mailpoet - https://www.mailpoet.com/
+// -- check one of the required plugins is not active then deactivate this plugin
+if (!is_plugin_active('advanced-custom-fields/acf.php') || !is_plugin_active('wp-graphql/wp-graphql.php') || !is_plugin_active('faustjs/faustjs.php') || !is_plugin_active('wp-graphql-content-blocks/wp-graphql-content-blocks.php') || !is_plugin_active('wp-graphql-acf/wp-graphql-acf.php') || !is_plugin_active('wp-graphql-smart-cache/wp-graphql-smart-cache.php') || !is_plugin_active('mailpoet/mailpoet.php')) {
+    add_action('admin_init', function () {
+        deactivate_plugins(plugin_basename(__FILE__));
+    });
+    return;
+}
+
+
+
+
 // Define Constants.
 define('NCMAZFC_VERSION', '0.0.1');
 define('NCMAZFC_FILE', __FILE__);

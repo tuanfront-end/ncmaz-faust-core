@@ -13,14 +13,16 @@ $NC_POSTS_EDGES_FRAGMENT = '
 $NC_POST_CARD_FRAGMENT = '
 	fragment NcmazFcPostCardFields on Post {
 		__typename
-		id
+		databaseId
+		title
 		uri
 		modified
 		date
 		commentStatus
+		commentCount
+		excerpt
 		author {
 			node {
-				id
 				databaseId
 				uri
 				name
@@ -34,38 +36,28 @@ $NC_POST_CARD_FRAGMENT = '
 			}
 		}
 		categories {
-			edges {
-				node {
-					id
-					name
-					uri
-					count
-					databaseId
-					ncTaxonomyMeta {
-						color
-					}
+			nodes {
+				id
+				name
+				uri
+				count
+				databaseId
+				ncTaxonomyMeta {
+					color
 				}
 			}
 		}
-		commentCount
-		date
-		excerpt
 		featuredImage {
 			node {
 				...NcmazFcImageFields
 			}
 		}
 		postFormats {
-			edges {
-				node {
-					id
-					name
-					slug
-				}
+			nodes {
+				name
+				slug
 			}
 		}
-		databaseId
-		title
 		ncmazVideoUrl {
 			videoUrl
 		}
@@ -124,13 +116,9 @@ $NC_POST_CARD_FRAGMENT = '
 $NC_IMAGE_MEDIA_FRAGMENT =  '
 	fragment NcmazFcImageFields on MediaItem {
 		__typename
-		id
 		altText
-		caption
 		databaseId
-		sizes
 		sourceUrl
-		srcSet
 	}
 ';
 
@@ -141,8 +129,5 @@ $NC_POST_META_DATA_FRAGMENT = '
 		viewsCount
 		readingTime
 		likesCount
-		savedsCount
-		showRightSidebar
-		template
 	}
 ';
