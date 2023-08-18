@@ -20,6 +20,7 @@ $NC_POST_CARD_FRAGMENT = '
 		date
 		commentStatus
 		commentCount
+		status
 		excerpt
 		author {
 			node {
