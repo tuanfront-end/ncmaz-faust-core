@@ -322,6 +322,7 @@ add_action('graphql_input_fields', function ($fields, $type_name, $config) {
             'ncmazPinterestUrl'         => ['type' => 'String'],
             'ncmazTwitchUrl'            => ['type' => 'String'],
             'ncmazWebsiteUrl'           => ['type' => 'String'],
+            'ncmazTiktokUrl'           => ['type' => 'String'],
             'ncmazBuymeacoffeUrl'       => ['type' => 'String'],
         ]);
     }
@@ -480,54 +481,90 @@ add_action('graphql_post_object_mutation_update_additional_data', function ($pos
     }
 }, 10, 5);
 
-// add_action('graphql_user_object_mutation_update_additional_data', function ($user_id, $input, $mutation_name) {
-//     $user_id = "user_" . $user_id;
-//     if (isset($input['ncmazFeaturedImage'])) {
-//         update_field('featured_image', $input['ncmazFeaturedImage'], $user_id);
-//     }
-//     if (isset($input['ncmazBackgroundImage'])) {
-//         update_field('background_image', $input['ncmazBackgroundImage'], $user_id);
-//     }
-//     if (isset($input['ncmazBio'])) {
-//         update_field('nc_bio', $input['ncmazBio'], $user_id);
-//     }
-//     if (isset($input['ncmazYoutubeUrl'])) {
-//         update_field('youtube_url', $input['ncmazYoutubeUrl'], $user_id);
-//     }
-//     if (isset($input['ncmazFacebookUrl'])) {
-//         update_field('facebook_url', $input['ncmazFacebookUrl'], $user_id);
-//     }
-//     if (isset($input['ncmazMediumUrl'])) {
-//         update_field('medium_url', $input['ncmazMediumUrl'], $user_id);
-//     }
-//     if (isset($input['ncmazGithubUrl'])) {
-//         update_field('github_url', $input['ncmazGithubUrl'], $user_id);
-//     }
-//     if (isset($input['ncmazVimeoUrl'])) {
-//         update_field('vimeo_url', $input['ncmazVimeoUrl'], $user_id);
-//     }
-//     if (isset($input['ncmazTwitterUrl'])) {
-//         update_field('twitter_url', $input['ncmazTwitterUrl'], $user_id);
-//     }
-//     if (isset($input['ncmazInstagramUrl'])) {
-//         update_field('instagram_url', $input['ncmazInstagramUrl'], $user_id);
-//     }
-//     if (isset($input['ncmazLinkedinUrl'])) {
-//         update_field('linkedin_url', $input['ncmazLinkedinUrl'], $user_id);
-//     }
-//     if (isset($input['ncmazPinterestUrl'])) {
-//         update_field('pinterest_url', $input['ncmazPinterestUrl'], $user_id);
-//     }
-//     if (isset($input['ncmazTwitchUrl'])) {
-//         update_field('twitch_url', $input['ncmazTwitchUrl'], $user_id);
-//     }
-//     if (isset($input['ncmazWebsiteUrl'])) {
-//         update_field('website_url', $input['ncmazWebsiteUrl'], $user_id);
-//     }
-//     if (isset($input['ncmazBuymeacoffeUrl'])) {
-//         update_field('buymeacoffe_url', $input['ncmazBuymeacoffeUrl'], $user_id);
-//     }
-// }, 10, 5);
+add_action('graphql_user_object_mutation_update_additional_data', function ($user_id, $input, $mutation_name) {
+    $user_id = "user_" . $user_id;
+
+    $imageFeatured_id = null;
+    $imageBackground_id = null;
+    $images_upload_error_message = "";
+
+    // check featured image upload
+    if (isset($input['ncmazFeaturedImgUrl'])) :
+        if (!empty($input['ncmazFeaturedImgUrl'])) {
+            $imageFeatured_id = ncmazfc__addImageToMediaLibraryByURL($input['ncmazFeaturedImgUrl'], $input['ncmazFeaturedImgAlt']);
+            if (!$imageFeatured_id['success']) {
+                $images_upload_error_message = $images_upload_error_message . " (Featured image - " . $imageFeatured_id['error'] . ") ";
+                $imageFeatured_id = '';
+            } else {
+                $imageFeatured_id = $imageFeatured_id['imageID'];
+            }
+        }
+        update_field('featured_image', $imageFeatured_id, $user_id);
+    endif;
+
+    // check background image upload
+    if (isset($input['ncmazBackgroundImgUrl'])) :
+        if (!empty($input['ncmazBackgroundImgUrl'])) {
+            $imageBackground_id = ncmazfc__addImageToMediaLibraryByURL($input['ncmazBackgroundImgUrl'], $input['ncmazBackgroundImgAlt']);
+            if (!$imageBackground_id['success']) {
+                $images_upload_error_message = $images_upload_error_message . " (Background image - " . $imageBackground_id['error'] . ") ";
+                $imageBackground_id = '';
+            } else {
+                $imageBackground_id = $imageBackground_id['imageID'];
+            }
+        }
+        update_field('background_image', $imageBackground_id, $user_id);
+    endif;
+
+
+    if (isset($input['ncmazBio'])) {
+        update_field('nc_bio', $input['ncmazBio'], $user_id);
+    }
+    if (isset($input['ncmazYoutubeUrl'])) {
+        update_field('youtube_url', $input['ncmazYoutubeUrl'], $user_id);
+    }
+    if (isset($input['ncmazFacebookUrl'])) {
+        update_field('facebook_url', $input['ncmazFacebookUrl'], $user_id);
+    }
+    if (isset($input['ncmazMediumUrl'])) {
+        update_field('medium_url', $input['ncmazMediumUrl'], $user_id);
+    }
+    if (isset($input['ncmazGithubUrl'])) {
+        update_field('github_url', $input['ncmazGithubUrl'], $user_id);
+    }
+    if (isset($input['ncmazVimeoUrl'])) {
+        update_field('vimeo_url', $input['ncmazVimeoUrl'], $user_id);
+    }
+    if (isset($input['ncmazTwitterUrl'])) {
+        update_field('twitter_url', $input['ncmazTwitterUrl'], $user_id);
+    }
+    if (isset($input['ncmazInstagramUrl'])) {
+        update_field('instagram_url', $input['ncmazInstagramUrl'], $user_id);
+    }
+    if (isset($input['ncmazLinkedinUrl'])) {
+        update_field('linkedin_url', $input['ncmazLinkedinUrl'], $user_id);
+    }
+    if (isset($input['ncmazPinterestUrl'])) {
+        update_field('pinterest_url', $input['ncmazPinterestUrl'], $user_id);
+    }
+    if (isset($input['ncmazTwitchUrl'])) {
+        update_field('twitch_url', $input['ncmazTwitchUrl'], $user_id);
+    }
+    if (isset($input['ncmazWebsiteUrl'])) {
+        update_field('website_url', $input['ncmazWebsiteUrl'], $user_id);
+    }
+    if (isset($input['ncmazTiktokUrl'])) {
+        update_field('tiktok_url', $input['ncmazTiktokUrl'], $user_id);
+    }
+    if (isset($input['ncmazBuymeacoffeUrl'])) {
+        update_field('buymeacoffe_url', $input['ncmazBuymeacoffeUrl'], $user_id);
+    }
+
+    // check if there is any error in images upload
+    if (!empty($images_upload_error_message)) {
+        throw new  GraphQL\Error\UserError(__('The object has been updated but an error occurred while uploading the image ' . $images_upload_error_message, 'wp-graphql'));
+    }
+}, 10, 5);
 
 
 

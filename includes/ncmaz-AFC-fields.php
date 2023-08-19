@@ -691,6 +691,23 @@ if (!function_exists("ncmazFC__acf_add_local_field_groups")) :
                     'placeholder' => '',
                 ],
                 [
+                    'key' => 'field_6153153270fxcb_tiktok_url',
+                    'label' => 'Tiktok Url',
+                    'name' => 'tiktok_url',
+                    'type' => 'text',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'show_in_graphql' => 1,
+                    'default_value' => '',
+                    'placeholder' => '',
+                ],
+                [
                     'key' => 'field_b70fcd_facebook_url',
                     'label' => 'Facebook Url',
                     'name' => 'facebook_url',
