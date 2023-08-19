@@ -18,6 +18,23 @@ add_filter('graphql_post_object_connection_query_args', function ($query_args, $
 // end ------------------------------
 
 
+// DEMO Truy vấn logo với GraphQL ------------------------------
+add_action('graphql_register_types', function () {
+    register_graphql_field('RootQuery', 'siteLogo', [
+        'type' => 'MediaItem',
+        'description' => __('The logo set in the customizer', 'ncmazfc'),
+        'resolve' => function () {
+            $logo_id = get_theme_mod('custom_logo');
+            if (!isset($logo_id) || !absint($logo_id)) {
+                return null;
+            }
+            $media_object = get_post($logo_id);
+            return new \WPGraphQL\Model\Post($media_object);
+        }
+    ]);
+});
+// end ------------------------------
+
 
 /*
  * Increase perPage for userReactionPosts. This is needed 
