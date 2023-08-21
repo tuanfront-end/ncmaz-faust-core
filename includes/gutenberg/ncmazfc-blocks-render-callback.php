@@ -1,16 +1,22 @@
 <?php
-// =============================================render_callback_block_magazine=====================================================================
+// =============================================render_callback_block_magazine============================== 
 if (!function_exists("ncmazfc__render_callback_block_magazine")) :
     function ncmazfc__render_callback_block_magazine($attributes)
     {
         $data = [];
-        $data = ncmazfc__graphql_query_posts_from_post_block($attributes['queries']);
+        $result = ncmazfc__graphql_query_posts_from_post_block($attributes['queries']);
 
+        $data = $result['data'];
+        $queryVariables = $result['variables'];
         $block_posts = "";
         $errors = "";
+        $pageInfo = "";
 
         if (!empty($data["data"]['posts']['nodes'] ?? "")) {
             $block_posts = $data["data"]['posts']['nodes'];
+            if ($attributes['showLoadMore'] === true) {
+                $pageInfo = $data['data']['posts']['pageInfo'] ?? "";
+            }
         }
 
         if (!empty($data['errors'] ?? "")) {
@@ -23,7 +29,7 @@ if (!function_exists("ncmazfc__render_callback_block_magazine")) :
 
         ob_start();
 ?>
-        <div hidden class="ncmazfc-block-content-common-class ncmazfc-block-magazine__content hidden" data-ncmazfc-unique-id="<?php echo esc_attr(wp_json_encode($attributes["uniqueId"])); ?>" data-ncmazfc-init-posts="<?php !empty($block_posts) ? esc_attr_e(wp_json_encode($block_posts)) : null ?>" data-ncmazfc-init-errors="<?php !empty($errors) ? esc_attr_e(wp_json_encode($errors)) : null ?>">
+        <div hidden class="ncmazfc-block-content-common-class ncmazfc-block-magazine__content hidden" data-ncmazfc-unique-id="<?php echo esc_attr(wp_json_encode($attributes["uniqueId"])); ?>" data-ncmazfc-init-posts="<?php !empty($block_posts) ? esc_attr_e(wp_json_encode($block_posts)) : null ?>" data-ncmazfc-init-errors="<?php !empty($errors) ? esc_attr_e(wp_json_encode($errors)) : null ?>" data-ncmazfc-init-query-variables="<?php echo esc_attr(wp_json_encode($queryVariables)); ?>" data-ncmazfc-init-data-page-info="<?php echo esc_attr(wp_json_encode($pageInfo)); ?>">
         </div>
     <?php
         $output = ob_get_contents(); // collect output
@@ -34,7 +40,7 @@ endif;
 
 
 
-// =============================================render_callback_block_terms=====================================================================
+// =============================================render_callback_block_terms================================= 
 if (!function_exists("ncmazfc__render_callback_block_terms")) :
     function ncmazfc__render_callback_block_terms($attributes)
     {

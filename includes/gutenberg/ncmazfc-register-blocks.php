@@ -3,7 +3,7 @@
 add_action('init', 'ncmazfc__register_blocks_gutenberg_init');
 if (!function_exists("ncmazfc__register_blocks_gutenberg_init")) :
     // START REGISTER GUTENBERG BLOCKS
-    //======================================================================================================================================
+    //========================================================================================  
     function ncmazfc__register_blocks_gutenberg_init()
     {
 
@@ -21,7 +21,7 @@ if (!function_exists("ncmazfc__register_blocks_gutenberg_init")) :
                         "type" => "object",
                         "default" => [
                             "pages" => 0,
-                            "perPage" => null,
+                            "perPage" => 10,
                             "offset" => 0,
                             "postType" => "post",
                             "order" => "DESC",
@@ -39,17 +39,14 @@ if (!function_exists("ncmazfc__register_blocks_gutenberg_init")) :
                         "type" => "string",
                         "default" => "magazine-1",
                     ],
-                    "showFilterTab" => [
+                    "showLoadMore" => [
                         "type" => "boolean",
-                        "default" => true,
-                    ],
-                    "viewMoreHref" => [
-                        "type" => "string",
-                        "default" => "#",
+                        "default" => false,
                     ],
                 ]
             ]
         );
+
         register_block_type(
             NCMAZFC_BUILD_PATH . '/block-terms',
             [
@@ -73,7 +70,7 @@ if (!function_exists("ncmazfc__register_blocks_gutenberg_init")) :
                     ],
                     "numberOfTags" => [
                         "type" => "number",
-                        "default" => 30,
+                        "default" => 10,
                     ],
                     "showTagCounts" => [
                         "type" => "boolean",
@@ -85,6 +82,11 @@ if (!function_exists("ncmazfc__register_blocks_gutenberg_init")) :
                     ],
                 ]
             ]
+        );
+
+        register_block_type(
+            NCMAZFC_BUILD_PATH . '/block-heading',
+            []
         );
     }
 

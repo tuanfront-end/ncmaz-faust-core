@@ -1,6 +1,5 @@
 <?php
 
-
 //  GraphQL Query for Posts Block
 if (!function_exists(('ncmazfc__graphql_query_posts_from_post_block'))) :
     function ncmazfc__graphql_query_posts_from_post_block($queries)
@@ -10,7 +9,6 @@ if (!function_exists(('ncmazfc__graphql_query_posts_from_post_block'))) :
         }
         global $NC_POSTS_EDGES_FRAGMENT, $NC_POST_CARD_FRAGMENT, $NC_IMAGE_MEDIA_FRAGMENT, $NC_POST_META_DATA_FRAGMENT;
 
-
         $categoryIn = !empty($queries['taxQuery']["category"] ?? []) ? $queries['taxQuery']["category"] : [];
         $tagIn = !empty($queries['taxQuery']["post_tag"] ?? []) ? $queries['taxQuery']["post_tag"] : [];
         $authorIn = !empty($queries['author'] ?? "") ? explode(',', $queries['author']) : [];
@@ -19,7 +17,6 @@ if (!function_exists(('ncmazfc__graphql_query_posts_from_post_block'))) :
 
 
         $variables = [
-            // "author" => !empty($queries['author']) ? $queries['author'] : 0,
             "authorIn" => $authorIn,
             "categoryIn" => $categoryIn,
             "tagIn" => $tagIn,
@@ -36,8 +33,8 @@ if (!function_exists(('ncmazfc__graphql_query_posts_from_post_block'))) :
                 $tagIn: [ID] = []
                 $search: String = ""
                 $first: Int = 10
-                $field: PostObjectsConnectionOrderbyEnum = AUTHOR
-                $order: OrderEnum = ASC
+                $field: PostObjectsConnectionOrderbyEnum = DATE
+                $order: OrderEnum = DESC
             ) {
                 posts (
                     where: {
@@ -50,6 +47,10 @@ if (!function_exists(('ncmazfc__graphql_query_posts_from_post_block'))) :
                     first: $first
                 ) {
                     ...NcmazFcPostsEdegsFields
+                    pageInfo {
+                        endCursor
+                        hasNextPage
+                      }
                 }
             } ' . $NC_POSTS_EDGES_FRAGMENT . ' ' . $NC_POST_CARD_FRAGMENT . ' ' . $NC_IMAGE_MEDIA_FRAGMENT . ' ' . $NC_POST_META_DATA_FRAGMENT;
 
@@ -61,10 +62,19 @@ if (!function_exists(('ncmazfc__graphql_query_posts_from_post_block'))) :
                 'operation_name' => "postsWithVariablesQuery",
             ]
         );
-        return  $results;
+        return [
+            "data"          => $results,
+            'variables'      => $variables,
+        ];
     }
 endif;
 
+
+
+
+
+// =================  TERM TERM TERM TERM TERM ===============================================
+// =================  TERM TERM TERM TERM TERM ===============================================
 //  GraphQL Query for Terms Block
 if (!function_exists(('ncmazfc__graphql_query_terms_from_terms_block'))) :
     function ncmazfc__graphql_query_terms_from_terms_block($queries)
@@ -95,7 +105,6 @@ if (!function_exists(('ncmazfc__graphql_query_terms_from_terms_block'))) :
                 first: $first
             ) {
                 nodes {
-                    __typename
                     id
                     count
                     name

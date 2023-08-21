@@ -1736,13 +1736,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/core@npm:^11.0.0":
-  version: 11.0.0
-  resolution: "@emotion/core@npm:11.0.0"
-  checksum: d9beeff0c120ec4d3cd89aa74e1ee3ff658976f27d14820e4e8f8e9981b4461b4a78c9e9c0853397ba09dff36b4e19357858ac8773ee5eb72bfd4b185926b5f3
-  languageName: node
-  linkType: hard
-
 "@emotion/css@npm:^11.7.1":
   version: 11.11.2
   resolution: "@emotion/css@npm:11.11.2"
@@ -1795,7 +1788,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:^11.10.6, @emotion/react@npm:^11.7.1":
+"@emotion/react@npm:^11.7.1":
   version: 11.11.1
   resolution: "@emotion/react@npm:11.11.1"
   dependencies:
@@ -1836,7 +1829,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/styled@npm:^11.10.6, @emotion/styled@npm:^11.6.0":
+"@emotion/styled@npm:^11.6.0":
   version: 11.11.0
   resolution: "@emotion/styled@npm:11.11.0"
   dependencies:
@@ -1993,13 +1986,6 @@ __metadata:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   checksum: d79e3c8570b0eaef5e968cd9c69de2c6bb372a5316e4e69a1cd12dae81771863ef430e81b74a0c21cefba663a2f971d8540c7294d7fb3b9807e32ba2a00c1e76
-  languageName: node
-  linkType: hard
-
-"@glidejs/glide@npm:^3.6.0":
-  version: 3.6.0
-  resolution: "@glidejs/glide@npm:3.6.0"
-  checksum: e2c8332f03dee891be5a310c9483355492093392efb35b5040d9678cd84d2dc067609a890cbf78f6824307f315e5f7e36940a5dc291c1c2ad653d43d62c7291d
   languageName: node
   linkType: hard
 
@@ -4133,15 +4119,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jquery@npm:^3.5.16":
-  version: 3.5.16
-  resolution: "@types/jquery@npm:3.5.16"
-  dependencies:
-    "@types/sizzle": "*"
-  checksum: 13c995f15d1c2f1d322103dc1cb0a22b95eecc3e7546f00279b8731aea21d7ec04550af40e609ee48e755d4e11bf61c25b4aa9f53df3bcbec4b8fe8e81471732
-  languageName: node
-  linkType: hard
-
 "@types/js-cookie@npm:^2.2.6":
   version: 2.2.7
   resolution: "@types/js-cookie@npm:2.2.7"
@@ -4288,24 +4265,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-slick@npm:^0.23.10":
-  version: 0.23.10
-  resolution: "@types/react-slick@npm:0.23.10"
-  dependencies:
-    "@types/react": "*"
-  checksum: 1e53fe8385e853881741a450d15c52d6433334b671fee4044939037f8e5b83968cb91fd9dbe7e6686e906882ebcf370b81bd55b6688f8e810020e23a968c0385
-  languageName: node
-  linkType: hard
-
-"@types/react-window@npm:^1.8.5":
-  version: 1.8.5
-  resolution: "@types/react-window@npm:1.8.5"
-  dependencies:
-    "@types/react": "*"
-  checksum: 5f519e1402300d11b6e6595223feb6499f3227e38da166cbc565773cd7f71862abcf855b7835d391b5119fcfacdfba79d73a965b45f60a293fc1ff25986319ed
-  languageName: node
-  linkType: hard
-
 "@types/react@npm:*, @types/react@npm:^18.0.21":
   version: 18.2.15
   resolution: "@types/react@npm:18.2.15"
@@ -4365,13 +4324,6 @@ __metadata:
     "@types/mime": "*"
     "@types/node": "*"
   checksum: 15c261dbfc57890f7cc17c04d5b22b418dfa0330c912b46c5d8ae2064da5d6f844ef7f41b63c7f4bbf07675e97ebe6ac804b032635ec742ae45d6f1274259b3e
-  languageName: node
-  linkType: hard
-
-"@types/sizzle@npm:*":
-  version: 2.3.3
-  resolution: "@types/sizzle@npm:2.3.3"
-  checksum: 586a9fb1f6ff3e325e0f2cc1596a460615f0bc8a28f6e276ac9b509401039dd242fa8b34496d3a30c52f5b495873922d09a9e76c50c2ab2bcc70ba3fb9c4e160
   languageName: node
   linkType: hard
 
@@ -5888,13 +5840,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accordion-js@npm:^3.3.4":
-  version: 3.3.4
-  resolution: "accordion-js@npm:3.3.4"
-  checksum: d25c7f8109854f36c3559538223601aeaa07dcf8fac4b9d91a4d6e8127462272c76d1b47e8f27d674f6e67e679ea452dacaa1be2260df9635e0922e14a6e202c
-  languageName: node
-  linkType: hard
-
 "acorn-globals@npm:^7.0.0":
   version: 7.0.1
   resolution: "acorn-globals@npm:7.0.1"
@@ -6047,13 +5992,6 @@ __metadata:
     require-from-string: ^2.0.2
     uri-js: ^4.2.2
   checksum: 4dc13714e316e67537c8b31bc063f99a1d9d9a497eb4bbd55191ac0dcd5e4985bbb71570352ad6f1e76684fb6d790928f96ba3b2d4fd6e10024be9612fe3f001
-  languageName: node
-  linkType: hard
-
-"animate.css@npm:^4.1.1":
-  version: 4.1.1
-  resolution: "animate.css@npm:4.1.1"
-  checksum: c7eb91540423532c549725a6dedea993735a05eadaa49ed4d1965ce166a6db36459adcc9667c1dfe13657fab92a2875bbee34ad0d942444a731badab69f762c8
   languageName: node
   linkType: hard
 
@@ -6433,17 +6371,6 @@ __metadata:
   dependencies:
     follow-redirects: ^1.14.7
   checksum: 2a8a3787c05f2a0c9c3878f49782357e2a9f38945b93018fb0c4fd788171c43dceefbb577988628e09fea53952744d1ecebde234b561f1e703aa43e0a598a3ad
-  languageName: node
-  linkType: hard
-
-"axios@npm:^1.3.4":
-  version: 1.4.0
-  resolution: "axios@npm:1.4.0"
-  dependencies:
-    follow-redirects: ^1.15.0
-    form-data: ^4.0.0
-    proxy-from-env: ^1.1.0
-  checksum: 7fb6a4313bae7f45e89d62c70a800913c303df653f19eafec88e56cea2e3821066b8409bc68be1930ecca80e861c52aa787659df0ffec6ad4d451c7816b9386b
   languageName: node
   linkType: hard
 
@@ -7097,7 +7024,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:^2.2.5, classnames@npm:^2.3.1, classnames@npm:^2.3.2":
+"classnames@npm:^2.3.1, classnames@npm:^2.3.2":
   version: 2.3.2
   resolution: "classnames@npm:2.3.2"
   checksum: 2c62199789618d95545c872787137262e741f9db13328e216b093eea91c85ef2bfb152c1f9e63027204e2559a006a92eb74147d46c800a9f96297ae1d9f96f4e
@@ -7277,36 +7204,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-name@npm:^1.0.0, color-name@npm:~1.1.4":
+"color-name@npm:~1.1.4":
   version: 1.1.4
   resolution: "color-name@npm:1.1.4"
   checksum: b0445859521eb4021cd0fb0cc1a75cecf67fceecae89b63f62b201cca8d345baf8b952c966862a9d9a2632987d4f6581f0ec8d957dfacece86f0a7919316f610
-  languageName: node
-  linkType: hard
-
-"color-parse@npm:^1.4.2":
-  version: 1.4.2
-  resolution: "color-parse@npm:1.4.2"
-  dependencies:
-    color-name: ^1.0.0
-  checksum: 3ed5916f873e55637c4c3ccf663de64d125c5a445ec081e08f596c625fb8cee32b9c9fc9437073e88d8565cc7ce542d35bef3a0d16bd922839e0c436c3f6f11a
-  languageName: node
-  linkType: hard
-
-"color-rgba@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "color-rgba@npm:2.4.0"
-  dependencies:
-    color-parse: ^1.4.2
-    color-space: ^2.0.0
-  checksum: a72b1001af4bed60d4677f6e368e3ea44fd228f6f3098182dd8d8d612165cb847f0792252539b36aa238840f45f1c644b8d7ed867e3d735d67d4e4b107384279
-  languageName: node
-  linkType: hard
-
-"color-space@npm:^2.0.0":
-  version: 2.0.1
-  resolution: "color-space@npm:2.0.1"
-  checksum: 98f8f6acc716d2332705ef6a98876b47e8e39094256b83eec1df17246a5b5c37d107ae682e87d96488b06da12df3595ed5ad4f0e354a45571e23fb2196e4c6e7
   languageName: node
   linkType: hard
 
@@ -7519,7 +7420,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"copy-to-clipboard@npm:^3.3.1, copy-to-clipboard@npm:^3.3.3":
+"copy-to-clipboard@npm:^3.3.1":
   version: 3.3.3
   resolution: "copy-to-clipboard@npm:3.3.3"
   dependencies:
@@ -8053,7 +7954,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dequal@npm:^2.0.2, dequal@npm:^2.0.3":
+"dequal@npm:^2.0.3":
   version: 2.0.3
   resolution: "dequal@npm:2.0.3"
   checksum: 8679b850e1a3d0ebbc46ee780d5df7b478c23f335887464023a631d1b9af051ad4a6595a44220f9ff8ff95a8ddccf019b5ad778a976fd7bbf77383d36f412f90
@@ -8370,13 +8271,6 @@ __metadata:
     graceful-fs: ^4.2.4
     tapable: ^2.2.0
   checksum: fbd8cdc9263be71cc737aa8a7d6c57b43d6aa38f6cc75dde6fcd3598a130cc465f979d2f4d01bb3bf475acb43817749c79f8eef9be048683602ca91ab52e4f11
-  languageName: node
-  linkType: hard
-
-"enquire.js@npm:^2.1.6":
-  version: 2.1.6
-  resolution: "enquire.js@npm:2.1.6"
-  checksum: bb094054ee2768edafc3b80fb2b65b79d63160d625085162e9c9016843b6eaa13d7430201bf593c2e31e1725b3208f47f57aa27e03b19729e7590d1ca2241451
   languageName: node
   linkType: hard
 
@@ -9368,7 +9262,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.7, follow-redirects@npm:^1.15.0":
+"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.7":
   version: 1.15.2
   resolution: "follow-redirects@npm:1.15.2"
   peerDependenciesMeta:
@@ -11677,15 +11571,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"json2mq@npm:^0.2.0":
-  version: 0.2.0
-  resolution: "json2mq@npm:0.2.0"
-  dependencies:
-    string-convert: ^0.2.0
-  checksum: 5672c3abdd31e21a0e2f0c2688b4948103687dab949a1c5a1cba98667e899a96c2c7e3d71763c4f5e7cd7d7c379ea5dd5e1a9b2a2107dd1dfa740719a11aa272
-  languageName: node
-  linkType: hard
-
 "json2php@npm:^0.0.7":
   version: 0.0.7
   resolution: "json2php@npm:0.0.7"
@@ -12261,13 +12146,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"memoize-one@npm:>=3.1.1 <6":
-  version: 5.2.1
-  resolution: "memoize-one@npm:5.2.1"
-  checksum: a3cba7b824ebcf24cdfcd234aa7f86f3ad6394b8d9be4c96ff756dafb8b51c7f71320785fbc2304f1af48a0467cbbd2a409efc9333025700ed523f254cb52e3d
-  languageName: node
-  linkType: hard
-
 "meow@npm:^6.1.1":
   version: 6.1.1
   resolution: "meow@npm:6.1.1"
@@ -12717,19 +12595,12 @@ __metadata:
   resolution: "ncmazfaustcore@workspace:."
   dependencies:
     "@apollo/client": ^3.7.10
-    "@emotion/core": ^11.0.0
-    "@emotion/react": ^11.10.6
-    "@emotion/styled": ^11.10.6
-    "@glidejs/glide": ^3.6.0
     "@graphql-codegen/cli": ^4.0.1
     "@graphql-codegen/client-preset": ^4.0.1
     "@headlessui/react": ^1.7.13
     "@heroicons/react": ^2.0.16
-    "@types/jquery": ^3.5.16
     "@types/lodash": ^4.14.192
     "@types/node": ^20.4.4
-    "@types/react-slick": ^0.23.10
-    "@types/react-window": ^1.8.5
     "@types/wordpress__block-editor": ^11.5.0
     "@wordpress/api-fetch": ^6.35.0
     "@wordpress/block-editor": ^12.6.0
@@ -12740,28 +12611,17 @@ __metadata:
     "@wordpress/i18n": ^4.38.0
     "@wordpress/scripts": ^26.9.0
     "@wordpress/server-side-render": ^4.15.0
-    accordion-js: ^3.3.4
-    animate.css: ^4.1.1
     autoprefixer: ^10.4.14
-    axios: ^1.3.4
     classnames: ^2.3.2
-    color-rgba: ^2.4.0
-    copy-to-clipboard: ^3.3.3
     graphql: ^16.6.0
     lodash: ^4.17.21
     postcss: ^8.4.27
     react-hot-toast: ^2.4.0
-    react-slick: ^0.29.0
-    react-swipeable: ^7.0.1
     react-use: ^17.4.0
-    react-window: ^1.8.8
     sass: ^1.64.1
-    scroll-snap-slider: barthy-koeln/scroll-snap-slider
-    slick-carousel: ^1.8.1
     tailwindcss: ^3.2.7
     ts-node: ^10.9.1
     typescript: ^5.1.6
-    use-deep-compare-effect: ^1.8.1
   languageName: unknown
   linkType: soft
 
@@ -14156,7 +14016,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"proxy-from-env@npm:1.1.0, proxy-from-env@npm:^1.1.0":
+"proxy-from-env@npm:1.1.0":
   version: 1.1.0
   resolution: "proxy-from-env@npm:1.1.0"
   checksum: ed7fcc2ba0a33404958e34d95d18638249a68c430e30fcb6c478497d72739ba64ce9810a24f53a7d921d0c065e5b78e3822759800698167256b04659366ca4d4
@@ -14436,22 +14296,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-slick@npm:^0.29.0":
-  version: 0.29.0
-  resolution: "react-slick@npm:0.29.0"
-  dependencies:
-    classnames: ^2.2.5
-    enquire.js: ^2.1.6
-    json2mq: ^0.2.0
-    lodash.debounce: ^4.0.8
-    resize-observer-polyfill: ^1.5.0
-  peerDependencies:
-    react: ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: 67ce4981914da8a76c6efb4bc8ee7ab69e04c33bd4b3517419ab2165679a3c701dae781556149713fe2c542f84188b7ca101ea58883537be5c05756408f48c8b
-  languageName: node
-  linkType: hard
-
 "react-style-singleton@npm:^2.2.1":
   version: 2.2.1
   resolution: "react-style-singleton@npm:2.2.1"
@@ -14466,15 +14310,6 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 7ee8ef3aab74c7ae1d70ff34a27643d11ba1a8d62d072c767827d9ff9a520905223e567002e0bf6c772929d8ea1c781a3ba0cc4a563e92b1e3dc2eaa817ecbe8
-  languageName: node
-  linkType: hard
-
-"react-swipeable@npm:^7.0.1":
-  version: 7.0.1
-  resolution: "react-swipeable@npm:7.0.1"
-  peerDependencies:
-    react: ^16.8.3 || ^17 || ^18
-  checksum: 1cd19275c5608cb202ca7717afc73e336fb51d6ae4c9353ef409e1779dfb90f36ac4c06aa870d3d862f15fb439f82b96d41395738d04b8d2290aefc670fd6b5b
   languageName: node
   linkType: hard
 
@@ -14510,19 +14345,6 @@ __metadata:
     react: ^16.8.0  || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0  || ^17.0.0 || ^18.0.0
   checksum: 0889da919b49a186de375ec15d2778b954ae981c523acd17dd496e4a4da7b6190efe7993491e1b85fdd6de3e745d08a4eaba4caa35408d570b5f1de550f35d11
-  languageName: node
-  linkType: hard
-
-"react-window@npm:^1.8.8":
-  version: 1.8.9
-  resolution: "react-window@npm:1.8.9"
-  dependencies:
-    "@babel/runtime": ^7.0.0
-    memoize-one: ">=3.1.1 <6"
-  peerDependencies:
-    react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: cefa232f4f37269d292529ef15780fb108123d6bb5beee19eeac657e75cf8d4664be66f2da04baf0cb1bc64c5ab3d83a88199c3358f023b78940acd37b0673b2
   languageName: node
   linkType: hard
 
@@ -14835,7 +14657,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resize-observer-polyfill@npm:^1.5.0, resize-observer-polyfill@npm:^1.5.1":
+"resize-observer-polyfill@npm:^1.5.1":
   version: 1.5.1
   resolution: "resize-observer-polyfill@npm:1.5.1"
   checksum: 57e7f79489867b00ba43c9c051524a5c8f162a61d5547e99333549afc23e15c44fd43f2f318ea0261ea98c0eb3158cca261e6f48d66e1ed1cd1f340a43977094
@@ -15206,13 +15028,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-scroll-snap-slider@barthy-koeln/scroll-snap-slider:
-  version: 3.1.0
-  resolution: "scroll-snap-slider@https://github.com/barthy-koeln/scroll-snap-slider.git#commit=6470edbe3c2054108029d629151b7b74a7cb89e1"
-  checksum: e943140fd544ea13804f10bfaf8159d574fa0a90381480b54ace462e54f1e3df4b255c098503d1e37ec77219954c926af130ba5390af8c29682ccd98020d511d
-  languageName: node
-  linkType: hard
-
 "scuid@npm:^1.1.0":
   version: 1.1.0
   resolution: "scuid@npm:1.1.0"
@@ -15539,15 +15354,6 @@ scroll-snap-slider@barthy-koeln/scroll-snap-slider:
   languageName: node
   linkType: hard
 
-"slick-carousel@npm:^1.8.1":
-  version: 1.8.1
-  resolution: "slick-carousel@npm:1.8.1"
-  peerDependencies:
-    jquery: ">=1.8.0"
-  checksum: acaad391e4d8bc1c7fdb8d361faa1f1d60829b31d618b54bc38c0550a59b26de36537e0ab4bc0364176ec11d1a61d0cf11e99d8d5b1285d656673c9a1a719257
-  languageName: node
-  linkType: hard
-
 "smart-buffer@npm:^4.2.0":
   version: 4.2.0
   resolution: "smart-buffer@npm:4.2.0"
@@ -15847,13 +15653,6 @@ scroll-snap-slider@barthy-koeln/scroll-snap-slider:
   version: 1.1.0
   resolution: "streamsearch@npm:1.1.0"
   checksum: 1cce16cea8405d7a233d32ca5e00a00169cc0e19fbc02aa839959985f267335d435c07f96e5e0edd0eadc6d39c98d5435fb5bbbdefc62c41834eadc5622ad942
-  languageName: node
-  linkType: hard
-
-"string-convert@npm:^0.2.0":
-  version: 0.2.1
-  resolution: "string-convert@npm:0.2.1"
-  checksum: 1098b1d8e3712c72d0a0b0b7f5c36c98af93e7660b5f0f14019e41bcefe55bfa79214d5e03e74d98a7334a0b9bf2b7f4c6889c8c24801aa2ae2f9ebe1d8a1ef9
   languageName: node
   linkType: hard
 
@@ -17073,18 +16872,6 @@ scroll-snap-slider@barthy-koeln/scroll-snap-slider:
     "@types/react":
       optional: true
   checksum: 7913df383a5a6fcb399212eedefaac2e0c6f843555202d4e3010bac3848afe38ecaa3d0d6500ad1d936fbeffd637e6c517e68edb024af5e6beca7f27f3ce7b21
-  languageName: node
-  linkType: hard
-
-"use-deep-compare-effect@npm:^1.8.1":
-  version: 1.8.1
-  resolution: "use-deep-compare-effect@npm:1.8.1"
-  dependencies:
-    "@babel/runtime": ^7.12.5
-    dequal: ^2.0.2
-  peerDependencies:
-    react: ">=16.13"
-  checksum: 2b9b6291df3f772f44d259b352e5d998963ccee0db2efeb76bb05525d928064aeeb69bb0dee5a5e428fea7cf3db67c097a770ebd30caa080662b565f6ef02b2e
   languageName: node
   linkType: hard
 

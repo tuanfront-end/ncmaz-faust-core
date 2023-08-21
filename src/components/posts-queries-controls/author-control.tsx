@@ -21,6 +21,7 @@ const AUTHORS_QUERY = {
 
 function AuthorControl({ value, onChange }) {
 	const authorsList = useSelect((select) => {
+		// @ts-ignore
 		const { getUsers } = select(coreStore);
 		return getUsers(AUTHORS_QUERY);
 	}, []);

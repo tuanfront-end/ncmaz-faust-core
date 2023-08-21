@@ -2,17 +2,18 @@ import React, { FC } from "react";
 import { NcmazFcPostsEdegsFieldsFragment } from "../__generated__/graphql";
 import { getPostDataFromPostFragment } from "../utils/getPostDataFromPostFragment";
 import ncFormatDate from "../utils/formatDate";
-import { Notice } from "@wordpress/components";
+import { getImageDataFromImageFragment } from "../utils/getImageDataFromImageFragment";
 interface Props {
 	className?: string;
 	posts: NcmazFcPostsEdegsFieldsFragment["nodes"];
 }
 const DemoListPosts: FC<Props> = ({ posts }) => {
+	console.log(22, { posts });
+
 	return (
 		<div className="no-prose mt-12 divide-y">
 			{posts.map((post) => {
 				const {
-					id,
 					title,
 					date,
 					categories,
@@ -28,7 +29,7 @@ const DemoListPosts: FC<Props> = ({ posts }) => {
 
 				return (
 					<article
-						key={id}
+						key={databaseId}
 						className="relative isolate flex flex-col gap-4 lg:flex-row py-4"
 					>
 						<div className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-28 lg:shrink-0">
@@ -51,15 +52,14 @@ const DemoListPosts: FC<Props> = ({ posts }) => {
 									{ncPostMetaData?.readingTime || 1} min read
 								</span>
 								<>
-									{categories &&
-										categories.edges.length > 0 &&
-										categories.edges.map((category) => {
+									{!!categories?.nodes?.length &&
+										categories?.nodes?.map((category) => {
 											return (
 												<a
-													href={category.node.link || ""}
+													href={category.link || ""}
 													className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
 												>
-													{category.node.name}
+													{category.name}
 												</a>
 											);
 										})}
@@ -72,21 +72,27 @@ const DemoListPosts: FC<Props> = ({ posts }) => {
 										{title}
 									</span>
 								</h3>
-								{/* <div
-									dangerouslySetInnerHTML={{ __html: excerpt || "" }}
-									className="mt-5 text-sm leading-6 text-gray-600"
-								></div> */}
 							</div>
-							<div className="mt-2 flex border-t border-gray-900/5 pt-2">
+							<div className="mt-2 flex pt-2">
 								<div className="relative flex items-center gap-x-4">
-									<img
-										src={""}
-										alt=""
-										className="h-8 w-8 rounded-full bg-gray-50"
-									/>
+									{getImageDataFromImageFragment(
+										author?.ncUserMeta?.featuredImage?.node
+									)?.sourceUrl ? (
+										<img
+											src={
+												getImageDataFromImageFragment(
+													author?.ncUserMeta?.featuredImage?.node
+												)?.sourceUrl || ""
+											}
+											alt=""
+											className="h-8 w-8 object-cover rounded-full bg-gray-50"
+										/>
+									) : (
+										<div className="w-8 h-8 bg-neutral-100 rounded-full" />
+									)}
 									<div className="relative flex items-center gap-x-2 text-sm leading-6">
 										<span className="font-semibold text-gray-900">
-											{author?.node.name || ""}
+											{author?.name || ""}
 										</span>
 										<span> • </span>
 										<span className="text-gray-600 my-0">

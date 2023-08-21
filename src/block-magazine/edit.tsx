@@ -1,6 +1,11 @@
 import React, { useRef, useState, FC, useEffect } from "react";
 import { __ } from "@wordpress/i18n";
-import { TextControl, PanelBody, SelectControl } from "@wordpress/components";
+import {
+	FormToggle,
+	PanelBody,
+	SelectControl,
+	Spinner,
+} from "@wordpress/components";
 import {
 	BlockControls,
 	InspectorControls,
@@ -20,8 +25,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	const { attributes, setAttributes, clientId } = props;
 
 	//
-	const { uniqueId, showFilterTab, viewMoreHref, blockVariation, queries } =
-		attributes;
+	const { uniqueId, blockVariation, queries, showLoadMore } = attributes;
 	const observerRef = useRef<MutationObserver | null>(null);
 
 	const [initPostsFromSSR, setInitPostsFromSSR] = useState<
@@ -29,6 +33,8 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	>(null);
 	const [initErrorFromSSR, setInitErrorFromSSR] = useState<string | null>(null);
 	const SERVER_SIDE_ID = "ncmazfcSSR-block-" + clientId;
+
+	console.log(222, { initPostsFromSSR, initErrorFromSSR });
 
 	// ---- SAVE uniqueId ----
 	useEffect(() => {
@@ -91,9 +97,6 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 
 	// reder
 	const renderLayoutType = () => {
-		if (!initPostsFromSSR) {
-			return null;
-		}
 		if (!initPostsFromSSR?.length) {
 			return <BlockEmptyPlaceholder />;
 		}
@@ -103,19 +106,6 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	const renderContent = () => {
 		return (
 			<div className={`ncmazfc-block-magazine relative `}>
-				{/* {showFilterTab && !!categories?.length ? (
-					<HeaderSectionFilter
-						tabActiveId={tabActiveId}
-						tabs={categories}
-						viewMoreHref={viewMoreHref}
-						heading={heading}
-						subHeading={subHeading}
-						onClickTab={handleClickTab}
-					/>
-				) : (
-					<Heading desc={subHeading}>{heading}</Heading>
-				)} */}
-
 				{initErrorFromSSR && (
 					<div className="text-red-500 text-sm">
 						<h3>Error!</h3>
@@ -124,7 +114,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 						</pre>
 					</div>
 				)}
-				{initPostsFromSSR && renderLayoutType()}
+				{renderLayoutType()}
 
 				<div id={SERVER_SIDE_ID}>
 					<ServerSideRender
@@ -132,7 +122,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 						attributes={{ uniqueId, queries }}
 						httpMethod="GET"
 						LoadingResponsePlaceholder={BlockLoadingPlaceholder}
-						EmptyResponsePlaceholder={() => <div />}
+						EmptyResponsePlaceholder={() => <BlockEmptyPlaceholder />}
 					/>
 				</div>
 			</div>
@@ -203,12 +193,36 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 							</optgroup>
 						</SelectControl>
 
-						<TextControl
-							label={__("View more href", "ncmazfc")}
+						{/* <TextControl
+							label={__("View all href", "ncmazfc")}
 							value={viewMoreHref || ""}
 							type="url"
 							onChange={(viewMoreHref) => setAttributes({ viewMoreHref })}
-						/>
+						/> */}
+
+						<div className="">
+							<div className="flex justify-between gap-2">
+								<label htmlFor="showLoadMore">
+									{__("Show load more", "ncmazfc")}
+								</label>
+								<FormToggle
+									checked={showLoadMore}
+									onChange={() =>
+										setAttributes({ showLoadMore: !showLoadMore })
+									}
+									name="showLoadMore"
+									id="showLoadMore"
+								/>
+							</div>
+							{!!showLoadMore && (
+								<i className="text-xs italic block mt-1">
+									{__(
+										"(You can see the load more button in the frontend page!)",
+										"ncmazfc"
+									)}
+								</i>
+							)}
+						</div>
 					</div>
 				</PanelBody>
 			</InspectorControls>

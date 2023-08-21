@@ -16,8 +16,8 @@ import TermOrderControl from "./order-control";
 import ServerSideRender from "@wordpress/server-side-render";
 import BlockLoadingPlaceholder from "../components/BlockLoadingPlaceholder";
 import DemoTermsList from "./DemoTermsList";
-import { NcmazFcTermsCardFieldsFragment } from "../__generated__/graphql";
 import BlockEmptyPlaceholder from "../components/BlockEmptyPlaceholder";
+import { NcmazFcCategoryFullFieldsFragmentFragment } from "../__generated__/graphql";
 
 const MIN_TAGS = 1;
 const MAX_TAGS = 100;
@@ -35,9 +35,7 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 		orderBy,
 	} = attributes;
 
-	const [initTermsFromSSR, setInitTermsFromSSR] = useState<
-		NcmazFcTermsCardFieldsFragment["nodes"] | null
-	>(null);
+	const [initTermsFromSSR, setInitTermsFromSSR] = useState<any[] | null>(null);
 	const [initErrorFromSSR, setInitErrorFromSSR] = useState<string | null>(null);
 	const SERVER_SIDE_ID = "ncmazfcSSR-block-" + clientId;
 	const observerRef = useRef<MutationObserver | null>(null);
@@ -57,9 +55,7 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 			node?.getAttribute("data-ncmazfc-init-errors") || "null";
 
 		return {
-			initTerms: JSON.parse(
-				dataInitTerms
-			) as NcmazFcTermsCardFieldsFragment["nodes"],
+			initTerms: JSON.parse(dataInitTerms),
 			initErrors: JSON.parse(dataInitErrors),
 		};
 	};

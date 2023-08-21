@@ -8,7 +8,7 @@ export interface Option<T = string> {
 }
 export interface MySelectOption<T = string> extends Option<T> {}
 
-export type HtmlTagsType = React.ElementType<any>;
+export type HtmlTagsType = keyof HTMLElementTagNameMap;
 
 export type MyTabsForColor = "Normal" | "Hover";
 export type MyTabsForActive = "Normal" | "Active";

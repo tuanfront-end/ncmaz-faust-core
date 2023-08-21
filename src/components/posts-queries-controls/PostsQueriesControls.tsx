@@ -176,7 +176,7 @@ const PostsQueriesControls = ({
 							onChange={(value) => setQuery({ inherit: !!value })}
 						/>
 					)}
-					{showPostTypeControl && (
+					{/* {showPostTypeControl && (
 						<SelectControl
 							__nextHasNoMarginBottom
 							options={postTypesSelectOptions}
@@ -187,7 +187,7 @@ const PostsQueriesControls = ({
 								"WordPress contains different types of content and they are divided into collections called “Post types”. By default there are a few different ones such as blog posts and pages, but plugins could add more."
 							)}
 						/>
-					)}
+					)} */}
 
 					{showOrderControl && (
 						<OrderControl {...{ order, orderBy }} onChange={setQuery} />

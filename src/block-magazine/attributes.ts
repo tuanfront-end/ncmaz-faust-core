@@ -8,10 +8,8 @@ export interface BlockMagazine_Attrs {
 	uniqueId: string;
 	queries: PostsQueriesControlsType;
 	//
-
-	showFilterTab: boolean;
-	viewMoreHref: string;
 	blockVariation: string;
+	showLoadMore: boolean;
 }
 
 const blokcAttrs: AttrsGenericType<BlockMagazine_Attrs> = {
@@ -29,14 +27,9 @@ const blokcAttrs: AttrsGenericType<BlockMagazine_Attrs> = {
 		type: "string",
 		// default: "style-1",
 	},
-
-	showFilterTab: {
+	showLoadMore: {
 		type: "boolean",
 		// default: false,
-	},
-	viewMoreHref: {
-		type: "string",
-		// default: "",
 	},
 };
 

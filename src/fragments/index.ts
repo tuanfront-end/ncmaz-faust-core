@@ -1,113 +1,104 @@
-import { graphql } from "../__generated__";
+import { gql } from "../__generated__";
 
-// Terms =================================================
-export const NC_TERM_CARD_FRAGMENT = graphql(/* GraphQL */ `
-	fragment NcmazFcTermCardFields on TermNode {
+// TAG =================================================
+export const NC_TAG_SHORT_FIELDS_FRAGMENT = gql(/* GraphQL */ `
+	fragment NcmazFcTagShortFieldsFragment on Tag {
 		__typename
-		id
-		count
-		uri
 		name
+		uri
+		databaseId
+		count
+	}
+`);
+export const NC_TAG_FULL_FIELDS_FRAGMENT = gql(/* GraphQL */ `
+	fragment NcmazFcTagFullFieldsFragment on Tag {
+		...NcmazFcTagShortFieldsFragment
+		description
+		count
+	}
+`);
+
+// CATEGORY =================================================
+export const NC_CATEGORY_FULL_FIELDS_FRAGMENT = gql(/* GraphQL */ `
+	fragment NcmazFcCategoryFullFieldsFragment on Category {
+		__typename
 		databaseId
 		description
-		taxonomyName
-		... on Category {
-			id
-			name
-			ncTaxonomyMeta {
-				color
-				featuredImage {
-					node {
-						...NcmazFcImageFields
-					}
+		name
+		uri
+		count
+		ncTaxonomyMeta {
+			color
+			featuredImage {
+				node {
+					...NcmazFcImageFields
 				}
 			}
 		}
 	}
 `);
-
-export const NC_TERMS_EDGES_FRAGMENT = graphql(/* GraphQL */ `
-	fragment NcmazFcTermsCardFields on RootQueryToTermNodeConnection {
+export const NC_CATEGORY_CARD_FIELD_NOT_IMAGE_FRAGMENT = gql(/* GraphQL */ `
+	fragment NcmazFcCategoryCardFieldsNotImage on Category {
 		__typename
-		nodes {
-			...NcmazFcTermCardFields
+		name
+		uri
+		count
+		databaseId
+		ncTaxonomyMeta {
+			color
 		}
 	}
 `);
 
 // POSTS =================================================
-export const NC_POSTS_EDGES_FRAGMENT = graphql(/* GraphQL */ `
+export const NC_POSTS_EDGES_FRAGMENT = gql(/* GraphQL */ `
 	fragment NcmazFcPostsEdegsFields on RootQueryToPostConnection {
-		__typename
 		nodes {
 			...NcmazFcPostCardFields
 		}
 	}
 `);
-
-export const NC_POST_CARD_FRAGMENT = graphql(/* GraphQL */ `
-	fragment NcmazFcPostCardFields on Post {
+export const NC_POST_FULL_FRAGMENT = gql(/* GraphQL */ `
+	fragment NcmazFcPostFullFields on Post {
 		__typename
-		id
 		uri
 		modified
 		date
 		commentStatus
 		status
+		commentCount
+		excerpt
+		databaseId
+		title
+		content
 		author {
 			node {
-				id
-				databaseId
-				url
-				uri
-				username
-				name
-				slug
-				ncUserMeta {
-					featuredImage {
-						node {
-							...NcmazFcImageFields
-						}
-					}
-				}
+				description
+				...NcmazFcUserShortForPostCardFragment
 			}
 		}
 		categories {
-			edges {
-				node {
-					id
-					link
-					name
-					uri
-					slug
-					count
-					databaseId
-					ncTaxonomyMeta {
-						color
-					}
-				}
+			nodes {
+				...NcmazFcCategoryCardFieldsNotImage
 			}
 		}
-		commentCount
-		date
-		excerpt
+		tags(first: 20) {
+			nodes {
+				...NcmazFcTagShortFieldsFragment
+			}
+		}
 		featuredImage {
 			node {
-				...NcmazFcImageFields
+				...NcmazFcImageHasDetailFields
 			}
 		}
 		postFormats {
-			edges {
-				node {
-					id
-					name
-					slug
-				}
+			nodes {
+				id
+				name
+				slug
 			}
 		}
-		databaseId
-		slug
-		title
 		ncmazVideoUrl {
 			videoUrl
 		}
@@ -115,8 +106,55 @@ export const NC_POST_CARD_FRAGMENT = graphql(/* GraphQL */ `
 			audioUrl
 		}
 		ncPostMetaData {
-			...NcmazFcPostMetaFields
+			...NcmazFcPostMetaFullFields
 		}
+		ncmazGalleryImgs {
+			image1 {
+				node {
+					...NcmazFcImageHasDetailFields
+				}
+			}
+			image2 {
+				node {
+					...NcmazFcImageHasDetailFields
+				}
+			}
+			image3 {
+				node {
+					...NcmazFcImageHasDetailFields
+				}
+			}
+			image4 {
+				node {
+					...NcmazFcImageHasDetailFields
+				}
+			}
+			image5 {
+				node {
+					...NcmazFcImageHasDetailFields
+				}
+			}
+			image6 {
+				node {
+					...NcmazFcImageHasDetailFields
+				}
+			}
+			image7 {
+				node {
+					...NcmazFcImageHasDetailFields
+				}
+			}
+			image8 {
+				node {
+					...NcmazFcImageHasDetailFields
+				}
+			}
+		}
+	}
+`);
+export const NC_POST_CARD_FRAGMENT = gql(/* GraphQL */ `
+	fragment NcmazFcPostCardFields on Post {
+		...NcmazFcPostCardFieldsNOTNcmazGalleryImgs
 		ncmazGalleryImgs {
 			image1 {
 				node {
@@ -161,24 +199,85 @@ export const NC_POST_CARD_FRAGMENT = graphql(/* GraphQL */ `
 		}
 	}
 `);
-
-// MEDIA =================================================
-export const NC_IMAGE_MEDIA_FRAGMENT = graphql(/* GraphQL */ `
-	fragment NcmazFcImageFields on MediaItem {
+export const NC_POST_CARD_NOT_NCMAZGALLERY_FRAGMENT = gql(/* GraphQL */ `
+	fragment NcmazFcPostCardFieldsNOTNcmazGalleryImgs on Post {
 		__typename
-		id
-		altText
-		caption
 		databaseId
-		sizes
-		sourceUrl
-		srcSet
+		title
+		uri
+		status
+		modified
+		date
+		commentStatus
+		commentCount
+		excerpt
+		author {
+			node {
+				...NcmazFcUserShortForPostCardFragment
+			}
+		}
+		categories {
+			nodes {
+				...NcmazFcCategoryCardFieldsNotImage
+			}
+		}
+		featuredImage {
+			node {
+				...NcmazFcImageFields
+			}
+		}
+		postFormats {
+			nodes {
+				name
+				slug
+			}
+		}
+		ncmazVideoUrl {
+			videoUrl
+		}
+		ncmazAudioUrl {
+			audioUrl
+		}
+		ncPostMetaData {
+			...NcmazFcPostMetaFields
+		}
 	}
 `);
 
-//  POSTS =================================================
-export const NC_POST_META_DATA_FRAGMENT = graphql(/* GraphQL */ `
+// MEDIA =================================================
+export const NC_IMAGE_MEDIA_FRAGMENT = gql(/* GraphQL */ `
+	fragment NcmazFcImageFields on MediaItem {
+		__typename
+		altText
+		databaseId
+		sourceUrl
+	}
+`);
+export const NC_IMAGE_MEDIA_HAS_DETAIL_FRAGMENT = gql(/* GraphQL */ `
+	fragment NcmazFcImageHasDetailFields on MediaItem {
+		__typename
+		altText
+		databaseId
+		sourceUrl
+		caption
+		mediaDetails {
+			height
+			width
+		}
+	}
+`);
+
+//  POSTS METADATA =================================================
+export const NC_POST_META_DATA_FRAGMENT = gql(/* GraphQL */ `
 	fragment NcmazFcPostMetaFields on NcPostMetaData {
+		__typename
+		viewsCount
+		readingTime
+		likesCount
+	}
+`);
+export const NC_POST_META_DATA_FULL_FRAGMENT = gql(/* GraphQL */ `
+	fragment NcmazFcPostMetaFullFields on NcPostMetaData {
 		__typename
 		viewsCount
 		readingTime
@@ -186,5 +285,60 @@ export const NC_POST_META_DATA_FRAGMENT = graphql(/* GraphQL */ `
 		savedsCount
 		showRightSidebar
 		template
+	}
+`);
+
+// USER   =================================================
+export const NC_USER_SHORT_FOR_POST_CARD_FRAGMENT = gql(/* GraphQL */ `
+	fragment NcmazFcUserShortForPostCardFragment on User {
+		databaseId
+		uri
+		username
+		name
+		ncUserMeta {
+			featuredImage {
+				node {
+					...NcmazFcImageFields
+				}
+			}
+		}
+	}
+`);
+
+export const NC_USER_FULL_FIELDS_FRAGMENT = gql(/* GraphQL */ `
+	fragment NcmazFcUserFullFields on User {
+		id
+		databaseId
+		uri
+		username
+		name
+		description
+		ncUserMeta {
+			buymeacoffeUrl
+			color
+			facebookUrl
+			githubUrl
+			instagramUrl
+			linkedinUrl
+			mediumUrl
+			ncBio
+			pinterestUrl
+			twitchUrl
+			twitterUrl
+			vimeoUrl
+			websiteUrl
+			youtubeUrl
+			tiktokUrl
+			featuredImage {
+				node {
+					...NcmazFcImageFields
+				}
+			}
+			backgroundImage {
+				node {
+					...NcmazFcImageFields
+				}
+			}
+		}
 	}
 `);

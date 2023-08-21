@@ -1,11 +1,10 @@
 import React, { FC } from "react";
-import { NcmazFcTermsCardFieldsFragment } from "../__generated__/graphql";
 import { useFragment } from "../__generated__";
-import { NC_TERM_CARD_FRAGMENT } from "../fragments";
 import { Notice } from "@wordpress/components";
+import { NC_CATEGORY_FULL_FIELDS_FRAGMENT } from "../fragments";
 
 interface Props {
-	terms: NcmazFcTermsCardFieldsFragment["nodes"];
+	terms: any[];
 }
 
 const DemoTermsList: FC<Props> = ({ terms }) => {
@@ -13,7 +12,7 @@ const DemoTermsList: FC<Props> = ({ terms }) => {
 		<div>
 			<div className={`flex flex-wrap gap-3 mt-3`}>
 				{terms.map((term) => {
-					const node = useFragment(NC_TERM_CARD_FRAGMENT, term);
+					const node = useFragment(NC_CATEGORY_FULL_FIELDS_FRAGMENT, term);
 					return (
 						<div
 							key={node.databaseId}
@@ -22,9 +21,11 @@ const DemoTermsList: FC<Props> = ({ terms }) => {
 							<div className="flex items-center space-x-4">
 								<div className="block flex-shrink-0 w-11 h-11 sm:w-16 sm:h-16 relative rounded-full overflow-hidden shadow-lg">
 									<div className="nc-NcImage absolute inset-0">
-										{node.ncTaxonomyMeta?.featuredImage?.sourceUrl ? (
+										{node.ncTaxonomyMeta?.featuredImage?.node?.sourceUrl ? (
 											<img
-												src={node.ncTaxonomyMeta?.featuredImage?.sourceUrl}
+												src={
+													node.ncTaxonomyMeta?.featuredImage?.node?.sourceUrl
+												}
 												className="object-cover w-full h-full "
 												alt="DIYer and TV "
 											/>
