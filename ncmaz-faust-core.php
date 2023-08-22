@@ -5,7 +5,7 @@
  * Description:       Core for Ncmaz headless!
  * Requires at least: 5.8
  * Requires PHP:      7.3
- * Version:           0.0.1
+ * Version:           1.0.0
  * Author:            ChisNghiax
  * Author URI:        https://ChisNghiax.com/
  * License:           GPL-2.0-or-later
@@ -17,85 +17,46 @@
 
 defined('ABSPATH') || exit;
 
-
-// required plugins -----------------
-// 1 - advanced-custom-fields - advancedcustomfields.com
-// 2 - wp-graphql - wpgraphql.com
-// 3 - Faust.js™ - https://faustjs.org/
-// 4 - WPGraphQL Content Blocks - https://github.com/wpengine/wp-graphql-content-blocks / https://faustjs.org/tutorial/get-started-with-wp-graphql-content-blocks
-// 5 - WPGraphQL for Advanced Custom Fields - https://github.com/wp-graphql/wpgraphql-acf
-// 6 - WPGraphQL Smart Cache - https://github.com/wp-graphql/wp-graphql-smart-cache
-// 7 - mailpoet - https://www.mailpoet.com/
-// -- check one of the required plugins is not active then deactivate this plugin
-if (
-    !is_plugin_active('advanced-custom-fields/acf.php')
-    || !is_plugin_active('wp-graphql/wp-graphql.php')
-    || !is_plugin_active('faustwp/faustwp.php')
-    || !is_plugin_active('wp-graphql-content-blocks/wp-graphql-content-blocks.php')
-    || !is_plugin_active('wp-graphql-acf/wp-graphql-acf.php')
-    // || !is_plugin_active('wp-graphql-smart-cache/wp-graphql-smart-cache.php')
-    || !is_plugin_active('mailpoet/mailpoet.php')
-) {
-
-    // show a notice that required plugins is not active
-    add_action('admin_notices', function () {
-        $class = 'notice notice-error';
-        $message = __('Ncmaz Faust Core plugin requires Advanced Custom Fields, WPGraphQL, Faust.js™, WPGraphQL Content Blocks, WPGraphQL for Advanced Custom Fields, WPGraphQL Smart Cache, MailPoet to be installed and activated!', 'ncmazfc');
-
-        printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), esc_html($message));
-    });
-
-    add_action('admin_init', function () {
-        deactivate_plugins(plugin_basename(__FILE__));
-    });
-    return;
-}
-
-
-
-
 // Define Constants.
-define('NCMAZFC_VERSION', '0.0.1');
+define('NCMAZFC_VERSION', '1.0.0');
 define('NCMAZFC_FILE', __FILE__);
 define('NCMAZFC_PLUGIN_BASE', plugin_basename(NCMAZFC_FILE));
 define('NCMAZFC_PATH', plugin_dir_path(NCMAZFC_FILE));
 define('NCMAZFC_URI', plugins_url('/', NCMAZFC_FILE));
 define('NCMAZFC_BUILD_PATH', __DIR__ . '/build');
 // 
-define('_NCMAZ_FRONTEND_VERSION', '4.4.2');
-define('_NCMAZ_FRONTEND_DIR_URL', plugin_dir_url(__FILE__));
-define('_NCMAZ_FRONTEND_DIR_PATH', plugin_dir_path(__FILE__));
-define('_NCMAZ_FRONTEND_PREFIX', 'ncmaz_frontend_prefix_');
-define('_NCMAZ_FRONTEND_TEXT_DOMAIN', 'ncmaz-frontend');
 
-// ****  -----------------
+
+// *** IMPORTANT CHECKS REQUIRED PLUGINS ******************
+require plugin_dir_path(__FILE__) . 'includes/ncmazfc_required_plugins.php';
+// 
+if (
+    !class_exists('WPGraphQL') || !class_exists('ACF') || !defined('FAUSTWP_FILE') || !defined('WPGRAPHQL_FOR_ACF_VERSION') || !defined('WPGRAPHQL_SMART_CACHE_VERSION') || !defined('WPGRAPHQL_CONTENT_BLOCKS_DIR') || !defined('MAILPOET_VERSION')
+) {
+    return;
+}
+
+
+// ****  --------------------------------------------------------------------
 add_theme_support('post-formats',  ['gallery', 'video', 'audio']);
 
 
-
-
 // ****  -----------------
-// below is of ncmaz frontend plugin -----------------
-
-
 require plugin_dir_path(__FILE__) . 'includes/ncmaz-AFC-fields.php';
-add_action('plugins_loaded',  function () {
-    require plugin_dir_path(__FILE__) . 'includes/ncmaz-custom-wpgraphql.php';
-    require plugin_dir_path(__FILE__) . 'includes/ncmazfc-wpgraphql-mutation.php';
-    require plugin_dir_path(__FILE__) . 'includes/ncmazfc-wpgraphql-custom-where.php';
-});
 require plugin_dir_path(__FILE__) . 'includes/ncmaz-custom-hooks.php';
-// ****  -----------------
-// below is of ncmaz faust core plugin -----------------
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-wpgraphql-fragments.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-update-post-custom-fields.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-custom-funcs.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-enqueue-scripts.php';
 require plugin_dir_path(__FILE__) . 'includes/gutenberg/index.php';
-// end
+add_action('plugins_loaded',  function () {
+    require plugin_dir_path(__FILE__) . 'includes/ncmaz-custom-wpgraphql.php';
+    require plugin_dir_path(__FILE__) . 'includes/ncmazfc-wpgraphql-mutation.php';
+    require plugin_dir_path(__FILE__) . 'includes/ncmazfc-wpgraphql-custom-where.php';
+});
+// end-----------------
 
 
-//  ****  -----------------
 //  update some ACF custom fields -----------------
 function ncmazfc__plugin_activate_update_fields()
 {
