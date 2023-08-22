@@ -27,7 +27,7 @@ const Edit: FC<
 	} = attributes;
 
 	return (
-		<div>
+		<>
 			<InspectorControls>
 				<PanelBody title="Layout">
 					<div className="space-y-4">
@@ -168,7 +168,7 @@ const Edit: FC<
 					)}
 				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

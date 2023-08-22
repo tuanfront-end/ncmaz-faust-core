@@ -224,7 +224,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function save() {
+function save({
+  attributes
+}) {
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save()
   }, "Todo List – hello from the saved content!");

@@ -7,6 +7,7 @@ import {
 	ToggleControl,
 	SelectControl,
 	RangeControl,
+	FormToggle,
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { InspectorControls, useBlockProps } from "@wordpress/block-editor";
@@ -18,6 +19,8 @@ import BlockLoadingPlaceholder from "../components/BlockLoadingPlaceholder";
 import DemoTermsList from "./DemoTermsList";
 import BlockEmptyPlaceholder from "../components/BlockEmptyPlaceholder";
 import { NcmazFcCategoryFullFieldsFragmentFragment } from "../__generated__/graphql";
+import BackgroundSection from "../frontend-components/BackgroundSection/BackgroundSection";
+import classNames from "../utils/className";
 
 const MIN_TAGS = 1;
 const MAX_TAGS = 100;
@@ -33,6 +36,7 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 		uniqueId,
 		order,
 		orderBy,
+		hasBackground,
 	} = attributes;
 
 	const [initTermsFromSSR, setInitTermsFromSSR] = useState<any[] | null>(null);
@@ -151,6 +155,13 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 							<option value="slider-5">Slider 5</option>
 						</optgroup>
 					</SelectControl>
+					<div className="w-full space-x-3 flex ">
+						<FormToggle
+							checked={hasBackground}
+							onChange={() => setAttributes({ hasBackground: !hasBackground })}
+						/>
+						<legend>{__("Enable Background", "ncmazfc")}</legend>
+					</div>
 				</div>
 			</PanelBody>
 			<PanelBody title={__("Settings")}>
@@ -196,10 +207,9 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 		</InspectorControls>
 	);
 
-	return (
-		<>
-			{inspectorControls}
-			<div {...useBlockProps()}>
+	const renderContent = () => {
+		return (
+			<>
 				{initErrorFromSSR && (
 					<div className="text-red-500 text-sm">
 						<h3>Error!</h3>
@@ -219,6 +229,24 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 						EmptyResponsePlaceholder={() => <div />}
 					/>
 				</div>
+			</>
+		);
+	};
+
+	return (
+		<>
+			{inspectorControls}
+
+			<div
+				{...useBlockProps({
+					className: classNames(
+						"not-prose",
+						hasBackground ? "relative py-16" : ""
+					),
+				})}
+			>
+				{hasBackground ? <BackgroundSection /> : null}
+				{renderContent()}
 			</div>
 		</>
 	);

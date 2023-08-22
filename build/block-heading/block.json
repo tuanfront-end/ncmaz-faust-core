@@ -7,14 +7,7 @@
   "category": "ncmazfc-blocks",
   "icon": "smiley",
   "description": "Example static block scaffolded with Create Block tool.",
-  "attributes": {
-    "padding": {
-      "type": "number",
-      "default": "10rem"
-    }
-  },
   "supports": {
-    "html": true,
     "anchor": true,
     "align": true,
     "alignWide": true,

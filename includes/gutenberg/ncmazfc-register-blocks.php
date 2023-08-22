@@ -16,6 +16,10 @@ if (!function_exists("ncmazfc__register_blocks_gutenberg_init")) :
                         "type" => "string",
                         "default" => "",
                     ],
+                    "hasBackground" => [
+                        "type" => "boolean",
+                        "default" => false,
+                    ],
                     // can follow theo attribute.ts file của block-magazine
                     "queries" => [
                         "type" => "object",
@@ -80,6 +84,10 @@ if (!function_exists("ncmazfc__register_blocks_gutenberg_init")) :
                         "type" => "string",
                         "default" => "CATEGORY",
                     ],
+                    "hasBackground" => [
+                        "type" => "boolean",
+                        "default" => false,
+                    ],
                 ]
             ]
         );
@@ -87,6 +95,25 @@ if (!function_exists("ncmazfc__register_blocks_gutenberg_init")) :
         register_block_type(
             NCMAZFC_BUILD_PATH . '/block-heading',
             []
+        );
+        register_block_type(
+            NCMAZFC_BUILD_PATH . '/block-cta',
+            []
+        );
+        register_block_type(
+            NCMAZFC_BUILD_PATH . '/block-group',
+            [
+                "attributes" => [
+                    "variation" => [
+                        "type" => "string",
+                        "default" => "style1",
+                    ],
+                    "hasBackground" => [
+                        "type" => "boolean",
+                        "default" => false,
+                    ],
+                ]
+            ]
         );
     }
 

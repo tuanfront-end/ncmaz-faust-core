@@ -6,7 +6,6 @@ const Input = (
 		sizeClass = "h-11 px-4 py-3",
 		fontClass = "text-sm font-normal",
 		rounded = "rounded-full",
-		children,
 		type = "text",
 		...args
 	},

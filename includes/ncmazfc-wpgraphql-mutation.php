@@ -619,7 +619,7 @@ register_graphql_mutation('ncmazFaustAddSubscriberToMailpoet', [
                 'user_email' => $email,
                 'user_first_name' => $first_name,
                 'errors' => $error_message,
-                'success' => $success,
+                'success' => false,
             ];
         }
 
@@ -649,14 +649,16 @@ register_graphql_mutation('ncmazFaustAddSubscriberToMailpoet', [
                 }
             } catch (\Exception $e) {
                 $error_message = $e->getMessage();
+                $success = false;
             }
         } else {
             $error_message = "Mailpoet not installed! Please contact the website owner.";
+            $success = false;
         }
 
         $outPut = [
-            'email' => $email,
-            'first_name' => $first_name,
+            'user_email' => $email,
+            'user_first_name' => $first_name,
             'errors' => $error_message,
             'success' => $success,
         ];

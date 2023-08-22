@@ -27,7 +27,15 @@ defined('ABSPATH') || exit;
 // 6 - WPGraphQL Smart Cache - https://github.com/wp-graphql/wp-graphql-smart-cache
 // 7 - mailpoet - https://www.mailpoet.com/
 // -- check one of the required plugins is not active then deactivate this plugin
-if (!is_plugin_active('advanced-custom-fields/acf.php') || !is_plugin_active('wp-graphql/wp-graphql.php') || !is_plugin_active('faustwp/faustwp.php') || !is_plugin_active('wp-graphql-content-blocks/wp-graphql-content-blocks.php') || !is_plugin_active('wp-graphql-acf/wp-graphql-acf.php') || !is_plugin_active('wp-graphql-smart-cache/wp-graphql-smart-cache.php') || !is_plugin_active('mailpoet/mailpoet.php')) {
+if (
+    !is_plugin_active('advanced-custom-fields/acf.php')
+    || !is_plugin_active('wp-graphql/wp-graphql.php')
+    || !is_plugin_active('faustwp/faustwp.php')
+    || !is_plugin_active('wp-graphql-content-blocks/wp-graphql-content-blocks.php')
+    || !is_plugin_active('wp-graphql-acf/wp-graphql-acf.php')
+    // || !is_plugin_active('wp-graphql-smart-cache/wp-graphql-smart-cache.php')
+    || !is_plugin_active('mailpoet/mailpoet.php')
+) {
 
     // show a notice that required plugins is not active
     add_action('admin_notices', function () {

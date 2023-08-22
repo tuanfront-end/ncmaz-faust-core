@@ -10,6 +10,7 @@ export interface BlockMagazine_Attrs {
 	//
 	blockVariation: string;
 	showLoadMore: boolean;
+	hasBackground: boolean;
 }
 
 const blokcAttrs: AttrsGenericType<BlockMagazine_Attrs> = {
@@ -28,6 +29,10 @@ const blokcAttrs: AttrsGenericType<BlockMagazine_Attrs> = {
 		// default: "style-1",
 	},
 	showLoadMore: {
+		type: "boolean",
+		// default: false,
+	},
+	hasBackground: {
 		type: "boolean",
 		// default: false,
 	},

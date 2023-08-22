@@ -20,14 +20,14 @@
 		"@graphql-codegen/cli": "^4.0.1",
 		"@graphql-codegen/client-preset": "^4.0.1",
 		"@types/node": "^20.4.4",
-		"@wordpress/scripts": "^26.9.0",
+		"@wordpress/scripts": "^26.11.0",
 		"ts-node": "^10.9.1",
 		"typescript": "^5.1.6"
 	},
 	"dependencies": {
 		"@apollo/client": "^3.7.10",
 		"@headlessui/react": "^1.7.13",
-		"@heroicons/react": "^2.0.16",
+		"@heroicons/react": "^2.0.18",
 		"@types/lodash": "^4.14.192",
 		"@types/wordpress__block-editor": "^11.5.0",
 		"@wordpress/api-fetch": "^6.35.0",

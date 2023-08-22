@@ -8,6 +8,7 @@ export interface BlockTerms_Attrs {
 	taxonomy: "CATEGORY" | "POSTFORMAT" | "TAG";
 	showTagCounts: boolean;
 	blockVariation: string;
+	hasBackground: boolean;
 }
 
 const blokcAttrs: AttrsGenericType<BlockTerms_Attrs> = {
@@ -37,6 +38,10 @@ const blokcAttrs: AttrsGenericType<BlockTerms_Attrs> = {
 	},
 	taxonomy: {
 		type: "string",
+		// default: "TAG",
+	},
+	hasBackground: {
+		type: "boolean",
 		// default: "TAG",
 	},
 };

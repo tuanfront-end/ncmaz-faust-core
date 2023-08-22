@@ -9069,6 +9069,48 @@ export type NcmazFaustAddSubscriberToMailpoetPayload = {
 };
 
 /** A block used for editing the site */
+export type NcmazFaustBlockCta = BlockWithSupportsAnchor & EditorBlock & PageEditorBlock & PostEditorBlock & {
+  __typename?: 'NcmazFaustBlockCta';
+  /** The anchor field for the block. */
+  anchor?: Maybe<Scalars['String']['output']>;
+  /** The API version of the Gutenberg Block */
+  apiVersion?: Maybe<Scalars['Int']['output']>;
+  /** Attributes of the NcmazFaustBlockCta Block Type */
+  attributes?: Maybe<NcmazFaustBlockCtaAttributes>;
+  /** The name of the category the Block belongs to */
+  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+  /** The id of the Block */
+  clientId?: Maybe<Scalars['String']['output']>;
+  /** CSS Classnames to apply to the block */
+  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** The inner blocks of the Block */
+  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+  /** Whether the block is Dynamic (server rendered) */
+  isDynamic: Scalars['Boolean']['output'];
+  /** The name of the block */
+  name?: Maybe<Scalars['String']['output']>;
+  /** The parent id of the Block */
+  parentClientId?: Maybe<Scalars['String']['output']>;
+  /** The rendered HTML for the block */
+  renderedHtml?: Maybe<Scalars['String']['output']>;
+};
+
+/** Attributes of the NcmazFaustBlockCta Block Type */
+export type NcmazFaustBlockCtaAttributes = BlockWithSupportsAnchor & {
+  __typename?: 'NcmazFaustBlockCtaAttributes';
+  /** The &quot;align&quot; field on the &quot;NcmazFaustBlockCta&quot; block */
+  align?: Maybe<Scalars['String']['output']>;
+  /** The anchor field for the block. */
+  anchor?: Maybe<Scalars['String']['output']>;
+  /** The &quot;className&quot; field on the &quot;NcmazFaustBlockCta&quot; block */
+  className?: Maybe<Scalars['String']['output']>;
+  /** The &quot;lock&quot; field on the &quot;NcmazFaustBlockCta&quot; block */
+  lock?: Maybe<Scalars['BlockAttributesObject']['output']>;
+  /** The &quot;style&quot; field on the &quot;NcmazFaustBlockCta&quot; block */
+  style?: Maybe<Scalars['BlockAttributesObject']['output']>;
+};
+
+/** A block used for editing the site */
 export type NcmazFaustBlockHeading = BlockWithSupportsAnchor & EditorBlock & PageEditorBlock & PostEditorBlock & {
   __typename?: 'NcmazFaustBlockHeading';
   /** The anchor field for the block. */
@@ -9106,8 +9148,6 @@ export type NcmazFaustBlockHeadingAttributes = BlockWithSupportsAnchor & {
   className?: Maybe<Scalars['String']['output']>;
   /** The &quot;lock&quot; field on the &quot;NcmazFaustBlockHeading&quot; block */
   lock?: Maybe<Scalars['BlockAttributesObject']['output']>;
-  /** The &quot;padding&quot; field on the &quot;NcmazFaustBlockHeading&quot; block */
-  padding?: Maybe<Scalars['Float']['output']>;
   /** The &quot;style&quot; field on the &quot;NcmazFaustBlockHeading&quot; block */
   style?: Maybe<Scalars['BlockAttributesObject']['output']>;
 };

@@ -20,12 +20,15 @@ import BlockLoadingPlaceholder from "../components/BlockLoadingPlaceholder";
 import BlockEmptyPlaceholder from "../components/BlockEmptyPlaceholder";
 import DemoListPosts from "./DemoListPosts";
 import { NcmazFcPostsEdegsFieldsFragment } from "../__generated__/graphql";
+import BackgroundSection from "../frontend-components/BackgroundSection/BackgroundSection";
+import classNames from "../utils/className";
 
 const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	const { attributes, setAttributes, clientId } = props;
 
 	//
-	const { uniqueId, blockVariation, queries, showLoadMore } = attributes;
+	const { uniqueId, blockVariation, queries, showLoadMore, hasBackground } =
+		attributes;
 	const observerRef = useRef<MutationObserver | null>(null);
 
 	const [initPostsFromSSR, setInitPostsFromSSR] = useState<
@@ -71,18 +74,12 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 		const callback = (mutationList, observer) => {
 			for (const mutation of mutationList) {
 				if (mutation.type === "childList") {
-					console.log(99, "__Magazine child node has been updated.", {
-						mutation,
-					});
 					const { initErrors, initPosts } = getPostsDataFromSeverSideRenderNode(
 						mutation.target
 					);
 					setInitPostsFromSSR(initPosts);
 					setInitErrorFromSSR(initErrors);
 					if (!!initErrors || !!initPosts) {
-						console.log(123, "_____Magazin__disconnect___.", {
-							mutation,
-						});
 						observer.disconnect();
 						observerRef.current = null;
 					}
@@ -193,18 +190,8 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 							</optgroup>
 						</SelectControl>
 
-						{/* <TextControl
-							label={__("View all href", "ncmazfc")}
-							value={viewMoreHref || ""}
-							type="url"
-							onChange={(viewMoreHref) => setAttributes({ viewMoreHref })}
-						/> */}
-
 						<div className="">
-							<div className="flex justify-between gap-2">
-								<label htmlFor="showLoadMore">
-									{__("Show load more", "ncmazfc")}
-								</label>
+							<div className="flex gap-3">
 								<FormToggle
 									checked={showLoadMore}
 									onChange={() =>
@@ -213,6 +200,9 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 									name="showLoadMore"
 									id="showLoadMore"
 								/>
+								<label htmlFor="showLoadMore">
+									{__("Show load more", "ncmazfc")}
+								</label>
 							</div>
 							{!!showLoadMore && (
 								<i className="text-xs italic block mt-1">
@@ -222,6 +212,16 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 									)}
 								</i>
 							)}
+						</div>
+
+						<div className="w-full gap-3 flex ">
+							<FormToggle
+								checked={hasBackground}
+								onChange={() =>
+									setAttributes({ hasBackground: !hasBackground })
+								}
+							/>
+							<legend>{__("Enable Background", "ncmazfc")}</legend>
 						</div>
 					</div>
 				</PanelBody>
@@ -243,7 +243,17 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 			</BlockControls>
 
 			{/* edit content render */}
-			<div {...useBlockProps()}>{renderContent()}</div>
+			<div
+				{...useBlockProps({
+					className: classNames(
+						"not-prose",
+						hasBackground ? "relative py-16" : ""
+					),
+				})}
+			>
+				{hasBackground ? <BackgroundSection /> : null}
+				{renderContent()}
+			</div>
 		</>
 	);
 };
