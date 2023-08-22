@@ -70,17 +70,21 @@ function ncmazfc__theme_register_required_plugins()
             'slug'     => 'wp-graphql-smart-cache',
             'required' => true,
         ),
+
+        // 2 plugin nay can dowload tu github ve sau do unzip va zip lai.
         array(
-            'name'   => 'WPGraphQL for Advanced Custom Fields',
-            'slug'   => 'wp-graphql-acf',
-            'source' => 'https://github.com/wp-graphql/wpgraphql-acf/releases/download/v2.0.0-beta.4.0.0/wp-graphql-acf.zip',
-            'required'     => true,
+            'name'      => 'WPGraphQL for Advanced Custom Fields',
+            'slug'      => 'wp-graphql-acf',
+            'source'    => dirname(__FILE__) . '/lib/wp-graphql-acf.zip',
+            'required'  => true,
+            'external_url'    => "https://github.com/wpengine/wp-graphql-content-blocks"
         ),
         array(
-            'name'   => 'WPGraphQL Content Blocks',
-            'slug'   => 'wp-graphql-content-blocks',
-            'source' => 'https://github.com/wpengine/wp-graphql-content-blocks/releases/download/v1.1.3/wp-graphql-content-blocks.zip',
-            'required'     => true,
+            'name'      => 'WPGraphQL Content Blocks',
+            'slug'      => 'wp-graphql-content-blocks',
+            'source'    => dirname(__FILE__) . '/lib/wp-graphql-content-blocks.zip',
+            'required'  => true,
+            'external_url'    => "https://github.com/wp-graphql/wpgraphql-acf"
         ),
 
     );
