@@ -1,4 +1,9 @@
 <?php
+
+if (!function_exists('register_graphql_enum_type') || !function_exists('register_graphql_mutation')) {
+    return;
+}
+
 // Register enum type
 register_graphql_enum_type('NcmazFcUserReactionPostActionEnum', [
     'description' => __('Reaction of user, like save, likes, view, or something else', 'ncmazfc'),

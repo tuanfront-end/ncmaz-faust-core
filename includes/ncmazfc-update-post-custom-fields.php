@@ -13,6 +13,10 @@ if (!function_exists("ncmazFc__increment_view_count_by_id")) :
             return false;
         }
 
+        if (!function_exists('get_field')) {
+            return false;
+        }
+
         // Lấy post_type của bài viết dựa vào post_id
         $post_type = get_post_type($post_id);
 
@@ -43,6 +47,10 @@ if (!function_exists("ncmazFc__update_likes_count_by_id")) :
         // Lấy post_type của bài viết dựa vào post_id
         $post_type = get_post_type($post_id);
         if ($post_type !== 'post') {
+            return false;
+        }
+
+        if (!function_exists('get_field')) {
             return false;
         }
 
@@ -80,6 +88,10 @@ if (!function_exists("ncmazFc__update_saveds_count_by_id")) :
         // Lấy post_type của bài viết dựa vào post_id
         $post_type = get_post_type($post_id);
         if ($post_type !== 'post') {
+            return false;
+        }
+
+        if (!function_exists('get_field')) {
             return false;
         }
 

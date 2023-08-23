@@ -56,7 +56,7 @@ function ncmazfc__theme_register_required_plugins()
             'required' => true,
         ),
         array(
-            'name'     => 'Mailpoet',
+            'name'     => 'MailPoet',
             'slug'     => 'mailpoet',
             'required' => true,
         ),

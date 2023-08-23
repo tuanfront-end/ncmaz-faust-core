@@ -9111,6 +9111,48 @@ export type NcmazFaustBlockCtaAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
+export type NcmazFaustBlockGroup = EditorBlock & PageEditorBlock & PostEditorBlock & {
+  __typename?: 'NcmazFaustBlockGroup';
+  /** The API version of the Gutenberg Block */
+  apiVersion?: Maybe<Scalars['Int']['output']>;
+  /** Attributes of the NcmazFaustBlockGroup Block Type */
+  attributes?: Maybe<NcmazFaustBlockGroupAttributes>;
+  /** The name of the category the Block belongs to */
+  blockEditorCategoryName?: Maybe<Scalars['String']['output']>;
+  /** The id of the Block */
+  clientId?: Maybe<Scalars['String']['output']>;
+  /** CSS Classnames to apply to the block */
+  cssClassNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** The inner blocks of the Block */
+  innerBlocks?: Maybe<Array<Maybe<EditorBlock>>>;
+  /** Whether the block is Dynamic (server rendered) */
+  isDynamic: Scalars['Boolean']['output'];
+  /** The name of the block */
+  name?: Maybe<Scalars['String']['output']>;
+  /** The parent id of the Block */
+  parentClientId?: Maybe<Scalars['String']['output']>;
+  /** The rendered HTML for the block */
+  renderedHtml?: Maybe<Scalars['String']['output']>;
+};
+
+/** Attributes of the NcmazFaustBlockGroup Block Type */
+export type NcmazFaustBlockGroupAttributes = {
+  __typename?: 'NcmazFaustBlockGroupAttributes';
+  /** The &quot;align&quot; field on the &quot;NcmazFaustBlockGroup&quot; block */
+  align?: Maybe<Scalars['String']['output']>;
+  /** The &quot;className&quot; field on the &quot;NcmazFaustBlockGroup&quot; block */
+  className?: Maybe<Scalars['String']['output']>;
+  /** The &quot;hasBackground&quot; field on the &quot;NcmazFaustBlockGroup&quot; block */
+  hasBackground?: Maybe<Scalars['Boolean']['output']>;
+  /** The &quot;lock&quot; field on the &quot;NcmazFaustBlockGroup&quot; block */
+  lock?: Maybe<Scalars['BlockAttributesObject']['output']>;
+  /** The &quot;style&quot; field on the &quot;NcmazFaustBlockGroup&quot; block */
+  style?: Maybe<Scalars['BlockAttributesObject']['output']>;
+  /** The &quot;variation&quot; field on the &quot;NcmazFaustBlockGroup&quot; block */
+  variation?: Maybe<Scalars['String']['output']>;
+};
+
+/** A block used for editing the site */
 export type NcmazFaustBlockHeading = BlockWithSupportsAnchor & EditorBlock & PageEditorBlock & PostEditorBlock & {
   __typename?: 'NcmazFaustBlockHeading';
   /** The anchor field for the block. */
@@ -9153,10 +9195,8 @@ export type NcmazFaustBlockHeadingAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type NcmazFaustBlockMagazine = BlockWithSupportsAnchor & EditorBlock & PageEditorBlock & PostEditorBlock & {
+export type NcmazFaustBlockMagazine = EditorBlock & PageEditorBlock & PostEditorBlock & {
   __typename?: 'NcmazFaustBlockMagazine';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
   /** The API version of the Gutenberg Block */
   apiVersion?: Maybe<Scalars['Int']['output']>;
   /** Attributes of the NcmazFaustBlockMagazine Block Type */
@@ -9180,16 +9220,16 @@ export type NcmazFaustBlockMagazine = BlockWithSupportsAnchor & EditorBlock & Pa
 };
 
 /** Attributes of the NcmazFaustBlockMagazine Block Type */
-export type NcmazFaustBlockMagazineAttributes = BlockWithSupportsAnchor & {
+export type NcmazFaustBlockMagazineAttributes = {
   __typename?: 'NcmazFaustBlockMagazineAttributes';
   /** The &quot;align&quot; field on the &quot;NcmazFaustBlockMagazine&quot; block */
   align?: Maybe<Scalars['String']['output']>;
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
   /** The &quot;blockVariation&quot; field on the &quot;NcmazFaustBlockMagazine&quot; block */
   blockVariation?: Maybe<Scalars['String']['output']>;
   /** The &quot;className&quot; field on the &quot;NcmazFaustBlockMagazine&quot; block */
   className?: Maybe<Scalars['String']['output']>;
+  /** The &quot;hasBackground&quot; field on the &quot;NcmazFaustBlockMagazine&quot; block */
+  hasBackground?: Maybe<Scalars['Boolean']['output']>;
   /** The &quot;lock&quot; field on the &quot;NcmazFaustBlockMagazine&quot; block */
   lock?: Maybe<Scalars['BlockAttributesObject']['output']>;
   /** The &quot;queries&quot; field on the &quot;NcmazFaustBlockMagazine&quot; block */
@@ -9201,10 +9241,8 @@ export type NcmazFaustBlockMagazineAttributes = BlockWithSupportsAnchor & {
 };
 
 /** A block used for editing the site */
-export type NcmazFaustBlockTerms = BlockWithSupportsAnchor & EditorBlock & PageEditorBlock & PostEditorBlock & {
+export type NcmazFaustBlockTerms = EditorBlock & PageEditorBlock & PostEditorBlock & {
   __typename?: 'NcmazFaustBlockTerms';
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
   /** The API version of the Gutenberg Block */
   apiVersion?: Maybe<Scalars['Int']['output']>;
   /** Attributes of the NcmazFaustBlockTerms Block Type */
@@ -9228,16 +9266,16 @@ export type NcmazFaustBlockTerms = BlockWithSupportsAnchor & EditorBlock & PageE
 };
 
 /** Attributes of the NcmazFaustBlockTerms Block Type */
-export type NcmazFaustBlockTermsAttributes = BlockWithSupportsAnchor & {
+export type NcmazFaustBlockTermsAttributes = {
   __typename?: 'NcmazFaustBlockTermsAttributes';
   /** The &quot;align&quot; field on the &quot;NcmazFaustBlockTerms&quot; block */
   align?: Maybe<Scalars['String']['output']>;
-  /** The anchor field for the block. */
-  anchor?: Maybe<Scalars['String']['output']>;
   /** The &quot;blockVariation&quot; field on the &quot;NcmazFaustBlockTerms&quot; block */
   blockVariation?: Maybe<Scalars['String']['output']>;
   /** The &quot;className&quot; field on the &quot;NcmazFaustBlockTerms&quot; block */
   className?: Maybe<Scalars['String']['output']>;
+  /** The &quot;hasBackground&quot; field on the &quot;NcmazFaustBlockTerms&quot; block */
+  hasBackground?: Maybe<Scalars['Boolean']['output']>;
   /** The &quot;lock&quot; field on the &quot;NcmazFaustBlockTerms&quot; block */
   lock?: Maybe<Scalars['BlockAttributesObject']['output']>;
   /** The &quot;numberOfTags&quot; field on the &quot;NcmazFaustBlockTerms&quot; block */
