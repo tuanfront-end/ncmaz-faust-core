@@ -6,6 +6,7 @@ export interface BlockGroup_Attrs {
 	hasBackground: boolean;
 	style: object;
 	variation: BlockGroup_variation;
+	align: string;
 }
 
 const blokcAttrs: AttrsGenericType<BlockGroup_Attrs> = {
@@ -16,6 +17,10 @@ const blokcAttrs: AttrsGenericType<BlockGroup_Attrs> = {
 	hasBackground: {
 		type: "boolean",
 		default: false,
+	},
+	align: {
+		type: "string",
+		default: "wide",
 	},
 
 	style: {

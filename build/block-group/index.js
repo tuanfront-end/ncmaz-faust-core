@@ -21,6 +21,10 @@ const blokcAttrs = {
     type: "boolean",
     default: false
   },
+  align: {
+    type: "string",
+    default: "wide"
+  },
   style: {
     type: "object",
     default: {

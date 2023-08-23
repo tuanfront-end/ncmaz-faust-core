@@ -21,6 +21,8 @@ import classNames from "../utils/className";
 const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	const { attributes, setAttributes, clientId } = props;
 
+	console.log(111, "Edit -> attributes", attributes);
+
 	//
 	const { uniqueId, blockVariation, queries, showLoadMore, hasBackground } =
 		attributes;

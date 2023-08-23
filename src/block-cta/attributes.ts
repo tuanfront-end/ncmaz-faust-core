@@ -14,6 +14,7 @@ export interface BlockCTA_Attrs {
 	descLists: string[];
 	showDescLists: boolean;
 	hasBackground: boolean;
+	align: string;
 }
 
 const blokcAttrs: AttrsGenericType<BlockCTA_Attrs> = {
@@ -66,6 +67,10 @@ const blokcAttrs: AttrsGenericType<BlockCTA_Attrs> = {
 	hasBackground: {
 		type: "boolean",
 		default: false,
+	},
+	align: {
+		type: "string",
+		default: "wide",
 	},
 
 	style: {

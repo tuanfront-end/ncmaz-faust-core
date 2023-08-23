@@ -553,6 +553,7 @@ const Edit = props => {
     setAttributes,
     clientId
   } = props;
+  console.log(111, "Edit -> attributes", attributes);
 
   //
   const {
