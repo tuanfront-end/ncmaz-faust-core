@@ -1,34 +1,15 @@
-import React from "react";
-import { __ } from "@wordpress/i18n";
 import { useBlockProps } from "@wordpress/block-editor";
-import { NcmazFcAttrs } from "./attributes";
-import SaveCommon from "../components/SaveCommon";
-import "./style.scss";
+import React from "react";
+import { BlockDefault_Attrs } from "./attributes";
 
-export interface NcmazFcAttrsForSave
-	extends Omit<NcmazFcAttrs, "heading" | "subHeading"> {}
-
-export default function save({ attributes }: { attributes: NcmazFcAttrs }) {
-	const { uniqueId, advance_responsiveCondition, advance_zIndex } = attributes;
-	//
-
-	const newAttrForSave: NcmazFcAttrsForSave = {
-		uniqueId,
-		advance_responsiveCondition,
-		advance_zIndex,
-	};
-	//
-	const blockProps = useBlockProps.save({
-		className: "wcb-default__wrap " + (attributes.className || ""),
-	});
+export default function save({
+	attributes,
+}: {
+	attributes: BlockDefault_Attrs & { anchor: string; align: string };
+}) {
 	return (
-		<SaveCommon
-			attributes={newAttrForSave}
-			className="wcb-default__wrap"
-			uniqueId={uniqueId}
-			{...blockProps}
-		>
-			<div>CHILD</div>
-		</SaveCommon>
+		<p {...useBlockProps.save()}>
+			{"Todo List – hello from the saved content!"}
+		</p>
 	);
 }

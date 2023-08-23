@@ -1,0 +1,33 @@
+html :where(.editor-styles-wrapper) {
+	[data-type^="ncmaz-faust"] {
+		@apply text-base text-neutral-900;
+
+		a {
+			@apply no-underline;
+		}
+
+		img {
+			@apply border-0 border-none;
+		}
+
+		ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			li {
+				list-style: none;
+			}
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		p {
+			&:not([class*="my-"]) {
+				@apply my-0;
+			}
+		}
+	}
+}
