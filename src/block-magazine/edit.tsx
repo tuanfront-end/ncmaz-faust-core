@@ -1,11 +1,6 @@
 import React, { useRef, useState, FC, useEffect } from "react";
 import { __ } from "@wordpress/i18n";
-import {
-	FormToggle,
-	PanelBody,
-	SelectControl,
-	Spinner,
-} from "@wordpress/components";
+import { FormToggle, PanelBody, SelectControl } from "@wordpress/components";
 import {
 	BlockControls,
 	InspectorControls,
@@ -36,8 +31,6 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	>(null);
 	const [initErrorFromSSR, setInitErrorFromSSR] = useState<string | null>(null);
 	const SERVER_SIDE_ID = "ncmazfcSSR-block-" + clientId;
-
-	console.log(222, { initPostsFromSSR, initErrorFromSSR });
 
 	// ---- SAVE uniqueId ----
 	useEffect(() => {
@@ -118,7 +111,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 						block="ncmaz-faust/block-magazine"
 						attributes={{ uniqueId, queries }}
 						httpMethod="GET"
-						LoadingResponsePlaceholder={BlockLoadingPlaceholder}
+						// LoadingResponsePlaceholder={BlockLoadingPlaceholder}
 						EmptyResponsePlaceholder={() => <BlockEmptyPlaceholder />}
 					/>
 				</div>

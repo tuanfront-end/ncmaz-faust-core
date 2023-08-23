@@ -18,12 +18,11 @@ import ServerSideRender from "@wordpress/server-side-render";
 import BlockLoadingPlaceholder from "../components/BlockLoadingPlaceholder";
 import DemoTermsList from "./DemoTermsList";
 import BlockEmptyPlaceholder from "../components/BlockEmptyPlaceholder";
-import { NcmazFcCategoryFullFieldsFragmentFragment } from "../__generated__/graphql";
 import BackgroundSection from "../frontend-components/BackgroundSection/BackgroundSection";
 import classNames from "../utils/className";
 
 const MIN_TAGS = 1;
-const MAX_TAGS = 100;
+const MAX_TAGS = 80;
 
 const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 	const { attributes, setAttributes, clientId } = props;
@@ -75,18 +74,12 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 		const callback = (mutationList, observer) => {
 			for (const mutation of mutationList) {
 				if (mutation.type === "childList") {
-					console.log(99, "__Term block - child node has been updated.", {
-						mutation,
-					});
 					const { initErrors, initTerms } = getTermsDataFromSeverSideRenderNode(
 						mutation.target
 					);
 					setInitErrorFromSSR(initErrors);
 					setInitTermsFromSSR(initTerms);
 					if (!!initErrors || !!initTerms) {
-						console.log(123, "___Term blokc-disconnect___.", {
-							mutation,
-						});
 						observer.disconnect();
 						observerRef.current = null;
 					}
@@ -225,7 +218,7 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 						block="ncmaz-faust/block-terms"
 						attributes={attributes}
 						httpMethod="POST"
-						LoadingResponsePlaceholder={BlockLoadingPlaceholder}
+						// LoadingResponsePlaceholder={BlockLoadingPlaceholder}
 						EmptyResponsePlaceholder={() => <div />}
 					/>
 				</div>
