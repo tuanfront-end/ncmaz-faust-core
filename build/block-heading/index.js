@@ -331,12 +331,12 @@ function save({
     })
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: (0,_utils_className__WEBPACK_IMPORTED_MODULE_3__["default"])(align === "center" ? "text-center w-full max-w-2xl mx-auto" : "max-w-2xl w-full")
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+  }, !!heading && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
     tagName: headingTag || "h2",
     className: (0,_utils_className__WEBPACK_IMPORTED_MODULE_3__["default"])(`ncmazfc-block-heading__heading font-semibold`, variation === "style1" ? "text-xl sm:text-2xl md:text-3xl lg:text-4xl" : "", variation === "style2" ? "text-xl md:text-2xl lg:text-3xl" : "", variation === "style3" ? "text-lg md:text-xl lg:text-2xl" : ""),
     value: heading,
     placeholder: "Add heading"
-  }), showSubHeading && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+  }), showSubHeading && !!subHeading && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
     tagName: "span",
     className: (0,_utils_className__WEBPACK_IMPORTED_MODULE_3__["default"])(`ncmazfc-block-heading__subHeading mt-2 font-normal block text-neutral-500 dark:text-neutral-400 max-w-4xl`, variation === "style1" ? "md:mt-3 text-sm sm:text-base md:text-lg" : "", variation === "style2" ? "text-sm sm:text-base" : "", variation === "style3" ? "text-sm sm:text-base" : ""),
     value: subHeading,

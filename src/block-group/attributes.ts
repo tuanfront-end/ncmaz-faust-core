@@ -12,31 +12,31 @@ export interface BlockGroup_Attrs {
 const blokcAttrs: AttrsGenericType<BlockGroup_Attrs> = {
 	variation: {
 		type: "string",
-		default: "style1",
+		// default: "style1",
 	},
 	hasBackground: {
 		type: "boolean",
-		default: false,
+		// default: false,
 	},
 	align: {
 		type: "string",
-		default: "wide",
+		// default: "wide",
 	},
 
 	style: {
 		type: "object",
-		default: {
-			spacing: {
-				padding: {
-					bottom: "4rem",
-					top: "4rem",
-				},
-				margin: {
-					bottom: "5.25rem",
-					top: "5.25rem",
-				},
-			},
-		},
+		// default: {
+		// 	spacing: {
+		// 		padding: {
+		// 			bottom: "4rem",
+		// 			top: "4rem",
+		// 		},
+		// 		margin: {
+		// 			bottom: "5.25rem",
+		// 			top: "5.25rem",
+		// 		},
+		// 	},
+		// },
 	},
 };
 

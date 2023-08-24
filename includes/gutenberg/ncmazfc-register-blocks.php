@@ -104,10 +104,12 @@ if (!function_exists("ncmazfc__register_blocks_gutenberg_init")) :
             NCMAZFC_BUILD_PATH . '/block-heading',
             []
         );
+
         register_block_type(
             NCMAZFC_BUILD_PATH . '/block-cta',
             []
         );
+
         register_block_type(
             NCMAZFC_BUILD_PATH . '/block-group',
             [
@@ -123,6 +125,21 @@ if (!function_exists("ncmazfc__register_blocks_gutenberg_init")) :
                     "align" => [
                         "type"      => "string",
                         "default"   => "wide",
+                    ],
+                    "style" => [
+                        "type" => "object",
+                        "default" => (object)[
+                            "spacing" => [
+                                "padding" => [
+                                    "bottom" => "4rem",
+                                    "top" => "4rem",
+                                ],
+                                "margin" => [
+                                    "bottom" => "5.25rem",
+                                    "top" => "5.25rem",
+                                ],
+                            ],
+                        ],
                     ],
                 ]
             ]

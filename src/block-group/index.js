@@ -13,7 +13,7 @@ import attributes from "./attributes";
 registerBlockType(metadata.name, {
 	edit: Edit,
 	save,
-	attributes,
+	// attributes,
 	deprecated: deprecated,
 	example: {},
 	icon: (
