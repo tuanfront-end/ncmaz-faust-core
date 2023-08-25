@@ -110,7 +110,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 					<ServerSideRender
 						block="ncmaz-faust/block-magazine"
 						attributes={{ uniqueId, queries }}
-						httpMethod="GET"
+						httpMethod="POST"
 						LoadingResponsePlaceholder={() => (
 							<div className="absolute bg-black/10 -inset-2.5 flex items-center justify-center">
 								<BlockLoadingPlaceholder />

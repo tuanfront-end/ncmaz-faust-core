@@ -192,12 +192,12 @@ const PostsQueriesControls = ({
 					{showOrderControl && (
 						<OrderControl {...{ order, orderBy }} onChange={setQuery} />
 					)}
-					{showStickyControl && (
+					{/* {showStickyControl && (
 						<StickyControl
 							value={sticky}
 							onChange={(value) => setQuery({ sticky: value })}
 						/>
-					)}
+					)} */}
 
 					<RangeControl
 						__nextHasNoMarginBottom

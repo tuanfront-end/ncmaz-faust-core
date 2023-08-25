@@ -636,7 +636,7 @@ const Edit = props => {
         uniqueId,
         queries
       },
-      httpMethod: "GET",
+      httpMethod: "POST",
       LoadingResponsePlaceholder: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "absolute bg-black/10 -inset-2.5 flex items-center justify-center"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_BlockLoadingPlaceholder__WEBPACK_IMPORTED_MODULE_8__["default"], null)),
@@ -1056,8 +1056,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _author_control__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./author-control */ "./src/components/posts-queries-controls/author-control.tsx");
 /* harmony import */ var _parent_control__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./parent-control */ "./src/components/posts-queries-controls/parent-control.tsx");
 /* harmony import */ var _taxonomy_controls__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./taxonomy-controls */ "./src/components/posts-queries-controls/taxonomy-controls.tsx");
-/* harmony import */ var _sticky_control__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./sticky-control */ "./src/components/posts-queries-controls/sticky-control.tsx");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./utils */ "./src/components/posts-queries-controls/utils.ts");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./utils */ "./src/components/posts-queries-controls/utils.ts");
 
 /**
  * WordPress dependencies
@@ -1071,7 +1070,6 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Internal dependencies
  */
-
 
 
 
@@ -1118,9 +1116,9 @@ const PostsQueriesControls = ({
   const {
     postTypesTaxonomiesMap,
     postTypesSelectOptions
-  } = (0,_utils__WEBPACK_IMPORTED_MODULE_11__.usePostTypes)();
-  const taxonomies = (0,_utils__WEBPACK_IMPORTED_MODULE_11__.useTaxonomies)(postType);
-  const isPostTypeHierarchical = (0,_utils__WEBPACK_IMPORTED_MODULE_11__.useIsPostTypeHierarchical)(postType);
+  } = (0,_utils__WEBPACK_IMPORTED_MODULE_10__.usePostTypes)();
+  const taxonomies = (0,_utils__WEBPACK_IMPORTED_MODULE_10__.useTaxonomies)(postType);
+  const isPostTypeHierarchical = (0,_utils__WEBPACK_IMPORTED_MODULE_10__.useIsPostTypeHierarchical)(postType);
   (0,react__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
     setShowSticky(postType === "post");
   }, [postType]);
@@ -1184,11 +1182,6 @@ const PostsQueriesControls = ({
     order,
     orderBy,
     onChange: setQuery
-  }), showStickyControl && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_sticky_control__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    value: sticky,
-    onChange: value => setQuery({
-      sticky: value
-    })
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
     __nextHasNoMarginBottom: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Number of posts"),
@@ -1582,57 +1575,6 @@ function ParentControl({
   });
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ParentControl);
-
-/***/ }),
-
-/***/ "./src/components/posts-queries-controls/sticky-control.tsx":
-/*!******************************************************************!*\
-  !*** ./src/components/posts-queries-controls/sticky-control.tsx ***!
-  \******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ StickyControl)
-/* harmony export */ });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-
-/**
- * WordPress dependencies
- */
-
-
-
-const stickyOptions = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Include"),
-  value: ""
-}, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Exclude"),
-  value: "exclude"
-}, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Only"),
-  value: "only"
-}];
-function StickyControl({
-  value,
-  onChange
-}) {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-    __nextHasNoMarginBottom: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Sticky posts"),
-    options: stickyOptions,
-    value: value,
-    onChange: onChange,
-    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Blog posts can be “stickied”, a feature that places them at the top of the front page of posts, keeping it there until new sticky posts are published.")
-  });
-}
 
 /***/ }),
 
