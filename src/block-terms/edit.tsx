@@ -199,10 +199,11 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 			</PanelBody>
 		</InspectorControls>
 	);
+	console.log(111, { attributes });
 
 	const renderContent = () => {
 		return (
-			<>
+			<div className="relative">
 				{initErrorFromSSR && (
 					<div className="text-red-500 text-sm">
 						<h3>Error!</h3>
@@ -218,11 +219,15 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 						block="ncmaz-faust/block-terms"
 						attributes={attributes}
 						httpMethod="POST"
-						// LoadingResponsePlaceholder={BlockLoadingPlaceholder}
+						LoadingResponsePlaceholder={() => (
+							<div className="absolute bg-black/10 -inset-2.5 flex items-center justify-center">
+								<BlockLoadingPlaceholder />
+							</div>
+						)}
 						EmptyResponsePlaceholder={() => <div />}
 					/>
 				</div>
-			</>
+			</div>
 		);
 	};
 

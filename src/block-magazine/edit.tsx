@@ -111,7 +111,11 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 						block="ncmaz-faust/block-magazine"
 						attributes={{ uniqueId, queries }}
 						httpMethod="GET"
-						// LoadingResponsePlaceholder={BlockLoadingPlaceholder}
+						LoadingResponsePlaceholder={() => (
+							<div className="absolute bg-black/10 -inset-2.5 flex items-center justify-center">
+								<BlockLoadingPlaceholder />
+							</div>
+						)}
 						EmptyResponsePlaceholder={() => <BlockEmptyPlaceholder />}
 					/>
 				</div>

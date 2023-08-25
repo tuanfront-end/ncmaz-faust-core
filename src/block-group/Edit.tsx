@@ -19,8 +19,6 @@ const Edit: FC<ContainerEditProps<BlockGroup_Attrs & { align: string }>> = (
 	const { attributes, setAttributes } = props;
 	const { align, hasBackground, variation } = attributes;
 
-	console.log(1111, { attributes });
-
 	return (
 		<>
 			<InspectorControls>

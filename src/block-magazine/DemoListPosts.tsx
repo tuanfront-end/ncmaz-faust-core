@@ -8,8 +8,6 @@ interface Props {
 	posts: NcmazFcPostsEdegsFieldsFragment["nodes"];
 }
 const DemoListPosts: FC<Props> = ({ posts }) => {
-	console.log(22, { posts });
-
 	return (
 		<div className="no-prose mt-12 divide-y">
 			{posts.map((post) => {
