@@ -163,6 +163,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 								<option value="magazine-10">Magazine 10</option>
 								<option value="magazine-11">Magazine 11</option>
 								<option value="magazine-12">Magazine 12</option>
+								<option value="magazine-13">Magazine 13</option>
 							</optgroup>
 
 							<optgroup label="Grid">

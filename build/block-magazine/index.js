@@ -686,7 +686,9 @@ const Edit = props => {
     value: "magazine-11"
   }, "Magazine 11"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: "magazine-12"
-  }, "Magazine 12")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("optgroup", {
+  }, "Magazine 12"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: "magazine-13"
+  }, "Magazine 13")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("optgroup", {
     label: "Grid"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: "grid-1"
