@@ -140,7 +140,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 									it will be changed and applied in the client UI. Sorry for the
 									inconvenience, you can check out the{" "}
 									<a
-										href="https://ncmaz-faust.vercel.app/blocks-variations-review/"
+										href="https://ncmaz-faust.chisnghiax.com/magazine-variations-preview"
 										target="_blank"
 										rel="noopener noreferrer"
 										className="underline text-blue-400"

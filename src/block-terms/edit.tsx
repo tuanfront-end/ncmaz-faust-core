@@ -121,7 +121,7 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 								be changed and applied in the client UI. Sorry for the
 								inconvenience, you can check out the{" "}
 								<a
-									href="https://ncmaz-faust.vercel.app/blocks-variations-review/"
+									href="https://ncmaz-faust.chisnghiax.com/block-term-variations-preview"
 									target="_blank"
 									rel="noopener noreferrer"
 									className="underline text-blue-400"
@@ -199,7 +199,6 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 			</PanelBody>
 		</InspectorControls>
 	);
-	console.log(111, { attributes });
 
 	const renderContent = () => {
 		return (

@@ -655,7 +655,7 @@ const Edit = props => {
       blockVariation
     }),
     help: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "(**) Select variation to change the layout and card style of the block. The editor preview of the variants is currently under construction, so you won't notice the change here, but it will be changed and applied in the client UI. Sorry for the inconvenience, you can check out the", " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-      href: "https://ncmaz-faust.vercel.app/blocks-variations-review/",
+      href: "https://ncmaz-faust.chisnghiax.com/magazine-variations-preview",
       target: "_blank",
       rel: "noopener noreferrer",
       className: "underline text-blue-400"
