@@ -22,6 +22,7 @@ import ButtonCircle from "../frontend-components/Button/ButtonCircle";
 import Badge from "../frontend-components/Badge/Badge";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import BackgroundSection from "../frontend-components/BackgroundSection/BackgroundSection";
+import { __experimentalInputControl as InputControl } from "@wordpress/components";
 
 const Edit: FC<ContainerEditProps<BlockCTA_Attrs & { anchor: string }>> = (
 	props
@@ -42,6 +43,7 @@ const Edit: FC<ContainerEditProps<BlockCTA_Attrs & { anchor: string }>> = (
 		anchor,
 		style,
 		hasBackground,
+		ctaButtonHref,
 	} = attributes;
 
 	const renderSubcribeForm = () => {
@@ -211,6 +213,19 @@ const Edit: FC<ContainerEditProps<BlockCTA_Attrs & { anchor: string }>> = (
 								{__("Show CTA button", "ncmazfc")}
 							</label>
 						</div>
+
+						{!!showCtaButton && (
+							<InputControl
+								title="CTA button link"
+								label="CTA button link"
+								type="url"
+								value={ctaButtonHref}
+								onChange={(nextValue) =>
+									setAttributes({ ctaButtonHref: nextValue || "#" })
+								}
+							/>
+						)}
+
 						<div className="flex gap-3">
 							<FormToggle
 								checked={showSubcribeForm}

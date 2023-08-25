@@ -6,6 +6,7 @@ export interface BlockCTA_Attrs {
 	subHeading: string;
 	headingTag: HtmlTagsType;
 	ctaButton: string;
+	ctaButtonHref: string;
 	description: string;
 	showSubHeading: boolean;
 	showCtaButton: boolean;
@@ -44,6 +45,10 @@ const blokcAttrs: AttrsGenericType<BlockCTA_Attrs> = {
 		type: "string",
 		default: "Become an author",
 	},
+	ctaButtonHref: {
+		type: "string",
+		default: "#",
+	},
 	headingTag: {
 		type: "string",
 		default: "h2",
@@ -77,11 +82,9 @@ const blokcAttrs: AttrsGenericType<BlockCTA_Attrs> = {
 		type: "object",
 		default: {
 			spacing: {
-				padding: {
-					bottom: "1.75rem",
-				},
 				margin: {
-					bottom: "2.25rem",
+					bottom: "6rem",
+					top: "6rem",
 				},
 			},
 		},

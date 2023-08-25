@@ -31,6 +31,7 @@ export default function save({
 		anchor,
 		style,
 		hasBackground,
+		ctaButtonHref,
 	} = attributes;
 
 	const renderSubcribeForm = () => {
@@ -101,7 +102,7 @@ export default function save({
 					{showSubcribeForm && renderSubcribeForm()}
 
 					{showCtaButton && (
-						<ButtonPrimary className="mt-8" type="button">
+						<ButtonPrimary className="mt-8" type="button" href={ctaButtonHref}>
 							<RichText.Content tagName="span" value={ctaButton} />
 						</ButtonPrimary>
 					)}
