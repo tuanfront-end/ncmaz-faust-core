@@ -533,9 +533,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DemoListPosts__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./DemoListPosts */ "./src/block-magazine/DemoListPosts.tsx");
 /* harmony import */ var _frontend_components_BackgroundSection_BackgroundSection__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../frontend-components/BackgroundSection/BackgroundSection */ "./src/frontend-components/BackgroundSection/BackgroundSection.tsx");
 /* harmony import */ var _utils_className__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../utils/className */ "./src/utils/className.tsx");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_13__);
-
 
 
 
@@ -555,11 +552,6 @@ const Edit = props => {
     setAttributes,
     clientId
   } = props;
-  //
-  const postFormats = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_13__.useSelect)(select => select("core").getPostFormats());
-  console.log(22222, {
-    postFormats
-  });
 
   //
   const {
