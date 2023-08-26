@@ -14,29 +14,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 const blokcAttrs = {
   variation: {
-    type: "string",
-    default: "style1"
+    type: "string"
+    // default: "style1",
   },
+
   hasBackground: {
-    type: "boolean",
-    default: false
+    type: "boolean"
+    // default: false,
   },
+
+  align: {
+    type: "string"
+    // default: "wide",
+  },
+
   style: {
-    type: "object",
-    default: {
-      spacing: {
-        padding: {
-          bottom: "4rem",
-          top: "4rem"
-        },
-        margin: {
-          bottom: "5.25rem",
-          top: "5.25rem"
-        }
-      }
-    }
+    type: "object"
+    // default: {
+    // 	spacing: {
+    // 		padding: {
+    // 			bottom: "4rem",
+    // 			top: "4rem",
+    // 		},
+    // 		margin: {
+    // 			bottom: "5.25rem",
+    // 			top: "5.25rem",
+    // 		},
+    // 	},
+    // },
   }
 };
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (blokcAttrs);
 
 /***/ }),
@@ -177,7 +185,7 @@ __webpack_require__.r(__webpack_exports__);
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, {
   edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_4__["default"],
-  attributes: _attributes__WEBPACK_IMPORTED_MODULE_7__["default"],
+  // attributes,
   deprecated: _deprecated__WEBPACK_IMPORTED_MODULE_6__["default"],
   example: {},
   icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
@@ -548,7 +556,7 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkncmazfaustcore"] = self["webpackChunkncmazfaustcore"] || [];
+/******/ 		var chunkLoadingGlobal = self["webpackChunkncmaz_faust_core"] = self["webpackChunkncmaz_faust_core"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();

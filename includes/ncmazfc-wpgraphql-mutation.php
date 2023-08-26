@@ -470,7 +470,7 @@ add_action('graphql_post_object_mutation_update_additional_data', function ($pos
 
     //  more fields
     if (!empty($input['ncTags'])) {
-        wp_set_post_tags($post_id, $input['ncTags'], true);
+        wp_set_post_tags($post_id, $input['ncTags']);
     }
     if (isset($input['ncmazAudioUrl'])) {
         update_field('audio_url', $input['ncmazAudioUrl'], $post_id);

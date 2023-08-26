@@ -37,20 +37,22 @@ export default function save({
 							: "max-w-2xl w-full"
 					)}
 				>
-					<RichText.Content
-						tagName={headingTag || "h2"}
-						className={classNames(
-							`ncmazfc-block-heading__heading font-semibold`,
-							variation === "style1"
-								? "text-xl sm:text-2xl md:text-3xl lg:text-4xl"
-								: "",
-							variation === "style2" ? "text-xl md:text-2xl lg:text-3xl" : "",
-							variation === "style3" ? "text-lg md:text-xl lg:text-2xl" : ""
-						)}
-						value={heading}
-						placeholder="Add heading"
-					/>
-					{showSubHeading && (
+					{!!heading && (
+						<RichText.Content
+							tagName={headingTag || "h2"}
+							className={classNames(
+								`ncmazfc-block-heading__heading font-semibold`,
+								variation === "style1"
+									? "text-xl sm:text-2xl md:text-3xl lg:text-4xl"
+									: "",
+								variation === "style2" ? "text-xl md:text-2xl lg:text-3xl" : "",
+								variation === "style3" ? "text-lg md:text-xl lg:text-2xl" : ""
+							)}
+							value={heading}
+							placeholder="Add heading"
+						/>
+					)}
+					{showSubHeading && !!subHeading && (
 						<RichText.Content
 							tagName="span"
 							className={classNames(

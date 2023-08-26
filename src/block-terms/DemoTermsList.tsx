@@ -21,9 +21,11 @@ const DemoTermsList: FC<Props> = ({ terms }) => {
 							<div className="flex items-center space-x-4">
 								<div className="block flex-shrink-0 w-11 h-11 sm:w-16 sm:h-16 relative rounded-full overflow-hidden shadow-lg">
 									<div className="nc-NcImage absolute inset-0">
+										{/* @ts-ignore */}
 										{node.ncTaxonomyMeta?.featuredImage?.node?.sourceUrl ? (
 											<img
 												src={
+													// {/* @ts-ignore */}
 													node.ncTaxonomyMeta?.featuredImage?.node?.sourceUrl
 												}
 												className="object-cover w-full h-full "

@@ -540,6 +540,19 @@ if (!function_exists("ncmazFC__acf_add_local_field_groups")) :
                         'indigo' => 'indigo',
                         'yellow' => 'yellow',
                         'blue' => 'blue',
+                        'slate' => 'slate',
+                        'teal' => 'teal',
+                        'amber' => 'amber',
+                        'emerald' => 'emerald',
+                        'lime' => 'lime',
+                        'rose' => 'rose',
+                        'fuchsia' => 'fuchsia',
+                        'cyan' => 'cyan',
+                        'lightBlue' => 'lightBlue',
+                        'violet' => 'violet',
+                        'sky' => 'sky',
+                        'orange' => 'orange',
+                        'lightGreen' => 'lightGreen',
                     ),
                     'default_value' => 'green',
                     'allow_null' => 0,
@@ -1147,6 +1160,67 @@ add_action('acf/include_fields', function () {
         'show_in_rest' => 0,
         'show_in_graphql' => 1,
         'graphql_field_name' => 'ncmazfaustMenu',
+        'map_graphql_types_from_location_rules' => 0,
+        'graphql_types' => '',
+    ));
+});
+
+
+// add custom fields to page
+add_action('acf/include_fields', function () {
+    if (!function_exists('acf_add_local_field_group')) {
+        return;
+    }
+
+    acf_add_local_field_group(array(
+        'key' => 'group_64e81a9c26583',
+        'title' => 'Ncmaz page meta',
+        'fields' => array(
+            array(
+                'key' => 'field_64e81a9cc8f30',
+                'label' => 'Is full-with page',
+                'name' => 'is_full-with_page',
+                'aria-label' => '',
+                'type' => 'true_false',
+                'instructions' => '',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'message' => 'If true, the page will be rendered full-width, and the title will be hidden. Same as front-page.',
+                'default_value' => 0,
+                'ui' => 0,
+                'show_in_graphql' => 1,
+                'graphql_description' => '',
+                'graphql_field_name' => 'isFullWithPage',
+                'graphql_non_null' => 0,
+                'ui_on_text' => '',
+                'ui_off_text' => '',
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'post_type',
+                    'operator' => '==',
+                    'value' => 'page',
+                ),
+            ),
+        ),
+        'menu_order' => 0,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+        'hide_on_screen' => '',
+        'active' => true,
+        'description' => '',
+        'show_in_rest' => 0,
+        'show_in_graphql' => 1,
+        'graphql_field_name' => 'ncPageMeta',
         'map_graphql_types_from_location_rules' => 0,
         'graphql_types' => '',
     ));

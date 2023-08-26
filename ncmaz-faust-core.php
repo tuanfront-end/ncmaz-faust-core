@@ -5,7 +5,7 @@
  * Description:       Core for Ncmaz headless!
  * Requires at least: 5.8
  * Requires PHP:      7.3
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            ChisNghiax
  * Author URI:        https://ChisNghiax.com/
  * License:           GPL-2.0-or-later
@@ -17,7 +17,7 @@
 
 defined('ABSPATH') || exit;
 
-define('NCMAZFC_VERSION', '1.0.0');
+define('NCMAZFC_VERSION', '1.0.1');
 define('NCMAZFC_FILE', __FILE__);
 define('NCMAZFC_PLUGIN_BASE', plugin_basename(NCMAZFC_FILE));
 define('NCMAZFC_PATH', plugin_dir_path(NCMAZFC_FILE));
@@ -29,8 +29,6 @@ require plugin_dir_path(__FILE__) . 'includes/ncmazfc_required_plugins.php';
 
 // ****  --------------------------------------------------------------------
 add_theme_support('post-formats',  ['gallery', 'video', 'audio']);
-
-
 
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-enqueue-scripts.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-custom-hooks.php';
@@ -48,14 +46,16 @@ add_action('plugins_loaded',  function () {
         require plugin_dir_path(__FILE__) . 'includes/ncmazfc-wpgraphql-custom-where.php';
         require plugin_dir_path(__FILE__) . 'includes/ncmazfc-custom-wpgraphql.php';
         require plugin_dir_path(__FILE__) . 'includes/ncmazfc-update-post-custom-fields.php';
+        require plugin_dir_path(__FILE__) . 'includes/ncmazfc-ocid.php';
     } else {
         // hien thi thong bao va deactive this plugin
         add_action('admin_notices', function () {
             $class = 'notice notice-error';
-            $message = __('Ncmaz Faust Core requires WPGraphQL, ACF, FaustWP, WPGraphQL for Advanced Custom Fields, WPGraphQL Smart Cache, WPGraphQL Content Blocks, MailPoet 3', 'ncmazfc');
+            $message1 = __('Ncmaz Faust Core cannot load!', 'ncmazfc');
+            $message2 = __('WPGraphQL, ACF, FaustWP, WPGraphQL for Advanced Custom Fields, WPGraphQL Smart Cache, WPGraphQL Content Blocks, MailPoet 3 must be active for "Ncmaz Faust Core" to work.', 'ncmazfc');
 
-            printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), esc_html($message));
-            deactivate_plugins(plugin_basename(__FILE__));
+            printf('<div class="%1$s"><h3>%2$s</h3><p>%3$s</p></div>', esc_attr($class), esc_html__($message1), esc_html__($message2));
+            // deactivate_plugins(plugin_basename(__FILE__));
         });
         return;
     }

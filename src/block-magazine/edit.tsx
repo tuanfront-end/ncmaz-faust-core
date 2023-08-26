@@ -1,11 +1,6 @@
 import React, { useRef, useState, FC, useEffect } from "react";
 import { __ } from "@wordpress/i18n";
-import {
-	FormToggle,
-	PanelBody,
-	SelectControl,
-	Spinner,
-} from "@wordpress/components";
+import { FormToggle, PanelBody, SelectControl } from "@wordpress/components";
 import {
 	BlockControls,
 	InspectorControls,
@@ -36,8 +31,6 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	>(null);
 	const [initErrorFromSSR, setInitErrorFromSSR] = useState<string | null>(null);
 	const SERVER_SIDE_ID = "ncmazfcSSR-block-" + clientId;
-
-	console.log(222, { initPostsFromSSR, initErrorFromSSR });
 
 	// ---- SAVE uniqueId ----
 	useEffect(() => {
@@ -117,8 +110,12 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 					<ServerSideRender
 						block="ncmaz-faust/block-magazine"
 						attributes={{ uniqueId, queries }}
-						httpMethod="GET"
-						LoadingResponsePlaceholder={BlockLoadingPlaceholder}
+						httpMethod="POST"
+						LoadingResponsePlaceholder={() => (
+							<div className="absolute bg-black/10 -inset-2.5 flex items-center justify-center">
+								<BlockLoadingPlaceholder />
+							</div>
+						)}
 						EmptyResponsePlaceholder={() => <BlockEmptyPlaceholder />}
 					/>
 				</div>
@@ -143,7 +140,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 									it will be changed and applied in the client UI. Sorry for the
 									inconvenience, you can check out the{" "}
 									<a
-										href="https://ncmaz-faust.vercel.app/blocks-variations-review/"
+										href="https://ncmaz-faust.chisnghiax.com/magazine-variations-preview"
 										target="_blank"
 										rel="noopener noreferrer"
 										className="underline text-blue-400"
@@ -164,8 +161,9 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 								<option value="magazine-8">Magazine 8</option>
 								<option value="magazine-9">Magazine 9</option>
 								<option value="magazine-10">Magazine 10</option>
-								<option value="magazine-10">Magazine 11</option>
-								<option value="magazine-10">Magazine 12</option>
+								<option value="magazine-11">Magazine 11</option>
+								<option value="magazine-12">Magazine 12</option>
+								<option value="magazine-13">Magazine 13</option>
 							</optgroup>
 
 							<optgroup label="Grid">

@@ -18,12 +18,11 @@ import ServerSideRender from "@wordpress/server-side-render";
 import BlockLoadingPlaceholder from "../components/BlockLoadingPlaceholder";
 import DemoTermsList from "./DemoTermsList";
 import BlockEmptyPlaceholder from "../components/BlockEmptyPlaceholder";
-import { NcmazFcCategoryFullFieldsFragmentFragment } from "../__generated__/graphql";
 import BackgroundSection from "../frontend-components/BackgroundSection/BackgroundSection";
 import classNames from "../utils/className";
 
 const MIN_TAGS = 1;
-const MAX_TAGS = 100;
+const MAX_TAGS = 80;
 
 const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 	const { attributes, setAttributes, clientId } = props;
@@ -75,18 +74,12 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 		const callback = (mutationList, observer) => {
 			for (const mutation of mutationList) {
 				if (mutation.type === "childList") {
-					console.log(99, "__Term block - child node has been updated.", {
-						mutation,
-					});
 					const { initErrors, initTerms } = getTermsDataFromSeverSideRenderNode(
 						mutation.target
 					);
 					setInitErrorFromSSR(initErrors);
 					setInitTermsFromSSR(initTerms);
 					if (!!initErrors || !!initTerms) {
-						console.log(123, "___Term blokc-disconnect___.", {
-							mutation,
-						});
 						observer.disconnect();
 						observerRef.current = null;
 					}
@@ -128,7 +121,7 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 								be changed and applied in the client UI. Sorry for the
 								inconvenience, you can check out the{" "}
 								<a
-									href="https://ncmaz-faust.vercel.app/blocks-variations-review/"
+									href="https://ncmaz-faust.chisnghiax.com/block-term-variations-preview"
 									target="_blank"
 									rel="noopener noreferrer"
 									className="underline text-blue-400"
@@ -209,7 +202,7 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 
 	const renderContent = () => {
 		return (
-			<>
+			<div className="relative">
 				{initErrorFromSSR && (
 					<div className="text-red-500 text-sm">
 						<h3>Error!</h3>
@@ -225,11 +218,15 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 						block="ncmaz-faust/block-terms"
 						attributes={attributes}
 						httpMethod="POST"
-						LoadingResponsePlaceholder={BlockLoadingPlaceholder}
+						LoadingResponsePlaceholder={() => (
+							<div className="absolute bg-black/10 -inset-2.5 flex items-center justify-center">
+								<BlockLoadingPlaceholder />
+							</div>
+						)}
 						EmptyResponsePlaceholder={() => <div />}
 					/>
 				</div>
-			</>
+			</div>
 		);
 	};
 

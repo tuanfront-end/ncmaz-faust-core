@@ -37,6 +37,10 @@ const blokcAttrs = {
     type: "string",
     default: "Become an author"
   },
+  ctaButtonHref: {
+    type: "string",
+    default: "#"
+  },
   headingTag: {
     type: "string",
     default: "h2"
@@ -61,15 +65,17 @@ const blokcAttrs = {
     type: "boolean",
     default: false
   },
+  align: {
+    type: "string",
+    default: "wide"
+  },
   style: {
     type: "object",
     default: {
       spacing: {
-        padding: {
-          bottom: "1.75rem"
-        },
         margin: {
-          bottom: "2.25rem"
+          bottom: "6rem",
+          top: "6rem"
         }
       }
     }
@@ -137,6 +143,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const Edit = props => {
   const {
     attributes,
@@ -156,7 +163,8 @@ const Edit = props => {
     showDescLists,
     anchor,
     style,
-    hasBackground
+    hasBackground,
+    ctaButtonHref
   } = attributes;
   const renderSubcribeForm = () => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", {
@@ -288,7 +296,15 @@ const Edit = props => {
     id: "showCtaButton"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "showCtaButton"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show CTA button", "ncmazfc"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show CTA button", "ncmazfc"))), !!showCtaButton && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalInputControl, {
+    title: "CTA button link",
+    label: "CTA button link",
+    type: "url",
+    value: ctaButtonHref,
+    onChange: nextValue => setAttributes({
+      ctaButtonHref: nextValue || "#"
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex gap-3"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.FormToggle, {
     checked: showSubcribeForm,
@@ -463,7 +479,8 @@ function save({
     showDescLists,
     anchor,
     style,
-    hasBackground
+    hasBackground,
+    ctaButtonHref
   } = attributes;
   const renderSubcribeForm = () => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", {
@@ -512,7 +529,8 @@ function save({
       className: "font-medium text-neutral-700 dark:text-neutral-300"
     }, item)))), showSubcribeForm && renderSubcribeForm(), showCtaButton && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_frontend_components_Button_ButtonPrimary__WEBPACK_IMPORTED_MODULE_5__["default"], {
       className: "mt-8",
-      type: "button"
+      type: "button",
+      href: ctaButtonHref
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText.Content, {
       tagName: "span",
       value: ctaButton
@@ -1124,7 +1142,7 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkncmazfaustcore"] = self["webpackChunkncmazfaustcore"] || [];
+/******/ 		var chunkLoadingGlobal = self["webpackChunkncmaz_faust_core"] = self["webpackChunkncmaz_faust_core"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
