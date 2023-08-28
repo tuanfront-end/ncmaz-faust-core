@@ -16,7 +16,7 @@
 <!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 <!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/6.3" created="2023-08-25 22:59" -->
+	<!-- generator="WordPress/6.3" created="2023-08-26 00:20" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,7 +29,7 @@
 	<title>Ncmaz headless blog</title>
 	<link>https://ncmaz-faust.chisnghiax.com</link>
 	<description>Ncmaz Nextjs headless WordPress site</description>
-	<pubDate>Fri, 25 Aug 2023 22:59:25 +0000</pubDate>
+	<pubDate>Sat, 26 Aug 2023 00:20:21 +0000</pubDate>
 	<language>en</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://ncmaz-faust.chisnghiax.com</wp:base_site_url>
@@ -21633,7 +21633,7 @@ Commenter avatars come from <a href="https://en.gravatar.com/">Gravatar</a>.]]><
 <div class="wp-block-ncmaz-faust-block-heading ncmazfc-block-heading__wrap relative text-neutral-900 dark:text-neutral-50 not-prose" style="margin-bottom:2.5rem;padding-bottom:0rem"><div class="max-w-2xl w-full"><h2 class="ncmazfc-block-heading__heading font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl" placeholder="Add heading">Listen to audio live 🎶</h2><span class="ncmazfc-block-heading__subHeading mt-2 font-normal block text-neutral-500 dark:text-neutral-400 max-w-4xl md:mt-3 text-sm sm:text-base md:text-lg" placeholder="Add sub heading">Click on music icon and enjoy music or podcast</span></div></div>
 <!-- /wp:ncmaz-faust/block-heading -->
 
-<!-- wp:ncmaz-faust/block-magazine {"uniqueId":"07f4e7b2-13cf-47de-8827-a3c270791628","queries":{"pages":0,"perPage":6,"offset":0,"postType":"post","order":"DESC","orderBy":"DATE","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":{"category":[54]},"parents":[]},"blockVariation":"magazine-8"} /--></div>
+<!-- wp:ncmaz-faust/block-magazine {"uniqueId":"52f28d26-9b35-4d84-833f-8d8001ffa92e","queries":{"pages":0,"perPage":6,"offset":0,"postType":"post","order":"DESC","orderBy":"DATE","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":{"category":[]},"parents":[]},"blockVariation":"magazine-8"} /--></div>
 <!-- /wp:ncmaz-faust/block-group -->
 
 <!-- wp:ncmaz-faust/block-cta {"heading":"Far from face\u003cbr\u003ebut not from heart 🎈","description":"Let stay at home and share with everyone the most\u003cbr\u003ebeautiful stories in your hometown","ctaButton":"Getting started","headingTag":"h3"} -->
@@ -21647,7 +21647,7 @@ Commenter avatars come from <a href="https://en.gravatar.com/">Gravatar</a>.]]><
 <div class="wp-block-ncmaz-faust-block-heading ncmazfc-block-heading__wrap relative text-neutral-900 dark:text-neutral-50 not-prose border-b border-neutral-200 dark:border-neutral-700" style="margin-bottom:2.25rem;padding-bottom:1.75rem"><div class="max-w-2xl w-full"><h2 class="ncmazfc-block-heading__heading font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl" placeholder="Add heading">Latest songs</h2></div></div>
 <!-- /wp:ncmaz-faust/block-heading -->
 
-<!-- wp:ncmaz-faust/block-magazine {"uniqueId":"cdb49947-b4ae-41f7-b585-0bd0f6b04dea","queries":{"pages":0,"perPage":9,"offset":0,"postType":"post","order":"ASC","orderBy":"DATE","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":{"category":[54]},"parents":[]},"blockVariation":"magazine-9"} /--></div>
+<!-- wp:ncmaz-faust/block-magazine {"uniqueId":"2cd030da-065e-4a1e-b220-aad6081e8d74","queries":{"pages":0,"perPage":9,"offset":0,"postType":"post","order":"ASC","orderBy":"DATE","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":{"category":[]},"parents":[]},"blockVariation":"magazine-9"} /--></div>
 <!-- /wp:ncmaz-faust/block-group -->
 
 <!-- wp:ncmaz-faust/block-group {"hasBackground":true} -->
@@ -21655,14 +21655,14 @@ Commenter avatars come from <a href="https://en.gravatar.com/">Gravatar</a>.]]><
 <div class="wp-block-ncmaz-faust-block-heading ncmazfc-block-heading__wrap relative text-neutral-900 dark:text-neutral-50 not-prose border-b border-neutral-200 dark:border-neutral-700" style="margin-bottom:2.25rem;padding-bottom:1.75rem"><div class="max-w-2xl w-full"><h2 class="ncmazfc-block-heading__heading font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl" placeholder="Add heading">Latest podcasts</h2></div></div>
 <!-- /wp:ncmaz-faust/block-heading -->
 
-<!-- wp:ncmaz-faust/block-magazine {"uniqueId":"40ddf65e-db87-4048-9097-c400fcb924e3","queries":{"pages":0,"perPage":9,"offset":0,"postType":"post","order":"DESC","orderBy":"TITLE","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":{"category":[54]},"parents":[]},"blockVariation":"grid-9","showLoadMore":true} /--></div>
+<!-- wp:ncmaz-faust/block-magazine {"uniqueId":"862f1730-fed6-45ed-a0bb-f2ea03beb844","queries":{"pages":0,"perPage":9,"offset":0,"postType":"post","order":"DESC","orderBy":"TITLE","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":{"category":[]},"parents":[]},"blockVariation":"grid-9","showLoadMore":true} /--></div>
 <!-- /wp:ncmaz-faust/block-group -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>646</wp:post_id>
 		<wp:post_date><![CDATA[2023-08-25 09:10:37]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2023-08-25 09:10:37]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2023-08-25 11:05:00]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2023-08-25 11:05:00]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2023-08-26 00:20:01]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2023-08-26 00:20:01]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[home-3-podcast]]></wp:post_name>
@@ -21674,7 +21674,7 @@ Commenter avatars come from <a href="https://en.gravatar.com/">Gravatar</a>.]]><
 		<wp:is_sticky>0</wp:is_sticky>
 														<wp:postmeta>
 		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		<wp:meta_value><![CDATA[2]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[is_full-with_page]]></wp:meta_key>
@@ -21700,14 +21700,14 @@ Commenter avatars come from <a href="https://en.gravatar.com/">Gravatar</a>.]]><
 <div style="height:2.2rem" aria-hidden="true" class="wp-block-spacer"></div>
 <!-- /wp:spacer -->
 
-<!-- wp:ncmaz-faust/block-magazine {"uniqueId":"65e57f96-e473-4f6e-bf22-acf91b9f0150","queries":{"pages":0,"perPage":5,"offset":0,"postType":"post","order":"DESC","orderBy":"DATE","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":{"category":[85]},"parents":[]},"blockVariation":"magazine-2"} /-->
+<!-- wp:ncmaz-faust/block-magazine {"uniqueId":"44421a9c-2083-4345-b075-33ef2853f510","queries":{"pages":0,"perPage":5,"offset":0,"postType":"post","order":"DESC","orderBy":"DATE","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":{"category":[]},"parents":[]},"blockVariation":"magazine-2"} /-->
 
 <!-- wp:ncmaz-faust/block-group {"style":{"spacing":{"padding":{"bottom":"0rem","top":"0rem"},"margin":{"bottom":"7rem","top":"7rem"}}}} -->
 <div class="wp-block-ncmaz-faust-block-group alignwide not-prose" style="margin-top:7rem;margin-bottom:7rem;padding-top:0rem;padding-bottom:0rem"><!-- wp:ncmaz-faust/block-heading {"heading":"Hot Animals Videos 🐟","subHeading":"Discover the most outstanding articles ins all topics of life.","showSubHeading":false} -->
 <div class="wp-block-ncmaz-faust-block-heading ncmazfc-block-heading__wrap relative text-neutral-900 dark:text-neutral-50 not-prose border-b border-neutral-200 dark:border-neutral-700" style="margin-bottom:2.25rem;padding-bottom:1.75rem"><div class="max-w-2xl w-full"><h2 class="ncmazfc-block-heading__heading font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl" placeholder="Add heading">Hot Animals Videos 🐟</h2></div></div>
 <!-- /wp:ncmaz-faust/block-heading -->
 
-<!-- wp:ncmaz-faust/block-magazine {"uniqueId":"2a62fb8f-82cb-4e73-bd22-b420f25060be","queries":{"pages":0,"perPage":5,"offset":0,"postType":"post","order":"DESC","orderBy":"TITLE","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":{"category":[85]},"parents":[]},"blockVariation":"slider-5"} /--></div>
+<!-- wp:ncmaz-faust/block-magazine {"uniqueId":"3b901de0-e66f-46e6-b0c3-49a7ab4382fd","queries":{"pages":0,"perPage":5,"offset":0,"postType":"post","order":"DESC","orderBy":"TITLE","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":{"category":[]},"parents":[]},"blockVariation":"slider-5"} /--></div>
 <!-- /wp:ncmaz-faust/block-group -->
 
 <!-- wp:ncmaz-faust/block-cta {"heading":"Join our newsletter 🎉","description":"Read and share new perspectives on just about any topic. Everyone’s welcome.","showCtaButton":false,"showSubcribeForm":true,"showDescLists":true} -->
@@ -21722,14 +21722,14 @@ Commenter avatars come from <a href="https://en.gravatar.com/">Gravatar</a>.]]><
 <div class="wp-block-ncmaz-faust-block-heading ncmazfc-block-heading__wrap relative text-neutral-900 dark:text-neutral-50 not-prose border-b border-neutral-200 dark:border-neutral-700" style="margin-bottom:2.25rem;padding-bottom:1.75rem"><div class="max-w-2xl w-full"><h2 class="ncmazfc-block-heading__heading font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl" placeholder="Add heading">More Hot Videos 🏑</h2></div></div>
 <!-- /wp:ncmaz-faust/block-heading -->
 
-<!-- wp:ncmaz-faust/block-magazine {"uniqueId":"bf3b976c-3186-48de-812b-5ab8ebe8be94","queries":{"pages":0,"perPage":9,"offset":0,"postType":"post","order":"ASC","orderBy":"TITLE","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":{"category":[85]},"parents":[]},"blockVariation":"grid-6","showLoadMore":true} /--></div>
+<!-- wp:ncmaz-faust/block-magazine {"uniqueId":"3d0fd876-d0e9-4cd2-81b4-794a43d29718","queries":{"pages":0,"perPage":9,"offset":0,"postType":"post","order":"ASC","orderBy":"TITLE","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":{"category":[]},"parents":[]},"blockVariation":"grid-6","showLoadMore":true} /--></div>
 <!-- /wp:ncmaz-faust/block-group -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>695</wp:post_id>
 		<wp:post_date><![CDATA[2023-08-25 09:35:20]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2023-08-25 09:35:20]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2023-08-25 11:06:13]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2023-08-25 11:06:13]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2023-08-26 00:19:56]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2023-08-26 00:19:56]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[home-4-video]]></wp:post_name>
@@ -21741,7 +21741,7 @@ Commenter avatars come from <a href="https://en.gravatar.com/">Gravatar</a>.]]><
 		<wp:is_sticky>0</wp:is_sticky>
 														<wp:postmeta>
 		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		<wp:meta_value><![CDATA[2]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[is_full-with_page]]></wp:meta_key>
@@ -21767,7 +21767,7 @@ Commenter avatars come from <a href="https://en.gravatar.com/">Gravatar</a>.]]><
 <div style="height:2rem" aria-hidden="true" class="wp-block-spacer"></div>
 <!-- /wp:spacer -->
 
-<!-- wp:ncmaz-faust/block-magazine {"uniqueId":"268802d3-4810-4d65-9995-be20b7ceeac4","queries":{"pages":0,"perPage":6,"offset":0,"postType":"post","order":"DESC","orderBy":"DATE","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":{"category":[86]},"parents":[]},"blockVariation":"magazine-7"} /-->
+<!-- wp:ncmaz-faust/block-magazine {"uniqueId":"e5449e89-9141-40cc-8294-41a437e06735","queries":{"pages":0,"perPage":6,"offset":0,"postType":"post","order":"DESC","orderBy":"DATE","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":{"category":[]},"parents":[]},"blockVariation":"magazine-7"} /-->
 
 <!-- wp:ncmaz-faust/block-cta {"headingTag":"h3","style":{"spacing":{"margin":{"bottom":"0rem","top":"7rem"}}}} -->
 <div class="wp-block-ncmaz-faust-block-cta alignwide not-prose" style="margin-top:7rem;margin-bottom:0rem"><div class="ncmazfaust-block-CTA__wrap relative flex flex-col lg:flex-row items-center gap-14 lg:gap-10 not-prose"><div class="flex-shrink-0 lg:w-2/5"><span class="text-xs uppercase tracking-wider font-medium text-neutral-400 block mb-3">SUPPER CHANGE YOUR PLANNING POWERS</span><h3 class="font-semibold text-3xl sm:text-4xl">Become an author and share your great stories</h3><span class="block mt-6 text-neutral-500 dark:text-neutral-400">Become an author you can earn extra income by writing articles. Read and share new perspectives on just about any topic. Everyone’s welcome.</span><a href="#" class="nc-Button flex-shrink-0 relative h-auto inline-flex items-center justify-center rounded-2xl transition-colors border-transparent bg-primary-700 hover:bg-primary-600 disabled:hover:bg-primary-700 text-primary-50 text-sm sm:text-base font-medium py-3 px-4 sm:py-3.5 sm:px-6 mt-8  " type="button"><span>Become an author</span></a></div><div class="flex-1"><!-- wp:image {"sizeSlug":"large"} -->
@@ -21780,14 +21780,14 @@ Commenter avatars come from <a href="https://en.gravatar.com/">Gravatar</a>.]]><
 <div class="wp-block-ncmaz-faust-block-heading ncmazfc-block-heading__wrap relative text-neutral-900 dark:text-neutral-50 not-prose border-b border-neutral-200 dark:border-neutral-700" style="margin-bottom:2.25rem;padding-bottom:1.75rem"><div class="max-w-2xl w-full"><h2 class="ncmazfc-block-heading__heading font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl" placeholder="Add heading">The latest gallery</h2></div></div>
 <!-- /wp:ncmaz-faust/block-heading -->
 
-<!-- wp:ncmaz-faust/block-magazine {"uniqueId":"9521ed39-9a5e-4bb2-8c6b-5200d2551b2b","queries":{"pages":0,"perPage":6,"offset":0,"postType":"post","order":"DESC","orderBy":"DATE","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":{"category":[86]},"parents":[]},"blockVariation":"grid-6","showLoadMore":true} /--></div>
+<!-- wp:ncmaz-faust/block-magazine {"uniqueId":"54364c8a-44a6-4241-934c-4a6d0cdea59f","queries":{"pages":0,"perPage":6,"offset":0,"postType":"post","order":"DESC","orderBy":"DATE","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":{"category":[]},"parents":[]},"blockVariation":"grid-6","showLoadMore":true} /--></div>
 <!-- /wp:ncmaz-faust/block-group -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>725</wp:post_id>
 		<wp:post_date><![CDATA[2023-08-25 09:57:09]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2023-08-25 09:57:09]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2023-08-25 11:11:08]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2023-08-25 11:11:08]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2023-08-26 00:19:54]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2023-08-26 00:19:54]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[home-5-gallery]]></wp:post_name>
@@ -21799,7 +21799,7 @@ Commenter avatars come from <a href="https://en.gravatar.com/">Gravatar</a>.]]><
 		<wp:is_sticky>0</wp:is_sticky>
 														<wp:postmeta>
 		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		<wp:meta_value><![CDATA[2]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[is_full-with_page]]></wp:meta_key>

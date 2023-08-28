@@ -114,6 +114,22 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
         $number = $input['number']; // 1 is add, and 0 is remove
         $outPut = [];
 
+        // truong hop khong co user id va increment view count
+        if (empty($userID) && $reaction == 'VIEW' && !empty($postID) && $number === 1) {
+            $newCount = ncmazFc__increment_view_count_by_id($postID);
+            $outPut = [
+                'user_id' => $userID,
+                'post_id' => $postID,
+                'reaction' => $reaction,
+                'result' => 'ADDED',
+                'number' => $number,
+                'new_count' =>  $newCount,
+            ];
+            return $outPut; // return here
+        }
+
+
+        //  Nhung truong hop con lai...
         if (empty($postID) || empty($userID) || empty($reaction) || ($number !== 0 && $number !== 1)) {
             return [
                 'user_id' => $userID,
@@ -182,7 +198,7 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
                     'reaction'  => $reaction,
                     'result'    => 'ERROR',
                     'number' => $number,
-                    'errors'    => 'View count is already exist.'
+                    'errors'    => 'View count is already exist. Can not remove it.'
                 ];
                 return $outPut;
             }
