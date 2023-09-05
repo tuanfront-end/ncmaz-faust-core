@@ -70,11 +70,6 @@ function ncmazfc__theme_register_required_plugins()
 			'slug'     => 'wpgraphql-smart-cache',
 			'required' => true,
 		),
-		array(
-			'name'     => 'One Click Demo Import',
-			'slug'     => 'one-click-demo-import',
-			'required' => false,
-		),
 
 		// 2 plugin nay can dowload tu github ve sau do unzip va zip lai.
 		array(
