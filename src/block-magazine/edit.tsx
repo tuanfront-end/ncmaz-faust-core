@@ -14,9 +14,9 @@ import ServerSideRender from "@wordpress/server-side-render";
 import BlockLoadingPlaceholder from "../components/BlockLoadingPlaceholder";
 import BlockEmptyPlaceholder from "../components/BlockEmptyPlaceholder";
 import DemoListPosts from "./DemoListPosts";
-import { NcmazFcPostsEdegsFieldsFragment } from "../__generated__/graphql";
 import BackgroundSection from "../frontend-components/BackgroundSection/BackgroundSection";
 import classNames from "../utils/className";
+import { PostRoot } from "./type";
 
 const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	const { attributes, setAttributes, clientId } = props;
@@ -26,9 +26,9 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 		attributes;
 	const observerRef = useRef<MutationObserver | null>(null);
 
-	const [initPostsFromSSR, setInitPostsFromSSR] = useState<
-		NcmazFcPostsEdegsFieldsFragment["nodes"] | null
-	>(null);
+	const [initPostsFromSSR, setInitPostsFromSSR] = useState<PostRoot[] | null>(
+		null,
+	);
 	const [initErrorFromSSR, setInitErrorFromSSR] = useState<string | null>(null);
 	const SERVER_SIDE_ID = "ncmazfcSSR-block-" + clientId;
 
@@ -38,20 +38,19 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	}, []);
 
 	const getPostsDataFromSeverSideRenderNode = (wrapNode: HTMLElement) => {
+		//
 		const node = wrapNode.querySelector(
-			".ncmazfc-block-content-common-class"
+			"div[data-block-json-wrap]",
 		) as HTMLElement | null;
-		const dataInitPosts =
-			node?.getAttribute("data-ncmazfc-init-posts") || "null";
-		const dataInitErrors =
-			node?.getAttribute("data-ncmazfc-init-errors") || "null";
+
+		const dataObject = JSON.parse(node?.textContent || "{}") as {
+			block_posts: PostRoot[];
+			errors: string;
+		};
 
 		return {
-			initPosts:
-				(JSON.parse(
-					dataInitPosts
-				) as NcmazFcPostsEdegsFieldsFragment["nodes"]) || null,
-			initErrors: JSON.parse(dataInitErrors),
+			initPosts: dataObject?.block_posts || null,
+			initErrors: dataObject?.errors || null,
 		};
 	};
 
@@ -68,7 +67,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 			for (const mutation of mutationList) {
 				if (mutation.type === "childList") {
 					const { initErrors, initPosts } = getPostsDataFromSeverSideRenderNode(
-						mutation.target
+						mutation.target,
 					);
 					setInitPostsFromSSR(initPosts);
 					setInitErrorFromSSR(initErrors);
@@ -90,20 +89,23 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 		if (!initPostsFromSSR?.length) {
 			return <BlockEmptyPlaceholder />;
 		}
-		return <DemoListPosts posts={initPostsFromSSR} />;
+		return <DemoListPosts posts={initPostsFromSSR} clientId={clientId} />;
 	};
 
 	const renderContent = () => {
 		return (
 			<div className={`ncmazfc-block-magazine relative `}>
 				{initErrorFromSSR && (
-					<div className="text-red-500 text-sm">
-						<h3>Error!</h3>
-						<pre>
+					<div className="text-red-500 text-sm p-10 bg-slate-100">
+						<strong>
+							{__("Error when fetching posts data from SSR", "ncmazfc")}
+						</strong>
+						<pre className="text-xs">
 							<code>{JSON.stringify(initErrorFromSSR, null, 2)}</code>
 						</pre>
 					</div>
 				)}
+
 				{renderLayoutType()}
 
 				<div id={SERVER_SIDE_ID}>
@@ -206,7 +208,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 								<i className="text-xs italic block mt-1">
 									{__(
 										"(You can see the load more button in the frontend page!)",
-										"ncmazfc"
+										"ncmazfc",
 									)}
 								</i>
 							)}
@@ -245,7 +247,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 				{...useBlockProps({
 					className: classNames(
 						"not-prose",
-						hasBackground ? "relative py-16" : ""
+						hasBackground ? "relative py-16" : "",
 					),
 				})}
 			>

@@ -25,7 +25,7 @@ if (!function_exists("ncmazfc__render_callback_block_magazine")) :
         }
 
         // return object with json data
-        $testOutputWithJsonData = [
+        $outputWithJsonData = [
             "queryVariables" => $queryVariables,
             "block_posts" => $block_posts,
             "errors" => $errors,
@@ -35,8 +35,15 @@ if (!function_exists("ncmazfc__render_callback_block_magazine")) :
 
         // test admin editor
         // return "<pre>" . wp_json_encode($data) . "</pre>";
-
-        return "<pre>" . wp_json_encode($testOutputWithJsonData) . "</pre>";
+        ob_start();
+?>
+        <div data-block-json-wrap hidden>
+            <?php echo wp_json_encode($outputWithJsonData); ?>
+        </div>
+    <?php
+        $output = ob_get_contents(); // collect output
+        ob_end_clean(); // Turn off ouput buffer
+        return $output; // Print output
     }
 endif;
 
@@ -62,14 +69,21 @@ if (!function_exists("ncmazfc__render_callback_block_terms")) :
         }
 
         // return object with json data
-        $testOutputWithJsonData = [
+        $outputWithJsonData = [
             "block_terms" => $block_terms,
             "errors" => $errors,
         ];
 
         // test admin editor
         // return "<pre>" . wp_json_encode($block_terms) . "</pre>";
-
-        return wp_json_encode($testOutputWithJsonData);
+        ob_start();
+    ?>
+        <div data-block-json-wrap hidden>
+            <?php echo wp_json_encode($outputWithJsonData); ?>
+        </div>
+<?php
+        $output = ob_get_contents(); // collect output
+        ob_end_clean(); // Turn off ouput buffer
+        return $output; // Print output
     }
 endif;

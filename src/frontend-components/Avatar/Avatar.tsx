@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import { avatarColors } from "../../contains/contants";
-import getImageSizesBySizeName from "../../utils/getImageSizesBySizeName";
 const Avatar = ({
 	containerClassName = "ring-1 ring-white dark:ring-neutral-900",
 	sizeClass = "h-6 w-6 text-sm",
@@ -10,13 +9,11 @@ const Avatar = ({
 	imageSizes = "THUMBNAIL",
 	srcSet = undefined,
 }) => {
-	let SIZES = getImageSizesBySizeName({ sizeName: imageSizes as any });
-
 	const url = imgUrl || "";
 	const name = userName || "John Doe";
 	const _setBgColor = (name) => {
 		const backgroundIndex = Math.floor(
-			name.charCodeAt(0) % avatarColors.length
+			name.charCodeAt(0) % avatarColors.length,
 		);
 		return avatarColors[backgroundIndex];
 	};
@@ -32,7 +29,6 @@ const Avatar = ({
 					src={url}
 					srcSet={srcSet}
 					alt={name}
-					sizes={SIZES}
 				/>
 			)}
 			<span className="wil-avatar__name">{name[0]}</span>

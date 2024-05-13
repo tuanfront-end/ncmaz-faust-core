@@ -8,12 +8,12 @@ const CategoryBadgeList = ({ className = "", itemClass = "", categories }) => {
 			data-nc-id="CategoryBadgeList"
 		>
 			<div className={`flex flex-wrap space-x-2 -my-1 ${className}`}>
-				{categories.edges.map((item, index) => (
+				{categories?.map((item, index) => (
 					<Badge
 						className={`relative my-1 ${itemClass}`}
 						key={index}
-						name={item.node.name}
-						href={item.node.link}
+						name={item?.node?.name}
+						href={item?.node?.link}
 					/>
 				))}
 			</div>
