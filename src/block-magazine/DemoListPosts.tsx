@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import ncFormatDate from "../utils/formatDate";
-import { useEffect, useState, useRef } from "@wordpress/element";
 import { PostRoot } from "./type";
 import useLoadPostMessage from "./useLoadPostMessage";
 

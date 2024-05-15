@@ -16,7 +16,7 @@ export default function useLoadPostMessage({
 	type: "ncmazfc-preview-posts-block" | "ncmazfc-preview-terms-block";
 }) {
 	const iframeRef = useRef<HTMLIFrameElement>(null);
-	const [front_uri, setFrontUri] = useState<string>("http://localhost:3000/");
+	const [front_uri, setFrontUri] = useState<string>("");
 	const [iframeHeight, setIframeHeight] = useState<number>();
 
 	useEffect(() => {
@@ -24,7 +24,9 @@ export default function useLoadPostMessage({
 			return;
 		}
 		const frontend_uri = window.ncmazfc_frontend_uri?.frontend_uri || "";
-		!!frontend_uri && setFrontUri(frontend_uri.replace(/\/$/, ""));
+		if (frontend_uri.startsWith("http")) {
+			setFrontUri(frontend_uri.replace(/\/$/, ""));
+		}
 	}, []);
 
 	useEffect(() => {

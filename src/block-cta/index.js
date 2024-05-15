@@ -14,7 +14,7 @@ registerBlockType(metadata.name, {
 	edit: Edit,
 	save,
 	attributes,
-	// deprecated: deprecated,
+	deprecated: deprecated,
 	example: {},
 	icon: (
 		<svg
