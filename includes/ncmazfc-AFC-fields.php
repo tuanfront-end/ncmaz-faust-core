@@ -1,7 +1,7 @@
 <?php
 
 // create custom fields for post type post
-add_action('acf/init', 'ncmazFC__acf_add_local_field_groups');
+add_action('acf/include_fields', 'ncmazFC__acf_add_local_field_groups');
 if (!function_exists("ncmazFC__acf_add_local_field_groups")) :
 
     function ncmazFC__acf_add_local_field_groups()
@@ -38,6 +38,13 @@ if (!function_exists("ncmazFC__acf_add_local_field_groups")) :
                         'param' => 'post_format',
                         'operator' => '==',
                         'value' => 'audio',
+                    ),
+                ),
+                array(
+                    array(
+                        'param' => 'post_type',
+                        'operator' => '==',
+                        'value' => 'post',
                     ),
                 ),
             ),
@@ -268,6 +275,13 @@ if (!function_exists("ncmazFC__acf_add_local_field_groups")) :
                         'value' => 'gallery',
                     ),
                 ),
+                array(
+                    array(
+                        'param' => 'post_type',
+                        'operator' => '==',
+                        'value' => 'post',
+                    ),
+                ),
             ),
             'menu_order' => 0,
             'position' => 'normal',
@@ -311,6 +325,13 @@ if (!function_exists("ncmazFC__acf_add_local_field_groups")) :
                         'param' => 'post_format',
                         'operator' => '==',
                         'value' => 'video',
+                    ),
+                ),
+                array(
+                    array(
+                        'param' => 'post_type',
+                        'operator' => '==',
+                        'value' => 'post',
                     ),
                 ),
             ),
