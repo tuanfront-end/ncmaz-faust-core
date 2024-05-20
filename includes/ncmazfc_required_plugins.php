@@ -32,7 +32,7 @@
  * Plugin:
  * require_once dirname( __FILE__ ) . '/path/to/class-tgm-plugin-activation.php';
  */
-require_once dirname(__FILE__) . '/class-tgm-plugin-activation.php';
+require_once plugin_dir_path(__FILE__) . '/class-tgm-plugin-activation.php';
 
 add_action('tgmpa_register', 'ncmazfc__theme_register_required_plugins');
 
@@ -70,21 +70,19 @@ function ncmazfc__theme_register_required_plugins()
 			'slug'     => 'wpgraphql-smart-cache',
 			'required' => true,
 		),
+		array(
+			'name'     => 'WPGraphQL for ACF',
+			'slug'     => 'wpgraphql-acf',
+			'required' => true,
+		),
 
 		// 2 plugin nay can dowload tu github ve sau do unzip va zip lai.
 		array(
-			'name'      => 'WPGraphQL for Advanced Custom Fields',
-			'slug'      => 'wp-graphql-acf',
-			'source'    => dirname(__FILE__) . '/lib/wp-graphql-acf.zip',
-			'required'  => true,
-			'external_url'    => "https://github.com/wpengine/wp-graphql-content-blocks"
-		),
-		array(
 			'name'      => 'WPGraphQL Content Blocks',
 			'slug'      => 'wp-graphql-content-blocks',
-			'source'    => dirname(__FILE__) . '/lib/wp-graphql-content-blocks.zip',
+			'source'    => plugin_dir_path(__FILE__) . '/lib/wp-graphql-content-blocks.zip',
 			'required'  => true,
-			'external_url'    => "https://github.com/wp-graphql/wpgraphql-acf"
+			'external_url'    => "https://github.com/wpengine/wp-graphql-content-blocks"
 		),
 
 	);
