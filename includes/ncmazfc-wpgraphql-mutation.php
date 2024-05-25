@@ -769,18 +769,19 @@ register_graphql_mutation('ncmazFaustAddSentMessContactForm', [
                 $admin_emails[] = $admin->user_email;
             }
 
+            // lấy title của website
+            $site_title = get_bloginfo('name');
+
             // Tiêu đề email
             $subject = "New Contact Form Submission from $fullName";
             // Nội dung email
-            $body = "Name: $fullName\nEmail: $email\n\nMessage:\n$message";
+            $body = "Messages received via your Website's Contact Form through the Nextjs frontend page - $site_title. \nName: $fullName\nEmail: $email\n\nMessage:\n$message";
             // Đầu mục email
             $headers = ['Content-Type: text/plain; charset=UTF-8', "From: $fullName <$email>"];
 
-            // Gửi email
+            // Gửi email và cc cho tất cả quản trị viên
             if (!empty($admin_emails)) {
-                foreach ($admin_emails as $email) {
-                    wp_mail($email, $subject, $body, $headers);
-                }
+                wp_mail($admin_emails, $subject, $body, $headers);
             }
 
             $success = true;
