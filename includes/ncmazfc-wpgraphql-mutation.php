@@ -756,16 +756,32 @@ register_graphql_mutation('ncmazFaustAddSentMessContactForm', [
         // 
 
         try {
-            // Địa chỉ email của quản trị viên
-            $admin_email = get_option('admin_email');
+
+            // Lấy danh sách người dùng có vai trò quản trị viên
+            $admins = get_users(array(
+                'role' => 'administrator',
+                'fields' => array('user_email')
+            ));
+
+            // Tạo danh sách email của quản trị viên
+            $admin_emails = array();
+            foreach ($admins as $admin) {
+                $admin_emails[] = $admin->user_email;
+            }
+
             // Tiêu đề email
             $subject = "New Contact Form Submission from $fullName";
             // Nội dung email
             $body = "Name: $fullName\nEmail: $email\n\nMessage:\n$message";
             // Đầu mục email
             $headers = ['Content-Type: text/plain; charset=UTF-8', "From: $fullName <$email>"];
+
             // Gửi email
-            wp_mail($admin_email, $subject, $body, $headers);
+            if (!empty($admin_emails)) {
+                foreach ($admin_emails as $email) {
+                    wp_mail($email, $subject, $body, $headers);
+                }
+            }
 
             $success = true;
             $error_message = "";
