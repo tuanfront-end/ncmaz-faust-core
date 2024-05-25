@@ -109,6 +109,16 @@ endif;
 // https://developer.wordpress.org/reference/functions/media_sideload_image/
 function ncmazfc__addImageToMediaLibraryByURL($imageUrl = "", $alt = "")
 {
+    // check imageIur is our domain, if true return success true
+    $siteUrl = get_site_url();
+    if (strpos($imageUrl, $siteUrl) !== false) {
+        return [
+            "success" => true,
+            "imageID" => $imageUrl
+        ];
+    }
+
+
     if (!function_exists('wp_handle_sideload') || !function_exists('media_sideload_image')) {
         require_once(ABSPATH . 'wp-admin/includes/media.php');
         require_once(ABSPATH . 'wp-admin/includes/file.php');
