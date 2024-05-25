@@ -687,3 +687,101 @@ register_graphql_mutation('ncmazFaustAddSubscriberToMailpoet', [
         return $outPut;
     }
 ]);
+
+// Register a mutation to contact form
+register_graphql_mutation('ncmazFaustAddSentMessContactForm', [
+    # inputFields expects an array of Fields to be used for inputting values to the mutation
+    'inputFields'         => [
+        'user_email' => [
+            'type' => 'String',
+            'description' => __('Email of user', 'ncmazfc'),
+        ],
+        'message' => [
+            'type' => 'String',
+            'description' => __('message', 'ncmazfc'),
+        ],
+        'user_full_name' => [
+            'type' => 'String',
+            'description' => __('Full name of user', 'ncmazfc'),
+        ],
+
+    ],
+    'outputFields'        => [
+        'user_email' => [
+            'type' => 'String',
+            'description' => __('Email of user', 'ncmazfc'),
+        ],
+        'user_full_name' => [
+            'type' => 'String',
+            'description' => __('Email of user', 'ncmazfc'),
+        ],
+        'errors' => [
+            'type' => 'String',
+            'description' => __('Error of this mutation', 'ncmazfc'),
+        ],
+        'success' => [
+            'type' => 'Boolean',
+            'description' => __('Is Added success!', 'ncmazfc'),
+        ],
+
+    ],
+    'mutateAndGetPayload' => function ($input, $context, $info) {
+        // Do any logic here to sanitize the input, check user capabilities, etc
+        $message = $input['message'];
+        $email = $input['user_email'];
+        $fullName = $input['user_full_name'];
+        $error_message = "";
+        $success = false;
+
+        if (empty($email)) {
+            $error_message = "Email is empty! Please check again!";
+            return [
+                'user_email' => $email,
+                'user_full_name' => $fullName,
+                'errors' => $error_message,
+                'success' => false,
+            ];
+        }
+
+        // check valid email
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $error_message = "Invalid email format! Please check again!";
+            return [
+                'user_email' => $email,
+                'user_full_name' => $fullName,
+                'errors' => $error_message,
+                'success' => false,
+            ];
+        }
+        // 
+
+        try {
+            // Địa chỉ email của quản trị viên
+            $admin_email = get_option('admin_email');
+            // Tiêu đề email
+            $subject = "New Contact Form Submission from $fullName";
+            // Nội dung email
+            $body = "Name: $fullName\nEmail: $email\n\nMessage:\n$message";
+            // Đầu mục email
+            $headers = ['Content-Type: text/plain; charset=UTF-8', "From: $fullName <$email>"];
+            // Gửi email
+            wp_mail($admin_email, $subject, $body, $headers);
+
+            $success = true;
+            $error_message = "";
+        } catch (\Throwable $th) {
+            //throw $th;
+            $error_message = $th->getMessage();
+            $success = false;
+        }
+
+        $outPut = [
+            'user_email' => $email,
+            'user_full_name' => $fullName,
+            'errors' => $error_message,
+            'success' =>   $success
+        ];
+
+        return $outPut;
+    }
+]);
