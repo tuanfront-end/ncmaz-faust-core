@@ -112,10 +112,14 @@ function ncmazfc__addImageToMediaLibraryByURL($imageUrl = "", $alt = "")
     // check imageIur is our domain, if true return success true
     $siteUrl = get_site_url();
     if (strpos($imageUrl, $siteUrl) !== false) {
-        return [
-            "success" => true,
-            "imageID" => $imageUrl
-        ];
+        // Sử dụng hàm attachment_url_to_postid để lấy ID
+        $attachment_id = attachment_url_to_postid($imageUrl);
+        if ($attachment_id) {
+            return [
+                "success" => true,
+                "imageID" => $attachment_id
+            ];
+        }
     }
 
 
