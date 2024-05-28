@@ -297,6 +297,9 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
 add_action('graphql_input_fields', function ($fields, $type_name, $config) {
     if ($type_name === 'CreatePostInput' || $type_name === 'UpdatePostInput') {
         $fields = array_merge($fields, [
+            'postStyle'        => ['type' => 'String'],
+            'showRightSidebar' => ['type' => 'String'],
+            // 
             'ncTags'        => ['type' => 'String'],
             // 
             'ncmazAudioUrl' => ['type' => 'String'],
@@ -493,6 +496,13 @@ add_action('graphql_post_object_mutation_update_additional_data', function ($pos
     }
     if (isset($input['ncmazVideoUrl'])) {
         update_field('video_url', $input['ncmazVideoUrl'], $post_id);
+    }
+
+    if (isset($input['showRightSidebar'])) {
+        update_field('show_right_sidebar', boolval($input['showRightSidebar']) ? 1 : 0, $post_id);
+    }
+    if (isset($input['postStyle'])) {
+        update_field('template', $input['postStyle'], $post_id);
     }
 
 
