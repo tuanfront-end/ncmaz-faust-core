@@ -136,11 +136,18 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 							onChange={(blockVariation) => setAttributes({ blockVariation })}
 							help={
 								<div>
-									(**) Select variation to change the layout and card style of
-									the block. The editor preview of the variants is currently
-									under construction, so you won't notice the change here, but
-									it will be changed and applied in the client UI. Sorry for the
-									inconvenience, you can check out the{" "}
+									To get a live preview of the styles of the different variants,
+									make sure to set{" "}
+									<a
+										href="https://faustjs.org/tutorial/get-started-with-faust#set-your-front-end-site-url"
+										target="_blank"
+										rel="noopener noreferrer"
+										className="underline text-green-600"
+									>
+										the frontend site URL
+									</a>{" "}
+									in the Faust WordPress Plugin Settings. <br />
+									Or you can check out the{" "}
 									<a
 										href="https://ncmaz-faust.chisnghiax.com/magazine-variations-preview"
 										target="_blank"

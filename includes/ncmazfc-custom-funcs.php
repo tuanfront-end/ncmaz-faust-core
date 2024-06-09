@@ -50,7 +50,7 @@ if (!function_exists('ncmazFc__calculate_reading_time_by_content')) :
         $reading_time_minutes = ceil($word_count / $words_per_minute); // Tính toán thời gian đọc (làm tròn lên).
 
         // minutes
-        return $reading_time_minutes;
+        return intval($reading_time_minutes);
     }
 endif;
 

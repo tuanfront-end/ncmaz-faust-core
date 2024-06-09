@@ -39,7 +39,7 @@ const DemoListPosts: FC<Props> = ({ posts, clientId }) => {
 				{!!front_uri && (
 					<iframe
 						ref={iframeRef}
-						className="w-full min-h-96 overflow-auto"
+						className="w-full min-h-96 overflow-auto hiddenScrollbar"
 						title="ncmaz_for_ncmazfc_preview_blocks"
 						src={front_uri + "/ncmaz_for_ncmazfc_preview_blocks/"}
 						style={{
