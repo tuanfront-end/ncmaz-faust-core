@@ -292,7 +292,6 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
 ]);
 
 
-
 // =========== dang ky cac nuations VAO POST MUTATION ... ================= 
 add_action('graphql_input_fields', function ($fields, $type_name, $config) {
     if ($type_name === 'CreatePostInput' || $type_name === 'UpdatePostInput') {
@@ -598,7 +597,6 @@ add_action('graphql_user_object_mutation_update_additional_data', function ($use
 }, 10, 5);
 
 
-
 // Register a mutation to add user to mailpoet list
 register_graphql_mutation('ncmazFaustAddSubscriberToMailpoet', [
     # inputFields expects an array of Fields to be used for inputting values to the mutation
@@ -807,6 +805,150 @@ register_graphql_mutation('ncmazFaustAddSentMessContactForm', [
             'user_full_name' => $fullName,
             'errors' => $error_message,
             'success' =>   $success
+        ];
+
+        return $outPut;
+    }
+]);
+
+// Register a mutation to create a new delete_account nonce
+register_graphql_mutation('ncmazFaustCreateDeleteAccountNonce', [
+    # inputFields expects an array of Fields to be used for inputting values to the mutation
+    'inputFields'         => [
+        'user_email' => [
+            'type' => 'String',
+            'description' => __('Email of user', 'ncmazfc'),
+        ],
+    ],
+    'outputFields'        => [
+        'user_email' => [
+            'type' => 'String',
+            'description' => __('Email of user', 'ncmazfc'),
+        ],
+        'errors' => [
+            'type' => 'String',
+            'description' => __('Error of this mutation', 'ncmazfc'),
+        ],
+        'success' => [
+            'type' => 'Boolean',
+            'description' => __('Is Added success!', 'ncmazfc'),
+        ],
+        'nonce' => [
+            'type' => 'String',
+            'description' => __('Nonce', 'ncmazfc'),
+        ],
+
+    ],
+    'mutateAndGetPayload' => function ($input, $context, $info) {
+        // Do any logic here to sanitize the input, check user capabilities, etc
+        $email = $input['user_email'];
+        $error_message = "";
+        $success = false;
+        $nonce = "";
+
+        // check valid email
+        if (empty($email) || !filter_var($email ?? "", FILTER_VALIDATE_EMAIL)) {
+            $error_message = "Email is empty or Invalid email format! Please check again!";
+            return [
+                'user_email' => $email,
+                'errors' => $error_message,
+                'success' => false,
+                'nonce' => $nonce,
+            ];
+        }
+        // 
+
+        try {
+            // create nonce
+            $nonce = wp_create_nonce('delete_account_' . $email);
+            $success = true;
+            $error_message = "";
+        } catch (\Throwable $th) {
+            //throw $th;
+            $error_message = $th->getMessage();
+            $success = false;
+        }
+
+        $outPut = [
+            'user_email' => $email,
+            'errors' => $error_message,
+            'success' =>   $success,
+            'nonce' => $nonce,
+        ];
+
+        return $outPut;
+    }
+]);
+
+// Register a mutation to delete a user account by nonce
+register_graphql_mutation('ncmazFaustDeleteAccountByNonce', [
+    # inputFields expects an array of Fields to be used for inputting values to the mutation
+    'inputFields'         => [
+        'nonce' => [
+            'type' => 'String',
+            'description' => __('Delete account Nonce', 'ncmazfc'),
+        ],
+        'user_email' => [
+            'type' => 'String',
+            'description' => __('Email of user', 'ncmazfc'),
+        ],
+
+    ],
+    'outputFields'        => [
+        'errors' => [
+            'type' => 'String',
+            'description' => __('Error of this mutation', 'ncmazfc'),
+        ],
+        'success' => [
+            'type' => 'Boolean',
+            'description' => __('Is Account Deleted success!', 'ncmazfc'),
+        ],
+    ],
+    'mutateAndGetPayload' => function ($input, $context, $info) {
+        // Do any logic here to sanitize the input, check user capabilities, etc
+        $nonce = $input['nonce'];
+        $email = $input['user_email'];
+        $error_message = "";
+        $success = false;
+
+        // check valid nonce
+        if (empty($nonce) || empty($email)) {
+            $error_message = "Invalid nonce or email! Please check again!";
+            return [
+                'errors' => $error_message,
+                'success' => false,
+            ];
+        }
+        // 
+
+        try {
+            // verify nonce
+            $nonce = wp_verify_nonce($nonce, 'delete_account_' . $email);
+
+            if ($nonce === 1) {
+                require_once(ABSPATH . 'wp-admin/includes/user.php');
+                // delete user account
+                $user = get_user_by('email', $email);
+                if ($user) {
+                    wp_delete_user($user->ID);
+                    $success = true;
+                } else {
+                    $error_message = "User not found!";
+                    $success = false;
+                }
+            } else {
+                $error_message = "Invalid nonce!";
+                $success = false;
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            $error_message = $th->getMessage();
+            $success = false;
+        }
+
+        $outPut = [
+            'errors' => $error_message,
+            'success' =>   $success,
         ];
 
         return $outPut;
