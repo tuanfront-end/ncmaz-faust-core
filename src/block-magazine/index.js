@@ -10,7 +10,6 @@ import deprecated from "./deprecated";
 import attributes from "./attributes";
 
 // for tailwind, only import the styles in this file
-import "../style.css";
 import "../styles/index.scss";
 //
 

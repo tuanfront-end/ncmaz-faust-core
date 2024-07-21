@@ -89,7 +89,13 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 		if (!initPostsFromSSR?.length) {
 			return <BlockEmptyPlaceholder />;
 		}
-		return <DemoListPosts posts={initPostsFromSSR} clientId={clientId} />;
+		return (
+			<DemoListPosts
+				posts={initPostsFromSSR}
+				clientId={clientId}
+				blockVariation={blockVariation}
+			/>
+		);
 	};
 
 	const renderContent = () => {

@@ -99,7 +99,13 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 			return <BlockEmptyPlaceholder />;
 		}
 
-		return <DemoTermsList terms={dataLists || []} clientId={clientId} />;
+		return (
+			<DemoTermsList
+				terms={dataLists || []}
+				clientId={clientId}
+				blockVariation={blockVariation}
+			/>
+		);
 	};
 
 	// render
@@ -134,7 +140,10 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 								</a>
 							</div>
 						}
-						onChange={(blockVariation) => setAttributes({ blockVariation })}
+						onChange={(value) => {
+							setAttributes({ blockVariation: value });
+							console.log(value);
+						}}
 					>
 						<optgroup label="Grid">
 							<option value="grid-1">Grid 1</option>

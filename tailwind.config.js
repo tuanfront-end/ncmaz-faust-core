@@ -13,54 +13,9 @@ function customColors(cssVar) {
 	};
 }
 
-const safelist = [
-	{
-		pattern: /shadow/,
-		variants: ["sm", "md", "lg", "xl", "2xl"],
-	},
-	{
-		pattern: /flex-(wrap|nowrap|wrap-reverse|row|col)/,
-		variants: ["sm", "md", "lg", "xl", "2xl"],
-	},
-	{
-		pattern: /grid-cols-(1|2|3|4|5|6|7|8|12)/,
-		variants: ["sm", "md", "lg", "xl", "2xl"],
-	},
-	{
-		pattern: /m-(1|2|3|4|5|6|7|8|10|11|12|13|14)/,
-		variants: ["sm", "md", "lg", "xl", "2xl"],
-	},
-	{
-		pattern: /mt-(0|16|24)/,
-		variants: ["sm", "md", "lg", "xl", "2xl"],
-	},
-	{
-		pattern: /space-y-(7|16|28)/,
-		variants: ["sm", "md", "lg", "xl", "2xl"],
-	},
-	{
-		pattern: /h-(14|16|20|24)/,
-		variants: ["sm", "xl"],
-	},
-	{
-		pattern: /w-(2\/5|3\/5|1\/3|2\/3)/,
-		variants: ["sm", "md", "lg", "xl", "2xl"],
-	},
-	{
-		pattern: /container/,
-		variants: ["sm", "md", "lg", "xl", "2xl"],
-	},
-	{
-		pattern: /text-blue-(100|500)/,
-		variants: [],
-	},
-	//
-];
-
 module.exports = {
 	important: true,
 	content: ["./src/**/*.{ts,tsx,js,jsx}"],
-	safelist,
 	theme: {
 		container: {
 			center: true,
@@ -73,17 +28,6 @@ module.exports = {
 			display: ["var(--font-display)", ...defaultTheme.fontFamily.sans],
 			body: ["var(--font-body)", ...defaultTheme.fontFamily.sans],
 		},
-		// borderRadius: {
-		// 	none: "0px",
-		// 	sm: "var(--radius-sm)",
-		// 	DEFAULT: "var(--radius-DEFAULT)",
-		// 	md: "var(--radius-md)",
-		// 	lg: "var(--radius-lg)",
-		// 	xl: "var(--radius-xl)",
-		// 	"2xl": "var(--radius-2xl)",
-		// 	"3xl": "var(--radius-3xl)",
-		// 	full: "var(--radius-full)",
-		// },
 
 		extend: {
 			colors: {
@@ -126,6 +70,4 @@ module.exports = {
 			},
 		},
 	},
-	variants: {},
-	plugins: [],
 };

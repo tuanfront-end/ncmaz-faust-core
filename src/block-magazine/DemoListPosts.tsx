@@ -7,19 +7,21 @@ interface Props {
 	className?: string;
 	posts: PostRoot[];
 	clientId?: string;
+	blockVariation: string;
 }
 
-const DemoListPosts: FC<Props> = ({ posts, clientId }) => {
+const DemoListPosts: FC<Props> = ({ posts, clientId, blockVariation }) => {
 	const { front_uri, iframeHeight, iframeRef } = useLoadPostMessage({
 		data: posts,
 		clientId: clientId || "",
 		type: "ncmazfc-preview-posts-block",
+		blockVariation,
 	});
 
 	return (
 		<>
 			{!front_uri && (
-				<div className="px-8 py-5 bg-slate-100/70 rounded-xl border-2 mt-12">
+				<div className="px-8 py-5 bg-slate-100/70 rounded-xl border-2 my-12">
 					<p>
 						To get a live preview of the styles of the different variants, make
 						sure to set{" "}
@@ -35,7 +37,7 @@ const DemoListPosts: FC<Props> = ({ posts, clientId }) => {
 					</p>
 				</div>
 			)}
-			<div className="no-prose mt-12 divide-y">
+			<div className={`no-prose py-5 relative ${!front_uri ? "divide-y" : ""}`}>
 				{!!front_uri && (
 					<iframe
 						ref={iframeRef}
@@ -77,7 +79,7 @@ const DemoListPosts: FC<Props> = ({ posts, clientId }) => {
 											className="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover"
 										/>
 									) : (
-										<div className="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover"></div>
+										<div className="absolute inset-0 h-full w-full rounded-2xl bg-gray-200 object-cover"></div>
 									)}
 									<div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
 								</div>
@@ -108,7 +110,7 @@ const DemoListPosts: FC<Props> = ({ posts, clientId }) => {
 										</h3>
 									</div>
 									<div className="mt-2 flex pt-2">
-										<div className="relative flex items-center gap-x-4">
+										<div className="relative flex items-center gap-x-3">
 											{author?.node?.ncUserMeta?.featuredImage?.node
 												?.sourceUrl ? (
 												<img
@@ -116,10 +118,10 @@ const DemoListPosts: FC<Props> = ({ posts, clientId }) => {
 														author?.node?.ncUserMeta?.featuredImage?.node
 															?.sourceUrl
 													}
-													className="h-8 w-8 object-cover rounded-full bg-gray-50"
+													className="h-8 w-8 object-cover rounded-full bg-gray-200"
 												/>
 											) : (
-												<div className="w-8 h-8 bg-neutral-100 rounded-full" />
+												<div className="w-8 h-8 bg-neutral-200 rounded-full" />
 											)}
 											<div className="relative flex items-center gap-x-2 text-sm leading-6">
 												<span className="font-semibold text-gray-900">
@@ -136,6 +138,8 @@ const DemoListPosts: FC<Props> = ({ posts, clientId }) => {
 							</article>
 						);
 					})}
+
+				<div className="absolute inset-0 bg-transparent"></div>
 			</div>
 		</>
 	);
