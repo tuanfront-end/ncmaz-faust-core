@@ -1,7 +1,4 @@
-import {
-	PostsQueriesControlsType,
-	PostsQueriesControls_DEMO_DATA,
-} from "../components/posts-queries-controls/PostsQueriesControls";
+import { PostsQueriesControlsType } from "../components/posts-queries-controls/PostsQueriesControls";
 import { AttrsGenericType } from "../types";
 
 export interface BlockMagazine_Attrs {
@@ -10,6 +7,7 @@ export interface BlockMagazine_Attrs {
 	//
 	blockVariation: string;
 	showLoadMore: boolean;
+	showViewAll: boolean;
 	hasBackground: boolean;
 }
 
@@ -29,6 +27,10 @@ const blokcAttrs: AttrsGenericType<BlockMagazine_Attrs> = {
 		// default: "style-1",
 	},
 	showLoadMore: {
+		type: "boolean",
+		// default: false,
+	},
+	showViewAll: {
 		type: "boolean",
 		// default: false,
 	},

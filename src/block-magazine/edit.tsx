@@ -22,8 +22,14 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	const { attributes, setAttributes, clientId } = props;
 
 	//
-	const { uniqueId, blockVariation, queries, showLoadMore, hasBackground } =
-		attributes;
+	const {
+		uniqueId,
+		blockVariation,
+		queries,
+		showLoadMore,
+		hasBackground,
+		showViewAll,
+	} = attributes;
 	const observerRef = useRef<MutationObserver | null>(null);
 
 	const [initPostsFromSSR, setInitPostsFromSSR] = useState<PostRoot[] | null>(
@@ -203,7 +209,29 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 							</optgroup>
 						</SelectControl>
 
-						<div className="">
+						<div>
+							<div className="flex gap-3">
+								<FormToggle
+									checked={showViewAll}
+									onChange={() => setAttributes({ showViewAll: !showViewAll })}
+									name="showViewAll"
+									id="showViewAll"
+								/>
+								<label htmlFor="showViewAll">
+									{__("Show View All button", "ncmazfc")}
+								</label>
+							</div>
+							{!!showViewAll && (
+								<i className="text-xs italic block mt-1">
+									{__(
+										"(You can see the View All button in the frontend page!)",
+										"ncmazfc",
+									)}
+								</i>
+							)}
+						</div>
+
+						<div>
 							<div className="flex gap-3">
 								<FormToggle
 									checked={showLoadMore}
@@ -214,13 +242,13 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 									id="showLoadMore"
 								/>
 								<label htmlFor="showLoadMore">
-									{__("Show load more", "ncmazfc")}
+									{__("Show Load More button", "ncmazfc")}
 								</label>
 							</div>
 							{!!showLoadMore && (
 								<i className="text-xs italic block mt-1">
 									{__(
-										"(You can see the load more button in the frontend page!)",
+										"(You can see the Load more button in the frontend page!)",
 										"ncmazfc",
 									)}
 								</i>
