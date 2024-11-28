@@ -39,6 +39,9 @@ if (!function_exists('ncmazFc__acf_prepare_field')) :
 endif;
 // add_filter('acf/prepare_field/name=views_count', 'ncmazFc__acf_prepare_field');
 add_filter('acf/prepare_field/name=reading_time', 'ncmazFc__acf_prepare_field');
+add_filter('acf/prepare_field/name=liked_posts', 'ncmazFc__acf_prepare_field');
+add_filter('acf/prepare_field/name=saved_posts', 'ncmazFc__acf_prepare_field');
+add_filter('acf/prepare_field/name=viewed_posts', 'ncmazFc__acf_prepare_field');
 
 
 // *****  ============ update some ACF custom fields when plugin active ============

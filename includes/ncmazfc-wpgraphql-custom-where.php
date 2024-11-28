@@ -96,8 +96,8 @@ add_filter('graphql_post_object_connection_query_args', function ($query_args, $
 // end ------------------------------
 
 
-//  Truy vấn  Post theo userReactionPost authorID va userReactionPost title với GraphQL ------------------------------
-// su dung truy van nay trong cac tab: liked/save trong trang author
+//  Truy vấn  Post theo authorID va user reaction: liked/save/view ------------------------------
+// su dung truy van nay trong cac tab: liked/save/view trong trang author
 add_action('graphql_register_types', function () {
     register_graphql_field('RootQueryToPostConnectionWhereArgs', 'inUserAndReaction', [
         'type' => 'String',
@@ -106,33 +106,52 @@ add_action('graphql_register_types', function () {
 });
 add_filter('graphql_post_object_connection_query_args', function ($query_args, $source, $args, $context, $info) {
     if (!empty($args['where']['inUserAndReaction'])) {
+        if (!is_string($args['where']['inUserAndReaction'])) {
+            $query_args['post__in'] = [0];
+            return $query_args;
+        }
 
         $userID_reaction = explode("/",  $args['where']['inUserAndReaction']);
 
         if (empty($userID_reaction[0]) || empty($userID_reaction[1])) {
-            $query_args['post__in'] =  [0];
+            $query_args['post__in'] = [0];
             return $query_args;
         }
 
+        // get user meta by slug
+        $user = get_user_by('slug', $userID_reaction[0]);
+        if (empty($user)) {
+            $query_args['post__in'] = [0];
+            return $query_args;
+        }
 
-        $data = ncmazfc__gqlGetUserReactionPostsByAuthorAndSearch($userID_reaction[0], $userID_reaction[1], "slug");
-        $userReactionPosts = $data['data']['userReactionPosts']['nodes'] ?? [];
+        $reaction = $userID_reaction[1];
+        $user_id = $user->ID;
 
-        // $item['title'] se o dinh danh la [postID,reaction], eg: 1,SAVE
-        $ids =  array_map(function ($item) {
-            if (empty($item['title'] ?? "")) {
-                return 0;
-            }
-            $postID = explode(",", $item['title'])[0] ?? 0;
-            if (ctype_digit($postID)) {
-                return intval($postID);
-            }
-            return 0;
-        }, $userReactionPosts);
-
+        // SAVE
+        if ($reaction == "save" || $reaction == "SAVE") {
+            // get user meta saved_posts
+            $saved_posts = get_user_meta($user_id, 'saved_posts', true);
+            $saved_posts =  ncmazfc__convert_string_to_array($saved_posts);
+            $ids = array_map('intval', $saved_posts);
+        } else if ($reaction == "like" || $reaction == "LIKE") {
+            // get user meta liked_posts
+            $liked_posts = get_user_meta($user_id, 'liked_posts', true);
+            $liked_posts =  ncmazfc__convert_string_to_array($liked_posts);
+            $ids = array_map('intval', $liked_posts);
+        } else if ($reaction == "view" || $reaction == "VIEW") {
+            // get user meta viewed_posts
+            $viewed_posts = get_user_meta($user_id, 'viewed_posts', true);
+            $viewed_posts =  ncmazfc__convert_string_to_array($viewed_posts);
+            $ids = array_map('intval', $viewed_posts);
+        } else {
+            $query_args['post__in'] = [0];
+            return $query_args;
+        }
         // 
         $query_args['post__in'] = empty($ids) ? [0] : $ids;
         $query_args['orderby'] = "post__in";
+        $query_args['posts_per_page'] = 200;
     }
     return $query_args;
 }, 10, 5);

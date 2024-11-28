@@ -110,7 +110,7 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
         // Do any logic here to sanitize the input, check user capabilities, etc
         $userID = $input['user_id'];
         $postID = $input['post_id'];
-        $reaction = $input['reaction'];
+        $reaction = $input['reaction']; // SAVE, LIKE, VIEW
         $number = $input['number']; // 1 is add, and 0 is remove
         $outPut = [];
 
@@ -128,8 +128,7 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
             return $outPut; // return here
         }
 
-
-        //  Nhung truong hop con lai...
+        //  Nhung truong loi...
         if (empty($postID) || empty($userID) || empty($reaction) || ($number !== 0 && $number !== 1)) {
             return [
                 'user_id' => $userID,
@@ -141,141 +140,51 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
             ];
         }
 
-        // when user save, like post ----------
-        $userPosts = graphql([
-            'query' =>  'query GetUserReactionPostsSaved($author: Int = 1, $title: String = "") {
-                userReactionPosts(where: {author: $author, title: $title}) {
-                  edges {
-                    node {
-                      id
-                      databaseId
-                      date
-                      authorId
-                      title
-                    }
-                  }
-                }
-              }',
-            'variables' => [
-                'author' => $userID,
-                'title' => $postID . ',' . $reaction
-            ]
-        ]);
-        $post = ($userPosts['data']['userReactionPosts']['edges'][0]['node'] ?? null);
-
-        // error case 1
-        if (empty($post) && $number === 0) {
-            return [
-                'user_id' => $userID,
-                'post_id' => $postID,
-                'reaction' => $reaction,
-                'result' => 'ERROR',
-                'number' => $number,
-                'errors' => "Reaction Post is not exist, so can not remove it. "
-            ];
-        }
-        // error case 2
-        if ($post && $number === 1) {
-            return [
-                'user_id' => $userID,
-                'post_id' => $postID,
-                'reaction' => $reaction,
-                'result' => 'ERROR',
-                'number' => $number,
-                'errors' => "Reaction Post is already exist."
-            ];
-        }
-
-
-        if ($post && $number === 0) {
-            // 1. when user update view count --------------------------------
-            if ($reaction == 'VIEW') {
-                // when user update view count, and view count is exist
-                // return error and do nothing 
-                $outPut = [
-                    'user_id'   => $userID,
-                    'post_id'   => $postID,
-                    'reaction'  => $reaction,
-                    'result'    => 'ERROR',
-                    'number' => $number,
-                    'errors'    => 'View count is already exist. Can not remove it.'
-                ];
-                return $outPut;
-            }
-
-
-            // 2. when user update save or like count --------------------------------
-            // Delete Post data 
-
-            $is_post_deleted = wp_delete_post($post['databaseId'], true);
-            // false or null when Delete Post data failure.
-            if (!$is_post_deleted) {
-                $outPut = [
-                    'user_id'   => $userID,
-                    'post_id'   => $postID,
-                    'reaction'  => $reaction,
-                    'result'    => 'ERROR',
-                    'number' => $number,
-                    'errors'    => 'Delete Reaction_post data failure.'
-                ];
-            } else {
-                // Delete Post data on success,
-                $newCount = 0;
-                if ($reaction == 'SAVE') {
-                    $newCount = ncmazFc__update_saveds_count_by_id($postID, 0);
-                } else if ($reaction == 'LIKE') {
-                    $newCount = ncmazFc__update_likes_count_by_id($postID, 0);
-                }
-
-                $outPut = [
-                    'user_id'   => $userID,
-                    'post_id'   => $postID,
-                    'reaction'  => $reaction,
-                    'result'    => 'REMOVED',
-                    'number' => $number,
-                    'new_count' =>  $newCount
-                ];
-            }
-        } else if (empty($post) && $number === 1) {
-            // have no post and add 1
-            $postTitle = $postID . ',' . $reaction;
+        if ($number === 0) {
+            // Delete id on user meta
             $newCount = 0;
-            $new_reaction_post_id = wp_insert_post([
-                'post_title' => $postTitle,
-                'post_author' =>  $userID,
-                'post_type' => 'user-reaction-post',
-                'post_status'   => 'publish',
-            ]);
-
-            //  Insert Post data on success,
-            if (!is_wp_error($new_reaction_post_id)) {
-                if ($reaction == 'SAVE') {
-                    $newCount = ncmazFc__update_saveds_count_by_id($postID, 1);
-                } else if ($reaction == 'LIKE') {
-                    $newCount = ncmazFc__update_likes_count_by_id($postID, 1);
-                } else if ($reaction == 'VIEW') {
-                    $newCount = ncmazFc__increment_view_count_by_id($postID);
-                }
-
-                $outPut = [
-                    'user_id' => $userID,
-                    'post_id' => $postID,
-                    'reaction' => $reaction,
-                    'result' => 'ADDED',
-                    'number' => $number,
-                    'new_count' =>  $newCount,
-                ];
-            } else {
-                // false or null when Insert Post data failure.
-                $outPut = [
-                    'user_id' => $userID,
-                    'post_id' => $postID,
-                    'reaction' => $reaction,
-                    'result' => 'ERROR',
-                    'errors' => $new_reaction_post_id->get_error_message(),
-                    'number' => $number,
-                ];
+            if ($reaction == 'SAVE') {
+                ncmazfc__remove_user_post_interact($userID, $postID, 'save');
+                $newCount = ncmazFc__update_saveds_count_by_id($postID, 0);
+            } else if ($reaction == 'LIKE') {
+                ncmazfc__remove_user_post_interact($userID, $postID, 'like');
+                $newCount = ncmazFc__update_likes_count_by_id($postID, 0);
+            } else if ($reaction == 'VIEW') {
+                ncmazfc__remove_user_post_interact($userID, $postID, 'view');
+                $newCount = get_field('views_count', $postID) ?? 0;
             }
+
+            $outPut = [
+                'user_id'   => $userID,
+                'post_id'   => $postID,
+                'reaction'  => $reaction,
+                'result'    => 'REMOVED',
+                'number' => $number,
+                'new_count' =>  intval($newCount),
+            ];
+        } else if ($number === 1) {
+            // have no post and add 1
+            $newCount = 0;
+
+            if ($reaction == 'SAVE') {
+                ncmazfc__add_user_post_interact($userID, $postID, 'save');
+                $newCount = ncmazFc__update_saveds_count_by_id($postID, 1);
+            } else if ($reaction == 'LIKE') {
+                ncmazfc__add_user_post_interact($userID, $postID, 'like');
+                $newCount = ncmazFc__update_likes_count_by_id($postID, 1);
+            } else if ($reaction == 'VIEW') {
+                ncmazfc__add_user_post_interact($userID, $postID, 'view');
+                $newCount = ncmazFc__increment_view_count_by_id($postID);
+            }
+
+            $outPut = [
+                'user_id' => $userID,
+                'post_id' => $postID,
+                'reaction' => $reaction,
+                'result' => 'ADDED',
+                'number' => $number,
+                'new_count' =>  intval($newCount),
+            ];
         } else {
             return [
                 'user_id' => $userID,

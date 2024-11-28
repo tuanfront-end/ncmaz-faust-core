@@ -131,7 +131,7 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 								in the Faust WordPress Plugin Settings. <br />
 								Or you can check out the{" "}
 								<a
-									href="https://ncmaz-faust.chisnghiax.com/block-term-variations-preview"
+									href="https://ncmaz-faust-delta.vercel.app/block-term-variations-preview"
 									target="_blank"
 									rel="noopener noreferrer"
 									className="underline text-blue-400"
