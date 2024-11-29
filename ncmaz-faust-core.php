@@ -51,8 +51,8 @@ add_action('plugins_loaded',  function () {
         // hien thi thong bao va deactive this plugin
         add_action('admin_notices', function () {
             $class = 'notice notice-error';
-            $message1 = __('Ncmaz Faust Core cannot load!', 'ncmazfc');
-            $message2 = __('WPGraphQL, ACF, FaustWP, WPGraphQL for Advanced Custom Fields, WPGraphQL Smart Cache, WPGraphQL Content Blocks, MailPoet 3 must be active for "Ncmaz Faust Core" to work.', 'ncmazfc');
+            $message1 = __('the Ncmaz Faust Core cannot load!!', 'ncmazfc');
+            $message2 = __('WPGraphQL, ACF, FaustWP, WPGraphQL for Advanced Custom Fields, WPGraphQL Smart Cache, WPGraphQL Content Blocks, MailPoet must be active for plugin "Ncmaz Faust Core" to work.', 'ncmazfc');
 
             printf('<div class="%1$s"><h3>%2$s</h3><p>%3$s</p></div>', esc_attr($class), esc_html($message1), esc_html($message2));
         });
