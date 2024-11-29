@@ -16,7 +16,7 @@
 <!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 <!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/6.3" created="2023-08-25 22:50" -->
+	<!-- generator="WordPress/6.6.2" created="2024-11-11 03:47" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -26,21 +26,22 @@
 >
 
 <channel>
-	<title>Ncmaz headless blog</title>
-	<link>https://ncmaz-faust.chisnghiax.com</link>
-	<description>Ncmaz Nextjs headless WordPress site</description>
-	<pubDate>Fri, 25 Aug 2023 22:50:56 +0000</pubDate>
-	<language>en</language>
+	<title>Ncmaz faust</title>
+	<link>https://royalblue-rat-307220.hostingersite.com</link>
+	<description>Ncmaz Next.js headless WordPress site</description>
+	<pubDate>Mon, 11 Nov 2024 03:47:54 +0000</pubDate>
+	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
-	<wp:base_site_url>https://ncmaz-faust.chisnghiax.com</wp:base_site_url>
-	<wp:base_blog_url>https://ncmaz-faust.chisnghiax.com</wp:base_blog_url>
+	<wp:base_site_url>https://royalblue-rat-307220.hostingersite.com</wp:base_site_url>
+	<wp:base_blog_url>https://royalblue-rat-307220.hostingersite.com</wp:base_blog_url>
 
-		<wp:author><wp:author_id>1</wp:author_id><wp:author_login><![CDATA[7w9oi7]]></wp:author_login><wp:author_email><![CDATA[mwy5dos1t2l8@sg2plzcpnl476815.prod.sin2.secureserver.net]]></wp:author_email><wp:author_display_name><![CDATA[Kristin Watson]]></wp:author_display_name><wp:author_first_name><![CDATA[Kristin]]></wp:author_first_name><wp:author_last_name><![CDATA[Watson]]></wp:author_last_name></wp:author>
-	<wp:author><wp:author_id>2</wp:author_id><wp:author_login><![CDATA[EdenTuan]]></wp:author_login><wp:author_email><![CDATA[atuanvptd@gmail.com]]></wp:author_email><wp:author_display_name><![CDATA[Esther Howard]]></wp:author_display_name><wp:author_first_name><![CDATA[Esther]]></wp:author_first_name><wp:author_last_name><![CDATA[Howard]]></wp:author_last_name></wp:author>
-	<wp:author><wp:author_id>3</wp:author_id><wp:author_login><![CDATA[demo]]></wp:author_login><wp:author_email><![CDATA[ncfaustm@gmail.com]]></wp:author_email><wp:author_display_name><![CDATA[Jenny Wilson]]></wp:author_display_name><wp:author_first_name><![CDATA[Jenny]]></wp:author_first_name><wp:author_last_name><![CDATA[Wilson]]></wp:author_last_name></wp:author>
+		<wp:author><wp:author_id>1</wp:author_id><wp:author_login><![CDATA[atuanvptd@gmail.com]]></wp:author_login><wp:author_email><![CDATA[atuanvptd@gmail.com]]></wp:author_email><wp:author_display_name><![CDATA[Moderation]]></wp:author_display_name><wp:author_first_name><![CDATA[]]></wp:author_first_name><wp:author_last_name><![CDATA[]]></wp:author_last_name></wp:author>
+	<wp:author><wp:author_id>2</wp:author_id><wp:author_login><![CDATA[demo]]></wp:author_login><wp:author_email><![CDATA[ncfaustm@gmail.com]]></wp:author_email><wp:author_display_name><![CDATA[Jenny Wilson]]></wp:author_display_name><wp:author_first_name><![CDATA[Jenny]]></wp:author_first_name><wp:author_last_name><![CDATA[Wilson]]></wp:author_last_name></wp:author>
+	<wp:author><wp:author_id>3</wp:author_id><wp:author_login><![CDATA[7w9oi7]]></wp:author_login><wp:author_email><![CDATA[mwy5dos1t2l8@sg2plzcpnl476815.prod.sin2.secureserver.net]]></wp:author_email><wp:author_display_name><![CDATA[Kristin Watson]]></wp:author_display_name><wp:author_first_name><![CDATA[Kristin]]></wp:author_first_name><wp:author_last_name><![CDATA[Watson]]></wp:author_last_name></wp:author>
+	<wp:author><wp:author_id>4</wp:author_id><wp:author_login><![CDATA[EdenTuan]]></wp:author_login><wp:author_email><![CDATA[EdenTNcmaz@gmail.com]]></wp:author_email><wp:author_display_name><![CDATA[Esther Howard]]></wp:author_display_name><wp:author_first_name><![CDATA[Esther]]></wp:author_first_name><wp:author_last_name><![CDATA[Howard]]></wp:author_last_name></wp:author>
 
 				
-	<generator>https://wordpress.org/?v=6.3</generator>
+	<generator>https://wordpress.org/?v=6.6.2</generator>
 
 	</channel>
 </rss>

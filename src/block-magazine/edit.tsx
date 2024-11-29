@@ -14,21 +14,27 @@ import ServerSideRender from "@wordpress/server-side-render";
 import BlockLoadingPlaceholder from "../components/BlockLoadingPlaceholder";
 import BlockEmptyPlaceholder from "../components/BlockEmptyPlaceholder";
 import DemoListPosts from "./DemoListPosts";
-import { NcmazFcPostsEdegsFieldsFragment } from "../__generated__/graphql";
 import BackgroundSection from "../frontend-components/BackgroundSection/BackgroundSection";
 import classNames from "../utils/className";
+import { PostRoot } from "./type";
 
 const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	const { attributes, setAttributes, clientId } = props;
 
 	//
-	const { uniqueId, blockVariation, queries, showLoadMore, hasBackground } =
-		attributes;
+	const {
+		uniqueId,
+		blockVariation,
+		queries,
+		showLoadMore,
+		hasBackground,
+		showViewAll,
+	} = attributes;
 	const observerRef = useRef<MutationObserver | null>(null);
 
-	const [initPostsFromSSR, setInitPostsFromSSR] = useState<
-		NcmazFcPostsEdegsFieldsFragment["nodes"] | null
-	>(null);
+	const [initPostsFromSSR, setInitPostsFromSSR] = useState<PostRoot[] | null>(
+		null,
+	);
 	const [initErrorFromSSR, setInitErrorFromSSR] = useState<string | null>(null);
 	const SERVER_SIDE_ID = "ncmazfcSSR-block-" + clientId;
 
@@ -38,20 +44,19 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 	}, []);
 
 	const getPostsDataFromSeverSideRenderNode = (wrapNode: HTMLElement) => {
+		//
 		const node = wrapNode.querySelector(
-			".ncmazfc-block-content-common-class"
+			"div[data-block-json-wrap]",
 		) as HTMLElement | null;
-		const dataInitPosts =
-			node?.getAttribute("data-ncmazfc-init-posts") || "null";
-		const dataInitErrors =
-			node?.getAttribute("data-ncmazfc-init-errors") || "null";
+
+		const dataObject = JSON.parse(node?.textContent || "{}") as {
+			block_posts: PostRoot[];
+			errors: string;
+		};
 
 		return {
-			initPosts:
-				(JSON.parse(
-					dataInitPosts
-				) as NcmazFcPostsEdegsFieldsFragment["nodes"]) || null,
-			initErrors: JSON.parse(dataInitErrors),
+			initPosts: dataObject?.block_posts || null,
+			initErrors: dataObject?.errors || null,
 		};
 	};
 
@@ -68,7 +73,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 			for (const mutation of mutationList) {
 				if (mutation.type === "childList") {
 					const { initErrors, initPosts } = getPostsDataFromSeverSideRenderNode(
-						mutation.target
+						mutation.target,
 					);
 					setInitPostsFromSSR(initPosts);
 					setInitErrorFromSSR(initErrors);
@@ -90,20 +95,29 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 		if (!initPostsFromSSR?.length) {
 			return <BlockEmptyPlaceholder />;
 		}
-		return <DemoListPosts posts={initPostsFromSSR} />;
+		return (
+			<DemoListPosts
+				posts={initPostsFromSSR}
+				clientId={clientId}
+				blockVariation={blockVariation}
+			/>
+		);
 	};
 
 	const renderContent = () => {
 		return (
 			<div className={`ncmazfc-block-magazine relative `}>
 				{initErrorFromSSR && (
-					<div className="text-red-500 text-sm">
-						<h3>Error!</h3>
-						<pre>
+					<div className="text-red-500 text-sm p-10 bg-slate-100">
+						<strong>
+							{__("Error when fetching posts data from SSR", "ncmazfc")}
+						</strong>
+						<pre className="text-xs">
 							<code>{JSON.stringify(initErrorFromSSR, null, 2)}</code>
 						</pre>
 					</div>
 				)}
+
 				{renderLayoutType()}
 
 				<div id={SERVER_SIDE_ID}>
@@ -134,13 +148,20 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 							onChange={(blockVariation) => setAttributes({ blockVariation })}
 							help={
 								<div>
-									(**) Select variation to change the layout and card style of
-									the block. The editor preview of the variants is currently
-									under construction, so you won't notice the change here, but
-									it will be changed and applied in the client UI. Sorry for the
-									inconvenience, you can check out the{" "}
+									To get a live preview of the styles of the different variants,
+									make sure to set{" "}
 									<a
-										href="https://ncmaz-faust.chisnghiax.com/magazine-variations-preview"
+										href="https://faustjs.org/tutorial/get-started-with-faust#set-your-front-end-site-url"
+										target="_blank"
+										rel="noopener noreferrer"
+										className="underline text-green-600"
+									>
+										the frontend site URL
+									</a>{" "}
+									in the Faust WordPress Plugin Settings. <br />
+									Or you can check out the{" "}
+									<a
+										href="https://ncmaz-faust-delta.vercel.app/magazine-variations-preview/"
 										target="_blank"
 										rel="noopener noreferrer"
 										className="underline text-blue-400"
@@ -188,7 +209,29 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 							</optgroup>
 						</SelectControl>
 
-						<div className="">
+						<div>
+							<div className="flex gap-3">
+								<FormToggle
+									checked={showViewAll}
+									onChange={() => setAttributes({ showViewAll: !showViewAll })}
+									name="showViewAll"
+									id="showViewAll"
+								/>
+								<label htmlFor="showViewAll">
+									{__("Show View All button", "ncmazfc")}
+								</label>
+							</div>
+							{!!showViewAll && (
+								<i className="text-xs italic block mt-1">
+									{__(
+										"(You can see the View All button in the frontend page!)",
+										"ncmazfc",
+									)}
+								</i>
+							)}
+						</div>
+
+						<div>
 							<div className="flex gap-3">
 								<FormToggle
 									checked={showLoadMore}
@@ -199,14 +242,14 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 									id="showLoadMore"
 								/>
 								<label htmlFor="showLoadMore">
-									{__("Show load more", "ncmazfc")}
+									{__("Show Load More button", "ncmazfc")}
 								</label>
 							</div>
 							{!!showLoadMore && (
 								<i className="text-xs italic block mt-1">
 									{__(
-										"(You can see the load more button in the frontend page!)",
-										"ncmazfc"
+										"(You can see the Load more button in the frontend page!)",
+										"ncmazfc",
 									)}
 								</i>
 							)}
@@ -245,7 +288,7 @@ const Edit: FC<ContainerEditProps<BlockMagazine_Attrs>> = (props) => {
 				{...useBlockProps({
 					className: classNames(
 						"not-prose",
-						hasBackground ? "relative py-16" : ""
+						hasBackground ? "relative py-16" : "",
 					),
 				})}
 			>

@@ -49,17 +49,14 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 
 	const getTermsDataFromSeverSideRenderNode = (wrapNode: HTMLElement) => {
 		const node = wrapNode.querySelector(
-			".ncmazfc-block-content-common-class"
+			"div[data-block-json-wrap]",
 		) as HTMLElement | null;
 
-		const dataInitTerms =
-			node?.getAttribute("data-ncmazfc-init-terms") || "null";
-		const dataInitErrors =
-			node?.getAttribute("data-ncmazfc-init-errors") || "null";
+		const dataObject = JSON.parse(node?.textContent || "{}");
 
 		return {
-			initTerms: JSON.parse(dataInitTerms),
-			initErrors: JSON.parse(dataInitErrors),
+			initTerms: dataObject?.block_terms || null,
+			initErrors: dataObject?.errors || null,
 		};
 	};
 
@@ -75,7 +72,7 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 			for (const mutation of mutationList) {
 				if (mutation.type === "childList") {
 					const { initErrors, initTerms } = getTermsDataFromSeverSideRenderNode(
-						mutation.target
+						mutation.target,
 					);
 					setInitErrorFromSSR(initErrors);
 					setInitTermsFromSSR(initTerms);
@@ -102,7 +99,13 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 			return <BlockEmptyPlaceholder />;
 		}
 
-		return <DemoTermsList terms={dataLists || []} />;
+		return (
+			<DemoTermsList
+				terms={dataLists || []}
+				clientId={clientId}
+				blockVariation={blockVariation}
+			/>
+		);
 	};
 
 	// render
@@ -115,13 +118,20 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 						value={blockVariation}
 						help={
 							<div>
-								(**) Select variation to change the layout and card style of the
-								block. The editor preview of the variants is currently under
-								construction, so you won't notice the change here, but it will
-								be changed and applied in the client UI. Sorry for the
-								inconvenience, you can check out the{" "}
+								To get a live preview of the styles of the different variants,
+								make sure to set{" "}
 								<a
-									href="https://ncmaz-faust.chisnghiax.com/block-term-variations-preview"
+									href="https://faustjs.org/tutorial/get-started-with-faust#set-your-front-end-site-url"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="underline text-green-600"
+								>
+									the frontend site URL
+								</a>{" "}
+								in the Faust WordPress Plugin Settings. <br />
+								Or you can check out the{" "}
+								<a
+									href="https://ncmaz-faust-delta.vercel.app/block-term-variations-preview"
 									target="_blank"
 									rel="noopener noreferrer"
 									className="underline text-blue-400"
@@ -130,7 +140,10 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 								</a>
 							</div>
 						}
-						onChange={(blockVariation) => setAttributes({ blockVariation })}
+						onChange={(value) => {
+							setAttributes({ blockVariation: value });
+							console.log(value);
+						}}
 					>
 						<optgroup label="Grid">
 							<option value="grid-1">Grid 1</option>
@@ -204,9 +217,11 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 		return (
 			<div className="relative">
 				{initErrorFromSSR && (
-					<div className="text-red-500 text-sm">
-						<h3>Error!</h3>
-						<pre>
+					<div className="text-red-500 text-sm p-10 bg-slate-100">
+						<strong>
+							{__("Error when fetching posts data from SSR", "ncmazfc")}
+						</strong>
+						<pre className="text-xs">
 							<code>{JSON.stringify(initErrorFromSSR, null, 2)}</code>
 						</pre>
 					</div>
@@ -238,7 +253,7 @@ const Edit: FC<ContainerEditProps<BlockTerms_Attrs>> = (props) => {
 				{...useBlockProps({
 					className: classNames(
 						"not-prose",
-						hasBackground ? "relative py-16" : ""
+						hasBackground ? "relative py-16" : "",
 					),
 				})}
 			>

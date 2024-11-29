@@ -47,6 +47,10 @@ if (!function_exists("ncmazfc__register_blocks_gutenberg_init")) :
                         "type" => "boolean",
                         "default" => false,
                     ],
+                    "showViewAll" => [
+                        "type" => "boolean",
+                        "default" => false,
+                    ],
                     "align" => [
                         "type"      => "string",
                         "default"   => "wide",

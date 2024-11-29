@@ -48,7 +48,19 @@ export default function save({
 						type="submit"
 						className="absolute transform top-1/2 -translate-y-1/2 end-1 dark:bg-neutral-300 dark:text-black"
 					>
-						<ArrowRightIcon className="w-5 h-5 rtl:rotate-180" />
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							aria-hidden="true"
+							className="w-5 h-5 rtl:rotate-180"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z"
+								clip-rule="evenodd"
+							></path>
+						</svg>
 					</ButtonCircle>
 				</form>
 				<i className="block ncmazfaust-block-CTA__subcribe_success text-green-500 text-xs"></i>
@@ -78,7 +90,7 @@ export default function save({
 					<RichText.Content
 						tagName="span"
 						className={classNames(
-							"block mt-6 text-neutral-500 dark:text-neutral-400"
+							"block mt-6 text-neutral-500 dark:text-neutral-400",
 						)}
 						value={description}
 					/>
@@ -119,7 +131,7 @@ export default function save({
 			{...useBlockProps.save({
 				className: classNames(
 					"not-prose",
-					hasBackground ? "relative py-16" : ""
+					hasBackground ? "relative py-16" : "",
 				),
 			})}
 		>

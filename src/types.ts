@@ -1,6 +1,4 @@
-import { FragmentType } from "./__generated__";
 import { ValueOfOptionFilterDataBy } from "./contains/common";
-import { NC_IMAGE_MEDIA_FRAGMENT } from "./fragments";
 
 export interface Option<T = string> {
 	label: string;
@@ -39,5 +37,3 @@ export type ContainerEditProps<T, C = any> = {
 };
 
 export interface EditProps<T, C = any> extends ContainerEditProps<T, C> {}
-
-export type NcImageFields = FragmentType<typeof NC_IMAGE_MEDIA_FRAGMENT>;

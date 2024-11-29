@@ -1,5 +1,14 @@
-const v1 = {};
-const v2 = {};
+import attributes from "./attributes";
+import save from "./save";
+
+const v1 = {
+	attributes,
+	save,
+};
+const v2 = {
+	attributes,
+	save,
+};
 
 const deprecated = [v2, v1];
 

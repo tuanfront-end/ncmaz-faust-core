@@ -9,7 +9,7 @@ function ncmazfc__ocdi_import_files()
             'categories'                 => ['Category 1'],
             'import_file_url'            => NCMAZFC_URI . 'includes/xmls/all.xml',
             'import_preview_image_url'   => NCMAZFC_URI . 'public/images/demo-import-preview.png',
-            'preview_url'                => 'https://ncmaz-faust.chisnghiax.com/',
+            'preview_url'                => 'https://ncmaz-faust-delta.vercel.app/',
         ],
     ];
 }

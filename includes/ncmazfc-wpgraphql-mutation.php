@@ -110,7 +110,7 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
         // Do any logic here to sanitize the input, check user capabilities, etc
         $userID = $input['user_id'];
         $postID = $input['post_id'];
-        $reaction = $input['reaction'];
+        $reaction = $input['reaction']; // SAVE, LIKE, VIEW
         $number = $input['number']; // 1 is add, and 0 is remove
         $outPut = [];
 
@@ -128,8 +128,7 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
             return $outPut; // return here
         }
 
-
-        //  Nhung truong hop con lai...
+        //  Nhung truong loi...
         if (empty($postID) || empty($userID) || empty($reaction) || ($number !== 0 && $number !== 1)) {
             return [
                 'user_id' => $userID,
@@ -141,141 +140,51 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
             ];
         }
 
-        // when user save, like post ----------
-        $userPosts = graphql([
-            'query' =>  'query GetUserReactionPostsSaved($author: Int = 1, $title: String = "") {
-                userReactionPosts(where: {author: $author, title: $title}) {
-                  edges {
-                    node {
-                      id
-                      databaseId
-                      date
-                      authorId
-                      title
-                    }
-                  }
-                }
-              }',
-            'variables' => [
-                'author' => $userID,
-                'title' => $postID . ',' . $reaction
-            ]
-        ]);
-        $post = ($userPosts['data']['userReactionPosts']['edges'][0]['node'] ?? null);
-
-        // error case 1
-        if (empty($post) && $number === 0) {
-            return [
-                'user_id' => $userID,
-                'post_id' => $postID,
-                'reaction' => $reaction,
-                'result' => 'ERROR',
-                'number' => $number,
-                'errors' => "Reaction Post is not exist, so can not remove it. "
-            ];
-        }
-        // error case 2
-        if ($post && $number === 1) {
-            return [
-                'user_id' => $userID,
-                'post_id' => $postID,
-                'reaction' => $reaction,
-                'result' => 'ERROR',
-                'number' => $number,
-                'errors' => "Reaction Post is already exist."
-            ];
-        }
-
-
-        if ($post && $number === 0) {
-            // 1. when user update view count --------------------------------
-            if ($reaction == 'VIEW') {
-                // when user update view count, and view count is exist
-                // return error and do nothing 
-                $outPut = [
-                    'user_id'   => $userID,
-                    'post_id'   => $postID,
-                    'reaction'  => $reaction,
-                    'result'    => 'ERROR',
-                    'number' => $number,
-                    'errors'    => 'View count is already exist. Can not remove it.'
-                ];
-                return $outPut;
-            }
-
-
-            // 2. when user update save or like count --------------------------------
-            // Delete Post data 
-
-            $is_post_deleted = wp_delete_post($post['databaseId'], true);
-            // false or null when Delete Post data failure.
-            if (!$is_post_deleted) {
-                $outPut = [
-                    'user_id'   => $userID,
-                    'post_id'   => $postID,
-                    'reaction'  => $reaction,
-                    'result'    => 'ERROR',
-                    'number' => $number,
-                    'errors'    => 'Delete Reaction_post data failure.'
-                ];
-            } else {
-                // Delete Post data on success,
-                $newCount = 0;
-                if ($reaction == 'SAVE') {
-                    $newCount = ncmazFc__update_saveds_count_by_id($postID, 0);
-                } else if ($reaction == 'LIKE') {
-                    $newCount = ncmazFc__update_likes_count_by_id($postID, 0);
-                }
-
-                $outPut = [
-                    'user_id'   => $userID,
-                    'post_id'   => $postID,
-                    'reaction'  => $reaction,
-                    'result'    => 'REMOVED',
-                    'number' => $number,
-                    'new_count' =>  $newCount
-                ];
-            }
-        } else if (empty($post) && $number === 1) {
-            // have no post and add 1
-            $postTitle = $postID . ',' . $reaction;
+        if ($number === 0) {
+            // Delete id on user meta
             $newCount = 0;
-            $new_reaction_post_id = wp_insert_post([
-                'post_title' => $postTitle,
-                'post_author' =>  $userID,
-                'post_type' => 'user-reaction-post',
-                'post_status'   => 'publish',
-            ]);
-
-            //  Insert Post data on success,
-            if (!is_wp_error($new_reaction_post_id)) {
-                if ($reaction == 'SAVE') {
-                    $newCount = ncmazFc__update_saveds_count_by_id($postID, 1);
-                } else if ($reaction == 'LIKE') {
-                    $newCount = ncmazFc__update_likes_count_by_id($postID, 1);
-                } else if ($reaction == 'VIEW') {
-                    $newCount = ncmazFc__increment_view_count_by_id($postID);
-                }
-
-                $outPut = [
-                    'user_id' => $userID,
-                    'post_id' => $postID,
-                    'reaction' => $reaction,
-                    'result' => 'ADDED',
-                    'number' => $number,
-                    'new_count' =>  $newCount,
-                ];
-            } else {
-                // false or null when Insert Post data failure.
-                $outPut = [
-                    'user_id' => $userID,
-                    'post_id' => $postID,
-                    'reaction' => $reaction,
-                    'result' => 'ERROR',
-                    'errors' => $new_reaction_post_id->get_error_message(),
-                    'number' => $number,
-                ];
+            if ($reaction == 'SAVE') {
+                ncmazfc__remove_user_post_interact($userID, $postID, 'save');
+                $newCount = ncmazFc__update_saveds_count_by_id($postID, 0);
+            } else if ($reaction == 'LIKE') {
+                ncmazfc__remove_user_post_interact($userID, $postID, 'like');
+                $newCount = ncmazFc__update_likes_count_by_id($postID, 0);
+            } else if ($reaction == 'VIEW') {
+                ncmazfc__remove_user_post_interact($userID, $postID, 'view');
+                $newCount = get_field('views_count', $postID) ?? 0;
             }
+
+            $outPut = [
+                'user_id'   => $userID,
+                'post_id'   => $postID,
+                'reaction'  => $reaction,
+                'result'    => 'REMOVED',
+                'number' => $number,
+                'new_count' =>  intval($newCount),
+            ];
+        } else if ($number === 1) {
+            // have no post and add 1
+            $newCount = 0;
+
+            if ($reaction == 'SAVE') {
+                ncmazfc__add_user_post_interact($userID, $postID, 'save');
+                $newCount = ncmazFc__update_saveds_count_by_id($postID, 1);
+            } else if ($reaction == 'LIKE') {
+                ncmazfc__add_user_post_interact($userID, $postID, 'like');
+                $newCount = ncmazFc__update_likes_count_by_id($postID, 1);
+            } else if ($reaction == 'VIEW') {
+                ncmazfc__add_user_post_interact($userID, $postID, 'view');
+                $newCount = ncmazFc__increment_view_count_by_id($postID);
+            }
+
+            $outPut = [
+                'user_id' => $userID,
+                'post_id' => $postID,
+                'reaction' => $reaction,
+                'result' => 'ADDED',
+                'number' => $number,
+                'new_count' =>  intval($newCount),
+            ];
         } else {
             return [
                 'user_id' => $userID,
@@ -292,11 +201,13 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
 ]);
 
 
-
 // =========== dang ky cac nuations VAO POST MUTATION ... ================= 
 add_action('graphql_input_fields', function ($fields, $type_name, $config) {
     if ($type_name === 'CreatePostInput' || $type_name === 'UpdatePostInput') {
         $fields = array_merge($fields, [
+            'postStyle'        => ['type' => 'String'],
+            'showRightSidebar' => ['type' => 'String'],
+            // 
             'ncTags'        => ['type' => 'String'],
             // 
             'ncmazAudioUrl' => ['type' => 'String'],
@@ -495,6 +406,13 @@ add_action('graphql_post_object_mutation_update_additional_data', function ($pos
         update_field('video_url', $input['ncmazVideoUrl'], $post_id);
     }
 
+    if (isset($input['showRightSidebar'])) {
+        update_field('show_right_sidebar', boolval($input['showRightSidebar']) ? 1 : 0, $post_id);
+    }
+    if (isset($input['postStyle'])) {
+        update_field('template', $input['postStyle'], $post_id);
+    }
+
 
     // check if there is any error in images upload
     if (!empty($images_upload_error_message)) {
@@ -586,7 +504,6 @@ add_action('graphql_user_object_mutation_update_additional_data', function ($use
         throw new  GraphQL\Error\UserError(__('The object has been updated but an error occurred while uploading the image ' . $images_upload_error_message, 'wp-graphql'));
     }
 }, 10, 5);
-
 
 
 // Register a mutation to add user to mailpoet list
@@ -682,6 +599,265 @@ register_graphql_mutation('ncmazFaustAddSubscriberToMailpoet', [
             'user_first_name' => $first_name,
             'errors' => $error_message,
             'success' => $success,
+        ];
+
+        return $outPut;
+    }
+]);
+
+// Register a mutation to contact form
+register_graphql_mutation('ncmazFaustAddSentMessContactForm', [
+    # inputFields expects an array of Fields to be used for inputting values to the mutation
+    'inputFields'         => [
+        'user_email' => [
+            'type' => 'String',
+            'description' => __('Email of user', 'ncmazfc'),
+        ],
+        'message' => [
+            'type' => 'String',
+            'description' => __('message', 'ncmazfc'),
+        ],
+        'user_full_name' => [
+            'type' => 'String',
+            'description' => __('Full name of user', 'ncmazfc'),
+        ],
+
+    ],
+    'outputFields'        => [
+        'user_email' => [
+            'type' => 'String',
+            'description' => __('Email of user', 'ncmazfc'),
+        ],
+        'user_full_name' => [
+            'type' => 'String',
+            'description' => __('Email of user', 'ncmazfc'),
+        ],
+        'errors' => [
+            'type' => 'String',
+            'description' => __('Error of this mutation', 'ncmazfc'),
+        ],
+        'success' => [
+            'type' => 'Boolean',
+            'description' => __('Is Added success!', 'ncmazfc'),
+        ],
+
+    ],
+    'mutateAndGetPayload' => function ($input, $context, $info) {
+        // Do any logic here to sanitize the input, check user capabilities, etc
+        $message = $input['message'];
+        $email = $input['user_email'];
+        $fullName = $input['user_full_name'];
+        $error_message = "";
+        $success = false;
+
+        if (empty($email)) {
+            $error_message = "Email is empty! Please check again!";
+            return [
+                'user_email' => $email,
+                'user_full_name' => $fullName,
+                'errors' => $error_message,
+                'success' => false,
+            ];
+        }
+
+        // check valid email
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $error_message = "Invalid email format! Please check again!";
+            return [
+                'user_email' => $email,
+                'user_full_name' => $fullName,
+                'errors' => $error_message,
+                'success' => false,
+            ];
+        }
+        // 
+
+        try {
+
+            // Lấy danh sách người dùng có vai trò quản trị viên
+            $admins = get_users(array(
+                'role' => 'administrator',
+                'fields' => array('user_email')
+            ));
+
+            // Tạo danh sách email của quản trị viên
+            $admin_emails = array();
+            foreach ($admins as $admin) {
+                $admin_emails[] = $admin->user_email;
+            }
+
+            // lấy title của website
+            $site_title = get_bloginfo('name');
+
+            // Tiêu đề email
+            $subject = "New Contact Form Submission from $fullName";
+            // Nội dung email
+            $body = "Messages received via your Website's Contact Form through the Nextjs frontend page - $site_title. \nName: $fullName\nEmail: $email\n\nMessage:\n$message";
+            // Đầu mục email
+            $headers = ['Content-Type: text/plain; charset=UTF-8', "From: $fullName <$email>"];
+
+            // Gửi email và cc cho tất cả quản trị viên
+            if (!empty($admin_emails)) {
+                wp_mail($admin_emails, $subject, $body, $headers);
+            }
+
+            $success = true;
+            $error_message = "";
+        } catch (\Throwable $th) {
+            //throw $th;
+            $error_message = $th->getMessage();
+            $success = false;
+        }
+
+        $outPut = [
+            'user_email' => $email,
+            'user_full_name' => $fullName,
+            'errors' => $error_message,
+            'success' =>   $success
+        ];
+
+        return $outPut;
+    }
+]);
+
+// Register a mutation to create a new delete_account nonce
+register_graphql_mutation('ncmazFaustCreateDeleteAccountNonce', [
+    # inputFields expects an array of Fields to be used for inputting values to the mutation
+    'inputFields'         => [
+        'user_email' => [
+            'type' => 'String',
+            'description' => __('Email of user', 'ncmazfc'),
+        ],
+    ],
+    'outputFields'        => [
+        'user_email' => [
+            'type' => 'String',
+            'description' => __('Email of user', 'ncmazfc'),
+        ],
+        'errors' => [
+            'type' => 'String',
+            'description' => __('Error of this mutation', 'ncmazfc'),
+        ],
+        'success' => [
+            'type' => 'Boolean',
+            'description' => __('Is Added success!', 'ncmazfc'),
+        ],
+        'nonce' => [
+            'type' => 'String',
+            'description' => __('Nonce', 'ncmazfc'),
+        ],
+
+    ],
+    'mutateAndGetPayload' => function ($input, $context, $info) {
+        // Do any logic here to sanitize the input, check user capabilities, etc
+        $email = $input['user_email'];
+        $error_message = "";
+        $success = false;
+        $nonce = "";
+
+        // check valid email
+        if (empty($email) || !filter_var($email ?? "", FILTER_VALIDATE_EMAIL)) {
+            $error_message = "Email is empty or Invalid email format! Please check again!";
+            return [
+                'user_email' => $email,
+                'errors' => $error_message,
+                'success' => false,
+                'nonce' => $nonce,
+            ];
+        }
+        // 
+
+        try {
+            // create nonce
+            $nonce = wp_create_nonce('delete_account_' . $email);
+            $success = true;
+            $error_message = "";
+        } catch (\Throwable $th) {
+            //throw $th;
+            $error_message = $th->getMessage();
+            $success = false;
+        }
+
+        $outPut = [
+            'user_email' => $email,
+            'errors' => $error_message,
+            'success' =>   $success,
+            'nonce' => $nonce,
+        ];
+
+        return $outPut;
+    }
+]);
+
+// Register a mutation to delete a user account by nonce
+register_graphql_mutation('ncmazFaustDeleteAccountByNonce', [
+    # inputFields expects an array of Fields to be used for inputting values to the mutation
+    'inputFields'         => [
+        'nonce' => [
+            'type' => 'String',
+            'description' => __('Delete account Nonce', 'ncmazfc'),
+        ],
+        'user_email' => [
+            'type' => 'String',
+            'description' => __('Email of user', 'ncmazfc'),
+        ],
+
+    ],
+    'outputFields'        => [
+        'errors' => [
+            'type' => 'String',
+            'description' => __('Error of this mutation', 'ncmazfc'),
+        ],
+        'success' => [
+            'type' => 'Boolean',
+            'description' => __('Is Account Deleted success!', 'ncmazfc'),
+        ],
+    ],
+    'mutateAndGetPayload' => function ($input, $context, $info) {
+        // Do any logic here to sanitize the input, check user capabilities, etc
+        $nonce = $input['nonce'];
+        $email = $input['user_email'];
+        $error_message = "";
+        $success = false;
+
+        // check valid nonce
+        if (empty($nonce) || empty($email)) {
+            $error_message = "Invalid nonce or email! Please check again!";
+            return [
+                'errors' => $error_message,
+                'success' => false,
+            ];
+        }
+        // 
+
+        try {
+            // verify nonce
+            $nonce = wp_verify_nonce($nonce, 'delete_account_' . $email);
+
+            if ($nonce === 1) {
+                require_once(ABSPATH . 'wp-admin/includes/user.php');
+                // delete user account
+                $user = get_user_by('email', $email);
+                if ($user) {
+                    wp_delete_user($user->ID);
+                    $success = true;
+                } else {
+                    $error_message = "User not found!";
+                    $success = false;
+                }
+            } else {
+                $error_message = "Invalid nonce!";
+                $success = false;
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            $error_message = $th->getMessage();
+            $success = false;
+        }
+
+        $outPut = [
+            'errors' => $error_message,
+            'success' =>   $success,
         ];
 
         return $outPut;

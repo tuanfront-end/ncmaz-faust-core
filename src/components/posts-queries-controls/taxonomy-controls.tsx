@@ -49,7 +49,7 @@ export function TaxonomyControls({ onChange, query }) {
 
 	const taxonomies = useTaxonomies(postType);
 
-	if (!taxonomies || taxonomies.length === 0) {
+	if (!taxonomies || !taxonomies.length) {
 		return null;
 	}
 
@@ -113,11 +113,11 @@ function TaxonomyItem({ taxonomy, termIds, onChange }) {
 				searchResults: getEntityRecords(...selectorArgs),
 				searchHasResolved: hasFinishedResolution(
 					"getEntityRecords",
-					selectorArgs
+					selectorArgs,
 				),
 			};
 		},
-		[search, termIds]
+		[search, termIds],
 	);
 	// `existingTerms` are the ones fetched from the API and their type is `{ id: number; name: string }`.
 	// They are used to extract the terms' names to populate the `FormTokenField` properly
@@ -132,7 +132,7 @@ function TaxonomyItem({ taxonomy, termIds, onChange }) {
 				per_page: termIds.length,
 			});
 		},
-		[termIds]
+		[termIds],
 	);
 	// Update the `value` state only after the selectors are resolved
 	// to avoid emptying the input when we're changing terms.

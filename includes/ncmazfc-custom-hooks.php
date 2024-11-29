@@ -8,7 +8,7 @@ function ncmazfc__add_new_block_category($block_categories, $editor_context)
             $block_categories,
             array(
                 'slug'  => 'ncmazfc-blocks',
-                'title' => __('Ncmaz faust', 'wcb'),
+                'title' => __('Ncmaz faust', 'ncmaz-faust-core'),
                 'icon'  => null,
             ),
         );
@@ -37,8 +37,11 @@ if (!function_exists('ncmazFc__acf_prepare_field')) :
         return $field;
     }
 endif;
-add_filter('acf/prepare_field/name=views_count', 'ncmazFc__acf_prepare_field');
+// add_filter('acf/prepare_field/name=views_count', 'ncmazFc__acf_prepare_field');
 add_filter('acf/prepare_field/name=reading_time', 'ncmazFc__acf_prepare_field');
+add_filter('acf/prepare_field/name=liked_posts', 'ncmazFc__acf_prepare_field');
+add_filter('acf/prepare_field/name=saved_posts', 'ncmazFc__acf_prepare_field');
+add_filter('acf/prepare_field/name=viewed_posts', 'ncmazFc__acf_prepare_field');
 
 
 // *****  ============ update some ACF custom fields when plugin active ============
@@ -81,17 +84,24 @@ if (!function_exists('ncmazFc__update_posts_custom_fields_one_time')) :
 endif;
 
 // update reading time 
-add_action('save_post', 'ncmazFc__update_reading_time_when_save_post', 10, 3);
+add_action('save_post', 'ncmazFc__update_reading_time_when_save_post', 99, 3);
 if (!function_exists("ncmazFc__update_reading_time_when_save_post")) :
     function ncmazFc__update_reading_time_when_save_post($post_ID, $post, $update)
     {
-        if ($post->post_type !== 'post' || !function_exists('get_field')) {
-            return null;
+        if ($post->post_type !== 'post' || !function_exists('update_field')) {
+            return;
         }
 
-        if (!get_field('reading_time', $post_ID)) {
-            $reading_time = ncmazFc__calculate_reading_time_by_content($post->post_content);
-            update_field('reading_time', $reading_time, $post_ID);
+        // bail out if this is an autosave
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+            return;
         }
+
+        if (wp_is_post_revision($post_ID)) {
+            return;
+        }
+
+        $reading_time = ncmazFc__calculate_reading_time_by_content($post->post_content);
+        update_field('reading_time', $reading_time, $post_ID);
     }
 endif;

@@ -1,8 +1,8 @@
 {
 	"name": "ncmaz-faust-core",
-	"version": "1.0.0",
+	"version": "2.5.1",
 	"description": "Example static block scaffolded with Create Block tool.",
-	"author": "The WordPress Contributors",
+	"author": "ChisNghiax",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
@@ -16,17 +16,19 @@
 		"start": "wp-scripts start",
 		"wc": "graphql-codegen -w"
 	},
+	"files": [
+		"*"
+	],
 	"devDependencies": {
 		"@graphql-codegen/cli": "^4.0.1",
 		"@graphql-codegen/client-preset": "^4.0.1",
 		"@types/node": "^20.4.4",
-		"@wordpress/scripts": "^26.11.0",
-		"ts-node": "^10.9.1",
-		"typescript": "^5.1.6"
+		"@wordpress/scripts": "^26.19.0",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.4.5"
 	},
 	"dependencies": {
 		"@apollo/client": "^3.7.10",
-		"@headlessui/react": "^1.7.13",
 		"@heroicons/react": "^2.0.18",
 		"@types/lodash": "^4.14.192",
 		"@types/wordpress__block-editor": "^11.5.0",
@@ -44,6 +46,7 @@
 		"lodash": "^4.17.21",
 		"postcss": "^8.4.27",
 		"react-hot-toast": "^2.4.0",
+		"react-swipeable": "^7.0.1",
 		"react-use": "^17.4.0",
 		"sass": "^1.64.1",
 		"tailwindcss": "^3.2.7"
