@@ -8,7 +8,7 @@ function ncmazfc__add_new_block_category($block_categories, $editor_context)
             $block_categories,
             array(
                 'slug'  => 'ncmazfc-blocks',
-                'title' => __('Ncmaz faust', 'wcb'),
+                'title' => __('Ncmaz faust', 'ncmaz-faust-core'),
                 'icon'  => null,
             ),
         );

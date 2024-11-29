@@ -11,7 +11,7 @@ function ncmazfc__PluginEnqueueScript()
         'ncmazfc-admin-script',
         plugins_url('../public/js/customizer.js', __FILE__),
         [],
-        '',
+        NCMAZFC_VERSION,
         false
     );
 
