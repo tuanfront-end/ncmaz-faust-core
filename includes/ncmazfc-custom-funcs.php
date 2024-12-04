@@ -129,39 +129,39 @@ if (!function_exists('ncmazfc__add_user_post_interact')):
      * @param int $user_id ID của người dùng.
      * @param int  $post_id ID của bài viết.
      * @param string $interact Loại phản ứng (like, save, view).
-     * @return void
+     * @return array('is_meta_changed' => bool)
      */
     function ncmazfc__add_user_post_interact($user_id, $post_id, $interact)
     {
-        if ($interact == "like") {
-            //  $liked_posts: "1,22,11,223"
-            $liked_posts = get_user_meta($user_id, 'liked_posts', true);
-            $liked_posts =  ncmazfc__convert_string_to_array($liked_posts);
+        $is_meta_changed = false;
 
-            if (! in_array($post_id, $liked_posts)) {
-                $liked_posts[] = $post_id;
-                $liked_posts = implode(',', $liked_posts);
-                update_user_meta($user_id, 'liked_posts', $liked_posts);
-            }
-        } else if ($interact == "save") {
-            $saved_posts = get_user_meta($user_id, 'saved_posts', true);
-            $saved_posts =  ncmazfc__convert_string_to_array($saved_posts);
-
-            if (! in_array($post_id, $saved_posts)) {
-                $saved_posts[] = $post_id;
-                $saved_posts = implode(',', $saved_posts);
-                update_user_meta($user_id, 'saved_posts', $saved_posts);
-            }
-        } else if ($interact == "view") {
-            $viewed_posts = get_user_meta($user_id, 'viewed_posts', true);
-            $viewed_posts =  ncmazfc__convert_string_to_array($viewed_posts);
-
-            if (! in_array($post_id, $viewed_posts)) {
-                $viewed_posts[] = $post_id;
-                $viewed_posts = implode(',', $viewed_posts);
-                update_user_meta($user_id, 'viewed_posts', $viewed_posts);
-            }
+        if (!$user_id || !$post_id || !$interact) {
+            return array('is_meta_changed' => $is_meta_changed);
         }
+        if (!in_array($interact, ['like', 'save', 'view'])) {
+            return array('is_meta_changed' => $is_meta_changed);
+        }
+
+        $meta_key = '';
+        if ($interact == 'like') {
+            $meta_key = 'liked_posts';
+        } else if ($interact == 'save') {
+            $meta_key = 'saved_posts';
+        } else if ($interact == 'view') {
+            $meta_key = 'viewed_posts';
+        }
+
+        $r_posts = get_user_meta($user_id, $meta_key, true); // "1,22,11,223"
+        $r_posts =  ncmazfc__convert_string_to_array($r_posts); // [1,22,11,223]
+
+        if (!in_array($post_id, $r_posts)) {
+            $r_posts[] = $post_id;
+            $r_posts = implode(',', $r_posts); // "1,22,11,223"
+            update_user_meta($user_id, $meta_key, $r_posts);
+            $is_meta_changed = true;
+        }
+
+        return array('is_meta_changed' => $is_meta_changed);
     }
 endif;
 
@@ -174,38 +174,41 @@ if (!function_exists('ncmazfc__remove_user_post_interact')):
      * @param int $user_id ID của người dùng.
      * @param int  $post_id ID của bài viết.
      * @param string $interact Loại phản ứng (like, save, view).
-     * @return void
+     * @return array('is_meta_changed' => bool)
      */
     function ncmazfc__remove_user_post_interact($user_id, $post_id, $interact)
     {
-        if ($interact == "like") {
-            $liked_posts = get_user_meta($user_id, 'liked_posts', true);
-            $liked_posts =  ncmazfc__convert_string_to_array($liked_posts);
-            $key = array_search($post_id, $liked_posts);
-            if ($key !== false) {
-                unset($liked_posts[$key]);
-                $liked_posts = implode(',', $liked_posts);
-                update_user_meta($user_id, 'liked_posts', $liked_posts);
-            }
-        } else if ($interact == "save") {
-            $saved_posts = get_user_meta($user_id, 'saved_posts', true);
-            $saved_posts =  ncmazfc__convert_string_to_array($saved_posts);
-            $key = array_search($post_id, $saved_posts);
-            if ($key !== false) {
-                unset($saved_posts[$key]);
-                $saved_posts = implode(',', $saved_posts);
-                update_user_meta($user_id, 'saved_posts', $saved_posts);
-            }
-        } else if ($interact == "view") {
-            $viewed_posts = get_user_meta($user_id, 'viewed_posts', true);
-            $viewed_posts =  ncmazfc__convert_string_to_array($viewed_posts);
-            $key = array_search($post_id, $viewed_posts);
-            if ($key !== false) {
-                unset($viewed_posts[$key]);
-                $viewed_posts = implode(',', $viewed_posts);
-                update_user_meta($user_id, 'viewed_posts', $viewed_posts);
-            }
+        $is_meta_changed = false;
+
+        if (!$user_id || !$post_id || !$interact) {
+            return array('is_meta_changed' => $is_meta_changed);
         }
+
+        if (!in_array($interact, ['like', 'save', 'view'])) {
+            return array('is_meta_changed' => $is_meta_changed);
+        }
+
+        $meta_key = '';
+        if ($interact == 'like') {
+            $meta_key = 'liked_posts';
+        } else if ($interact == 'save') {
+            $meta_key = 'saved_posts';
+        } else if ($interact == 'view') {
+            $meta_key = 'viewed_posts';
+        }
+
+        $r_posts = get_user_meta($user_id, $meta_key, true); // "1,22,11,223"
+        $r_posts =  ncmazfc__convert_string_to_array($r_posts); // [1,22,11,223]
+
+        $key = array_search($post_id, $r_posts);
+        if ($key !== false) {
+            unset($r_posts[$key]);
+            $r_posts = implode(',', $r_posts); // "1,22,11,223"
+            update_user_meta($user_id, $meta_key, $r_posts);
+            $is_meta_changed = true;
+        }
+
+        return array('is_meta_changed' => $is_meta_changed);
     }
 endif;
 
