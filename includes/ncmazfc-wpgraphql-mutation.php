@@ -436,7 +436,8 @@ add_action('graphql_post_object_mutation_update_additional_data', function ($pos
 
     // check if there is any error in images upload
     if (!empty($images_upload_error_message)) {
-        throw new  GraphQL\Error\UserError(__('The object has been updated but an error occurred while uploading the image ' . $images_upload_error_message, 'wp-graphql'));
+        /* translators: 1: Error message. */
+        throw new  GraphQL\Error\UserError(esc_html__('The object has been updated but an error occurred while uploading the image ' . $images_upload_error_message, 'wp-graphql'));
     }
 }, 10, 5);
 
@@ -521,7 +522,8 @@ add_action('graphql_user_object_mutation_update_additional_data', function ($use
 
     // check if there is any error in images upload
     if (!empty($images_upload_error_message)) {
-        throw new  GraphQL\Error\UserError(__('The object has been updated but an error occurred while uploading the image ' . $images_upload_error_message, 'wp-graphql'));
+        /* translators: 1: Error message. */
+        throw new  GraphQL\Error\UserError(esc_html__('The object has been updated but an error occurred while uploading the image ' . $images_upload_error_message, 'wp-graphql'));
     }
 }, 10, 5);
 

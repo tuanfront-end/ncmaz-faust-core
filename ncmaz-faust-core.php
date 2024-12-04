@@ -5,9 +5,9 @@
  * Description:       Core for Ncmaz headless!
  * Requires at least: 5.8
  * Requires PHP:      7.3
- * Version:           2.8.0
- * Author:            ChisNghiax
- * Author URI:        https://ChisNghiax.com/
+ * Version:           2.8.1
+ * Author:            BooliiTheme
+ * Author URI:        https://booliitheme.com/
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       ncmazfc
@@ -17,7 +17,7 @@
 
 defined('ABSPATH') || exit;
 
-define('NCMAZFC_VERSION', '2.8.0');
+define('NCMAZFC_VERSION', '2.8.1');
 define('NCMAZFC_FILE', __FILE__);
 define('NCMAZFC_PLUGIN_BASE', plugin_basename(NCMAZFC_FILE));
 define('NCMAZFC_PATH', plugin_dir_path(NCMAZFC_FILE));
