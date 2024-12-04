@@ -129,7 +129,7 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
         }
 
         //  Nhung truong loi...
-        if (empty($postID) || empty($userID) || empty($reaction) || ($number !== 0 && $number !== 1)) {
+        if (empty($postID) || empty($userID) || empty($reaction) || ($number !== 0 && $number !== 1) || !in_array($reaction, ['SAVE', 'LIKE', 'VIEW'])) {
             return [
                 'user_id' => $userID,
                 'post_id' => $postID,
@@ -144,11 +144,19 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
             // Delete id on user meta
             $newCount = 0;
             if ($reaction == 'SAVE') {
-                ncmazfc__remove_user_post_interact($userID, $postID, 'save');
-                $newCount = ncmazFc__update_saveds_count_by_id($postID, 0);
+                $remove_result = ncmazfc__remove_user_post_interact($userID, $postID, 'save');
+                if ($remove_result['is_meta_changed'] ?? false) {
+                    $newCount = ncmazFc__update_saveds_count_by_id($postID, 0);
+                } else {
+                    $newCount = get_field('saveds_count', $postID) ?? 0;
+                }
             } else if ($reaction == 'LIKE') {
-                ncmazfc__remove_user_post_interact($userID, $postID, 'like');
-                $newCount = ncmazFc__update_likes_count_by_id($postID, 0);
+                $remove_result = ncmazfc__remove_user_post_interact($userID, $postID, 'like');
+                if ($remove_result['is_meta_changed'] ?? false) {
+                    $newCount = ncmazFc__update_likes_count_by_id($postID, 0);
+                } else {
+                    $newCount = get_field('likes_count', $postID) ?? 0;
+                }
             } else if ($reaction == 'VIEW') {
                 ncmazfc__remove_user_post_interact($userID, $postID, 'view');
                 $newCount = get_field('views_count', $postID) ?? 0;
@@ -159,7 +167,7 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
                 'post_id'   => $postID,
                 'reaction'  => $reaction,
                 'result'    => 'REMOVED',
-                'number' => $number,
+                'number'    => $number,
                 'new_count' =>  intval($newCount),
             ];
         } else if ($number === 1) {
@@ -167,14 +175,26 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
             $newCount = 0;
 
             if ($reaction == 'SAVE') {
-                ncmazfc__add_user_post_interact($userID, $postID, 'save');
-                $newCount = ncmazFc__update_saveds_count_by_id($postID, 1);
+                $a_result = ncmazfc__add_user_post_interact($userID, $postID, 'save');
+                if ($a_result['is_meta_changed'] ?? false) {
+                    $newCount = ncmazFc__update_saveds_count_by_id($postID, 1);
+                } else {
+                    $newCount = get_field('saveds_count', $postID) ?? 0;
+                }
             } else if ($reaction == 'LIKE') {
-                ncmazfc__add_user_post_interact($userID, $postID, 'like');
-                $newCount = ncmazFc__update_likes_count_by_id($postID, 1);
+                $a_result = ncmazfc__add_user_post_interact($userID, $postID, 'like');
+                if ($a_result['is_meta_changed'] ?? false) {
+                    $newCount = ncmazFc__update_likes_count_by_id($postID, 1);
+                } else {
+                    $newCount = get_field('likes_count', $postID) ?? 0;
+                }
             } else if ($reaction == 'VIEW') {
-                ncmazfc__add_user_post_interact($userID, $postID, 'view');
-                $newCount = ncmazFc__increment_view_count_by_id($postID);
+                $a_result = ncmazfc__add_user_post_interact($userID, $postID, 'view');
+                if ($a_result['is_meta_changed'] ?? false) {
+                    $newCount = ncmazFc__increment_view_count_by_id($postID);
+                } else {
+                    $newCount = get_field('views_count', $postID) ?? 0;
+                }
             }
 
             $outPut = [
