@@ -1,8 +1,8 @@
 === Ncmaz Faust Core ===
 Contributors:      BooliiTheme
-Tags:              block, ncmaz, ncmaz faust, nextjs headless, wordpress cms, faustjs, ncmaz headless, ncmaz nextjs, wordpress headless
-Tested up to:      6.7.1
-Stable tag:        2.8.1
+Tags:              nextjs headless, wordpress cms, faustjs, wordpress headless
+Tested up to:      6.9
+Stable tag:        2.8.3
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 

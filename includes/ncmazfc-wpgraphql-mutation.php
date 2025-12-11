@@ -6,7 +6,7 @@ if (!function_exists('register_graphql_enum_type') || !function_exists('register
 
 // Register enum type
 register_graphql_enum_type('NcmazFcUserReactionPostActionEnum', [
-    'description' => __('Reaction of user, like save, likes, view, or something else', 'ncmazfc'),
+    'description' => __('Reaction of user, like save, likes, view, or something else', 'ncmaz-faust-core'),
     'values' => [
         'SAVE' => [
             'value' => 'SAVE'
@@ -21,7 +21,7 @@ register_graphql_enum_type('NcmazFcUserReactionPostActionEnum', [
 ]);
 
 register_graphql_enum_type('NcmazFcUserReactionPostNumberUpdateEnum', [
-    'description' => __('1 = add, 0 = remove', 'ncmazfc'),
+    'description' => __('1 = add, 0 = remove', 'ncmaz-faust-core'),
     'values' => [
         'REMOVE_1' => [
             'value' => 0,
@@ -36,7 +36,7 @@ register_graphql_enum_type('NcmazFcUserReactionPostNumberUpdateEnum', [
 ]);
 
 register_graphql_enum_type('NcmazFcUserReactionPostUpdateResuiltEnum', [
-    'description' => __('Added, Removed, or Error', 'ncmazfc'),
+    'description' => __('Added, Removed, or Error', 'ncmaz-faust-core'),
     'values' => [
         'ADDED' => [
             'value' => 'ADDED',
@@ -61,49 +61,49 @@ register_graphql_mutation('ncmazFaustUpdateUserReactionPostCount', [
     'inputFields'         => [
         'user_id' => [
             'type' => 'Int',
-            'description' => __('User database id of user', 'ncmazfc'),
+            'description' => __('User database id of user', 'ncmaz-faust-core'),
         ],
         'post_id' => [
             'type' => 'Int',
-            'description' => __('Post database id of user', 'ncmazfc'),
+            'description' => __('Post database id of user', 'ncmaz-faust-core'),
         ],
         'reaction' => [
             'type' => 'NcmazFcUserReactionPostActionEnum',
-            'description' => __('Save, likes, view, or something else,', 'ncmazfc'),
+            'description' => __('Save, likes, view, or something else,', 'ncmaz-faust-core'),
         ],
         'number' => [
             'type' => 'NcmazFcUserReactionPostNumberUpdateEnum',
-            'description' => __('1 is add, and 0 is remove', 'ncmazfc'),
+            'description' => __('1 is add, and 0 is remove', 'ncmaz-faust-core'),
         ],
     ],
     'outputFields'        => [
         'user_id' => [
             'type' => 'Int',
-            'description' => __('User database id of user', 'ncmazfc'),
+            'description' => __('User database id of user', 'ncmaz-faust-core'),
         ],
         'post_id' => [
             'type' => 'Int',
-            'description' => __('Post database id of user', 'ncmazfc'),
+            'description' => __('Post database id of user', 'ncmaz-faust-core'),
         ],
         'reaction' => [
             'type' => 'NcmazFcUserReactionPostActionEnum',
-            'description' => __('Save, likes, view, or something else,', 'ncmazfc'),
+            'description' => __('Save, likes, view, or something else,', 'ncmaz-faust-core'),
         ],
         'result' => [
             'type' => 'NcmazFcUserReactionPostUpdateResuiltEnum',
-            'description' => __('Added or Removed or Error', 'ncmazfc'),
+            'description' => __('Added or Removed or Error', 'ncmaz-faust-core'),
         ],
         'new_count' => [
             'type' => 'Int',
-            'description' => __('New count after update', 'ncmazfc'),
+            'description' => __('New count after update', 'ncmaz-faust-core'),
         ],
         'errors' => [
             'type' => 'String',
-            'description' => __('Error of this mutation', 'ncmazfc'),
+            'description' => __('Error of this mutation', 'ncmaz-faust-core'),
         ],
         'number' => [
             'type' => 'NcmazFcUserReactionPostNumberUpdateEnum',
-            'description' => __('1 is add, and 0 is remove', 'ncmazfc'),
+            'description' => __('1 is add, and 0 is remove', 'ncmaz-faust-core'),
         ],
     ],
     'mutateAndGetPayload' => function ($input, $context, $info) {
@@ -437,7 +437,7 @@ add_action('graphql_post_object_mutation_update_additional_data', function ($pos
     // check if there is any error in images upload
     if (!empty($images_upload_error_message)) {
         /* translators: 1: Error message. */
-        throw new  GraphQL\Error\UserError(esc_html__('The object has been updated but an error occurred while uploading the image ' . $images_upload_error_message, 'wp-graphql'));
+        throw new  GraphQL\Error\UserError(esc_html__('The object has been updated but an error occurred while uploading the image ' . $images_upload_error_message, 'ncmaz-faust-core'));
     }
 }, 10, 5);
 
@@ -523,7 +523,7 @@ add_action('graphql_user_object_mutation_update_additional_data', function ($use
     // check if there is any error in images upload
     if (!empty($images_upload_error_message)) {
         /* translators: 1: Error message. */
-        throw new  GraphQL\Error\UserError(esc_html__('The object has been updated but an error occurred while uploading the image ' . $images_upload_error_message, 'wp-graphql'));
+        throw new  GraphQL\Error\UserError(esc_html__('The object has been updated but an error occurred while uploading the image ' . $images_upload_error_message, 'ncmaz-faust-core'));
     }
 }, 10, 5);
 
@@ -534,34 +534,34 @@ register_graphql_mutation('ncmazFaustAddSubscriberToMailpoet', [
     'inputFields'         => [
         'user_email' => [
             'type' => 'String',
-            'description' => __('Email of user', 'ncmazfc'),
+            'description' => __('Email of user', 'ncmaz-faust-core'),
         ],
         'listId' => [
             'type' => 'String',
-            'description' => __('listId', 'ncmazfc'),
+            'description' => __('listId', 'ncmaz-faust-core'),
         ],
         'user_first_name' => [
             'type' => 'String',
-            'description' => __('Email of user', 'ncmazfc'),
+            'description' => __('Email of user', 'ncmaz-faust-core'),
         ],
 
     ],
     'outputFields'        => [
         'user_email' => [
             'type' => 'String',
-            'description' => __('Email of user', 'ncmazfc'),
+            'description' => __('Email of user', 'ncmaz-faust-core'),
         ],
         'user_first_name' => [
             'type' => 'String',
-            'description' => __('Email of user', 'ncmazfc'),
+            'description' => __('Email of user', 'ncmaz-faust-core'),
         ],
         'errors' => [
             'type' => 'String',
-            'description' => __('Error of this mutation', 'ncmazfc'),
+            'description' => __('Error of this mutation', 'ncmaz-faust-core'),
         ],
         'success' => [
             'type' => 'Boolean',
-            'description' => __('Is Added success!', 'ncmazfc'),
+            'description' => __('Is Added success!', 'ncmaz-faust-core'),
         ],
 
     ],
@@ -633,34 +633,34 @@ register_graphql_mutation('ncmazFaustAddSentMessContactForm', [
     'inputFields'         => [
         'user_email' => [
             'type' => 'String',
-            'description' => __('Email of user', 'ncmazfc'),
+            'description' => __('Email of user', 'ncmaz-faust-core'),
         ],
         'message' => [
             'type' => 'String',
-            'description' => __('message', 'ncmazfc'),
+            'description' => __('message', 'ncmaz-faust-core'),
         ],
         'user_full_name' => [
             'type' => 'String',
-            'description' => __('Full name of user', 'ncmazfc'),
+            'description' => __('Full name of user', 'ncmaz-faust-core'),
         ],
 
     ],
     'outputFields'        => [
         'user_email' => [
             'type' => 'String',
-            'description' => __('Email of user', 'ncmazfc'),
+            'description' => __('Email of user', 'ncmaz-faust-core'),
         ],
         'user_full_name' => [
             'type' => 'String',
-            'description' => __('Email of user', 'ncmazfc'),
+            'description' => __('Email of user', 'ncmaz-faust-core'),
         ],
         'errors' => [
             'type' => 'String',
-            'description' => __('Error of this mutation', 'ncmazfc'),
+            'description' => __('Error of this mutation', 'ncmaz-faust-core'),
         ],
         'success' => [
             'type' => 'Boolean',
-            'description' => __('Is Added success!', 'ncmazfc'),
+            'description' => __('Is Added success!', 'ncmaz-faust-core'),
         ],
 
     ],
@@ -748,25 +748,25 @@ register_graphql_mutation('ncmazFaustCreateDeleteAccountNonce', [
     'inputFields'         => [
         'user_email' => [
             'type' => 'String',
-            'description' => __('Email of user', 'ncmazfc'),
+            'description' => __('Email of user', 'ncmaz-faust-core'),
         ],
     ],
     'outputFields'        => [
         'user_email' => [
             'type' => 'String',
-            'description' => __('Email of user', 'ncmazfc'),
+            'description' => __('Email of user', 'ncmaz-faust-core'),
         ],
         'errors' => [
             'type' => 'String',
-            'description' => __('Error of this mutation', 'ncmazfc'),
+            'description' => __('Error of this mutation', 'ncmaz-faust-core'),
         ],
         'success' => [
             'type' => 'Boolean',
-            'description' => __('Is Added success!', 'ncmazfc'),
+            'description' => __('Is Added success!', 'ncmaz-faust-core'),
         ],
         'nonce' => [
             'type' => 'String',
-            'description' => __('Nonce', 'ncmazfc'),
+            'description' => __('Nonce', 'ncmaz-faust-core'),
         ],
 
     ],
@@ -817,22 +817,22 @@ register_graphql_mutation('ncmazFaustDeleteAccountByNonce', [
     'inputFields'         => [
         'nonce' => [
             'type' => 'String',
-            'description' => __('Delete account Nonce', 'ncmazfc'),
+            'description' => __('Delete account Nonce', 'ncmaz-faust-core'),
         ],
         'user_email' => [
             'type' => 'String',
-            'description' => __('Email of user', 'ncmazfc'),
+            'description' => __('Email of user', 'ncmaz-faust-core'),
         ],
 
     ],
     'outputFields'        => [
         'errors' => [
             'type' => 'String',
-            'description' => __('Error of this mutation', 'ncmazfc'),
+            'description' => __('Error of this mutation', 'ncmaz-faust-core'),
         ],
         'success' => [
             'type' => 'Boolean',
-            'description' => __('Is Account Deleted success!', 'ncmazfc'),
+            'description' => __('Is Account Deleted success!', 'ncmaz-faust-core'),
         ],
     ],
     'mutateAndGetPayload' => function ($input, $context, $info) {
