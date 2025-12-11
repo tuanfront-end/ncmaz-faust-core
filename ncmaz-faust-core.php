@@ -48,20 +48,11 @@ require plugin_dir_path(__FILE__) . 'includes/ncmazfc-ocid.php';
 add_theme_support('post-formats',  ['gallery', 'video', 'audio']);
 
 
-if (!function_exists('ncmazfc_plugin_graphql_content_block_is_active')):
-    function ncmazfc_plugin_graphql_content_block_is_active()
-    {
-        return defined('WPGRAPHQL_CONTENT_BLOCKS_DIR') && defined('WPGRAPHQL_CONTENT_BLOCKS_VERSION');
-    }
-endif;
-
 /*
 * Notification if required plugins are not installed
 */
-add_action('plugins_loaded',  function () {
-    if (
-        !ncmazfc_plugin_graphql_content_block_is_active()
-    ) {
+add_action('init',  function () {
+    if (!defined('WPGRAPHQL_CONTENT_BLOCKS_VERSION')) {
         add_action('admin_notices', function () {
             $class    = 'notice notice-error';
             $message1 = __('The Ncmaz Faust Core plugin is not working correctly.', 'ncmaz-faust-core');
@@ -94,4 +85,4 @@ add_action('plugins_loaded',  function () {
             );
         });
     }
-}, 999);
+}, 10);
