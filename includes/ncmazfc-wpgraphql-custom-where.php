@@ -3,7 +3,7 @@
 add_action('graphql_register_types', function () {
     register_graphql_field('RootQueryToPostConnectionWhereArgs', 'onlySticky', [
         'type' => 'Boolean',
-        'description' => __('Whether to only include sticky posts', 'ncmazfc'),
+        'description' => __('Whether to only include sticky posts', 'ncmaz-faust-core'),
     ]);
 });
 
@@ -22,7 +22,7 @@ add_filter('graphql_post_object_connection_query_args', function ($query_args, $
 add_action('graphql_register_types', function () {
     register_graphql_field('RootQuery', 'siteLogo', [
         'type' => 'MediaItem',
-        'description' => __('The logo set in the customizer', 'ncmazfc'),
+        'description' => __('The logo set in the customizer', 'ncmaz-faust-core'),
         'resolve' => function () {
             $logo_id = get_theme_mod('custom_logo');
             if (!isset($logo_id) || !absint($logo_id)) {
@@ -59,11 +59,11 @@ add_filter('graphql_connection_max_query_amount', function (int $max_amount, $so
 add_filter('graphql_PostObjectsConnectionOrderbyEnum_values', function ($values) {
     $values['VIEWS_COUNT'] = [
         'value' => 'views_count',
-        'description' => __('The number of views on the post', 'ncmazfc'),
+        'description' => __('The number of views on the post', 'ncmaz-faust-core'),
     ];
     $values['LIKES_COUNT'] = [
         'value' => 'likes_count',
-        'description' => __('The number of likes on the post', 'ncmazfc'),
+        'description' => __('The number of likes on the post', 'ncmaz-faust-core'),
     ];
     return $values;
 });
@@ -101,7 +101,7 @@ add_filter('graphql_post_object_connection_query_args', function ($query_args, $
 add_action('graphql_register_types', function () {
     register_graphql_field('RootQueryToPostConnectionWhereArgs', 'inUserAndReaction', [
         'type' => 'String',
-        'description' => __('Filter posts liked/save/viewed by user slug (user_slug/reaction, eg: admin/SAVE)', 'ncmazfc'),
+        'description' => __('Filter posts liked/save/viewed by user slug (user_slug/reaction, eg: admin/SAVE)', 'ncmaz-faust-core'),
     ]);
 });
 add_filter('graphql_post_object_connection_query_args', function ($query_args, $source, $args, $context, $info) {
@@ -162,7 +162,7 @@ add_filter('graphql_post_object_connection_query_args', function ($query_args, $
 add_action('graphql_register_types', function () {
     register_graphql_field('RootQueryToPostConnectionWhereArgs', 'isRelatedOfPostId', [
         'type' => 'Int',
-        'description' => __('Filter related posts of post_database_id', 'ncmazfc'),
+        'description' => __('Filter related posts of post_database_id', 'ncmaz-faust-core'),
     ]);
 });
 add_filter('graphql_post_object_connection_query_args', function ($query_args, $source, $args, $context, $info) {
