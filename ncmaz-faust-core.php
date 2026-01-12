@@ -6,7 +6,7 @@
  * Requires at least: 6.5
  * Requires PHP:      7.3
  * Requires Plugins:  advanced-custom-fields, wp-graphql, faustwp, wpgraphql-acf, wpgraphql-smart-cache, mailpoet, WPGraphQL Content Blocks
- * Version:           2.8.3
+ * Version:           2.8.4
  * Author:            BooliiTheme
  * Author URI:        https://booliitheme.com/
  * License:           GPL-2.0-or-later
@@ -17,7 +17,7 @@
  */
 
 defined('ABSPATH') || exit;
-define('NCMAZFC_VERSION', '2.8.3');
+define('NCMAZFC_VERSION', '2.8.4');
 define('NCMAZFC_FILE', __FILE__);
 define('NCMAZFC_PLUGIN_BASE', plugin_basename(NCMAZFC_FILE));
 define('NCMAZFC_PATH', plugin_dir_path(NCMAZFC_FILE));
@@ -32,16 +32,18 @@ require plugin_dir_path(__FILE__) . 'includes/ncmazfc-enqueue-scripts.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-custom-hooks.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-custom-funcs.php';
 require plugin_dir_path(__FILE__) . 'includes/gutenberg/index.php';
-// __wpgraphql 
+// __acf init 
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-wpgraphql-fragments.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-AFC-fields.php';
-// __wpgraphql
-require plugin_dir_path(__FILE__) . 'includes/ncmazfc-wpgraphql-mutation.php';
-require plugin_dir_path(__FILE__) . 'includes/ncmazfc-wpgraphql-custom-where.php';
-require plugin_dir_path(__FILE__) . 'includes/ncmazfc-custom-wpgraphql.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-update-post-custom-fields.php';
 require plugin_dir_path(__FILE__) . 'includes/ncmazfc-ocid.php';
 
+// __wpgraphql plugins_loaded
+add_action('plugins_loaded',  function () {
+    require plugin_dir_path(__FILE__) . 'includes/ncmazfc-wpgraphql-mutation.php';
+    require plugin_dir_path(__FILE__) . 'includes/ncmazfc-wpgraphql-custom-where.php';
+    require plugin_dir_path(__FILE__) . 'includes/ncmazfc-custom-wpgraphql.php';
+});
 /*
 * Add theme support
 */

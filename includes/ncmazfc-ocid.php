@@ -15,8 +15,6 @@ function ncmazfc__ocdi_import_files()
 }
 
 
-
-
 // AFTER IMPORT DEMO -- SETTING MENU, FRONT-PAGE, WIDGET ...
 add_action('ocdi/after_import', 'ncmazfc__ocdi_after_import_setup');
 if (!function_exists('ncmazfc__ocdi_after_import_setup')) :
